@@ -332,36 +332,64 @@ section { padding: 96px 6%; scroll-margin-top: 80px; }
   color: var(--green); display: flex; align-items: center; gap: 6px;
 }
 
-/* AVANT APRES */
+/* AVANT APRES SLIDER */
 #avant-apres { background: var(--gray-cold); }
-.aa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; align-items: center; }
-.aa-card { }
-.aa-images { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
-.aa-side { position: relative; }
-.aa-photo { width: 100%; height: 260px; object-fit: cover; display: block; }
-.aa-label {
-  position: absolute; bottom: 12px; left: 12px;
-  font-family: var(--font-head); font-weight: 800; font-size: 0.85rem;
-  padding: 6px 16px; border-radius: 50px;
-  letter-spacing: 0.04em; text-transform: uppercase;
+.ba-wrap { max-width: 860px; margin: 48px auto 0; }
+.ba-slider {
+  position: relative; width: 100%; height: 420px;
+  border-radius: 20px; overflow: hidden;
+  cursor: col-resize; user-select: none;
+  box-shadow: 0 20px 60px rgba(26,47,94,0.18);
+  touch-action: none;
 }
-.aa-label-before { background: #ef4444; color: white; }
-.aa-label-after { background: var(--green); color: white; }
-.aa-caption {
-  display: flex; flex-direction: column; gap: 4px;
-  margin-top: 16px; padding: 0 4px;
+.ba-after, .ba-before { position: absolute; inset: 0; height: 100%; }
+.ba-after img, .ba-before img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.ba-before { width: 50%; overflow: hidden; }
+.ba-handle {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  transform: translateX(-50%); width: 4px;
+  display: flex; flex-direction: column; align-items: center; z-index: 10;
 }
-.aa-caption strong { font-family: var(--font-head); font-weight: 700; color: var(--navy); font-size: 1rem; }
-.aa-caption span { font-size: 0.875rem; color: var(--gray-text); }
-.aa-facts { display: flex; flex-direction: column; gap: 24px; }
-.aa-fact { display: flex; align-items: flex-start; gap: 16px; }
-.aa-fact-ico { font-size: 2rem; flex-shrink: 0; width: 48px; text-align: center; }
-.aa-fact strong { display: block; font-family: var(--font-head); font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.aa-fact span { font-size: 0.875rem; color: var(--gray-text); line-height: 1.5; }
+.ba-line { flex: 1; width: 3px; background: white; box-shadow: 0 0 8px rgba(0,0,0,0.4); }
+.ba-btn {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: white; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); cursor: col-resize;
+  color: var(--navy);
+}
+.ba-badge {
+  position: absolute; top: 18px; z-index: 5;
+  font-family: var(--font-head); font-weight: 800;
+  font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 50px;
+}
+.ba-badge-before { left: 18px; background: #ef4444; color: white; }
+.ba-badge-after { right: 18px; background: var(--green); color: white; }
+.ba-hint {
+  text-align: center; margin-top: 16px;
+  font-size: 0.8rem; color: var(--gray-text);
+  font-family: var(--font-head); font-weight: 600; letter-spacing: 0.06em;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.ba-hint::before, .ba-hint::after { content: ''; display: block; height: 1px; width: 40px; background: var(--navy-100); }
+.aa-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; max-width: 860px; margin: 48px auto 0;
+}
+.aa-stat {
+  text-align: center; background: white;
+  border-radius: var(--radius); padding: 28px 16px;
+  box-shadow: var(--shadow); border-top: 3px solid var(--green);
+}
+.aa-stat-val {
+  display: block; font-family: var(--font-head); font-weight: 800;
+  font-size: 2rem; color: var(--green); line-height: 1; margin-bottom: 8px;
+}
+.aa-stat-label { font-size: 0.78rem; color: var(--gray-text); font-weight: 500; line-height: 1.4; }
 @media (max-width: 768px) {
-  .aa-grid { grid-template-columns: 1fr; }
-  .aa-images { grid-template-columns: 1fr 1fr; }
-  .aa-photo { height: 160px; }
+  .ba-slider { height: 240px; }
+  .aa-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* METHODE */
@@ -1018,61 +1046,58 @@ section { position: relative; }
 <section id="avant-apres" aria-labelledby="t-avant-apres">
   <div class="centered">
     <span class="s-tag fade-up">Résultats concrets</span>
-    <h2 class="s-title fade-up d1" id="t-avant-apres">La différence est visible</h2>
-    <p class="s-sub fade-up d2">Un nettoyage Climeo34, c'est une transformation radicale — pour votre santé et votre confort.</p>
+    <h2 class="s-title fade-up d1" id="t-avant-apres">Avant c'est noir.<br>Après c'est Climeo34.</h2>
+    <p class="s-sub fade-up d2">Glissez le curseur pour voir la transformation. Nos photos sont celles de vraies interventions.</p>
   </div>
-  <div class="aa-grid">
-    <div class="aa-card fade-up">
-      <div class="aa-images">
-        <div class="aa-side aa-before">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80"
-               alt="Filtre climatisation encrassé avant nettoyage Climeo34 Montpellier — moisissures et poussières"
-               class="aa-photo" width="600" height="400" loading="lazy">
-          <div class="aa-label aa-label-before">Avant</div>
-        </div>
-        <div class="aa-side aa-after">
-          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80"
-               alt="Climatisation propre après nettoyage désinfection Climeo34 Montpellier Hérault"
-               class="aa-photo" width="600" height="400" loading="lazy">
-          <div class="aa-label aa-label-after">Après</div>
-        </div>
+
+  <!-- Slider interactif — remplacez les src par vos vraies photos avant/après -->
+  <div class="ba-wrap fade-up d2">
+    <div class="ba-slider" id="ba-main" role="img" aria-label="Comparaison avant/après nettoyage climatisation Climeo34">
+      <!-- Image APRÈS (fond) -->
+      <div class="ba-after">
+        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=85"
+             alt="Climatisation propre et désinfectée après intervention Climeo34 Montpellier Hérault 34"
+             width="900" height="420" loading="lazy">
+        <div class="ba-badge ba-badge-after">✓ Après</div>
       </div>
-      <div class="aa-caption">
-        <strong>Évaporateur &amp; filtres</strong>
-        <span>Moisissures, bactéries et dépôts de calcaire complètement éliminés</span>
+      <!-- Image AVANT (dessus, rognée) -->
+      <div class="ba-before" id="ba-before-layer">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85"
+             alt="Filtre climatisation encrassé moisissures poussières avant nettoyage Climeo34 Montpellier"
+             width="900" height="420" loading="lazy">
+        <div class="ba-badge ba-badge-before">✗ Avant</div>
+      </div>
+      <!-- Poignée de glissement -->
+      <div class="ba-handle" id="ba-handle-el">
+        <div class="ba-line"></div>
+        <div class="ba-btn" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4l-4 6 4 6M13 4l4 6-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ba-line"></div>
       </div>
     </div>
-    <div class="aa-card fade-up d1">
-      <div class="aa-facts">
-        <div class="aa-fact">
-          <div class="aa-fact-ico">🦠</div>
-          <div>
-            <strong>99,9% de bactéries éliminées</strong>
-            <span>Désinfection bactéricide certifiée sur évaporateur et bac de condensat</span>
-          </div>
-        </div>
-        <div class="aa-fact">
-          <div class="aa-fact-ico">💨</div>
-          <div>
-            <strong>Air 3× plus sain immédiatement</strong>
-            <span>Les filtres propres réduisent drastiquement allergènes et spores dans l'air</span>
-          </div>
-        </div>
-        <div class="aa-fact">
-          <div class="aa-fact-ico">⚡</div>
-          <div>
-            <strong>-20% sur la consommation électrique</strong>
-            <span>Un appareil propre consomme moins et dure plus longtemps</span>
-          </div>
-        </div>
-        <div class="aa-fact">
-          <div class="aa-fact-ico">✅</div>
-          <div>
-            <strong>Résultat garanti ou remboursé</strong>
-            <span>Climeo34 s'engage sur la qualité de chaque intervention</span>
-          </div>
-        </div>
-      </div>
+    <p class="ba-hint">Glissez pour comparer</p>
+  </div>
+
+  <!-- Statistiques impactantes -->
+  <div class="aa-stats fade-up d3">
+    <div class="aa-stat">
+      <span class="aa-stat-val">99,9%</span>
+      <span class="aa-stat-label">de bactéries éliminées</span>
+    </div>
+    <div class="aa-stat">
+      <span class="aa-stat-val">3×</span>
+      <span class="aa-stat-label">air plus sain dès le 1er jour</span>
+    </div>
+    <div class="aa-stat">
+      <span class="aa-stat-val">−20%</span>
+      <span class="aa-stat-label">sur la consommation électrique</span>
+    </div>
+    <div class="aa-stat">
+      <span class="aa-stat-val">100%</span>
+      <span class="aa-stat-label">résultat garanti ou remboursé</span>
     </div>
   </div>
 </section>
@@ -1454,6 +1479,29 @@ section { position: relative; }
 </a>
 
 <script>
+/* ---- Slider Avant/Après ---- */
+(function() {
+  var slider = document.getElementById('ba-main');
+  if (!slider) return;
+  var beforeLayer = document.getElementById('ba-before-layer');
+  var handle = document.getElementById('ba-handle-el');
+  var dragging = false;
+
+  function setPos(clientX) {
+    var rect = slider.getBoundingClientRect();
+    var pct = Math.max(3, Math.min(97, ((clientX - rect.left) / rect.width) * 100));
+    beforeLayer.style.width = pct + '%';
+    handle.style.left = pct + '%';
+  }
+
+  slider.addEventListener('mousedown', function(e) { dragging = true; setPos(e.clientX); e.preventDefault(); });
+  document.addEventListener('mouseup', function() { dragging = false; });
+  document.addEventListener('mousemove', function(e) { if (dragging) setPos(e.clientX); });
+  slider.addEventListener('touchstart', function(e) { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+  document.addEventListener('touchend', function() { dragging = false; });
+  document.addEventListener('touchmove', function(e) { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+})();
+
 function acceptCookies() {
   localStorage.setItem('cookies', 'accepted');
   document.getElementById('cookie-banner').classList.add('hidden');
