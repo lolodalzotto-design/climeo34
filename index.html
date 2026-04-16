@@ -182,7 +182,6 @@ body {
 .hero-bg {
   position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
 }
-.hero-content { position: relative; z-index: 2; max-width: 700px; }
 .hero-orb {
   position: absolute; border-radius: 50%;
   background: radial-gradient(circle, rgba(77,184,72,0.12), transparent 70%);
@@ -197,7 +196,32 @@ body {
     linear-gradient(90deg, rgba(77,184,72,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
-.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.hero-inner {
+  position: relative; z-index: 2;
+  display: flex; align-items: center;
+  gap: 64px; width: 100%;
+}
+.hero-content { flex: 1; min-width: 0; }
+.hero-image-wrap {
+  flex: 0 0 440px; max-width: 440px;
+  position: relative; align-self: stretch; display: flex; align-items: center;
+}
+.hero-photo {
+  width: 100%; height: 540px;
+  object-fit: cover; object-position: center top;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07);
+  display: block;
+}
+.hero-image-badge {
+  position: absolute; bottom: -18px; left: -18px;
+  background: var(--green); color: white;
+  font-family: var(--font-head); font-weight: 700;
+  font-size: 0.8rem; line-height: 1.5;
+  padding: 14px 18px; border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(77,184,72,0.5);
+  white-space: nowrap;
+}
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   margin-bottom: 28px;
@@ -257,6 +281,14 @@ body {
   font-size: 1.8rem; color: var(--green); line-height: 1;
 }
 .kpi-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 3px; }
+
+/* HERO RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-inner { flex-direction: column-reverse; gap: 36px; }
+  .hero-image-wrap { flex: none; max-width: 100%; width: 100%; align-self: auto; }
+  .hero-photo { height: 260px; }
+  .hero-image-badge { bottom: -14px; left: 14px; }
+}
 
 /* SECTIONS */
 section { padding: 96px 6%; scroll-margin-top: 80px; }
@@ -812,31 +844,43 @@ section { position: relative; }
     <div class="hero-particle" style="width:6px;height:6px;top:75%;right:30%;animation-delay:-1s;"></div>
     <div class="hero-particle" style="width:10px;height:10px;top:15%;right:40%;animation-delay:-3s;"></div>
   </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="hero-dot"></div>
-      <span>Disponible — Hérault (34) — Intervention sous 48h</span>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-dot"></div>
+        <span>Disponible — Hérault (34) — Intervention sous 48h</span>
+      </div>
+      <h1 class="hero-title">
+        Nettoyage & désinfection<br>
+        <span class="accent">climatisation</span><br>
+        Montpellier & Hérault (34)
+      </h1>
+      <p class="hero-lead">
+        Votre clim diffuse <strong>bactéries, moisissures et allergènes</strong>.
+        Climeo34 la nettoie et désinfecte en profondeur —
+        filtres, évaporateur, bac de condensat.
+        <strong>Résultat garanti, tarifs clairs.</strong>
+      </p>
+      <div class="hero-actions">
+        <a href="tel:0603257679" class="btn-primary">Appeler maintenant</a>
+        <a href="https://wa.me/33603257679" class="btn-ghost" target="_blank" rel="noopener">Devis WhatsApp gratuit</a>
+      </div>
+      <div class="hero-kpis">
+        <div class="kpi"><div class="kpi-val" data-target="200" data-suffix="+">200+</div><div class="kpi-label">Clients satisfaits</div></div>
+        <div class="kpi"><div class="kpi-val">48h</div><div class="kpi-label">Délai d'intervention</div></div>
+        <div class="kpi"><div class="kpi-val">5/5</div><div class="kpi-label">Note clients</div></div>
+        <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
+      </div>
     </div>
-    <h1 class="hero-title">
-      Nettoyage & désinfection<br>
-      <span class="accent">climatisation</span><br>
-      Montpellier & Hérault (34)
-    </h1>
-    <p class="hero-lead">
-      Votre clim diffuse <strong>bactéries, moisissures et allergènes</strong>.
-      Climeo34 la nettoie et désinfecte en profondeur —
-      filtres, évaporateur, bac de condensat.
-      <strong>Résultat garanti, tarifs clairs.</strong>
-    </p>
-    <div class="hero-actions">
-      <a href="tel:0603257679" class="btn-primary">Appeler maintenant</a>
-      <a href="https://wa.me/33603257679" class="btn-ghost" target="_blank" rel="noopener">Devis WhatsApp gratuit</a>
-    </div>
-    <div class="hero-kpis">
-      <div class="kpi"><div class="kpi-val" data-target="200" data-suffix="+">200+</div><div class="kpi-label">Clients satisfaits</div></div>
-      <div class="kpi"><div class="kpi-val">48h</div><div class="kpi-label">Délai d'intervention</div></div>
-      <div class="kpi"><div class="kpi-val">5/5</div><div class="kpi-label">Note clients</div></div>
-      <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
+    <div class="hero-image-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=880&q=80"
+        alt="Technicien Climeo34 nettoyage climatisation Montpellier Hérault"
+        class="hero-photo"
+        width="440"
+        height="540"
+        loading="eager">
+      <div class="hero-image-badge">✓ Technicien certifié<br>Intervention sous 48h</div>
     </div>
   </div>
 </header>
