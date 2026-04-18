@@ -52,4 +52,34 @@
     <priority>0.9</priority>
   </url>
 
+
+  <!-- Blog -->
+  <url>
+    <loc>https://climeo34.fr/blog/</loc>
+    <lastmod>2025-04-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/nettoyage-clim-ete-montpellier.html</loc>
+    <lastmod>2025-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/odeur-clim-herault.html</loc>
+    <lastmod>2025-03-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/airbnb-climatisation-montpellier.html</loc>
+    <lastmod>2025-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
