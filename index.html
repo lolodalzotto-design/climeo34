@@ -580,9 +580,11 @@ section { padding: 96px 6%; scroll-margin-top: 80px; }
   background: var(--navy-50); color: var(--navy);
   font-family: var(--font-head); font-weight: 600; font-size: 0.78rem;
   padding: 8px 16px; border-radius: 50px; transition: all var(--transition); cursor: default;
+  text-decoration: none; display: inline-block;
 }
+a.pill { cursor: pointer; }
 .pill.main { background: var(--navy); color: white; }
-.pill:hover { background: var(--navy); color: white; }
+.pill:hover { background: var(--navy); color: white; text-decoration: none; }
 .zone-visual {
   background: linear-gradient(135deg, var(--navy-50), var(--brand-blue-bg));
   border-radius: var(--radius); height: 320px;
@@ -1277,7 +1279,7 @@ section { position: relative; }
         <span class="pill">Lattes</span>
         <span class="pill">Pérols</span>
         <span class="pill">Palavas-les-Flots</span>
-        <span class="pill">La Grande-Motte</span>
+        <a href="/nettoyage-clim-la-grande-motte.html" class="pill">La Grande-Motte</a>
         <span class="pill">Carnon</span>
         <span class="pill">Castelnau-le-Lez</span>
         <span class="pill">Mauguio</span>
