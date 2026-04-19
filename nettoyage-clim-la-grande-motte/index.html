@@ -120,20 +120,40 @@ a { text-decoration: none; color: inherit; }
   backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 rgba(26,47,94,0.08);
 }
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
 .nav-logo img { height: 56px; width: auto; display: block; }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-.nav-links a {
+#nav .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+#nav .nav-links a {
   font-family: var(--font-head); font-weight: 600; font-size: 0.8rem;
-  color: var(--navy); letter-spacing: 0.04em;
-  transition: color var(--transition);
+  text-decoration: none; color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em; transition: color var(--transition);
 }
 #nav.scrolled .nav-links a { color: var(--gray-text); }
-.nav-links a:hover { color: var(--brand-blue) !important; }
-.nav-cta {
+#nav .nav-links a:hover { color: var(--brand-blue) !important; }
+#nav .nav-cta {
   background: var(--brand-blue) !important; color: white !important;
   padding: 10px 22px; border-radius: 50px;
 }
-.nav-cta:hover { background: #2d5a9e !important; }
+#nav .nav-cta:hover { background: #2d5a9e !important; }
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-burger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all var(--transition); }
+#nav.scrolled .nav-burger span { background: var(--navy); }
+@media (min-width: 769px) {
+  #nav .nav-links { display: flex !important; }
+  .nav-burger { display: none !important; }
+}
+@media (max-width: 768px) {
+  #nav { padding: 0 5%; height: 64px; }
+  #nav .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  #nav .nav-links.open {
+    display: flex; flex-direction: column; position: fixed;
+    top: 64px; left: 0; right: 0; z-index: 999;
+    background: var(--navy-dark); padding: 24px 5%;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+  }
+  #nav .nav-links.open a { color: rgba(255,255,255,0.85) !important; font-size: 1rem; }
+}
 
 /* HERO */
 #hero {
@@ -413,17 +433,21 @@ footer a:hover { color: white; }
 </head>
 <body>
 
-<nav id="nav">
-  <a href="https://climeo34.fr" class="nav-logo">
-    <img src="/logo_transparent.png" alt="Logo Climeo34 — Nettoyage climatisation Hérault">
+<nav id="nav" role="navigation" aria-label="Navigation principale">
+  <a href="https://climeo34.fr" class="nav-logo" aria-label="Climeo34 — Accueil">
+    <img src="/logo_transparent.png" alt="Logo Climeo34" height="56" width="auto">
   </a>
-  <ul class="nav-links">
-    <li><a href="https://climeo34.fr/#tarifs">Tarifs</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#avant-apres">Avant / Après</a></li>
+    <li><a href="#tarifs">Tarifs</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="https://climeo34.fr/#zone">Zone</a></li>
-    <li><a href="https://climeo34.fr/#avis">Avis</a></li>
-    <li><a href="https://climeo34.fr/#faq">FAQ</a></li>
+    <li><a href="/blog/">Blog</a></li>
     <li><a href="https://wa.me/33603257679" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
   </ul>
+  <div class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <header id="hero">
@@ -718,6 +742,10 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
+
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('open');
+}
 
 function toggleFaq(btn) {
   const item = btn.parentElement;
