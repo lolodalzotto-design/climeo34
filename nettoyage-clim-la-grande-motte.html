@@ -279,6 +279,27 @@ a { text-decoration: none; color: inherit; }
 .pricing-note { text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--gray-text); }
 @media (max-width: 768px) { .pricing { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
 
+/* FAQ */
+#faq { background: white; padding: 96px 6%; }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid rgba(26,47,94,0.1); }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 22px 0; cursor: pointer; background: none; border: none;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.95rem;
+  color: var(--navy); text-align: left;
+}
+.faq-q:hover { color: var(--brand-blue); }
+.faq-toggle {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--brand-blue-bg); color: var(--brand-blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 400; transition: all var(--transition);
+}
+.faq-item.open .faq-toggle { background: var(--brand-blue); color: white; transform: rotate(45deg); }
+.faq-a { display: none; padding: 0 0 22px; font-size: 0.92rem; color: var(--gray-text); line-height: 1.75; }
+.faq-item.open .faq-a { display: block; }
+
 /* ANIMATIONS */
 @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,-20px) scale(1.05); } }
 @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
@@ -514,11 +535,77 @@ a { text-decoration: none; color: inherit; }
   <p class="pricing-note">Besoin d'un devis pour plus de 3 splits ? <a href="https://wa.me/33603257679" style="color:var(--brand-blue);">Contactez-nous sur WhatsApp</a></p>
 </section>
 
+<section id="faq">
+  <div class="centered">
+    <span class="s-tag">Questions fréquentes</span>
+    <h2 class="s-title">Tout ce que les propriétaires<br>de La Grande-Motte nous demandent</h2>
+  </div>
+  <div class="faq-list">
+
+    <div class="faq-item open">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="true">
+        À quelle fréquence entretenir la clim d'une location saisonnière à La Grande-Motte ?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Au minimum une fois par an. Idéalement deux fois : avant la saison (avril–mai) et après (septembre–octobre). L'air marin chargé en sel colmate les filtres 2 à 3 fois plus vite qu'en zone urbaine intérieure — un entretien unique en début de saison ne suffit pas pour les biens très occupés.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        Climeo34 peut-il intervenir entre deux locations ?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Oui. Chaque intervention dure environ 45 minutes par split. Nous nous adaptons à vos créneaux de rotation locative. Contactez-nous par WhatsApp pour bloquer un horaire précis — nous répondons en général dans l'heure.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        Une mauvaise clim peut-elle vraiment faire baisser mes notes Airbnb ?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Oui, directement. L'odeur de moisi ou d'air vicié dès la mise en marche est l'une des causes les plus fréquentes de commentaires négatifs sur la "propreté" et le "confort" en location estivale. Une seule mauvaise note peut faire passer un bien de SuperHost à non-éligible.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        L'entretien de la clim est-il obligatoire pour un meublé de tourisme ?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Il n'existe pas de fréquence légale imposée, mais l'obligation générale de sécurité et de salubrité du logement loué s'applique. En cas de dégât des eaux (bac de condensat qui déborde) ou de plainte liée à la qualité de l'air, votre assureur peut refuser la prise en charge si un défaut d'entretien est constaté.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        Intervenez-vous aussi sur les résidences secondaires fermées l'hiver ?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Oui, c'est même fortement conseillé. Un appareil inactif plusieurs mois dans un environnement humide comme La Grande-Motte accumule moisissures et dépôts. Une remise en état avant réouverture est la bonne pratique — et le meilleur moyen d'éviter les mauvaises surprises à l'arrivée de vos premiers locataires.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+        Quel est le délai d'intervention à La Grande-Motte ?
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">Hors saison (septembre–mai) : intervention sous 48h en général. En pleine saison (juin–août) : comptez 5 à 10 jours, c'est notre période la plus chargée sur le littoral héraultais. On vous recommande fortement d'anticiper et de réserver votre créneau dès le mois d'avril.</div>
+    </div>
+
+  </div>
+</section>
+
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded', 'false'));
+  if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+}
 
 (function() {
   var slider = document.getElementById('ba-main');
