@@ -156,6 +156,58 @@ a { text-decoration: none; color: inherit; }
 .kpi-val { font-family: var(--font-head); font-weight: 800; font-size: 1.8rem; color: var(--brand-blue); line-height: 1; }
 .kpi-label { font-size: 0.75rem; color: rgba(26,47,94,0.45); margin-top: 3px; }
 
+/* AVANT APRES */
+#avant-apres { background: var(--brand-blue-bg); padding: 96px 6%; }
+.s-tag { display: inline-block; font-family: var(--font-head); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-blue); margin-bottom: 14px; }
+.s-title { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.7rem, 3.5vw, 2.5rem); color: var(--navy); line-height: 1.18; margin-bottom: 16px; }
+.s-sub { font-size: 1rem; color: var(--gray-text); line-height: 1.75; max-width: 580px; margin: 0 auto 48px; font-weight: 300; }
+.centered { text-align: center; }
+.ba-wrap { max-width: 860px; margin: 0 auto 48px; }
+.ba-slider {
+  position: relative; width: 100%; height: 420px;
+  border-radius: 20px; overflow: hidden;
+  cursor: col-resize; user-select: none;
+  box-shadow: 0 20px 60px rgba(26,47,94,0.18);
+  touch-action: none;
+}
+.ba-after, .ba-before { position: absolute; inset: 0; height: 100%; }
+.ba-after img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.ba-before img { position: absolute; left: 0; top: 0; height: 100%; max-width: none; object-fit: cover; display: block; pointer-events: none; }
+.ba-before { width: 50%; overflow: hidden; }
+.ba-handle {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  transform: translateX(-50%); width: 4px;
+  display: flex; flex-direction: column; align-items: center; z-index: 10;
+}
+.ba-line { flex: 1; width: 3px; background: white; box-shadow: 0 0 8px rgba(0,0,0,0.4); }
+.ba-btn {
+  width: 46px; height: 46px; border-radius: 50%; background: white; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); cursor: col-resize; color: var(--navy);
+}
+.ba-badge {
+  position: absolute; top: 18px; z-index: 5;
+  font-family: var(--font-head); font-weight: 800; font-size: 0.8rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 50px;
+}
+.ba-badge-before { left: 18px; background: #ef4444; color: white; }
+.ba-badge-after { right: 18px; background: var(--green); color: white; }
+.ba-hint {
+  text-align: center; margin-top: 16px; font-size: 0.8rem; color: var(--gray-text);
+  font-family: var(--font-head); font-weight: 600; letter-spacing: 0.06em;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.ba-hint::before, .ba-hint::after { content: ''; display: block; height: 1px; width: 40px; background: var(--navy-100); }
+.aa-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 860px; margin: 0 auto; }
+.aa-stat { text-align: center; background: white; border-radius: var(--radius); padding: 28px 16px; box-shadow: var(--shadow); border-top: 3px solid var(--brand-blue); }
+.aa-stat-val { display: block; font-family: var(--font-head); font-weight: 800; font-size: 2rem; color: var(--brand-blue); line-height: 1; margin-bottom: 8px; }
+.aa-stat-label { font-size: 0.78rem; color: var(--gray-text); font-weight: 500; line-height: 1.4; }
+@media (max-width: 768px) {
+  .ba-slider { height: 240px; }
+  .aa-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ANIMATIONS */
 @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,-20px) scale(1.05); } }
 @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
@@ -232,11 +284,71 @@ a { text-decoration: none; color: inherit; }
   </div>
 </header>
 
+<section id="avant-apres">
+  <div class="centered">
+    <span class="s-tag">Résultats concrets</span>
+    <h2 class="s-title">Hier c'était noir.<br>Après c'est Climeo34.</h2>
+    <p class="s-sub">Glissez le curseur pour voir la transformation. Photos prises lors de vraies interventions dans l'Hérault.</p>
+  </div>
+  <div class="ba-wrap">
+    <div class="ba-slider" id="ba-main" role="img" aria-label="Comparaison avant/après nettoyage climatisation La Grande-Motte">
+      <div class="ba-after">
+        <img src="Screenshot_20260417_072815_Chrome.jpg" alt="Climatisation propre après intervention Climeo34 La Grande-Motte" width="900" height="420" loading="lazy">
+      </div>
+      <div class="ba-before" id="ba-before-layer">
+        <img src="Screenshot_20260417_072904_Chrome.jpg" alt="Filtre climatisation encrassé avant nettoyage La Grande-Motte" width="900" height="420" loading="lazy">
+      </div>
+      <div class="ba-badge ba-badge-before">✗ Avant</div>
+      <div class="ba-badge ba-badge-after">✓ Après</div>
+      <div class="ba-handle" id="ba-handle-el">
+        <div class="ba-line"></div>
+        <div class="ba-btn" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4l-4 6 4 6M13 4l4 6-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ba-line"></div>
+      </div>
+    </div>
+    <p class="ba-hint">Glissez pour comparer</p>
+  </div>
+  <div class="aa-stats">
+    <div class="aa-stat"><span class="aa-stat-val">99,9%</span><span class="aa-stat-label">de bactéries éliminées</span></div>
+    <div class="aa-stat"><span class="aa-stat-val">3×</span><span class="aa-stat-label">air plus sain dès le 1er jour</span></div>
+    <div class="aa-stat"><span class="aa-stat-val">−20%</span><span class="aa-stat-label">sur la consommation électrique</span></div>
+    <div class="aa-stat"><span class="aa-stat-val">100%</span><span class="aa-stat-label">résultat garanti ou remboursé</span></div>
+  </div>
+</section>
+
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
+
+(function() {
+  var slider = document.getElementById('ba-main');
+  if (!slider) return;
+  var beforeLayer = document.getElementById('ba-before-layer');
+  var handle = document.getElementById('ba-handle-el');
+  var beforeImg = beforeLayer.querySelector('img');
+  var dragging = false;
+  function fixImgWidth() { beforeImg.style.width = slider.offsetWidth + 'px'; }
+  fixImgWidth();
+  window.addEventListener('resize', fixImgWidth);
+  function setPos(clientX) {
+    var rect = slider.getBoundingClientRect();
+    var pct = Math.max(3, Math.min(97, ((clientX - rect.left) / rect.width) * 100));
+    beforeLayer.style.width = pct + '%';
+    handle.style.left = pct + '%';
+  }
+  slider.addEventListener('mousedown', function(e) { dragging = true; setPos(e.clientX); e.preventDefault(); });
+  document.addEventListener('mouseup', function() { dragging = false; });
+  document.addEventListener('mousemove', function(e) { if (dragging) setPos(e.clientX); });
+  slider.addEventListener('touchstart', function(e) { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+  document.addEventListener('touchend', function() { dragging = false; });
+  document.addEventListener('touchmove', function(e) { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+})();
 </script>
 
 </body>
