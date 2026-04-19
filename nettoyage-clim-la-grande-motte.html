@@ -208,6 +208,31 @@ a { text-decoration: none; color: inherit; }
   .aa-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* PROBLÈMES */
+#problemes { background: white; padding: 96px 6%; }
+.prob-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+.prob-card {
+  background: var(--gray-cold); border-radius: var(--radius); padding: 32px 28px;
+  border: 1px solid rgba(26,47,94,0.06);
+  transition: all var(--transition); position: relative; overflow: hidden;
+}
+.prob-card::after {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--green); transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+.prob-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); background: white; }
+.prob-card:hover::after { transform: scaleY(1); }
+.prob-ico {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: var(--brand-blue-bg); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.prob-ico svg { width: 24px; height: 24px; }
+.prob-card h3 { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 10px; }
+.prob-card p { font-size: 0.87rem; color: var(--gray-text); line-height: 1.65; margin: 0; }
+.prob-fix { margin-top: 14px; font-size: 0.8rem; font-weight: 700; color: var(--green); }
+@media (max-width: 768px) { .prob-grid { grid-template-columns: 1fr; } }
+
 /* ANIMATIONS */
 @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,-20px) scale(1.05); } }
 @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
@@ -317,6 +342,71 @@ a { text-decoration: none; color: inherit; }
     <div class="aa-stat"><span class="aa-stat-val">3×</span><span class="aa-stat-label">air plus sain dès le 1er jour</span></div>
     <div class="aa-stat"><span class="aa-stat-val">−20%</span><span class="aa-stat-label">sur la consommation électrique</span></div>
     <div class="aa-stat"><span class="aa-stat-val">100%</span><span class="aa-stat-label">résultat garanti ou remboursé</span></div>
+  </div>
+</section>
+
+<section id="problemes">
+  <div class="centered">
+    <span class="s-tag">Airbnb · Location saisonnière</span>
+    <h2 class="s-title">Ce qu'une clim sale coûte<br>à votre location à La Grande-Motte</h2>
+    <p class="s-sub">L'air marin et l'humidité du littoral créent des conditions particulièrement sévères. Voici ce que risquent vos locataires — et votre réputation.</p>
+  </div>
+  <div class="prob-grid">
+
+    <article class="prob-card">
+      <div class="prob-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <h3>Mauvaise note Airbnb</h3>
+      <p>L'odeur de moisi au démarrage est la première cause de commentaires négatifs sur la propreté en location estivale. Un seul avis suffit à faire chuter votre note.</p>
+      <div class="prob-fix">→ Désinfection bactéricide de l'évaporateur</div>
+    </article>
+
+    <article class="prob-card">
+      <div class="prob-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+      </div>
+      <h3>Chaleur insupportable</h3>
+      <p>Un filtre colmaté par le sel marin réduit la puissance de refroidissement jusqu'à 40%. En plein mois d'août à La Grande-Motte, vos locataires n'ont aucune tolérance pour ça.</p>
+      <div class="prob-fix">→ Nettoyage haute pression filtres & évaporateur</div>
+    </article>
+
+    <article class="prob-card">
+      <div class="prob-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+      </div>
+      <h3>Dégât des eaux</h3>
+      <p>Le bac de condensat bouché déborde sur vos murs et plafonds. En location, c'est une urgence et un sinistre coûteux — souvent refusé par l'assurance si l'entretien est négligé.</p>
+      <div class="prob-fix">→ Débouchage & désinfection bac de condensat</div>
+    </article>
+
+    <article class="prob-card">
+      <div class="prob-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h3>Risque sanitaire</h3>
+      <p>Légionelles, moisissures, staphylocoques : le bac de condensat humide et chaud est un incubateur parfait. Vos locataires — enfants, seniors, personnes asthmatiques — sont les premiers exposés.</p>
+      <div class="prob-fix">→ Traitement biocide homologué</div>
+    </article>
+
+    <article class="prob-card">
+      <div class="prob-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h3>Surconsommation électrique</h3>
+      <p>Une clim encrassée consomme jusqu'à 30% d'énergie en plus. Sur une saison complète à La Grande-Motte (mai–septembre), la facture grimpe — pour un confort moindre.</p>
+      <div class="prob-fix">→ Entretien complet, performance restaurée</div>
+    </article>
+
+    <article class="prob-card">
+      <div class="prob-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d7ab5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      </div>
+      <h3>Corrosion accélérée</h3>
+      <p>Les sels marins corrodent les ailettes de l'unité extérieure. Sans contrôle régulier, c'est un remplacement complet à prévoir — bien plus coûteux qu'un entretien annuel.</p>
+      <div class="prob-fix">→ Contrôle visuel unité extérieure inclus</div>
+    </article>
+
   </div>
 </section>
 
