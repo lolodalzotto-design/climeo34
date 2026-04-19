@@ -357,6 +357,19 @@ a { text-decoration: none; color: inherit; }
 .pricing-note { text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--gray-text); }
 @media (max-width: 768px) { .pricing { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
 
+/* AVIS */
+#avis { background: var(--brand-blue-bg); padding: 96px 6%; }
+.avis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+.avis { background: white; border-radius: var(--radius); padding: 32px; border: 1px solid rgba(26,47,94,0.05); transition: all var(--transition); }
+.avis:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 16px; }
+.avis-text { font-size: 0.88rem; color: #1f2937; line-height: 1.75; margin-bottom: 24px; font-style: italic; font-weight: 300; }
+.avis-author { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light)); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 700; font-size: 0.78rem; color: white; flex-shrink: 0; }
+.avis-author strong { font-size: 0.85rem; color: var(--navy); display: block; font-weight: 700; }
+.avis-author span { font-size: 0.75rem; color: var(--gray-text); }
+@media (max-width: 768px) { .avis-grid { grid-template-columns: 1fr; } }
+
 /* FAQ */
 #faq { background: white; padding: 96px 6%; }
 .faq-list { max-width: 720px; margin: 0 auto; }
@@ -442,8 +455,7 @@ footer a:hover { color: white; }
     <li><a href="#avant-apres">Avant / Après</a></li>
     <li><a href="#problemes">Pourquoi ?</a></li>
     <li><a href="#tarifs">Tarifs</a></li>
-    <li><a href="https://climeo34.fr/#zone">Zone</a></li>
-    <li><a href="https://climeo34.fr/#avis">Avis clients</a></li>
+    <li><a href="#avis">Avis clients</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="/blog/">Blog</a></li>
     <li><a href="https://wa.me/33603257679" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
@@ -659,6 +671,40 @@ footer a:hover { color: white; }
 
   </div>
   <p class="pricing-note">Besoin d'un devis pour plus de 3 splits ? <a href="https://wa.me/33603257679" style="color:var(--brand-blue);">Contactez-nous sur WhatsApp</a></p>
+</section>
+
+<section id="avis">
+  <div class="centered">
+    <span class="s-tag">Témoignages</span>
+    <h2 class="s-title">Ils ont fait confiance à Climeo34</h2>
+    <p class="s-sub">200+ clients satisfaits en Hérault — particuliers et propriétaires Airbnb.</p>
+  </div>
+  <div class="avis-grid">
+    <article class="avis">
+      <div class="stars">★★★★★</div>
+      <p class="avis-text">« Ma clim sentait le moisi depuis des semaines. Après l'intervention, plus aucune odeur. Professionnel, ponctuel et soigneux. »</p>
+      <div class="avis-author">
+        <div class="avatar">SM</div>
+        <div><strong>Sophie M.</strong><span>Castelnau-le-Lez · Particulier</span></div>
+      </div>
+    </article>
+    <article class="avis">
+      <div class="stars">★★★★★</div>
+      <p class="avis-text">« Airbnb à La Grande-Motte. Depuis Climeo34, plus aucune remarque des voyageurs sur les odeurs. Mes avis ont clairement progressé. »</p>
+      <div class="avis-author">
+        <div class="avatar">JR</div>
+        <div><strong>Jean-Luc R.</strong><span>La Grande-Motte · Propriétaire Airbnb</span></div>
+      </div>
+    </article>
+    <article class="avis">
+      <div class="stars">★★★★★</div>
+      <p class="avis-text">« Appel le matin, intervention l'après-midi. 3 splits parfaitement nettoyés, logement réoccupé immédiatement. Je recommande. »</p>
+      <div class="avis-author">
+        <div class="avatar">AB</div>
+        <div><strong>Anne-Laure B.</strong><span>Lattes · Particulier</span></div>
+      </div>
+    </article>
+  </div>
 </section>
 
 <section id="faq">
