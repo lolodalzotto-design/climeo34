@@ -439,9 +439,9 @@ footer a:hover { color: white; }
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#avant-apres">Avant / Après</a></li>
+    <li><a href="#problemes">Pourquoi ?</a></li>
     <li><a href="#tarifs">Tarifs</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="https://climeo34.fr/#zone">Zone</a></li>
     <li><a href="/blog/">Blog</a></li>
     <li><a href="https://wa.me/33603257679" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
   </ul>
@@ -746,6 +746,19 @@ window.addEventListener('scroll', () => {
 function toggleMenu() {
   document.getElementById('nav-links').classList.toggle('open');
 }
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    const offset = document.getElementById('nav').offsetHeight + 8;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    document.getElementById('nav-links').classList.remove('open');
+  });
+});
 
 function toggleFaq(btn) {
   const item = btn.parentElement;
