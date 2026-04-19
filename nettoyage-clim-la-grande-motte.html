@@ -18,6 +18,66 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:image" content="https://climeo34.fr/Homme-Nettoie-climatiseur.jpg">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Nettoyage climatisation La Grande-Motte",
+  "description": "Service de nettoyage et désinfection de climatisation à La Grande-Motte (34280) pour propriétaires et gestionnaires de locations saisonnières et Airbnb. Technicien certifié Hérault.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Climeo34",
+    "url": "https://climeo34.fr",
+    "telephone": "+33603257679",
+    "priceRange": "80€–190€",
+    "areaServed": [
+      {"@type": "City", "name": "La Grande-Motte", "postalCode": "34280"},
+      {"@type": "AdministrativeArea", "name": "Hérault"}
+    ]
+  },
+  "areaServed": {"@type": "City", "name": "La Grande-Motte", "postalCode": "34280"},
+  "serviceType": "Nettoyage et désinfection de climatisation",
+  "offers": [
+    {"@type": "Offer", "name": "Nettoyage 1 split", "price": "80", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Nettoyage 2 splits", "price": "140", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Nettoyage 3 splits", "price": "190", "priceCurrency": "EUR"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "À quelle fréquence entretenir la clim d'une location saisonnière à La Grande-Motte ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Au minimum une fois par an. Idéalement deux fois : avant la saison (avril–mai) et après (septembre–octobre). L'air marin colmate les filtres 2 à 3 fois plus vite qu'en zone intérieure."}
+    },
+    {
+      "@type": "Question",
+      "name": "Climeo34 peut-il intervenir entre deux locations à La Grande-Motte ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Oui. Chaque intervention dure environ 45 minutes par split. Nous nous adaptons aux créneaux de rotation locative."}
+    },
+    {
+      "@type": "Question",
+      "name": "Une mauvaise clim peut-elle faire baisser les notes Airbnb ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Oui. L'odeur de moisi dès la mise en marche est l'une des causes les plus fréquentes de commentaires négatifs sur la propreté et le confort en location estivale."}
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le délai d'intervention à La Grande-Motte ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Hors saison : sous 48h. En juin–août : comptez 5 à 10 jours. Réservez votre créneau dès avril pour éviter les délais."}
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un nettoyage de climatisation à La Grande-Motte ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "1 split : 80 € TTC, 2 splits : 140 € TTC, 3 splits : 190 € TTC. Déplacement inclus, pas de frais cachés."}
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -299,6 +359,40 @@ a { text-decoration: none; color: inherit; }
 .faq-item.open .faq-toggle { background: var(--brand-blue); color: white; transform: rotate(45deg); }
 .faq-a { display: none; padding: 0 0 22px; font-size: 0.92rem; color: var(--gray-text); line-height: 1.75; }
 .faq-item.open .faq-a { display: block; }
+
+/* CTA FINALE */
+#cta-finale {
+  background: var(--navy-dark); padding: 96px 6%; text-align: center;
+}
+#cta-finale .s-tag { color: var(--brand-blue-light); }
+#cta-finale h2 { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: white; margin-bottom: 16px; line-height: 1.2; }
+#cta-finale p { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 40px; line-height: 1.75; font-weight: 300; }
+.cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.btn-whatsapp {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25D366; color: white;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.95rem;
+  padding: 16px 34px; border-radius: 50px;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+  transition: all var(--transition);
+}
+.btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); }
+.btn-tel {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.08); color: white;
+  font-family: var(--font-head); font-weight: 600; font-size: 0.95rem;
+  padding: 16px 34px; border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all var(--transition);
+}
+.btn-tel:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+.cta-reassurance { margin-top: 28px; font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+/* FOOTER */
+footer { background: #070f1e; text-align: center; padding: 32px 6%; }
+footer p { font-size: 0.78rem; color: rgba(255,255,255,0.25); line-height: 1.8; }
+footer a { color: rgba(255,255,255,0.4); }
+footer a:hover { color: white; }
 
 /* ANIMATIONS */
 @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,-20px) scale(1.05); } }
@@ -592,6 +686,31 @@ a { text-decoration: none; color: inherit; }
 
   </div>
 </section>
+
+<section id="cta-finale">
+  <span class="s-tag">Disponible maintenant</span>
+  <h2>Votre clim propre avant<br>la saison à La Grande-Motte</h2>
+  <p>Devis gratuit, réponse en moins d'une heure. Intervention sous 48h hors saison. Résultat garanti ou remboursé.</p>
+  <div class="cta-actions">
+    <a href="https://wa.me/33603257679" class="btn-whatsapp" target="_blank" rel="noopener">
+      Devis gratuit sur WhatsApp
+    </a>
+    <a href="tel:0603257679" class="btn-tel">
+      06 03 25 76 79
+    </a>
+  </div>
+  <p class="cta-reassurance">Technicien certifié · Hérault (34) · La Grande-Motte (34280) · Littoral héraultais</p>
+</section>
+
+<footer>
+  <p>
+    © 2025 Climeo34 ·
+    <a href="https://climeo34.fr">climeo34.fr</a> ·
+    Nettoyage climatisation La Grande-Motte (34280) ·
+    Airbnb & Location saisonnière Hérault ·
+    <a href="https://climeo34.fr/#zone">Zone d'intervention</a>
+  </p>
+</footer>
 
 <script>
 const nav = document.getElementById('nav');
