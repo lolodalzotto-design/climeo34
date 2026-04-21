@@ -571,15 +571,6 @@ a.pill { cursor: pointer; }
 .pill.main { background: var(--navy); color: white; }
 .pill:hover { background: var(--navy); color: white; text-decoration: none; }
 .zone-visual { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); height: auto; display: block; }
-.zone-map { width: 100%; display: block; border-radius: var(--radius); }
-.map-city-link { cursor: pointer; }
-.map-pin-inner { transition: transform 0.2s ease; transform-box: fill-box; transform-origin: center; }
-.map-city-link:hover .map-pin-inner { transform: scale(1.3); }
-@keyframes mapPulse { 0% { opacity: 0.5; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
-.mp1 { animation: mapPulse 2.5s ease-out infinite; transform-box: fill-box; transform-origin: center; }
-.mp2 { animation: mapPulse 2.5s ease-out infinite 0.8s; transform-box: fill-box; transform-origin: center; }
-.mp3 { animation: mapPulse 2.5s ease-out infinite 1.6s; transform-box: fill-box; transform-origin: center; }
-.mp4 { animation: mapPulse 2.5s ease-out infinite 0.4s; transform-box: fill-box; transform-origin: center; }
 
 /* AVIS */
 #avis { background: var(--brand-blue-bg); }
@@ -1275,63 +1266,6 @@ section { position: relative; }
         <span class="pill">+ tout l'Hérault</span>
       </div>
       <a href="tel:0603257679" class="btn-primary fade-up d3" style="display:inline-flex;">Vérifier ma zone</a>
-    </div>
-    <div class="zone-visual fade-up d2">
-      <svg class="zone-map" viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carte zone d'intervention Climeo34 — Hérault">
-        <defs>
-          <pattern id="mapgrid" width="30" height="30" patternUnits="userSpaceOnUse">
-            <path d="M30 0L0 0 0 30" fill="none" stroke="rgba(61,122,181,0.06)" stroke-width="1"/>
-          </pattern>
-        </defs>
-        <!-- Land -->
-        <rect width="460" height="280" fill="#e4f0f8" rx="16"/>
-        <rect width="460" height="280" fill="url(#mapgrid)" rx="16"/>
-        <!-- Sea -->
-        <path d="M0,252 C50,244 110,239 203,242 C218,242 236,239 253,234 C289,224 338,207 384,198 C412,192 440,190 460,190 L460,280 L0,280 Z" fill="#b8d9f0"/>
-        <!-- Étang de Palavas -->
-        <ellipse cx="158" cy="231" rx="60" ry="10" fill="#8abcd8" opacity="0.7"/>
-        <!-- Étang de l'Or -->
-        <ellipse cx="315" cy="213" rx="52" ry="10" fill="#8abcd8" opacity="0.7"/>
-        <!-- Coastline -->
-        <path d="M0,252 C50,244 110,239 203,242 C218,242 236,239 253,234 C289,224 338,207 384,198 C412,192 440,190 460,190" fill="none" stroke="#6aa8c8" stroke-width="1.5"/>
-        <!-- Labels -->
-        <text x="90" y="269" font-family="Montserrat,sans-serif" font-size="8.5" font-weight="600" fill="#4a88b8" opacity="0.65" text-anchor="middle">Méditerranée</text>
-        <text x="230" y="55" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="#1e3a5c" opacity="0.18" text-anchor="middle" letter-spacing="3">HÉRAULT</text>
-        <!-- MONTPELLIER -->
-        <a href="/nettoyage-clim-montpellier/" class="map-city-link">
-          <title>Nettoyage clim Montpellier</title>
-          <circle class="mp1" cx="146" cy="108" r="8" fill="#3d7ab5"/>
-          <circle class="map-pin-inner" cx="146" cy="108" r="8" fill="#3d7ab5"/>
-          <circle cx="146" cy="108" r="3" fill="white"/>
-          <text x="146" y="126" font-family="Montserrat,sans-serif" font-size="10" font-weight="700" fill="#1e3a5c" text-anchor="middle">Montpellier</text>
-        </a>
-        <!-- PALAVAS -->
-        <a href="/nettoyage-clim-palavas/" class="map-city-link">
-          <title>Nettoyage clim Palavas-les-Flots</title>
-          <circle class="mp2" cx="203" cy="236" r="7" fill="#3d7ab5"/>
-          <circle class="map-pin-inner" cx="203" cy="236" r="7" fill="#3d7ab5"/>
-          <circle cx="203" cy="236" r="2.5" fill="white"/>
-          <text x="183" y="222" font-family="Montserrat,sans-serif" font-size="9" font-weight="700" fill="#1e3a5c" text-anchor="middle">Palavas</text>
-        </a>
-        <!-- CARNON -->
-        <a href="/nettoyage-clim-carnon/" class="map-city-link">
-          <title>Nettoyage clim Carnon</title>
-          <circle class="mp3" cx="251" cy="228" r="7" fill="#3d7ab5"/>
-          <circle class="map-pin-inner" cx="251" cy="228" r="7" fill="#3d7ab5"/>
-          <circle cx="251" cy="228" r="2.5" fill="white"/>
-          <text x="271" y="215" font-family="Montserrat,sans-serif" font-size="9" font-weight="700" fill="#1e3a5c" text-anchor="middle">Carnon</text>
-        </a>
-        <!-- LA GRANDE-MOTTE -->
-        <a href="/nettoyage-clim-la-grande-motte/" class="map-city-link">
-          <title>Nettoyage clim La Grande-Motte</title>
-          <circle class="mp4" cx="384" cy="197" r="7" fill="#3d7ab5"/>
-          <circle class="map-pin-inner" cx="384" cy="197" r="7" fill="#3d7ab5"/>
-          <circle cx="384" cy="197" r="2.5" fill="white"/>
-          <text x="384" y="181" font-family="Montserrat,sans-serif" font-size="8.5" font-weight="700" fill="#1e3a5c" text-anchor="middle">La Grande-Motte</text>
-        </a>
-        <!-- Border -->
-        <rect width="460" height="280" fill="none" stroke="rgba(61,122,181,0.12)" stroke-width="1" rx="16"/>
-      </svg>
     </div>
   </div>
 </section>
