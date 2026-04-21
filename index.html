@@ -969,13 +969,17 @@ section { position: relative; }
       </div>
     </div>
     <div class="hero-image-wrap">
-      <img
-        src="Homme-Nettoie-climatiseur.jpg"
-        alt="Technicien Climeo34 nettoyage climatisation Montpellier Hérault"
-        class="hero-photo"
-        width="440"
-        height="540"
-        loading="eager">
+      <picture>
+        <source srcset="Homme-Nettoie-climatiseur.webp" type="image/webp">
+        <img
+          src="Homme-Nettoie-climatiseur.jpg"
+          alt="Technicien Climeo34 nettoyage climatisation Montpellier Hérault"
+          class="hero-photo"
+          width="440"
+          height="540"
+          loading="eager"
+          fetchpriority="high">
+      </picture>
       <div class="hero-image-badge">✓ Technicien certifié<br>Intervention sous 48h</div>
     </div>
   </div>
@@ -1001,15 +1005,21 @@ section { position: relative; }
     <div class="ba-slider" id="ba-main" role="img" aria-label="Comparaison avant/après nettoyage climatisation Climeo34">
       <!-- Image APRÈS (fond) -->
       <div class="ba-after">
-        <img src="Screenshot_20260417_072815_Chrome.jpg"
-             alt="Climatisation propre et désinfectée après intervention Climeo34 Montpellier Hérault 34"
-             width="900" height="420" loading="lazy">
+        <picture>
+          <source srcset="Screenshot_20260417_072815_Chrome.webp" type="image/webp">
+          <img src="Screenshot_20260417_072815_Chrome.jpg"
+               alt="Climatisation propre et désinfectée après intervention Climeo34 Montpellier Hérault 34"
+               width="900" height="420" loading="lazy">
+        </picture>
       </div>
       <!-- Image AVANT (dessus, rognée) -->
       <div class="ba-before" id="ba-before-layer">
-        <img src="Screenshot_20260417_072904_Chrome.jpg"
-             alt="Filtre climatisation encrassé moisissures poussières avant nettoyage Climeo34 Montpellier"
-             width="900" height="420" loading="lazy">
+        <picture>
+          <source srcset="Screenshot_20260417_072904_Chrome.webp" type="image/webp">
+          <img src="Screenshot_20260417_072904_Chrome.jpg"
+               alt="Filtre climatisation encrassé moisissures poussières avant nettoyage Climeo34 Montpellier"
+               width="900" height="420" loading="lazy">
+        </picture>
       </div>
       <!-- Badges fixes (positionnés sur le slider, pas dans les conteneurs mobiles) -->
       <div class="ba-badge ba-badge-before">✗ Avant</div>
