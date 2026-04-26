@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Studio Devoluy — Location vacances ski aux pieds Superdévoluy | Hautes-Alpes 05250</title>
-<meta name="description" content="Studio rénové 18m² pour 4 personnes, ski aux pieds, vue sur la vallée. Résidence Le Bois d'Aurouze, Superdévoluy 05250. Ski alpin, randonnée, VTT. Réservez sur Airbnb.">
+<meta name="description" content="Location vacances pas chère à Superdévoluy — studio rénové 18m², ski aux pieds, vue vallée. Idéal hiver (ski alpin, raquettes) et été (randonnée, VTT). Le Bois d'Aurouze, 05250 Dévoluy. Prix abordables, réservez sur Airbnb.">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="studio location Dévoluy, appartement vacances Superdévoluy, location ski Dévoluy Hautes-Alpes, studio à louer Dévoluy, Bois d'Aurouze Superdévoluy, location vacances 05250, ski aux pieds Dévoluy, studio montagne Hautes-Alpes">
+<meta name="keywords" content="location pas chère Dévoluy, studio vacances Superdévoluy pas cher, location ski Dévoluy prix abordable, appartement vacances été hiver Dévoluy, Le Bois d'Aurouze 05250, studio montagne Hautes-Alpes pas cher, location ski aux pieds Superdévoluy">
 <meta name="author" content="Laurent Dalzotto — Studio Devoluy">
 <meta name="geo.region" content="FR-05">
 <meta name="geo.placename" content="Superdévoluy, Hautes-Alpes">
@@ -16,11 +16,13 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="Studio Devoluy — Ski aux pieds à Superdévoluy, Hautes-Alpes">
-<meta property="og:description" content="Studio rénové 18m² pour 4 personnes. Ski aux pieds, vue vallée, 1600m d'altitude. Résidence Le Bois d'Aurouze, Superdévoluy 05250.">
+<meta property="og:description" content="Location vacances pas chère à Superdévoluy — studio rénové, ski aux pieds, vue vallée. Idéal hiver &amp; été. Prix abordables.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.studiodevoluy.fr/">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Studio Devoluy">
+<meta property="og:image" content="https://studiodevoluy.fr/IMG-20260426-WA0001.jpg">
+<meta property="og:image:alt" content="Studio Devoluy — Location vacances Superdévoluy ski aux pieds">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -249,13 +251,16 @@ a { text-decoration: none; color: inherit; }
 /* ── HERO ── */
 #hero {
   min-height: 100vh;
-  background: linear-gradient(-45deg, #050e07, #091a0d, #0d2415, #071510, #040c07);
-  background-size: 400% 400%;
-  animation: gradientFlow 18s ease infinite;
+  background: url('IMG-20260426-WA0001.jpg') center center / cover no-repeat;
   position: relative; display: flex; align-items: center;
   overflow: hidden; padding: 120px 6% 80px;
 }
-.hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(135deg, rgba(5,14,7,0.82) 0%, rgba(9,26,13,0.70) 50%, rgba(13,36,21,0.60) 100%);
+}
+.hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
 .hero-orb {
   position: absolute; border-radius: 50%;
   background: radial-gradient(circle, rgba(74,124,95,0.25), transparent 70%);
@@ -276,7 +281,7 @@ a { text-decoration: none; color: inherit; }
   opacity: 0.12; pointer-events: none;
 }
 .hero-inner {
-  position: relative; z-index: 2;
+  position: relative; z-index: 2; /* above overlay */
   display: flex; align-items: center;
   gap: 60px; width: 100%; max-width: 1200px; margin: 0 auto;
 }
@@ -714,6 +719,7 @@ footer a:hover { color: var(--gold-light); }
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#studio" onclick="closeMenu()">Le Studio</a></li>
+    <li><a href="#galerie" onclick="closeMenu()">Photos</a></li>
     <li><a href="#equipements" onclick="closeMenu()">Équipements</a></li>
     <li><a href="#activites" onclick="closeMenu()">Activités</a></li>
     <li><a href="#avis" onclick="closeMenu()">Avis</a></li>
@@ -834,6 +840,43 @@ footer a:hover { color: var(--gold-light); }
           <div class="studio-card-label">Étage · avec ascenseur</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE PHOTOS -->
+<section id="galerie" class="section" style="background:var(--forest-dark);padding-top:80px;padding-bottom:80px;" aria-labelledby="galerie-title">
+  <div class="section-inner">
+    <span class="section-label" style="color:var(--gold-light);">Le studio en images</span>
+    <h2 class="section-title" id="galerie-title" style="color:#fff;">Votre <em style="color:var(--gold-light);">refuge alpin</em><br>à Superdévoluy</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:40px;">
+      <a href="IMG-20260426-WA0001.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;grid-column:span 2;grid-row:span 2;" aria-label="Studio Devoluy — Vue principale">
+        <img src="IMG-20260426-WA0001.jpg" alt="Studio Devoluy Superdévoluy — location vacances ski aux pieds Le Bois d'Aurouze" width="600" height="450" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;display:block;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0002.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 2">
+        <img src="IMG-20260426-WA0002.jpg" alt="Intérieur studio rénové Superdévoluy — location pas chère Dévoluy" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0003.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 3">
+        <img src="IMG-20260426-WA0003.jpg" alt="Studio vacances Dévoluy hiver été — Hautes-Alpes 05250" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0004.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 4">
+        <img src="IMG-20260426-WA0004.jpg" alt="Cuisine équipée studio Superdévoluy — location vacances abordable" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0005.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 5">
+        <img src="IMG-20260426-WA0005.jpg" alt="Vue vallée Dévoluy depuis le studio — 7ème étage Le Bois d'Aurouze" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0006.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 6">
+        <img src="IMG-20260426-WA0006.jpg" alt="Mezzanine lit double studio Dévoluy — location ski prix abordable" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0007.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 7">
+        <img src="IMG-20260426-WA0007.jpg" alt="Séjour studio Superdévoluy — canapé-lit confort location été hiver" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0008.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 8">
+        <img src="IMG-20260426-WA0008.jpg" alt="Station ski Superdévoluy pied des pistes — location vacances Hautes-Alpes" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <a href="IMG-20260426-WA0009.jpg" target="_blank" style="display:block;border-radius:12px;overflow:hidden;aspect-ratio:4/3;" aria-label="Studio Devoluy — Photo 9">
+        <img src="IMG-20260426-WA0009.jpg" alt="Montagne Dévoluy été randonnée VTT — studio location pas chère 05250" width="400" height="300" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
     </div>
   </div>
 </section>
