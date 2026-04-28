@@ -1617,23 +1617,23 @@ section { position: relative; }
 <div id="exit-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="exit-popup-heading">
   <div id="exit-popup">
     <button class="exit-popup-close" id="exit-popup-close" aria-label="Fermer">&#x2715;</button>
-    <span class="exit-popup-icon">❄️</span>
-    <div class="exit-popup-badge">Offre exclusive</div>
+    <span class="exit-popup-icon">🎁</span>
+    <div class="exit-popup-badge">Offre limitée</div>
     <h2 class="exit-popup-title" id="exit-popup-heading">
-      Avant de partir…<br><span>−10 % sur votre 1ère intervention</span>
+      Avant de partir…<br><span>1 entretien split offert !</span>
     </h2>
     <p class="exit-popup-sub">
-      Laissez votre email et recevez votre code promo<br>
-      + nos conseils pour entretenir votre clim en Hérault.
+      Laissez votre email et recevez votre bon cadeau<br>
+      pour un nettoyage complet de votre split — valeur 80 €.
     </p>
     <form class="exit-popup-form" id="exit-popup-form" action="https://formspree.io/f/REMPLACER_PAR_VOTRE_ID" method="POST">
-      <input type="hidden" name="_subject" value="Nouveau lead — pop-up Climeo34">
+      <input type="hidden" name="_subject" value="Nouveau lead — 1 entretien split offert (Climeo34)">
       <input class="exit-popup-input" type="email" name="email" placeholder="votre@email.fr" required autocomplete="email">
-      <button class="exit-popup-submit" type="submit">Recevoir mon −10 % →</button>
+      <button class="exit-popup-submit" type="submit">Recevoir mon bon cadeau →</button>
       <div class="exit-popup-rgpd">
         <input type="checkbox" id="popup-rgpd" name="consent" value="oui" required>
         <label for="popup-rgpd">
-          J'accepte que Climeo34 utilise mon adresse email pour m'envoyer mon code promo et des conseils d'entretien. Désinscription possible à tout moment via <a href="mailto:contact@climeo34.fr" style="color:inherit">contact@climeo34.fr</a>.
+          J'accepte que Climeo34 utilise mon adresse email pour m'envoyer mon bon cadeau et des conseils d'entretien. Désinscription possible à tout moment via <a href="mailto:contact@climeo34.fr" style="color:inherit">contact@climeo34.fr</a>.
         </label>
       </div>
     </form>
@@ -1644,7 +1644,7 @@ section { position: relative; }
         </svg>
       </div>
       <p>Super, c'est enregistré !</p>
-      <small>Votre code promo vous sera envoyé très prochainement.</small>
+      <small>Votre bon cadeau vous sera envoyé très prochainement.</small>
     </div>
   </div>
 </div>
@@ -1844,9 +1844,16 @@ document.addEventListener('keydown', e => {
 // Exit intent popup
 (function() {
   const STORAGE_KEY = 'exitPopupTs';
+  const VISIT_KEY = 'exitPopupVisits';
   const COOLDOWN = 7 * 24 * 60 * 60 * 1000; // 7 jours
 
+  // Compter la visite actuelle
+  const visits = parseInt(localStorage.getItem(VISIT_KEY) || '0', 10) + 1;
+  localStorage.setItem(VISIT_KEY, visits.toString());
+
   function shouldShow() {
+    // N'afficher qu'à partir de la 2ème visite
+    if (visits < 2) return false;
     const ts = localStorage.getItem(STORAGE_KEY);
     if (!ts) return true;
     return Date.now() - parseInt(ts, 10) > COOLDOWN;
