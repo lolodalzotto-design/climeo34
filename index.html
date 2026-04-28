@@ -1617,26 +1617,58 @@ section { position: relative; }
 <div id="exit-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="exit-popup-heading">
   <div id="exit-popup">
     <button class="exit-popup-close" id="exit-popup-close" aria-label="Fermer">&#x2715;</button>
-    <span class="exit-popup-icon">🎁</span>
-    <div class="exit-popup-badge">Offre limitée</div>
-    <h2 class="exit-popup-title" id="exit-popup-heading">
-      Avant de partir…<br><span>1 entretien split offert !</span>
-    </h2>
-    <p class="exit-popup-sub">
-      Laissez votre email et recevez votre bon cadeau<br>
-      pour un nettoyage complet de votre split — valeur 80 €.
-    </p>
-    <form class="exit-popup-form" id="exit-popup-form" action="https://formspree.io/f/REMPLACER_PAR_VOTRE_ID" method="POST">
-      <input type="hidden" name="_subject" value="Nouveau lead — 1 entretien split offert (Climeo34)">
-      <input class="exit-popup-input" type="email" name="email" placeholder="votre@email.fr" required autocomplete="email">
-      <button class="exit-popup-submit" type="submit">Recevoir mon bon cadeau →</button>
-      <div class="exit-popup-rgpd">
-        <input type="checkbox" id="popup-rgpd" name="consent" value="oui" required>
-        <label for="popup-rgpd">
-          J'accepte que Climeo34 utilise mon adresse email pour m'envoyer mon bon cadeau et des conseils d'entretien. Désinscription possible à tout moment via <a href="mailto:contact@climeo34.fr" style="color:inherit">contact@climeo34.fr</a>.
-        </label>
-      </div>
-    </form>
+
+    <!-- CONTENU VISITE 1 : devis gratuit -->
+    <div id="exit-popup-v1">
+      <span class="exit-popup-icon">📋</span>
+      <div class="exit-popup-badge">Gratuit & sans engagement</div>
+      <h2 class="exit-popup-title" id="exit-popup-heading">
+        Avant de partir…<br><span>Recevez votre devis gratuit</span>
+      </h2>
+      <p class="exit-popup-sub">
+        Laissez votre email, on vous envoie<br>
+        un devis personnalisé sous 24h — sans engagement.
+      </p>
+      <form class="exit-popup-form" id="exit-popup-form-v1" action="https://formspree.io/f/REMPLACER_PAR_VOTRE_ID" method="POST">
+        <input type="hidden" name="_subject" value="Nouveau lead — Devis gratuit (Climeo34)">
+        <input type="hidden" name="offre" value="devis-gratuit">
+        <input class="exit-popup-input" type="email" name="email" placeholder="votre@email.fr" required autocomplete="email">
+        <button class="exit-popup-submit" type="submit">Recevoir mon devis gratuit →</button>
+        <div class="exit-popup-rgpd">
+          <input type="checkbox" id="popup-rgpd-v1" name="consent" value="oui" required>
+          <label for="popup-rgpd-v1">
+            J'accepte que Climeo34 utilise mon adresse email pour me contacter. Désinscription possible à tout moment via <a href="mailto:contact@climeo34.fr" style="color:inherit">contact@climeo34.fr</a>.
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <!-- CONTENU VISITE 2+ : 1 split offert -->
+    <div id="exit-popup-v2" style="display:none">
+      <span class="exit-popup-icon">🎁</span>
+      <div class="exit-popup-badge">Offre limitée</div>
+      <h2 class="exit-popup-title">
+        Avant de partir…<br><span>1 entretien split offert !</span>
+      </h2>
+      <p class="exit-popup-sub">
+        Laissez votre email et recevez votre bon cadeau<br>
+        pour un nettoyage complet de votre split — valeur 80 €.
+      </p>
+      <form class="exit-popup-form" id="exit-popup-form-v2" action="https://formspree.io/f/REMPLACER_PAR_VOTRE_ID" method="POST">
+        <input type="hidden" name="_subject" value="Nouveau lead — 1 entretien split offert (Climeo34)">
+        <input type="hidden" name="offre" value="split-offert">
+        <input class="exit-popup-input" type="email" name="email" placeholder="votre@email.fr" required autocomplete="email">
+        <button class="exit-popup-submit" type="submit">Recevoir mon bon cadeau →</button>
+        <div class="exit-popup-rgpd">
+          <input type="checkbox" id="popup-rgpd-v2" name="consent" value="oui" required>
+          <label for="popup-rgpd-v2">
+            J'accepte que Climeo34 utilise mon adresse email pour m'envoyer mon bon cadeau et des conseils d'entretien. Désinscription possible à tout moment via <a href="mailto:contact@climeo34.fr" style="color:inherit">contact@climeo34.fr</a>.
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <!-- Message succès commun -->
     <div id="exit-popup-success">
       <div class="success-icon">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1644,7 +1676,7 @@ section { position: relative; }
         </svg>
       </div>
       <p>Super, c'est enregistré !</p>
-      <small>Votre bon cadeau vous sera envoyé très prochainement.</small>
+      <small id="exit-popup-success-msg">Nous vous recontactons très prochainement.</small>
     </div>
   </div>
 </div>
@@ -1843,27 +1875,45 @@ document.addEventListener('keydown', e => {
 
 // Exit intent popup
 (function() {
-  const STORAGE_KEY = 'exitPopupTs';
   const VISIT_KEY = 'exitPopupVisits';
-  const COOLDOWN = 7 * 24 * 60 * 60 * 1000; // 7 jours
+  const SHOWN_V1_KEY = 'exitPopupV1Shown';
+  const SHOWN_V2_KEY = 'exitPopupV2Ts';
+  const COOLDOWN_V2 = 7 * 24 * 60 * 60 * 1000; // 7 jours pour l'offre split
 
   // Compter la visite actuelle
   const visits = parseInt(localStorage.getItem(VISIT_KEY) || '0', 10) + 1;
   localStorage.setItem(VISIT_KEY, visits.toString());
 
+  const isFirstVisit = visits === 1;
+
   function shouldShow() {
-    // N'afficher qu'à partir de la 2ème visite
-    if (visits < 2) return false;
-    const ts = localStorage.getItem(STORAGE_KEY);
-    if (!ts) return true;
-    return Date.now() - parseInt(ts, 10) > COOLDOWN;
+    if (isFirstVisit) {
+      // Visite 1 : pop-up devis, une seule fois
+      return !localStorage.getItem(SHOWN_V1_KEY);
+    } else {
+      // Visite 2+ : pop-up split offert, cooldown 7 jours
+      const ts = localStorage.getItem(SHOWN_V2_KEY);
+      if (!ts) return true;
+      return Date.now() - parseInt(ts, 10) > COOLDOWN_V2;
+    }
   }
 
   const overlay = document.getElementById('exit-popup-overlay');
 
   function showPopup() {
     if (!shouldShow()) return;
-    localStorage.setItem(STORAGE_KEY, Date.now().toString());
+
+    // Afficher le bon contenu selon la visite
+    if (isFirstVisit) {
+      document.getElementById('exit-popup-v1').style.display = 'block';
+      document.getElementById('exit-popup-v2').style.display = 'none';
+      localStorage.setItem(SHOWN_V1_KEY, '1');
+    } else {
+      document.getElementById('exit-popup-v1').style.display = 'none';
+      document.getElementById('exit-popup-v2').style.display = 'block';
+      localStorage.setItem(SHOWN_V2_KEY, Date.now().toString());
+    }
+
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
     triggered = true;
@@ -1875,17 +1925,16 @@ document.addEventListener('keydown', e => {
   }
 
   let triggered = false;
+  const pageLoadTime = Date.now();
 
   // Desktop : curseur qui quitte vers le haut
   document.addEventListener('mouseleave', function(e) {
     if (triggered || e.clientY > 20) return;
-    // Délai minimal de 15s avant de déclencher
-    if (timeOnPage < 15000) return;
+    if (Date.now() - pageLoadTime < 15000) return;
     showPopup();
   });
 
   // Mobile / fallback : après 40s de navigation
-  const timeOnPage = Date.now();
   setTimeout(function() {
     if (!triggered) showPopup();
   }, 40000);
@@ -1896,17 +1945,30 @@ document.addEventListener('keydown', e => {
   });
   document.getElementById('exit-popup-close').addEventListener('click', hidePopup);
 
-  // Soumission du formulaire (Formspree AJAX)
-  document.getElementById('exit-popup-form').addEventListener('submit', function(e) {
+  // Soumission formulaire v1 (devis gratuit)
+  document.getElementById('exit-popup-form-v1').addEventListener('submit', function(e) {
     e.preventDefault();
-    const form = this;
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+    fetch(this.action, {
+      method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' }
     }).then(function(res) {
       if (res.ok) {
-        form.style.display = 'none';
+        document.getElementById('exit-popup-v1').style.display = 'none';
+        document.getElementById('exit-popup-success-msg').textContent = 'Nous vous envoyons votre devis sous 24h.';
+        document.getElementById('exit-popup-success').style.display = 'block';
+        setTimeout(hidePopup, 4000);
+      }
+    });
+  });
+
+  // Soumission formulaire v2 (split offert)
+  document.getElementById('exit-popup-form-v2').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch(this.action, {
+      method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        document.getElementById('exit-popup-v2').style.display = 'none';
+        document.getElementById('exit-popup-success-msg').textContent = 'Votre bon cadeau vous sera envoyé très prochainement.';
         document.getElementById('exit-popup-success').style.display = 'block';
         setTimeout(hidePopup, 4000);
       }
