@@ -1143,12 +1143,13 @@ section { position: relative; }
         <a href="tel:0603257679" class="btn-primary">Appeler maintenant</a>
         <a href="https://wa.me/33603257679" class="btn-ghost" target="_blank" rel="noopener">Devis WhatsApp gratuit</a>
       </div>
-      <!-- FORMULAIRE DE CAPTURE — action: remplacer YOUR_FORM_ID par l'ID Formspree (formspree.io, compte gratuit) -->
+      <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
       <div class="hero-form-wrap" id="hero-form-wrap">
         <p class="hero-form-title">📩 Recevoir mon devis gratuit — réponse sous 24h</p>
-        <form class="hero-form" id="hero-capture-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form class="hero-form" id="hero-capture-form" action="https://formsubmit.co/ajax/Lolo.dalzotto@gmail.com" method="POST">
           <input type="text" name="prenom" placeholder="Prénom *" required autocomplete="given-name">
           <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
+          <input type="email" name="email" placeholder="E-mail *" required autocomplete="email" style="grid-column: 1 / -1">
           <input type="text" name="ville" placeholder="Ville *" required autocomplete="address-level2">
           <select name="splits" required>
             <option value="" disabled selected>Nombre de splits *</option>
@@ -1158,6 +1159,8 @@ section { position: relative; }
             <option value="4+ splits">4 splits et +</option>
           </select>
           <input type="hidden" name="_subject" value="🔔 Nouveau devis Climeo34">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
           <button type="submit" class="hero-form-submit" id="hero-form-btn">Recevoir mon devis gratuit</button>
         </form>
         <div class="hero-form-success" id="hero-form-success">
@@ -1647,7 +1650,7 @@ section { position: relative; }
       </div>
       <div class="mention-block" id="confidentialite">
         <h3>Politique de confidentialité & RGPD</h3>
-        <p><strong>Données collectées :</strong> Ce site propose un formulaire de devis permettant de collecter votre prénom, numéro de téléphone, ville et nombre de splits. Ces données sont transmises via Formspree (prestataire tiers) à Climeo34 dans le seul but de vous contacter pour établir un devis. Elles ne sont ni revendues, ni partagées à des fins commerciales. Durée de conservation : 6 mois. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p><br>
+        <p><strong>Données collectées :</strong> Ce site propose un formulaire de devis permettant de collecter votre prénom, adresse e-mail, numéro de téléphone, ville et nombre de splits. Ces données sont transmises via Formsubmit (prestataire tiers) à Climeo34 dans le seul but de vous contacter pour établir un devis. Elles ne sont ni revendues, ni partagées à des fins commerciales. Durée de conservation : 6 mois. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p><br>
         <p><strong>Cookies :</strong> Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement. Aucun cookie publicitaire ou de tracking n'est déposé sans votre consentement.</p><br>
         <p><strong>Vos droits :</strong> Conformément au RGPD (Règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition. Pour exercer ces droits : <a href="mailto:contact@climeo34.fr">contact@climeo34.fr</a></p><br>
         <p><strong>Autorité de contrôle :</strong> <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
@@ -1835,7 +1838,7 @@ const kpiObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.observe(k));
 
-// Hero capture form — async Formspree submit
+// Hero capture form — envoi async via Formsubmit.co
 (function() {
   var form = document.getElementById('hero-capture-form');
   if (!form) return;
@@ -1850,7 +1853,8 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
         body: new FormData(this),
         headers: { 'Accept': 'application/json' }
       });
-      if (resp.ok) {
+      var data = await resp.json();
+      if (resp.ok && data.success === 'true') {
         form.style.display = 'none';
         document.getElementById('hero-form-success').style.display = 'block';
       } else {
