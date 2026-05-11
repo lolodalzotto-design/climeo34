@@ -1848,8 +1848,9 @@ const kpiObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.observe(k));
 
-// Hero capture form — envoi async via Formsubmit.co
+// Hero capture form — envoi async via Formsubmit.co + Google Sheets
 (function() {
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyDdSGBh0nbw6YfenlPPXN8UkWs3YjJ_N32OLQoDznoYaPLWr6DZfAViB9k-3dpVpSx/exec';
   var form = document.getElementById('hero-capture-form');
   if (!form) return;
   form.addEventListener('submit', async function(e) {
@@ -1858,19 +1859,33 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     btn.textContent = 'Envoi en cours…';
     btn.disabled = true;
     try {
-      var resp = await fetch(this.action, {
-        method: 'POST',
-        body: new FormData(this),
-        headers: { 'Accept': 'application/json' }
-      });
-      var data = await resp.json();
-      if (resp.ok && data.success === 'true') {
-        form.style.display = 'none';
-        document.getElementById('hero-form-success').style.display = 'block';
-      } else {
-        btn.textContent = 'Erreur — réessayez';
-        btn.disabled = false;
+      var formData = new FormData(this);
+      var sheetParams = new URLSearchParams();
+      formData.forEach(function(v, k) { sheetParams.append(k, v); });
+
+      var [resp] = await Promise.allSettled([
+        fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        }),
+        fetch(SHEET_URL, {
+          method: 'POST',
+          body: sheetParams,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+      ]);
+
+      if (resp.status === 'fulfilled' && resp.value.ok) {
+        var data = await resp.value.json();
+        if (data.success === 'true') {
+          form.style.display = 'none';
+          document.getElementById('hero-form-success').style.display = 'block';
+          return;
+        }
       }
+      btn.textContent = 'Erreur — réessayez';
+      btn.disabled = false;
     } catch(err) {
       btn.textContent = 'Erreur — réessayez';
       btn.disabled = false;
