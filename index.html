@@ -1850,7 +1850,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
 
 // Hero capture form — envoi async via Formsubmit.co + Google Sheets
 (function() {
-  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyDdSGBh0nbw6YfenlPPXN8UkWs3YjJ_N32OLQoDznoYaPLWr6DZfAViB9k-3dpVpSx/exec';
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwumPAq-SWNknazpEzGbIiJWpsUepMP5kMXz27AA112tNz-DMoL-fagoWAUOebkrTYr/exec';
   var form = document.getElementById('hero-capture-form');
   if (!form) return;
   form.addEventListener('submit', async function(e) {
@@ -1869,7 +1869,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
           body: formData,
           headers: { 'Accept': 'application/json' }
         }),
-        fetch(SHEET_URL + '?' + sheetParams.toString(), { method: 'GET', mode: 'no-cors' })
+        fetch(SHEET_URL + '?' + sheetParams.toString()).catch(function(){})
       ]);
 
       if (resp.status === 'fulfilled' && resp.value.ok) {
