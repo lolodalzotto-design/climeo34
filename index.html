@@ -1869,11 +1869,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
           body: formData,
           headers: { 'Accept': 'application/json' }
         }),
-        fetch(SHEET_URL, {
-          method: 'POST',
-          body: sheetParams,
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+        fetch(SHEET_URL + '?' + sheetParams.toString(), { method: 'GET', mode: 'no-cors' })
       ]);
 
       if (resp.status === 'fulfilled' && resp.value.ok) {
