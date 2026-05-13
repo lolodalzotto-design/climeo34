@@ -1906,9 +1906,9 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
 //           → Restreignez la clé aux domaines : climeo34.fr, www.climeo34.fr
 (function () {
   var PLACE_ID = 'ChIJodubwNeGWo0R8j-otvrAcW0';
-  var API_KEY  = 'VOTRE_CLE_API';
+  var API_KEY  = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
   var grid = document.getElementById('google-reviews-grid');
-  if (!grid || PLACE_ID === 'VOTRE_PLACE_ID' || API_KEY === 'VOTRE_CLE_API') return;
+  if (!grid) return;
 
   function stars(n) {
     return '<span aria-label="' + n + ' étoiles sur 5">★★★★★☆☆☆☆☆</span>'.slice(0, n + (5 - n > 0 ? 5 - n : 0));
