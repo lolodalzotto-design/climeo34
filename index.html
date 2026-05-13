@@ -1921,7 +1921,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       '<div class="avis" style="grid-column:1/-1;text-align:center;padding:48px 32px;">'
       + '<div style="font-size:3.5rem;font-weight:800;color:var(--navy);line-height:1;">' + (rating ? rating.toFixed(1) : '5.0') + '</div>'
       + '<div class="stars" style="font-size:1.4rem;letter-spacing:4px;margin:10px 0;">' + starsHtml(full) + '</div>'
-      + '<div style="color:var(--gray-text);font-size:0.85rem;margin-bottom:28px;">Note Google · ' + (count || 0) + ' avis</div>'
+      + '<div style="color:var(--gray-text);font-size:0.85rem;margin-bottom:28px;">Note Google · ' + (count || 0) + ' avis</div>'
       + '<a href="' + MAPS_URL + '" target="_blank" rel="noopener noreferrer" '
       + 'style="display:inline-block;background:var(--brand-blue);color:#fff;padding:14px 32px;border-radius:8px;'
       + 'font-weight:700;font-size:0.9rem;text-decoration:none;">Laisser un avis Google</a>'
@@ -1932,9 +1932,9 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     var filtered = reviews.filter(function(r){ return r.rating >= 4; }).slice(0, 6);
     if (!filtered.length) { renderScore(rating, count); return; }
     grid.innerHTML = filtered.map(function(r) {
-      var name    = escHtml((r.authorAttribution && r.authorAttribution.displayName) || 'Client');
-      var text    = escHtml((r.text && r.text.text) || '');
-      var relTime = escHtml(r.relativePublishTimeDescription || '');
+      var name    = escHtml(r.author_name || (r.authorAttribution && r.authorAttribution.displayName) || 'Client');
+      var text    = escHtml(typeof r.text === 'string' ? r.text : (r.text && r.text.text) || '');
+      var relTime = escHtml(r.relative_time_description || r.relativePublishTimeDescription || '');
       var note    = r.rating || 5;
       return '<div class="avis">'
         + '<div class="stars">' + starsHtml(note) + '</div>'
@@ -1946,20 +1946,28 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     }).join('');
   }
 
-  var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID + '?key=' + API_KEY;
-  fetch(url, { headers: { 'X-Goog-FieldMask': 'rating,userRatingCount,reviews' } })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.reviews && data.reviews.length) {
-        renderReviews(data.reviews, data.rating, data.userRatingCount);
-      } else {
-        renderScore(data.rating, data.userRatingCount);
-      }
-    })
-    .catch(function() { renderScore(5, null); });
-})();
-// ──────────────────────────────────────────────────────────────────────────
+  // Places API (New) pour la note et le nombre ; classique pour les avis écrits
+  var urlNew     = 'https://places.googleapis.com/v1/places/' + PLACE_ID + '?key=' + API_KEY;
+  var urlClassic = 'https://maps.googleapis.com/maps/api/place/details/json'
+    + '?place_id=' + PLACE_ID + '&fields=reviews&language=fr&reviews_sort=newest&key=' + API_KEY;
 
+  Promise.all([
+    fetch(urlNew, { headers: { 'X-Goog-FieldMask': 'rating,userRatingCount' } }).then(function(r){ return r.json(); }),
+    fetch(urlClassic).then(function(r){ return r.json(); })
+  ]).then(function(results) {
+    var nd      = results[0];
+    var cd      = results[1].result || {};
+    var rating  = nd.rating || cd.rating || 5;
+    var count   = nd.userRatingCount || 0;
+    var reviews = cd.reviews || [];
+    if (reviews.length) {
+      renderReviews(reviews, rating, count);
+    } else {
+      renderScore(rating, count);
+    }
+  }).catch(function() { renderScore(5, null); });
+})();
+// ──────────────────────────────────────────
 function openMentions() {
   document.getElementById('modal-mentions').style.display = 'block';
   document.body.style.overflow = 'hidden';
