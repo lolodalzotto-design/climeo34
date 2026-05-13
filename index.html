@@ -1899,8 +1899,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
   });
 })();
 
-// ─── Google Places — Avis clients (Maps JavaScript API) ──────────────────────
-// Tente de récupérer les vrais avis Google et les affiche en cartes si disponibles
+// ─── Google Places — Avis clients (Places API nouvelle génération) ────────────
 (function () {
   var PLACE_ID = 'ChIJodubwNeGWo0R8j-otvrAcW0';
   var API_KEY  = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
@@ -1917,46 +1916,44 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  window._googlePlacesCallback = function() {
+  window._googlePlacesCallback = async function() {
     try {
       var grid = document.getElementById('google-reviews-grid');
       if (!grid) return;
-      var container = document.createElement('div');
-      container.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;';
-      document.body.appendChild(container);
-      var map = new google.maps.Map(container, { center: { lat: 43.6, lng: 3.88 }, zoom: 1 });
-      var service = new google.maps.places.PlacesService(map);
-      service.getDetails(
-        { placeId: PLACE_ID, fields: ['rating', 'user_ratings_total', 'reviews'], language: 'fr' },
-        function(place, status) {
-          if (status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
-          // Mettre à jour le nombre d'avis dans la carte statique
-          var countEl = document.getElementById('google-avis-count');
-          if (countEl && place.user_ratings_total) countEl.textContent = place.user_ratings_total;
-          // Afficher les cartes d'avis s'il y en a
-          var reviews = (place.reviews || []).filter(function(r){ return r.rating >= 4; }).slice(0, 6);
-          if (!reviews.length) return;
-          grid.innerHTML = reviews.map(function(r) {
-            var name    = escHtml(r.author_name || 'Client');
-            var text    = escHtml(r.text || '');
-            var relTime = escHtml(r.relative_time_description || '');
-            var note    = r.rating || 5;
-            return '<div class="avis">'
-              + '<div class="stars">' + starsHtml(note) + '</div>'
-              + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
-              + '<div class="avis-author">'
-              + '<div class="avatar">' + initials(name) + '</div>'
-              + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
-              + '</div></div>';
-          }).join('');
-        }
-      );
-    } catch(e) { /* score card statique reste visible */ }
+
+      const { Place } = await google.maps.importLibrary('places');
+      const place = new Place({ id: PLACE_ID, requestedLanguage: 'fr' });
+      await place.fetchFields({ fields: ['rating', 'userRatingCount', 'reviews'] });
+
+      // Mettre à jour le compteur dans la carte statique
+      var countEl = document.getElementById('google-avis-count');
+      if (countEl && place.userRatingCount) countEl.textContent = place.userRatingCount;
+
+      var rawReviews = place.reviews || [];
+      var reviews = rawReviews.filter(function(r){ return r.rating >= 4; }).slice(0, 6);
+      if (!reviews.length) return;
+
+      grid.innerHTML = reviews.map(function(r) {
+        var name    = escHtml((r.authorAttribution && r.authorAttribution.displayName) || 'Client');
+        var text    = escHtml((r.text && r.text.text) || (typeof r.text === 'string' ? r.text : ''));
+        var relTime = escHtml(r.relativePublishTimeDescription || '');
+        var note    = r.rating || 5;
+        return '<div class="avis">'
+          + '<div class="stars">' + starsHtml(note) + '</div>'
+          + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
+          + '<div class="avis-author">'
+          + '<div class="avatar">' + initials(name) + '</div>'
+          + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
+          + '</div></div>';
+      }).join('');
+    } catch(e) {
+      console.error('[Climeo34] Erreur Places:', e);
+    }
   };
 
   var s = document.createElement('script');
   s.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY
-        + '&libraries=places&callback=_googlePlacesCallback&language=fr';
+        + '&callback=_googlePlacesCallback&loading=async&language=fr';
   s.async = true; s.defer = true;
   document.head.appendChild(s);
 })();
