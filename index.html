@@ -1918,6 +1918,8 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
   }
 
   window._googlePlacesCallback = function() {
+    console.log("[Climeo34] Maps JS API chargé ✓");
+    console.log("[Climeo34] Maps JS API chargé ✓");
     try {
       var grid = document.getElementById('google-reviews-grid');
       if (!grid) return;
@@ -1929,12 +1931,17 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       service.getDetails(
         { placeId: PLACE_ID, fields: ['rating', 'user_ratings_total', 'reviews'], language: 'fr' },
         function(place, status) {
-          if (status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
+          console.log("[Climeo34] PlacesService status:", status, "place:", place);
+          if (status !== google.maps.places.PlacesServiceStatus.OK || !place) {
+            console.log("[Climeo34] Erreur API:", status); return;
+          }
           // Mettre à jour le nombre d'avis dans la carte statique
           var countEl = document.getElementById('google-avis-count');
           if (countEl && place.user_ratings_total) countEl.textContent = place.user_ratings_total;
           // Afficher les cartes d'avis s'il y en a
+          console.log("[Climeo34] reviews bruts:", place.reviews, "| user_ratings_total:", place.user_ratings_total);
           var reviews = (place.reviews || []).filter(function(r){ return r.rating >= 4; }).slice(0, 6);
+          console.log("[Climeo34] reviews filtrés (≥4★):", reviews.length);
           if (!reviews.length) return;
           grid.innerHTML = reviews.map(function(r) {
             var name    = escHtml(r.author_name || 'Client');
@@ -1951,7 +1958,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
           }).join('');
         }
       );
-    } catch(e) { /* score card statique reste visible */ }
+    } catch(e) { console.error('[Climeo34] Erreur Maps JS:', e); }
   };
 
   var s = document.createElement('script');
