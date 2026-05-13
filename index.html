@@ -628,6 +628,15 @@ a.pill { cursor: pointer; }
 /* AVIS */
 #avis { background: var(--brand-blue-bg); }
 .avis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.avis-skeleton {
+  min-height: 200px;
+  background: linear-gradient(90deg, #e8eef8 25%, #d4dff5 50%, #e8eef8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: var(--radius);
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.avis-error { text-align: center; padding: 40px 20px; color: var(--gray-text); grid-column: 1/-1; }
 .avis {
   background: white; border-radius: var(--radius); padding: 32px;
   border: 1px solid rgba(26,47,94,0.05); transition: all var(--transition);
@@ -1508,14 +1517,11 @@ section { position: relative; }
     <h2 class="s-title fade-up d1" id="t-avis">Ils ont fait confiance à Climeo34</h2>
     <p class="s-sub fade-up d2">Avis Google vérifiés — particuliers et propriétaires Airbnb en Hérault.</p>
   </div>
-  <!-- Widget Elfsight Google Reviews — INSTRUCTIONS :
-       1. Créer un compte gratuit sur https://elfsight.com
-       2. Chercher "Google Reviews" > connecter votre fiche Google Business Profile
-       3. Personnaliser (layout : liste ou grille), cliquer "Publish"
-       4. Remplacer YOUR_WIDGET_ID ci-dessous par l'ID du widget (ex: a1b2c3d4-e5f6-...)
-  -->
-  <script src="https://static.elfsight.com/platform/platform.js" async></script>
-  <div class="elfsight-app-YOUR_WIDGET_ID fade-up" data-elfsight-app-lazy style="max-width:1100px;margin:0 auto;"></div>
+  <div class="avis-grid fade-up" id="google-reviews-grid" style="max-width:1100px;margin:32px auto 0;">
+    <div class="avis avis-skeleton" aria-hidden="true"></div>
+    <div class="avis avis-skeleton" aria-hidden="true"></div>
+    <div class="avis avis-skeleton" aria-hidden="true"></div>
+  </div>
 </section>
 
 <!-- FAQ -->
@@ -1888,6 +1894,74 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     }
   });
 })();
+
+// ─── Google Places API — Avis clients ─────────────────────────────────────
+// ÉTAPE 1 : Remplacez VOTRE_PLACE_ID par l'ID de votre fiche Google Business
+//           → Cherchez votre établissement sur maps.google.com > "Partager"
+//             > "Intégrer une carte" > l'ID est dans l'URL après "!1s" ou
+//             → Utilisez : https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
+// ÉTAPE 2 : Remplacez VOTRE_CLE_API par votre clé API Google Maps/Places
+//           → console.cloud.google.com > APIs & Services > Credentials
+//           → Activez "Places API (New)" dans la bibliothèque d'APIs
+//           → Restreignez la clé aux domaines : climeo34.fr, www.climeo34.fr
+(function () {
+  var PLACE_ID = 'VOTRE_PLACE_ID';
+  var API_KEY  = 'VOTRE_CLE_API';
+  var grid = document.getElementById('google-reviews-grid');
+  if (!grid || PLACE_ID === 'VOTRE_PLACE_ID' || API_KEY === 'VOTRE_CLE_API') return;
+
+  function stars(n) {
+    return '<span aria-label="' + n + ' étoiles sur 5">★★★★★☆☆☆☆☆</span>'.slice(0, n + (5 - n > 0 ? 5 - n : 0));
+  }
+  function starsHtml(n) {
+    var s = '';
+    for (var i = 0; i < 5; i++) s += i < n ? '★' : '☆';
+    return '<span aria-label="' + n + ' étoiles sur 5">' + s + '</span>';
+  }
+  function initials(name) {
+    return (name || 'A').split(' ').map(function(w){ return w[0] || ''; }).slice(0, 2).join('').toUpperCase() || 'A';
+  }
+  function escHtml(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderReviews(reviews) {
+    var filtered = reviews.filter(function(r){ return r.rating >= 4; }).slice(0, 6);
+    if (!filtered.length) { showError(); return; }
+    grid.innerHTML = filtered.map(function(r) {
+      var name    = escHtml((r.authorAttribution && r.authorAttribution.displayName) || 'Client');
+      var text    = escHtml((r.text && r.text.text) || '');
+      var relTime = escHtml(r.relativePublishTimeDescription || '');
+      var note    = r.rating || 5;
+      return '<div class="avis">'
+        + '<div class="stars">' + starsHtml(note) + '</div>'
+        + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
+        + '<div class="avis-author">'
+        + '<div class="avatar">' + initials(name) + '</div>'
+        + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
+        + '</div></div>';
+    }).join('');
+  }
+
+  function showError() {
+    grid.innerHTML = '<p class="avis-error">Retrouvez tous nos avis sur <a href="https://www.google.com/maps/search/Climeo34" target="_blank" rel="noopener noreferrer">Google Maps</a>.</p>';
+  }
+
+  var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID
+    + '?fields=reviews&languageCode=fr&key=' + API_KEY;
+
+  fetch(url, { headers: { 'X-Goog-FieldMask': 'reviews' } })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.reviews && data.reviews.length) {
+        renderReviews(data.reviews);
+      } else {
+        showError();
+      }
+    })
+    .catch(showError);
+})();
+// ──────────────────────────────────────────────────────────────────────────
 
 function openMentions() {
   document.getElementById('modal-mentions').style.display = 'block';
