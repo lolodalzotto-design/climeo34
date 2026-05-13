@@ -1895,24 +1895,14 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
   });
 })();
 
-// ─── Google Places API — Avis clients ─────────────────────────────────────
-// ÉTAPE 1 : Remplacez VOTRE_PLACE_ID par l'ID de votre fiche Google Business
-//           → Cherchez votre établissement sur maps.google.com > "Partager"
-//             > "Intégrer une carte" > l'ID est dans l'URL après "!1s" ou
-//             → Utilisez : https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
-// ÉTAPE 2 : Remplacez VOTRE_CLE_API par votre clé API Google Maps/Places
-//           → console.cloud.google.com > APIs & Services > Credentials
-//           → Activez "Places API (New)" dans la bibliothèque d'APIs
-//           → Restreignez la clé aux domaines : climeo34.fr, www.climeo34.fr
+// ─── Google Places API — Avis clients ─────────────────────────────────────────────
 (function () {
   var PLACE_ID = 'ChIJodubwNeGWo0R8j-otvrAcW0';
   var API_KEY  = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
+  var MAPS_URL = 'https://search.google.com/local/writereview?placeid=ChIJodubwNeGWo0R8j-otvrAcW0';
   var grid = document.getElementById('google-reviews-grid');
   if (!grid) return;
 
-  function stars(n) {
-    return '<span aria-label="' + n + ' étoiles sur 5">★★★★★☆☆☆☆☆</span>'.slice(0, n + (5 - n > 0 ? 5 - n : 0));
-  }
   function starsHtml(n) {
     var s = '';
     for (var i = 0; i < 5; i++) s += i < n ? '★' : '☆';
@@ -1925,9 +1915,22 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function renderReviews(reviews) {
+  function renderScore(rating, count) {
+    var full = Math.round(rating || 5);
+    grid.innerHTML =
+      '<div class="avis" style="grid-column:1/-1;text-align:center;padding:48px 32px;">'
+      + '<div style="font-size:3.5rem;font-weight:800;color:var(--navy);line-height:1;">' + (rating ? rating.toFixed(1) : '5.0') + '</div>'
+      + '<div class="stars" style="font-size:1.4rem;letter-spacing:4px;margin:10px 0;">' + starsHtml(full) + '</div>'
+      + '<div style="color:var(--gray-text);font-size:0.85rem;margin-bottom:28px;">Note Google · ' + (count || 0) + ' avis</div>'
+      + '<a href="' + MAPS_URL + '" target="_blank" rel="noopener noreferrer" '
+      + 'style="display:inline-block;background:var(--brand-blue);color:#fff;padding:14px 32px;border-radius:8px;'
+      + 'font-weight:700;font-size:0.9rem;text-decoration:none;">Laisser un avis Google</a>'
+      + '</div>';
+  }
+
+  function renderReviews(reviews, rating, count) {
     var filtered = reviews.filter(function(r){ return r.rating >= 4; }).slice(0, 6);
-    if (!filtered.length) { showError(); return; }
+    if (!filtered.length) { renderScore(rating, count); return; }
     grid.innerHTML = filtered.map(function(r) {
       var name    = escHtml((r.authorAttribution && r.authorAttribution.displayName) || 'Client');
       var text    = escHtml((r.text && r.text.text) || '');
@@ -1943,23 +1946,17 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     }).join('');
   }
 
-  function showError() {
-    grid.innerHTML = '<p class="avis-error">Retrouvez tous nos avis sur <a href="https://www.google.com/maps/search/Climeo34" target="_blank" rel="noopener noreferrer">Google Maps</a>.</p>';
-  }
-
-  var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID
-    + '?fields=reviews&languageCode=fr&key=' + API_KEY;
-
-  fetch(url, { headers: { 'X-Goog-FieldMask': 'reviews' } })
+  var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID + '?key=' + API_KEY;
+  fetch(url, { headers: { 'X-Goog-FieldMask': 'rating,userRatingCount,reviews' } })
     .then(function(res) { return res.json(); })
     .then(function(data) {
       if (data.reviews && data.reviews.length) {
-        renderReviews(data.reviews);
+        renderReviews(data.reviews, data.rating, data.userRatingCount);
       } else {
-        showError();
+        renderScore(data.rating, data.userRatingCount);
       }
     })
-    .catch(showError);
+    .catch(function() { renderScore(5, null); });
 })();
 // ──────────────────────────────────────────────────────────────────────────
 
