@@ -1518,9 +1518,13 @@ section { position: relative; }
     <p class="s-sub fade-up d2">Avis Google vérifiés — particuliers et propriétaires Airbnb en Hérault.</p>
   </div>
   <div class="avis-grid fade-up" id="google-reviews-grid" style="max-width:1100px;margin:32px auto 0;">
-    <div class="avis avis-skeleton" aria-hidden="true"></div>
-    <div class="avis avis-skeleton" aria-hidden="true"></div>
-    <div class="avis avis-skeleton" aria-hidden="true"></div>
+    <div class="avis" style="grid-column:1/-1;text-align:center;padding:48px 32px;" id="google-score-card">
+      <div style="font-size:3.5rem;font-weight:800;color:var(--navy);line-height:1;">5.0</div>
+      <div class="stars" style="font-size:1.4rem;letter-spacing:4px;margin:10px 0;" aria-label="5 étoiles sur 5">★★★★★</div>
+      <div style="color:var(--gray-text);font-size:0.85rem;margin-bottom:28px;">Note Google · <span id="google-avis-count">2</span> avis</div>
+      <a href="https://search.google.com/local/writereview?placeid=ChIJodubwNeGWo0R8j-otvrAcW0" target="_blank" rel="noopener noreferrer"
+         style="display:inline-block;background:var(--brand-blue);color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;">Laisser un avis Google</a>
+    </div>
   </div>
 </section>
 
@@ -1896,10 +1900,10 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
 })();
 
 // ─── Google Places — Avis clients (Maps JavaScript API) ──────────────────────
+// Tente de récupérer les vrais avis Google et les affiche en cartes si disponibles
 (function () {
   var PLACE_ID = 'ChIJodubwNeGWo0R8j-otvrAcW0';
   var API_KEY  = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
-  var MAPS_URL = 'https://search.google.com/local/writereview?placeid=ChIJodubwNeGWo0R8j-otvrAcW0';
 
   function starsHtml(n) {
     var s = '';
@@ -1913,77 +1917,48 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function renderScore(rating, count) {
-    var grid = document.getElementById('google-reviews-grid');
-    if (!grid) return;
-    var full = Math.round(rating || 5);
-    grid.innerHTML =
-      '<div class="avis" style="grid-column:1/-1;text-align:center;padding:48px 32px;">'
-      + '<div style="font-size:3.5rem;font-weight:800;color:var(--navy);line-height:1;">' + (rating ? rating.toFixed(1) : '5.0') + '</div>'
-      + '<div class="stars" style="font-size:1.4rem;letter-spacing:4px;margin:10px 0;">' + starsHtml(full) + '</div>'
-      + '<div style="color:var(--gray-text);font-size:0.85rem;margin-bottom:28px;">Note Google · ' + (count || 0) + ' avis</div>'
-      + '<a href="' + MAPS_URL + '" target="_blank" rel="noopener noreferrer" '
-      + 'style="display:inline-block;background:var(--brand-blue);color:#fff;padding:14px 32px;border-radius:8px;'
-      + 'font-weight:700;font-size:0.9rem;text-decoration:none;">Laisser un avis Google</a>'
-      + '</div>';
-  }
-
-  function renderReviews(reviews, rating, count) {
-    var grid = document.getElementById('google-reviews-grid');
-    if (!grid) return;
-    var filtered = reviews.filter(function(r){ return r.rating >= 4; }).slice(0, 6);
-    if (!filtered.length) { renderScore(rating, count); return; }
-    grid.innerHTML = filtered.map(function(r) {
-      var name    = escHtml(r.author_name || (r.authorAttribution && r.authorAttribution.displayName) || 'Client');
-      var text    = escHtml(typeof r.text === 'string' ? r.text : (r.text && r.text.text) || '');
-      var relTime = escHtml(r.relative_time_description || r.relativePublishTimeDescription || '');
-      var note    = r.rating || 5;
-      return '<div class="avis">'
-        + '<div class="stars">' + starsHtml(note) + '</div>'
-        + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
-        + '<div class="avis-author">'
-        + '<div class="avatar">' + initials(name) + '</div>'
-        + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
-        + '</div></div>';
-    }).join('');
-  }
-
   window._googlePlacesCallback = function() {
     try {
+      var grid = document.getElementById('google-reviews-grid');
+      if (!grid) return;
       var container = document.createElement('div');
-      var map = new google.maps.Map(container);
+      container.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;';
+      document.body.appendChild(container);
+      var map = new google.maps.Map(container, { center: { lat: 43.6, lng: 3.88 }, zoom: 1 });
       var service = new google.maps.places.PlacesService(map);
       service.getDetails(
         { placeId: PLACE_ID, fields: ['rating', 'user_ratings_total', 'reviews'], language: 'fr' },
         function(place, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK && place) {
-            var reviews = place.reviews || [];
-            var rating  = place.rating || 5;
-            var count   = place.user_ratings_total || 0;
-            if (reviews.length) {
-              renderReviews(reviews, rating, count);
-            } else {
-              renderScore(rating, count);
-            }
-          } else {
-            renderScore(5, null);
-          }
+          if (status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
+          // Mettre à jour le nombre d'avis dans la carte statique
+          var countEl = document.getElementById('google-avis-count');
+          if (countEl && place.user_ratings_total) countEl.textContent = place.user_ratings_total;
+          // Afficher les cartes d'avis s'il y en a
+          var reviews = (place.reviews || []).filter(function(r){ return r.rating >= 4; }).slice(0, 6);
+          if (!reviews.length) return;
+          grid.innerHTML = reviews.map(function(r) {
+            var name    = escHtml(r.author_name || 'Client');
+            var text    = escHtml(r.text || '');
+            var relTime = escHtml(r.relative_time_description || '');
+            var note    = r.rating || 5;
+            return '<div class="avis">'
+              + '<div class="stars">' + starsHtml(note) + '</div>'
+              + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
+              + '<div class="avis-author">'
+              + '<div class="avatar">' + initials(name) + '</div>'
+              + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
+              + '</div></div>';
+          }).join('');
         }
       );
-    } catch(e) { renderScore(5, null); }
+    } catch(e) { /* score card statique reste visible */ }
   };
 
   var s = document.createElement('script');
   s.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY
-        + '&libraries=places&callback=_googlePlacesCallback&language=fr&loading=async';
+        + '&libraries=places&callback=_googlePlacesCallback&language=fr';
   s.async = true; s.defer = true;
-  s.onerror = function() { renderScore(5, null); };
   document.head.appendChild(s);
-  // Fallback : si le callback n'est pas appelé dans 5s, afficher la note
-  setTimeout(function() {
-    var g = document.getElementById('google-reviews-grid');
-    if (g && g.querySelector('.avis-skeleton')) { renderScore(5, null); }
-  }, 5000);
 })();
 // ──────────────────────────────────────────────────────────────────────────
 
