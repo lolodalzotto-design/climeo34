@@ -1534,6 +1534,19 @@ section { position: relative; }
 
   <!-- Bulles d'avis — remplies par l'API Google Places -->
   <div class="avis-grid fade-up" id="google-reviews-grid" style="max-width:1100px;margin:28px auto 0;"></div>
+
+  <!-- Badge note répété après les bulles -->
+  <div class="fade-up" style="display:flex;justify-content:center;margin:32px auto 0;">
+    <a href="https://www.google.com/maps/search/?api=1&query_place_id=ChIJodubwNeGWo0R8j-otvrAcW0" target="_blank" rel="noopener noreferrer"
+       style="display:inline-flex;align-items:center;gap:14px;background:#fff;color:var(--navy);border:1.5px solid #e0e7f3;padding:14px 24px;border-radius:12px;text-decoration:none;box-shadow:0 2px 10px rgba(61,122,181,.08);">
+      <svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.1 33.9 29.5 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.9 20-21 0-1.4-.1-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3c-7.6 0-14.2 4.5-17.7 11.7z"/><path fill="#FBBC05" d="M24 45c5.4 0 10.3-1.8 14.1-4.9l-6.5-5.5C29.4 36.4 26.8 37 24 37c-5.4 0-10-3-12.1-7.4l-7 5.4C8.3 40.9 15.6 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-.9 2.5-2.6 4.6-4.8 6.1l6.5 5.5C41.1 36.9 45 31 45 24c0-1.4-.1-2.7-.5-4z"/></svg>
+      <span>
+        <span style="display:block;font-size:1.5rem;font-weight:800;line-height:1;color:var(--navy);">5,0</span>
+        <span style="display:block;color:#f5a623;font-size:0.95rem;letter-spacing:2px;line-height:1.3;">★★★★★</span>
+        <span style="display:block;font-size:0.78rem;color:var(--gray-text);margin-top:2px;"><span id="google-avis-count-bottom">2</span> avis Google · Voir la fiche</span>
+      </span>
+    </a>
+  </div>
 </section>
 
 <!-- FAQ -->
