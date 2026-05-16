@@ -1896,17 +1896,15 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       ]);
 
       if (resp.status === 'fulfilled' && resp.value.ok) {
-        var data = await resp.value.json();
-        if (data.success === 'true') {
-          form.style.display = 'none';
-          document.getElementById('hero-form-success').style.display = 'block';
-          gtag('event', 'conversion', {'send_to': 'AW-18153085489/tsRgCPyp7q0cELG0iNBD'});
-          return;
-        }
+        form.style.display = 'none';
+        document.getElementById('hero-form-success').style.display = 'block';
+        gtag('event', 'conversion', {'send_to': 'AW-18153085489/tsRgCPyp7q0cELG0iNBD'});
+        return;
       }
       btn.textContent = 'Erreur — réessayez';
       btn.disabled = false;
     } catch(err) {
+      console.error('[Climeo34] Erreur formulaire:', err);
       btn.textContent = 'Erreur — réessayez';
       btn.disabled = false;
     }
