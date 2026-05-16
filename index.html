@@ -1169,11 +1169,15 @@ section { position: relative; }
       <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
       <div class="hero-form-wrap" id="hero-form-wrap">
         <p class="hero-form-title">📩 Recevoir mon devis gratuit — réponse sous 24h</p>
-        <form class="hero-form" id="hero-capture-form" action="https://formsubmit.co/ajax/Lolo.dalzotto@gmail.com" method="POST">
+        <form class="hero-form" id="hero-capture-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="618df005-2b3e-4ec4-a780-db2b01f6923a">
+          <input type="hidden" name="subject" value="🔔 Nouveau devis Climeo34">
+          <input type="hidden" name="from_name" value="Climeo34">
+          <input type="checkbox" name="botcheck" style="display:none">
           <input type="text" name="nom" placeholder="Nom *" required autocomplete="family-name">
           <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
           <input type="email" name="email" placeholder="E-mail *" required autocomplete="email" style="grid-column: 1 / -1">
-<input type="text" name="ville" placeholder="Ville *" required autocomplete="address-level2">
+          <input type="text" name="ville" placeholder="Ville *" required autocomplete="address-level2">
           <select name="splits" required>
             <option value="" disabled selected>Nombre de splits *</option>
             <option value="1 split">1 split</option>
@@ -1181,9 +1185,6 @@ section { position: relative; }
             <option value="3 splits">3 splits</option>
             <option value="4+ splits">4 splits et +</option>
           </select>
-          <input type="hidden" name="_subject" value="🔔 Nouveau devis Climeo34">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
           <button type="submit" class="hero-form-submit" id="hero-form-btn">Recevoir mon devis gratuit</button>
         </form>
         <div class="hero-form-success" id="hero-form-success">
