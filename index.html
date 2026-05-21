@@ -860,6 +860,8 @@ footer { background: var(--navy); padding: 48px 6% 28px; }
   background: white; transition: all var(--transition); font-family: var(--font-body);
 }
 .diag-opt:hover { border-color: var(--brand-blue); background: var(--brand-blue-bg); color: var(--navy); }
+.diag-opt-autre { border-style: dashed; color: var(--gray-text); font-size: 0.78rem; }
+.diag-opt-autre:hover { border-color: var(--gray-text); background: var(--gray-cold); color: var(--dark-text); }
 .diag-email-form { display: flex; flex-direction: column; gap: 10px; }
 .diag-email-form input {
   padding: 10px 12px; border: 1.5px solid #dde8f5; border-radius: var(--radius-sm);
@@ -2275,6 +2277,37 @@ hoverEls.forEach(btn => {
         });
         opts.appendChild(btn);
       });
+
+      // Option "Autre" — saisie libre sur toutes les questions
+      var autreBtn = document.createElement('button');
+      autreBtn.className   = 'diag-opt diag-opt-autre';
+      autreBtn.textContent = '✏️ Autre…';
+      autreBtn.addEventListener('click', function() {
+        opts.innerHTML = '';
+        var autreWrap   = document.createElement('div');
+        autreWrap.className = 'diag-email-form';
+        var autreInput  = document.createElement('input');
+        autreInput.type        = 'text';
+        autreInput.placeholder = 'Précisez votre situation…';
+        autreInput.autofocus   = true;
+        var autreNext   = document.createElement('button');
+        autreNext.className   = 'diag-submit-btn';
+        autreNext.textContent = 'Continuer →';
+        autreNext.addEventListener('click', function() {
+          var val = autreInput.value.trim();
+          if (!val) { autreInput.style.borderColor = '#e53e3e'; autreInput.focus(); return; }
+          autreInput.style.borderColor = '';
+          answers.push({ key: node.key, value: val });
+          renderEmailForm();
+        });
+        autreInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') autreNext.click(); });
+        autreWrap.appendChild(autreInput);
+        autreWrap.appendChild(autreNext);
+        opts.appendChild(autreWrap);
+        autreInput.focus();
+      });
+      opts.appendChild(autreBtn);
+
       body.appendChild(opts);
     } else {
       var wrap  = document.createElement('div');
