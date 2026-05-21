@@ -796,6 +796,108 @@ footer { background: var(--navy); padding: 48px 6% 28px; }
 .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
 .wa-btn svg { width: 26px; height: 26px; fill: white; }
 
+/* DIAGNOSTIC QUIZ BUBBLE */
+.diag-fab {
+  position: fixed; bottom: 24px; left: 24px; z-index: 91;
+  width: 54px; height: 54px;
+  background: linear-gradient(135deg, var(--navy), var(--brand-blue));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(30,58,92,0.45); cursor: pointer;
+  border: none; transition: all var(--transition);
+}
+.diag-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(30,58,92,0.6); }
+.diag-fab svg { width: 24px; height: 24px; fill: white; }
+.diag-fab-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px; background: var(--green); border-radius: 50%;
+  font-size: 0.65rem; font-weight: 700; color: white;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid white;
+}
+.diag-panel {
+  position: fixed; bottom: 88px; left: 24px; z-index: 91;
+  width: 320px; max-width: calc(100vw - 48px);
+  background: white; border-radius: var(--radius);
+  box-shadow: 0 16px 56px rgba(26,47,94,0.18);
+  overflow: hidden; transform-origin: bottom left;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.diag-panel.hidden { opacity: 0; transform: scale(0.92) translateY(12px); pointer-events: none; }
+.diag-header {
+  background: linear-gradient(135deg, var(--navy), var(--brand-blue));
+  padding: 14px 16px 12px;
+  display: flex; align-items: center; gap: 10px; justify-content: space-between;
+}
+.diag-header-left { display: flex; align-items: center; gap: 10px; }
+.diag-avatar {
+  width: 36px; height: 36px; background: rgba(255,255,255,0.15);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.diag-avatar svg { width: 18px; height: 18px; fill: white; }
+.diag-header-text { color: white; }
+.diag-header-text strong { display: block; font-size: 0.85rem; font-weight: 700; }
+.diag-header-text span { font-size: 0.72rem; opacity: 0.75; }
+.diag-close {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.7); font-size: 1.2rem; line-height: 1;
+  padding: 2px 4px; transition: color var(--transition);
+}
+.diag-close:hover { color: white; }
+.diag-progress { padding: 8px 16px 0; background: var(--gray-cold); }
+.diag-progress-bar { height: 3px; background: #dde8f5; border-radius: 2px; overflow: hidden; }
+.diag-progress-fill {
+  height: 100%; background: var(--green); border-radius: 2px; transition: width 0.4s ease;
+}
+.diag-progress-label {
+  font-size: 0.68rem; color: var(--gray-text); text-align: right; margin-top: 4px; padding-bottom: 6px;
+}
+.diag-body { padding: 16px; }
+.diag-question { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; line-height: 1.4; }
+.diag-options { display: flex; flex-direction: column; gap: 8px; }
+.diag-opt {
+  padding: 9px 12px; border: 1.5px solid #dde8f5; border-radius: var(--radius-sm);
+  font-size: 0.82rem; color: var(--dark-text); cursor: pointer; text-align: left;
+  background: white; transition: all var(--transition); font-family: var(--font-body);
+}
+.diag-opt:hover { border-color: var(--brand-blue); background: var(--brand-blue-bg); color: var(--navy); }
+.diag-opt-autre { border-style: dashed; color: var(--gray-text); font-size: 0.78rem; }
+.diag-opt-autre:hover { border-color: var(--gray-text); background: var(--gray-cold); color: var(--dark-text); }
+.diag-email-form { display: flex; flex-direction: column; gap: 10px; }
+.diag-email-form input {
+  padding: 10px 12px; border: 1.5px solid #dde8f5; border-radius: var(--radius-sm);
+  font-size: 0.82rem; color: var(--dark-text); font-family: var(--font-body);
+  transition: border-color var(--transition); outline: none;
+}
+.diag-email-form input:focus { border-color: var(--brand-blue); }
+.diag-submit-btn {
+  padding: 11px; background: var(--green); border: none; border-radius: var(--radius-sm);
+  color: white; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  font-family: var(--font-body); transition: background var(--transition);
+}
+.diag-submit-btn:hover { background: var(--green-dark); }
+.diag-submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+.diag-success { text-align: center; padding: 8px 0; }
+.diag-success-icon { font-size: 2.2rem; margin-bottom: 8px; }
+.diag-success strong { display: block; color: var(--navy); font-size: 0.9rem; margin-bottom: 6px; }
+.diag-success p { font-size: 0.8rem; color: var(--gray-text); line-height: 1.5; }
+.diag-bubble-hint {
+  position: fixed; bottom: 88px; left: 24px; z-index: 91;
+  background: white; padding: 8px 14px; border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(26,47,94,0.15);
+  font-size: 0.78rem; color: var(--navy); font-weight: 500; white-space: nowrap;
+  pointer-events: none;
+  animation: diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 2s both;
+}
+@keyframes diagHintPop {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (max-width: 480px) {
+  .diag-panel { left: 12px; right: 12px; width: auto; max-width: none; bottom: 82px; }
+  .diag-fab { left: 16px; bottom: 16px; }
+  .diag-bubble-hint { left: 78px; bottom: 22px; }
+}
+
 /* ANIMATIONS */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
@@ -1752,6 +1854,36 @@ function gtag_report_conversion(url) {
   </div>
 </footer>
 
+<!-- DIAGNOSTIC QUIZ BUBBLE -->
+<div class="diag-bubble-hint" id="diag-hint" style="display:none">⚡ Devis en 2 min chrono !</div>
+
+<button class="diag-fab" id="diag-fab" aria-label="Diagnostic climatisation rapide">
+  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+  <span class="diag-fab-badge">?</span>
+</button>
+
+<div class="diag-panel hidden" id="diag-panel">
+  <div class="diag-header">
+    <div class="diag-header-left">
+      <div class="diag-avatar">
+        <svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.58 2 11c0 2.4 1.2 4.56 3.1 6.06L4 21l4.27-2.13C9.4 19.27 10.67 19.5 12 19.5c5.5 0 10-3.58 10-8s-4.5-8.5-10-8.5z"/></svg>
+      </div>
+      <div class="diag-header-text">
+        <strong>Diagnostic rapide</strong>
+        <span>3 min · Réponse par e-mail</span>
+      </div>
+    </div>
+    <button class="diag-close" id="diag-close" aria-label="Fermer">✕</button>
+  </div>
+  <div class="diag-progress" id="diag-progress-wrap">
+    <div class="diag-progress-bar">
+      <div class="diag-progress-fill" id="diag-progress-fill" style="width:0%"></div>
+    </div>
+    <div class="diag-progress-label" id="diag-progress-label">Question 1 / 4</div>
+  </div>
+  <div class="diag-body" id="diag-body"></div>
+</div>
+
 <!-- FLOATING WA -->
 <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="wa-btn" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -2039,6 +2171,268 @@ hoverEls.forEach(btn => {
     animate(btn, { scale: 1, y: 0 }, { duration: 0.25, easing: 'ease-out' })
   );
 });
+
+// ─── Diagnostic Quiz Bubble (branched tree) ──────────────────────────────────
+(function() {
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwumPAq-SWNknazpEzGbIiJWpsUepMP5kMXz27AA112tNz-DMoL-fagoWAUOebkrTYr/exec';
+  var WEB3_KEY  = '618df005-2b3e-4ec4-a780-db2b01f6923a';
+  var MAX_STEPS = 3;
+
+  var villeDepNode = { q: "📍 Quelle est la ville d'intervention ?", key: 'ville', type: 'free', placeholder: 'Ex : Montpellier', next: null };
+
+  var TREE = {
+    q: '👋 Que souhaitez-vous ?', key: 'souhait', type: 'options',
+    opts: [
+      { label: '🔧 Entretien', next: {
+        q: "🏠 Type d'installation", key: 'type_installation', type: 'options',
+        opts: [
+          { label: 'Gainable', next: { q: "🔢 Combien avez-vous de sorties ?", key: 'nb_sorties', type: 'free', placeholder: 'Ex : 3', next: null } },
+          { label: 'Splits muraux', next: { q: "🔢 Combien avez-vous de splits ?", key: 'nb_splits', type: 'free', placeholder: 'Ex : 2', next: null } }
+        ]
+      }},
+      { label: '🛠 Dépannage', next: {
+        q: '❓ Quel est le problème ?', key: 'probleme', type: 'options',
+        opts: [
+          { label: '💧 Ma clim coule',         next: villeDepNode },
+          { label: "⚡ Manque d'efficacité",   next: villeDepNode },
+          { label: "💨 L'air sent mauvais",    next: villeDepNode }
+        ]
+      }},
+      { label: '📦 Installation', next: {
+        q: "📍 Dans quelle ville doit se passer l'installation ?", key: 'ville_installation', type: 'free', placeholder: 'Ex : Montpellier',
+        next: {
+          q: '🏡 Type de bien à équiper', key: 'type_bien', type: 'options',
+          opts: [
+            { label: 'Villa',        next: null },
+            { label: 'Appartement',  next: null },
+            { label: 'Autre',        next: null }
+          ]
+        }
+      }}
+    ]
+  };
+
+  var answers  = [];
+  var panel    = document.getElementById('diag-panel');
+  var fab      = document.getElementById('diag-fab');
+  var closeBtn = document.getElementById('diag-close');
+  var body     = document.getElementById('diag-body');
+  var progFill = document.getElementById('diag-progress-fill');
+  var progLbl  = document.getElementById('diag-progress-label');
+  var hint     = document.getElementById('diag-hint');
+
+  // Show hint when user scrolls to section 2
+  var hintShown = false;
+  var triggerEl = document.getElementById('avant-apres');
+  if (triggerEl) {
+    var hintObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !hintShown) {
+        hintShown = true;
+        hint.style.display = 'block';
+        hint.style.animation = 'diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both';
+        setTimeout(function() { hint.style.transition = 'opacity 0.5s'; hint.style.opacity = '0'; }, 5000);
+        setTimeout(function() { hint.style.display = 'none'; }, 5600);
+        hintObs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    hintObs.observe(triggerEl);
+  }
+
+  function openPanel() {
+    if (hint) hint.style.display = 'none';
+    panel.classList.remove('hidden');
+    if (answers.length === 0) renderNode(TREE, 0);
+  }
+  function closePanel() { panel.classList.add('hidden'); }
+
+  fab.addEventListener('click', function() {
+    panel.classList.contains('hidden') ? openPanel() : closePanel();
+  });
+  closeBtn.addEventListener('click', closePanel);
+
+  function updateProgress(step) {
+    progFill.style.width = Math.round((step / MAX_STEPS) * 100) + '%';
+    progLbl.textContent  = step < MAX_STEPS ? 'Étape ' + (step + 1) + ' / ' + MAX_STEPS : 'Dernière étape';
+  }
+
+  function renderNode(node, step) {
+    updateProgress(step);
+    body.innerHTML = '';
+
+    var qEl = document.createElement('p');
+    qEl.className   = 'diag-question';
+    qEl.textContent = node.q;
+    body.appendChild(qEl);
+
+    if (node.type === 'options') {
+      var opts = document.createElement('div');
+      opts.className = 'diag-options';
+      node.opts.forEach(function(opt) {
+        var btn = document.createElement('button');
+        btn.className   = 'diag-opt';
+        btn.textContent = opt.label;
+        btn.addEventListener('click', function() {
+          answers.push({ key: node.key, value: opt.label });
+          opt.next ? renderNode(opt.next, step + 1) : renderEmailForm();
+        });
+        opts.appendChild(btn);
+      });
+
+      // Option "Autre" — saisie libre sur toutes les questions
+      var autreBtn = document.createElement('button');
+      autreBtn.className   = 'diag-opt diag-opt-autre';
+      autreBtn.textContent = '✏️ Autre…';
+      autreBtn.addEventListener('click', function() {
+        opts.innerHTML = '';
+        var autreWrap   = document.createElement('div');
+        autreWrap.className = 'diag-email-form';
+        var autreInput  = document.createElement('input');
+        autreInput.type        = 'text';
+        autreInput.placeholder = 'Précisez votre situation…';
+        autreInput.autofocus   = true;
+        var autreNext   = document.createElement('button');
+        autreNext.className   = 'diag-submit-btn';
+        autreNext.textContent = 'Continuer →';
+        autreNext.addEventListener('click', function() {
+          var val = autreInput.value.trim();
+          if (!val) { autreInput.style.borderColor = '#e53e3e'; autreInput.focus(); return; }
+          autreInput.style.borderColor = '';
+          answers.push({ key: node.key, value: val });
+          renderEmailForm();
+        });
+        autreInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') autreNext.click(); });
+        autreWrap.appendChild(autreInput);
+        autreWrap.appendChild(autreNext);
+        opts.appendChild(autreWrap);
+        autreInput.focus();
+      });
+      opts.appendChild(autreBtn);
+
+      body.appendChild(opts);
+    } else {
+      var wrap  = document.createElement('div');
+      wrap.className = 'diag-email-form';
+      var input = document.createElement('input');
+      input.type        = 'text';
+      input.placeholder = node.placeholder || 'Votre réponse…';
+      var nextBtn = document.createElement('button');
+      nextBtn.className   = 'diag-submit-btn';
+      nextBtn.textContent = 'Continuer →';
+      nextBtn.addEventListener('click', function() {
+        var val = input.value.trim();
+        if (!val) { input.style.borderColor = '#e53e3e'; input.focus(); return; }
+        input.style.borderColor = '';
+        answers.push({ key: node.key, value: val });
+        node.next ? renderNode(node.next, step + 1) : renderEmailForm();
+      });
+      input.addEventListener('keydown', function(e) { if (e.key === 'Enter') nextBtn.click(); });
+      wrap.appendChild(input);
+      wrap.appendChild(nextBtn);
+      body.appendChild(wrap);
+    }
+  }
+
+  function renderEmailForm() {
+    updateProgress(MAX_STEPS);
+    body.innerHTML = '';
+
+    var qEl = document.createElement('p');
+    qEl.className   = 'diag-question';
+    qEl.textContent = '📩 Où envoyer votre devis ?';
+    body.appendChild(qEl);
+
+    var intro = document.createElement('p');
+    intro.style.cssText = 'font-size:0.78rem;color:var(--gray-text);margin:-4px 0 12px;line-height:1.5;';
+    intro.textContent   = 'Laurent vous répond sous 24h avec un tarif personnalisé.';
+    body.appendChild(intro);
+
+    var form       = document.createElement('div');
+    form.className = 'diag-email-form';
+
+    var nameInput       = document.createElement('input');
+    nameInput.type        = 'text';
+    nameInput.placeholder = 'Votre prénom *';
+
+    var telInput       = document.createElement('input');
+    telInput.type        = 'tel';
+    telInput.placeholder = 'Votre téléphone *';
+
+    var emailInput       = document.createElement('input');
+    emailInput.type        = 'email';
+    emailInput.placeholder = 'Votre e-mail *';
+
+    var submitBtn       = document.createElement('button');
+    submitBtn.className   = 'diag-submit-btn';
+    submitBtn.textContent = 'Recevoir mon devis gratuit →';
+
+    submitBtn.addEventListener('click', function() {
+      var name  = nameInput.value.trim();
+      var tel   = telInput.value.trim();
+      var email = emailInput.value.trim();
+      nameInput.style.borderColor  = '';
+      telInput.style.borderColor   = '';
+      emailInput.style.borderColor = '';
+      if (!name)  { nameInput.style.borderColor  = '#e53e3e'; nameInput.focus(); return; }
+      if (!tel)   { telInput.style.borderColor   = '#e53e3e'; telInput.focus();  return; }
+      if (!email || !email.includes('@')) { emailInput.style.borderColor = '#e53e3e'; emailInput.focus(); return; }
+      submitBtn.textContent = 'Envoi en cours…';
+      submitBtn.disabled    = true;
+      submitDiag(name, tel, email, submitBtn);
+    });
+
+    form.appendChild(nameInput);
+    form.appendChild(telInput);
+    form.appendChild(emailInput);
+    form.appendChild(submitBtn);
+    body.appendChild(form);
+  }
+
+  async function submitDiag(name, tel, email, submitBtn) {
+    var details = answers.map(function(a) { return a.key + ' : ' + a.value; }).join('\n');
+    var souhait = answers.length ? answers[0].value : '';
+
+    var fd = new FormData();
+    fd.append('access_key', WEB3_KEY);
+    fd.append('subject',    '🔍 Devis Climeo34 — ' + souhait + ' — ' + name);
+    fd.append('from_name',  'Climeo34 Diagnostic');
+    fd.append('name',       name);
+    fd.append('email',      email);
+    fd.append('message',    'DEVIS RAPIDE\n\nPrénom : ' + name + '\nTéléphone : ' + tel + '\nE-mail : ' + email + '\n\n' + details);
+
+    var sheetData = { source: 'diagnostic-quiz', nom: name, telephone: tel, email: email, t: Date.now() };
+    answers.forEach(function(a) { sheetData[a.key] = a.value; });
+
+    try {
+      var [resp] = await Promise.allSettled([
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
+        }),
+        (new Image()).src = SHEET_URL + '?' + new URLSearchParams(sheetData).toString()
+      ]);
+      if (resp.status === 'fulfilled' && resp.value.ok) {
+        showSuccess(name);
+        if (typeof gtag === 'function') gtag('event', 'diag_submit', { event_category: 'diagnostic' });
+      } else {
+        submitBtn.textContent = 'Erreur — réessayez';
+        submitBtn.disabled    = false;
+      }
+    } catch(e) {
+      console.error('[Climeo34] Diag:', e);
+      submitBtn.textContent = 'Erreur — réessayez';
+      submitBtn.disabled    = false;
+    }
+  }
+
+  function showSuccess(name) {
+    document.getElementById('diag-progress-wrap').style.display = 'none';
+    body.innerHTML = '<div class="diag-success"><div class="diag-success-icon">✅</div><strong>Merci ' + escDiag(name) + ' !</strong><p>Laurent analyse votre situation et vous répond sous 24h.<br>Vérifiez vos e-mails !</p></div>';
+    answers = [];
+  }
+
+  function escDiag(s) {
+    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+})();
 </script>
 </body>
 </html>
