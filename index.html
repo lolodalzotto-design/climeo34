@@ -813,6 +813,15 @@ footer { background: var(--navy); padding: 48px 6% 28px; }
   font-size: 0.65rem; font-weight: 700; color: white;
   display: flex; align-items: center; justify-content: center;
   border: 2px solid white;
+  opacity: 0; transform: scale(0);
+}
+.diag-fab-badge.pop {
+  animation: diagBadgePop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes diagBadgePop {
+  0%   { opacity: 0; transform: scale(0); }
+  65%  { transform: scale(1.35); }
+  100% { opacity: 1; transform: scale(1); }
 }
 .diag-panel {
   position: fixed; bottom: 88px; right: 24px; z-index: 91;
@@ -1855,11 +1864,11 @@ function gtag_report_conversion(url) {
 </footer>
 
 <!-- DIAGNOSTIC QUIZ BUBBLE -->
-<div class="diag-bubble-hint" id="diag-hint" style="display:none">Devis en 2 min chrono !</div>
+<div class="diag-bubble-hint" id="diag-hint" style="display:none">Estimation en 2 min chrono !</div>
 
-<button class="diag-fab" id="diag-fab" aria-label="Diagnostic climatisation rapide">
-  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
-  <span class="diag-fab-badge">?</span>
+<button class="diag-fab" id="diag-fab" aria-label="Estimation climatisation rapide">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  <span class="diag-fab-badge" id="diag-fab-badge">1</span>
 </button>
 
 <div class="diag-panel hidden" id="diag-panel">
@@ -2217,13 +2226,15 @@ hoverEls.forEach(btn => {
   var progLbl  = document.getElementById('diag-progress-label');
   var hint     = document.getElementById('diag-hint');
 
-  // Show hint when user scrolls to section 2
+  // Show hint + badge pop when user scrolls to section 2
+  var badge     = document.getElementById('diag-fab-badge');
   var hintShown = false;
   var triggerEl = document.getElementById('avant-apres');
   if (triggerEl) {
     var hintObs = new IntersectionObserver(function(entries) {
       if (entries[0].isIntersecting && !hintShown) {
         hintShown = true;
+        if (badge) badge.classList.add('pop');
         hint.style.display = 'block';
         hint.style.animation = 'diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both';
         setTimeout(function() { hint.style.transition = 'opacity 0.5s'; hint.style.opacity = '0'; }, 5000);
@@ -2334,7 +2345,7 @@ hoverEls.forEach(btn => {
 
     var qEl = document.createElement('p');
     qEl.className   = 'diag-question';
-    qEl.textContent = 'Où envoyer votre devis ?';
+    qEl.textContent = 'Où envoyer votre estimation ?';
     body.appendChild(qEl);
 
     var intro = document.createElement('p');
@@ -2359,7 +2370,7 @@ hoverEls.forEach(btn => {
 
     var submitBtn       = document.createElement('button');
     submitBtn.className   = 'diag-submit-btn';
-    submitBtn.textContent = 'Recevoir mon devis gratuit →';
+    submitBtn.textContent = 'Recevoir mon estimation gratuite →';
 
     submitBtn.addEventListener('click', function() {
       var name  = nameInput.value.trim();
@@ -2389,11 +2400,11 @@ hoverEls.forEach(btn => {
 
     var fd = new FormData();
     fd.append('access_key', WEB3_KEY);
-    fd.append('subject',    '🔍 Devis Climeo34 — ' + souhait + ' — ' + name);
+    fd.append('subject',    '🔍 Estimation Climeo34 — ' + souhait + ' — ' + name);
     fd.append('from_name',  'Climeo34 Diagnostic');
     fd.append('name',       name);
     fd.append('email',      email);
-    fd.append('message',    'DEVIS RAPIDE\n\nPrénom : ' + name + '\nTéléphone : ' + tel + '\nE-mail : ' + email + '\n\n' + details);
+    fd.append('message',    'ESTIMATION RAPIDE\n\nPrénom : ' + name + '\nTéléphone : ' + tel + '\nE-mail : ' + email + '\n\n' + details);
 
     var sheetData = { source: 'diagnostic-quiz', nom: name, telephone: tel, email: email, t: Date.now() };
     answers.forEach(function(a) { sheetData[a.key] = a.value; });
