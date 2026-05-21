@@ -1878,7 +1878,7 @@ function gtag_report_conversion(url) {
         <svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.58 2 11c0 2.4 1.2 4.56 3.1 6.06L4 21l4.27-2.13C9.4 19.27 10.67 19.5 12 19.5c5.5 0 10-3.58 10-8s-4.5-8.5-10-8.5z"/></svg>
       </div>
       <div class="diag-header-text">
-        <strong>Diagnostic rapide</strong>
+        <strong>Estimation gratuite</strong>
         <span>3 min · Réponse par e-mail</span>
       </div>
     </div>
@@ -2183,34 +2183,36 @@ hoverEls.forEach(btn => {
   var WEB3_KEY  = '618df005-2b3e-4ec4-a780-db2b01f6923a';
   var MAX_STEPS = 3;
 
-  var villeDepNode = { q: "Quelle est la ville d'intervention ?", key: 'ville', type: 'free', placeholder: 'Ex : Montpellier', next: null };
+  var villeDepNode = { q: "Votre ville ?", key: 'ville', type: 'free', placeholder: 'Ex : Montpellier', next: null };
 
   var TREE = {
-    q: 'Que souhaitez-vous ?', key: 'souhait', type: 'options',
+    q: 'Vous avez besoin de :', key: 'souhait', type: 'options',
     opts: [
-      { label: 'Entretien', next: {
-        q: "Type d'installation", key: 'type_installation', type: 'options',
+      { label: 'Entretenir ma climatisation', next: {
+        q: "Votre clim est de quel type ?", key: 'type_installation', type: 'options',
         opts: [
-          { label: 'Gainable',      next: { q: "Combien avez-vous de sorties ?", key: 'nb_sorties', type: 'free', placeholder: 'Ex : 3', next: null } },
-          { label: 'Splits muraux', next: { q: "Combien avez-vous de splits ?",  key: 'nb_splits',  type: 'free', placeholder: 'Ex : 2', next: null } }
+          { label: 'Splits muraux (unités fixées au mur)',        next: { q: "Combien d'unités murales avez-vous ?", key: 'nb_splits',  type: 'free', placeholder: 'Ex : 2', next: null } },
+          { label: 'Gainable (soufflage par bouches au plafond)', next: { q: "Combien de bouches de soufflage avez-vous ?", key: 'nb_sorties', type: 'free', placeholder: 'Ex : 3', next: null } }
         ]
       }},
-      { label: 'Dépannage', next: {
-        q: 'Quel est le problème ?', key: 'probleme', type: 'options',
+      { label: 'Réparer ma climatisation', next: {
+        q: 'Que constatez-vous ?', key: 'probleme', type: 'options',
         opts: [
-          { label: 'Ma clim coule',        next: villeDepNode },
-          { label: "Manque d'efficacité",  next: villeDepNode },
-          { label: "L'air sent mauvais",   next: villeDepNode }
+          { label: 'Elle fuit ou coule de l\'eau',       next: villeDepNode },
+          { label: 'Elle ne chauffe / refroidit plus',   next: villeDepNode },
+          { label: 'Odeur désagréable',                  next: villeDepNode },
+          { label: 'Elle ne s\'allume plus',             next: villeDepNode }
         ]
       }},
-      { label: 'Installation', next: {
-        q: "Dans quelle ville doit se passer l'installation ?", key: 'ville_installation', type: 'free', placeholder: 'Ex : Montpellier',
+      { label: 'Installer une climatisation', next: {
+        q: "Dans quelle ville ?", key: 'ville_installation', type: 'free', placeholder: 'Ex : Montpellier',
         next: {
-          q: 'Type de bien à équiper', key: 'type_bien', type: 'options',
+          q: 'Votre logement est :', key: 'type_bien', type: 'options',
           opts: [
-            { label: 'Villa',       next: null },
-            { label: 'Appartement', next: null },
-            { label: 'Autre',       next: null }
+            { label: 'Maison / Villa',       next: null },
+            { label: 'Appartement',          next: null },
+            { label: 'Local professionnel',  next: null },
+            { label: 'Autre',                next: null }
           ]
         }
       }}
@@ -2345,12 +2347,12 @@ hoverEls.forEach(btn => {
 
     var qEl = document.createElement('p');
     qEl.className   = 'diag-question';
-    qEl.textContent = 'Où envoyer votre estimation ?';
+    qEl.textContent = 'Vos coordonnées :';
     body.appendChild(qEl);
 
     var intro = document.createElement('p');
     intro.style.cssText = 'font-size:0.78rem;color:var(--gray-text);margin:-4px 0 12px;line-height:1.5;';
-    intro.textContent   = 'Laurent vous répond sous 24h avec un tarif personnalisé.';
+    intro.textContent   = 'Estimation gratuite par retour sous 24h.';
     body.appendChild(intro);
 
     var form       = document.createElement('div');
