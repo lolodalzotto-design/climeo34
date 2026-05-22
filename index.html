@@ -2274,15 +2274,15 @@ hoverEls.forEach(btn => {
   var progLbl  = document.getElementById('diag-progress-label');
   var hint     = document.getElementById('diag-hint');
 
-  // Show hint + badge pop when user scrolls to section 2
+  // Show badge automatically after 1.5s; show hint on scroll to section 2
   var badge     = document.getElementById('diag-fab-badge');
+  if (badge) setTimeout(function() { badge.classList.add('pop'); }, 1500);
   var hintShown = false;
   var triggerEl = document.getElementById('avant-apres');
   if (triggerEl) {
     var hintObs = new IntersectionObserver(function(entries) {
       if (entries[0].isIntersecting && !hintShown) {
         hintShown = true;
-        if (badge) badge.classList.add('pop');
         hint.style.display = 'block';
         hint.style.animation = 'diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both';
         setTimeout(function() { hint.style.transition = 'opacity 0.5s'; hint.style.opacity = '0'; }, 5000);
