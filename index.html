@@ -2418,7 +2418,7 @@ hoverEls.forEach(btn => {
 (function(){
   var vid = document.getElementById('hero-vid');
   if (!vid) return;
-  vid.addEventListener('loadedmetadata', function(){ vid.currentTime = 2; });
+  vid.addEventListener('loadedmetadata', function(){ vid.currentTime = 2.5; });
   vid.addEventListener('ended', function(){ vid.pause(); });
   var lastMobile = window.innerWidth <= 767;
   window.addEventListener('resize', function(){
