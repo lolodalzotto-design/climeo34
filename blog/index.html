@@ -23,6 +23,57 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://climeo34.fr/blog/">
 <meta property="og:locale" content="fr_FR">
+<!-- Schema.org : LocalBusiness + Blog -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "name": "Climeo34",
+      "url": "https://climeo34.fr",
+      "telephone": "+33603257679",
+      "description": "Technicien certifié entretien climatisation Montpellier et Hérault (34). Nettoyage climatisation, intervention sous 48h.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montpellier",
+        "addressRegion": "Hérault",
+        "postalCode": "34000",
+        "addressCountry": "FR"
+      },
+      "areaServed": [
+        "Montpellier", "Lattes", "Pérols", "Mauguio",
+        "Palavas-les-Flots", "Carnon-Plage", "La Grande-Motte",
+        "Lunel", "Sète", "Hérault"
+      ],
+      "sameAs": ["https://climeo34.fr"]
+    },
+    {
+      "@type": "Blog",
+      "name": "Blog Climeo34 — Entretien climatisation Montpellier & Hérault",
+      "url": "https://climeo34.fr/blog/",
+      "description": "Guides et conseils sur l'entretien climatisation à Montpellier et dans l'Hérault par Climeo34, technicien certifié.",
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Climatisation qui coule en été à Montpellier : entretien climatisation Hérault indispensable",
+          "url": "https://climeo34.fr/blog/clim-qui-coule-chaleur-herault.html",
+          "datePublished": "2025-05-23",
+          "dateModified": "2025-05-23",
+          "author": {"@type": "Organization", "name": "Climeo34"}
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://climeo34.fr"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://climeo34.fr/blog/"}
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -36,8 +87,8 @@
     --orange: #f97316;
     --green: #16a34a;
     --teal: #0d9488;
-    --purple: #7c3aed;
-    --rose: #e11d48;
+    --red: #dc2626;
+    --red-light: #fef2f2;
     --muted: #64748b;
     --border: #e2e8f0;
     --bg: #f8faff;
@@ -58,8 +109,7 @@
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     padding: 0 max(24px, 5vw);
     display: flex; align-items: center; justify-content: space-between;
@@ -101,7 +151,7 @@
   .section-label span { font-size: 0.82rem; color: var(--muted); }
   .section-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
 
-  /* FEATURED CARD */
+  /* FEATURED CARD — article principal */
   .featured-card {
     display: grid; grid-template-columns: 340px 1fr;
     background: white; border-radius: var(--radius);
@@ -112,11 +162,11 @@
   }
   .featured-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
   .featured-thumb {
-    background: linear-gradient(145deg, #1d4ed8 0%, #3b82f6 60%, #60a5fa 100%);
+    background: linear-gradient(145deg, #991b1b 0%, #dc2626 55%, #ef4444 100%);
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden; min-height: 260px;
   }
-  .featured-thumb::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.12) 0%, transparent 60%); }
+  .featured-thumb::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 60%); }
   .featured-thumb svg { width: 80px; height: 80px; color: rgba(255,255,255,0.88); position: relative; z-index: 1; }
   .featured-body { padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; }
   .featured-label {
@@ -124,7 +174,7 @@
     font-family: var(--font-head); font-weight: 700; font-size: 0.65rem;
     letter-spacing: 0.1em; text-transform: uppercase;
     padding: 4px 12px; border-radius: 50px; margin-bottom: 16px; width: fit-content;
-    background: #fff1f2; color: var(--rose); border: 1px solid #fda4af;
+    background: var(--red-light); color: var(--red); border: 1px solid #fca5a5;
   }
   .featured-body h2 { font-family: var(--font-head); font-weight: 800; font-size: 1.45rem; color: var(--navy); line-height: 1.25; margin-bottom: 12px; }
   .featured-body .card-meta { font-size: 0.75rem; color: #94a3b8; margin-bottom: 14px; }
@@ -134,46 +184,34 @@
   .read-link:hover { gap: 12px; }
   .read-link:hover svg { transform: translateX(4px); }
 
-  /* CARDS GRID */
-  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  .blog-card {
+  /* CARDS GRID — pages villes */
+  .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .city-card {
     background: white; border-radius: var(--radius);
     border: 1px solid var(--border); overflow: hidden;
     box-shadow: var(--shadow);
     transition: box-shadow var(--transition), transform var(--transition);
     cursor: pointer; display: flex; flex-direction: column;
   }
-  .blog-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-
-  .card-thumb { height: 164px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-  .card-thumb svg { width: 52px; height: 52px; position: relative; z-index: 1; }
+  .city-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+  .card-thumb { height: 130px; display: flex; align-items: center; justify-content: center; }
+  .card-thumb svg { width: 44px; height: 44px; }
   .card-thumb--blue { background: linear-gradient(145deg, #dbeafe 0%, #bfdbfe 100%); }
   .card-thumb--blue svg { color: var(--blue); }
   .card-thumb--teal { background: linear-gradient(145deg, #ccfbf1 0%, #99f6e4 100%); }
   .card-thumb--teal svg { color: var(--teal); }
-  .card-thumb--purple { background: linear-gradient(145deg, #ede9fe 0%, #ddd6fe 100%); }
-  .card-thumb--purple svg { color: var(--purple); }
-  .card-thumb--orange { background: linear-gradient(145deg, #ffedd5 0%, #fed7aa 100%); }
-  .card-thumb--orange svg { color: #ea580c; }
-  .card-thumb--green { background: linear-gradient(145deg, #dcfce7 0%, #bbf7d0 100%); }
-  .card-thumb--green svg { color: var(--green); }
-
-  .card-body { padding: 22px 24px 26px; flex: 1; display: flex; flex-direction: column; }
-  .card-tag { font-family: var(--font-head); font-weight: 700; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; display: block; }
+  .card-body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; }
+  .card-tag { font-family: var(--font-head); font-weight: 700; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; display: block; }
   .card-tag--teal { color: var(--teal); }
-  .card-tag--purple { color: var(--purple); }
-  .card-tag--orange { color: #ea580c; }
-  .blog-card h2 { font-family: var(--font-head); font-weight: 700; font-size: 0.98rem; color: var(--navy); line-height: 1.42; margin-bottom: 8px; }
-  .blog-card .card-meta { font-size: 0.73rem; color: #94a3b8; margin-bottom: 10px; }
-  .blog-card p.excerpt { font-size: 0.82rem; color: var(--muted); line-height: 1.68; margin-bottom: 18px; flex: 1; }
-  .blog-card .read-link { margin-top: auto; font-size: 0.8rem; }
+  .city-card h2 { font-family: var(--font-head); font-weight: 700; font-size: 0.92rem; color: var(--navy); line-height: 1.4; margin-bottom: 14px; flex: 1; }
+  .city-card .read-link { margin-top: auto; font-size: 0.78rem; }
 
   /* FOOTER */
   .blog-footer { background: #0f172a; border-top: 1px solid rgba(255,255,255,0.04); padding: 52px max(24px, 5vw) 32px; }
   .footer-inner { max-width: 1100px; margin: 0 auto; }
-  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
   .footer-brand img { height: 44px; width: auto; opacity: 0.85; margin-bottom: 14px; }
-  .footer-brand p { font-size: 0.78rem; color: rgba(255,255,255,0.32); line-height: 1.65; max-width: 240px; }
+  .footer-brand p { font-size: 0.78rem; color: rgba(255,255,255,0.32); line-height: 1.65; max-width: 260px; }
   .footer-col h3 { font-family: var(--font-head); font-weight: 700; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .footer-col a { font-size: 0.8rem; color: rgba(255,255,255,0.5); transition: color var(--transition); cursor: pointer; }
@@ -184,28 +222,20 @@
   .footer-bottom a:hover { color: white; }
 
   /* RESPONSIVE */
-  @media (max-width: 1024px) {
-    .footer-top { grid-template-columns: 1fr 1fr; }
-  }
+  @media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 900px) {
     .featured-card { grid-template-columns: 1fr; }
     .featured-thumb { min-height: 200px; }
-    .cards-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-stats { gap: 20px; }
-  }
-  @media (max-width: 640px) {
-    .cards-grid { grid-template-columns: 1fr; }
-    .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
-    .hero { padding-top: 48px; padding-bottom: 48px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
+    .cards-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+    .hero { padding-top: 48px; padding-bottom: 48px; }
     .footer-top { grid-template-columns: 1fr; }
-    .footer-brand { display: none; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; }
-  }
+  @media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -218,9 +248,7 @@
     <li><a href="https://climeo34.fr/#tarifs">Tarifs</a></li>
     <li><a href="https://climeo34.fr/#zone">Zone</a></li>
     <li><a href="https://climeo34.fr/#faq">FAQ</a></li>
-    <li>
-      <a href="https://wa.me/33603257679" class="cta" target="_blank" rel="noopener">Devis gratuit</a>
-    </li>
+    <li><a href="https://wa.me/33603257679" class="cta" target="_blank" rel="noopener">Devis gratuit</a></li>
   </ul>
 </nav>
 
@@ -240,8 +268,8 @@
           </svg>
         </div>
         <div class="stat-text">
-          <strong>7 articles</strong>
-          <span>Guides & conseils</span>
+          <strong>Guides pratiques</strong>
+          <span>Conseils d'expert</span>
         </div>
       </div>
       <div class="stat">
@@ -273,22 +301,21 @@
 <div class="blog-section">
 
   <div class="section-label">
-    <h2>À la une</h2>
-    <span>Guide le plus complet de la saison</span>
+    <h2>Dernier article</h2>
+    <span>Guide complet</span>
   </div>
 
-  <a href="airbnb-climatisation-montpellier.html" class="featured-card">
+  <a href="clim-qui-coule-chaleur-herault.html" class="featured-card">
     <div class="featured-thumb">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
+        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
       </svg>
     </div>
     <div class="featured-body">
-      <span class="featured-label">Airbnb · Réglementation</span>
-      <h2>Airbnb & climatisation à Montpellier : obligations et entretien</h2>
-      <p class="card-meta">Février 2025 · 5 min de lecture</p>
-      <p class="excerpt">Propriétaire d'un logement Airbnb dans l'Hérault ? La clim est votre meilleur allié en été — mais elle impose des obligations d'entretien légales que peu de propriétaires connaissent.</p>
+      <span class="featured-label">Panne · Entretien</span>
+      <h2>Climatisation qui coule en été : les fortes chaleurs révèlent les clims mal entretenues dans l'Hérault</h2>
+      <p class="card-meta">Mai 2025 · 5 min de lecture</p>
+      <p class="excerpt">Bac de condensat bouché, évaporateur givré, tuyau obstrué : découvrez pourquoi votre clim coule pendant les canicules à Montpellier et comment un entretien professionnel l'évite définitivement.</p>
       <span class="read-link">
         Lire l'article
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -299,23 +326,21 @@
   <hr class="section-divider">
 
   <div class="section-label">
-    <h2>Tous les articles</h2>
-    <span>6 guides pratiques</span>
+    <h2>Nos zones d'intervention</h2>
+    <span>Entretien climatisation dans l'Hérault</span>
   </div>
 
   <div class="cards-grid">
 
-    <a href="/nettoyage-clim-montpellier/" class="blog-card">
+    <a href="/nettoyage-clim-montpellier/" class="city-card">
       <div class="card-thumb card-thumb--blue">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
         </svg>
       </div>
       <div class="card-body">
-        <span class="card-tag">Montpellier · Entretien</span>
-        <h2>Nettoyage climatisation à Montpellier : guide complet pour particuliers et Airbnb</h2>
-        <p class="card-meta">Avril 2025 · 5 min de lecture</p>
-        <p class="excerpt">Canicules répétées, étés à plus de 35°C : un évaporateur encrassé réduit les performances de 40% et diffuse bactéries et moisissures.</p>
+        <span class="card-tag">Entretien · Montpellier</span>
+        <h2>Nettoyage climatisation à Montpellier</h2>
         <span class="read-link">
           Voir la page
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -323,7 +348,7 @@
       </div>
     </a>
 
-    <a href="/nettoyage-clim-palavas/" class="blog-card">
+    <a href="/nettoyage-clim-palavas/" class="city-card">
       <div class="card-thumb card-thumb--teal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 12c2-4 6-4 8 0s6 4 8 0"/>
@@ -332,10 +357,8 @@
         </svg>
       </div>
       <div class="card-body">
-        <span class="card-tag card-tag--teal">Côte · Airbnb</span>
-        <h2>Nettoyage climatisation à Palavas-les-Flots : guide pour propriétaires Airbnb</h2>
-        <p class="card-meta">Avril 2025 · 5 min de lecture</p>
-        <p class="excerpt">Station balnéaire à 12 km de Montpellier : forte densité locative, air iodé, humidité élevée. Vos clims demandent un entretien régulier.</p>
+        <span class="card-tag card-tag--teal">Entretien · Palavas</span>
+        <h2>Nettoyage climatisation à Palavas-les-Flots</h2>
         <span class="read-link">
           Voir la page
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -343,17 +366,15 @@
       </div>
     </a>
 
-    <a href="/nettoyage-clim-carnon/" class="blog-card">
+    <a href="/nettoyage-clim-carnon/" class="city-card">
       <div class="card-thumb card-thumb--teal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 15H2a10 10 0 0 0 20 0h-3"/>
         </svg>
       </div>
       <div class="card-body">
-        <span class="card-tag card-tag--teal">Côte · Airbnb</span>
-        <h2>Nettoyage climatisation à Carnon : guide pour locations saisonnières</h2>
-        <p class="card-meta">Avril 2025 · 5 min de lecture</p>
-        <p class="excerpt">Carnon-Plage, à deux pas de Montpellier : forte rotation locative, air marin chargé en sel. Vos clims s'encrassent vite. Intervention sous 48h.</p>
+        <span class="card-tag card-tag--teal">Entretien · Carnon</span>
+        <h2>Nettoyage climatisation à Carnon-Plage</h2>
         <span class="read-link">
           Voir la page
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -361,59 +382,17 @@
       </div>
     </a>
 
-    <a href="/nettoyage-clim-la-grande-motte/" class="blog-card">
-      <div class="card-thumb card-thumb--green">
+    <a href="/nettoyage-clim-la-grande-motte/" class="city-card">
+      <div class="card-thumb card-thumb--teal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/>
         </svg>
       </div>
       <div class="card-body">
-        <span class="card-tag card-tag--teal">Côte · Entretien</span>
-        <h2>Nettoyage climatisation à La Grande-Motte : l'air marin accélère l'encrassement</h2>
-        <p class="card-meta">Avril 2025 · 5 min de lecture</p>
-        <p class="excerpt">Air chargé en sel, humidité élevée, forte rotation locative : les clims du littoral héraultais s'encrassent 2 à 3 fois plus vite.</p>
+        <span class="card-tag card-tag--teal">Entretien · La Grande-Motte</span>
+        <h2>Nettoyage climatisation à La Grande-Motte</h2>
         <span class="read-link">
-          Lire l'article
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a href="nettoyage-clim-ete-montpellier.html" class="blog-card">
-      <div class="card-thumb card-thumb--orange">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <span class="card-tag card-tag--orange">Entretien · Saisonnalité</span>
-        <h2>Pourquoi nettoyer sa climatisation avant l'été à Montpellier ?</h2>
-        <p class="card-meta">Avril 2025 · 4 min de lecture</p>
-        <p class="excerpt">Avec les étés caniculaires de l'Hérault, votre clim tourne à plein régime. Un évaporateur encrassé peut réduire les performances de 40%.</p>
-        <span class="read-link">
-          Lire l'article
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a href="odeur-clim-herault.html" class="blog-card">
-      <div class="card-thumb card-thumb--purple">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <span class="card-tag card-tag--purple">Problèmes · Solutions</span>
-        <h2>Clim qui sent mauvais : causes et solutions dans l'Hérault</h2>
-        <p class="card-meta">Mars 2025 · 3 min de lecture</p>
-        <p class="excerpt">Une odeur de moisi dès que vous allumez la clim ? Ce n'est pas normal. Voici les causes précises et la solution définitive sans produits agressifs.</p>
-        <span class="read-link">
-          Lire l'article
+          Voir la page
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </span>
       </div>
@@ -428,14 +407,6 @@
       <div class="footer-brand">
         <img src="../logo_transparent.png" alt="Logo Climeo34">
         <p>Technicien certifié nettoyage climatisation à Montpellier et dans l'Hérault. Intervention sous 48h, devis gratuit.</p>
-      </div>
-      <div class="footer-col">
-        <h3>Articles</h3>
-        <ul>
-          <li><a href="nettoyage-clim-ete-montpellier.html">Nettoyage avant l'été</a></li>
-          <li><a href="odeur-clim-herault.html">Odeur de climatisation</a></li>
-          <li><a href="airbnb-climatisation-montpellier.html">Airbnb & climatisation</a></li>
-        </ul>
       </div>
       <div class="footer-col">
         <h3>Zones</h3>
@@ -457,7 +428,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Climeo34 · Nettoyage climatisation Montpellier & Hérault (34)</p>
+      <p>© 2025 Climeo34 · Entretien climatisation Montpellier & Hérault (34)</p>
       <a href="https://climeo34.fr">climeo34.fr</a>
     </div>
   </div>
