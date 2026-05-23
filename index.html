@@ -1232,7 +1232,8 @@ function gtag_report_conversion(url) {
 <!-- HERO -->
 <header id="hero" role="banner">
   <div class="hero-video-bg" aria-hidden="true">
-    <video autoplay loop muted playsinline preload="auto" poster="Homme-Nettoie-climatiseur.jpg">
+    <video autoplay loop muted playsinline preload="auto" poster="Homme-Nettoie-climatiseur.jpg" id="hero-vid">
+      <source src="hero-video-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
       <source src="hero-video.mp4" type="video/mp4">
     </video>
   </div>
@@ -2407,6 +2408,22 @@ hoverEls.forEach(btn => {
   function escDiag(s) {
     return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
+})();
+</script>
+<script>
+(function(){
+  var vid = document.getElementById('hero-vid');
+  if (!vid) return;
+  var lastMobile = window.innerWidth <= 767;
+  window.addEventListener('resize', function(){
+    var isMobile = window.innerWidth <= 767;
+    if (isMobile !== lastMobile) {
+      lastMobile = isMobile;
+      var t = vid.currentTime;
+      vid.load();
+      vid.play();
+    }
+  });
 })();
 </script>
 </body>
