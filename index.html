@@ -1233,7 +1233,7 @@ function gtag_report_conversion(url) {
 <!-- HERO -->
 <header id="hero" role="banner">
   <div class="hero-video-bg" aria-hidden="true">
-    <video autoplay muted playsinline preload="auto" id="hero-vid"
+    <video muted playsinline preload="auto" id="hero-vid"
       oncanplay="this.playbackRate=2;" fetchpriority="high">
       <source src="hero-video-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
       <source src="hero-video-mobile.webm" type="video/webm" media="(max-width: 767px)">
@@ -2419,13 +2419,14 @@ hoverEls.forEach(btn => {
   var vid = document.getElementById('hero-vid');
   if (!vid) return;
   vid.addEventListener('ended', function(){ vid.pause(); });
+  setTimeout(function(){ vid.play(); }, 1500);
   var lastMobile = window.innerWidth <= 767;
   window.addEventListener('resize', function(){
     var isMobile = window.innerWidth <= 767;
     if (isMobile !== lastMobile) {
       lastMobile = isMobile;
       vid.load();
-      vid.play();
+      setTimeout(function(){ vid.play(); }, 1500);
     }
   });
 })();
