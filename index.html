@@ -232,56 +232,31 @@ body {
 #hero {
   scroll-margin-top: 92px;
   min-height: 100vh;
-  background: linear-gradient(-45deg, #04111F, #071E38, #0C2A44, #071E38, #04111F);
-  background-size: 400% 400%;
-  animation: gradientFlow 18s ease infinite;
   position: relative; display: flex; align-items: center;
-  overflow: hidden; padding: 140px 6% 80px;
+  overflow: hidden; padding: 160px 6% 100px;
   z-index: 0;
 }
-.hero-bg {
-  position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+.hero-video-bg {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
 }
-.hero-orb {
-  position: absolute; border-radius: 50%;
-  background: radial-gradient(circle, rgba(8,145,178,0.20), transparent 70%);
-  animation: orbFloat 10s ease-in-out infinite;
+.hero-video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
 }
-.hero-orb:nth-child(1) { width: 700px; height: 700px; top: -200px; right: -150px; animation-delay: 0s; }
-.hero-orb:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: 5%; animation-delay: -4s; }
-.hero-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(4,17,31,0.75) 0%,
+    rgba(4,17,31,0.42) 40%,
+    rgba(4,17,31,0.70) 100%
+  );
 }
 .hero-inner {
   position: relative; z-index: 2;
-  display: flex; align-items: center;
-  gap: 64px; width: 100%;
+  width: 100%; max-width: 820px;
 }
-.hero-content { flex: 1; min-width: 0; }
-.hero-image-wrap {
-  flex: 0 0 440px; max-width: 440px;
-  position: relative; align-self: stretch; display: flex; align-items: center;
-}
-.hero-photo {
-  width: 100%; height: 540px;
-  object-fit: cover; object-position: center top;
-  border-radius: 20px;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07);
-  display: block;
-}
-.hero-image-badge {
-  position: absolute; bottom: -18px; left: -18px;
-  background: var(--brand); color: white;
-  font-family: var(--font-head); font-weight: 700;
-  font-size: 0.8rem; line-height: 1.5;
-  padding: 14px 18px; border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(8,145,178,0.5);
-  white-space: nowrap;
-}
+.hero-content { width: 100%; }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   margin-bottom: 28px;
@@ -303,7 +278,7 @@ body {
 .hero-lead {
   font-size: 1.05rem; line-height: 1.75;
   color: var(--gray-text); margin-bottom: 40px;
-  max-width: 560px; font-weight: 300;
+  max-width: 680px; font-weight: 300;
 }
 .hero-lead strong { color: var(--navy); font-weight: 500; }
 .hero-actions {
@@ -356,36 +331,9 @@ body {
   color: #ffffff;
   border-color: rgba(255,255,255,0.3);
 }
-.hero-image-badge {
-  background: rgba(4,17,31,0.75);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: #ffffff;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1);
-}
-#hero .hero-photo {
-  box-shadow:
-    0 32px 80px rgba(0,0,0,0.65),
-    0 0 0 1px rgba(255,255,255,0.08),
-    0 0 80px rgba(8,145,178,0.22);
-}
-.hero-image-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -28px;
-  background: radial-gradient(circle at 60% 50%, rgba(8,145,178,0.28), transparent 68%);
-  border-radius: 50px;
-  z-index: 0;
-  pointer-events: none;
-}
-
 /* HERO RESPONSIVE */
 @media (max-width: 900px) {
-  .hero-inner { flex-direction: column-reverse; gap: 36px; }
-  .hero-image-wrap { flex: none; max-width: 100%; width: 100%; align-self: auto; }
-  .hero-photo { height: 260px; }
-  .hero-image-badge { bottom: -14px; left: 14px; }
+  #hero { padding: 120px 5% 80px; }
 }
 
 /* SECTIONS */
@@ -954,18 +902,9 @@ footer { background: #04111F; padding: 48px 6% 28px; }
   from { opacity: 0; transform: translate(-50%, 20px); }
   to { opacity: 1; transform: translate(-50%, 0); }
 }
-@keyframes orbFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-30px); }
-}
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.75); }
-}
-@keyframes gradientFlow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -1175,20 +1114,6 @@ footer { background: #04111F; padding: 48px 6% 28px; }
   will-change: transform;
 }
 
-/* HERO PARTICLE */
-.hero-particle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(8,145,178,0.15);
-  animation: particleFloat 6s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes particleFloat {
-  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-  33% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
-  66% { transform: translateY(10px) translateX(-8px); opacity: 0.4; }
-}
-
 /* HERO WAVE */
 .hero-wave {
   position: absolute; bottom: 0; left: 0; right: 0;
@@ -1306,16 +1231,12 @@ function gtag_report_conversion(url) {
 
 <!-- HERO -->
 <header id="hero" role="banner">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="hero-orb"></div>
-    <div class="hero-orb"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-particle" style="width:12px;height:12px;top:20%;left:15%;animation-delay:0s;"></div>
-    <div class="hero-particle" style="width:8px;height:8px;top:60%;left:25%;animation-delay:-2s;"></div>
-    <div class="hero-particle" style="width:16px;height:16px;top:35%;right:20%;animation-delay:-4s;"></div>
-    <div class="hero-particle" style="width:6px;height:6px;top:75%;right:30%;animation-delay:-1s;"></div>
-    <div class="hero-particle" style="width:10px;height:10px;top:15%;right:40%;animation-delay:-3s;"></div>
+  <div class="hero-video-bg" aria-hidden="true">
+    <video autoplay loop muted playsinline preload="auto" poster="Homme-Nettoie-climatiseur.jpg">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
   </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-eyebrow">
@@ -1369,20 +1290,6 @@ function gtag_report_conversion(url) {
         <div class="kpi"><div class="kpi-val">99,9%</div><div class="kpi-label">Bactéries & champignons éliminés</div></div>
         <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
       </div>
-    </div>
-    <div class="hero-image-wrap">
-      <picture>
-        <source srcset="Homme-Nettoie-climatiseur.webp" type="image/webp">
-        <img
-          src="Homme-Nettoie-climatiseur.jpg"
-          alt="Technicien Climeo34 nettoyage climatisation Montpellier Hérault"
-          class="hero-photo"
-          width="440"
-          height="540"
-          loading="eager"
-          fetchpriority="high">
-      </picture>
-      <div class="hero-image-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px;"><path d="M20 6 9 17l-5-5"/></svg>Technicien certifié<br>Intervention sous 48h</div>
     </div>
   </div>
   <div class="hero-wave" aria-hidden="true">
