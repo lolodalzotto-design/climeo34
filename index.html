@@ -2419,14 +2419,14 @@ hoverEls.forEach(btn => {
   var vid = document.getElementById('hero-vid');
   if (!vid) return;
   vid.addEventListener('ended', function(){ vid.pause(); });
-  setTimeout(function(){ vid.play(); }, 2000);
+  setTimeout(function(){ vid.play(); }, 4000);
   var lastMobile = window.innerWidth <= 767;
   window.addEventListener('resize', function(){
     var isMobile = window.innerWidth <= 767;
     if (isMobile !== lastMobile) {
       lastMobile = isMobile;
       vid.load();
-      setTimeout(function(){ vid.play(); }, 2000);
+      setTimeout(function(){ vid.play(); }, 4000);
     }
   });
 })();
