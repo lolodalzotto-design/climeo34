@@ -232,7 +232,7 @@ body {
 #hero {
   scroll-margin-top: 92px;
   min-height: 100vh;
-  background: #04111F;
+  background: transparent;
   position: relative; display: flex; align-items: center;
   overflow: hidden; padding: 160px 6% 100px;
   z-index: 0;
@@ -1233,7 +1233,7 @@ function gtag_report_conversion(url) {
 <!-- HERO -->
 <header id="hero" role="banner">
   <div class="hero-video-bg" aria-hidden="true">
-    <video muted playsinline preload="metadata" id="hero-vid"
+    <video muted playsinline preload="auto" id="hero-vid"
       oncanplay="this.playbackRate=2;" fetchpriority="high">
       <source src="hero-video-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
       <source src="hero-video-mobile.webm" type="video/webm" media="(max-width: 767px)">
