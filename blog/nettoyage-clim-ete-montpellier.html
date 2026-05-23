@@ -7,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JSCNCLBQEB');
   gtag('config', 'AW-18153085489');
 </script>
@@ -27,57 +26,208 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Pourquoi nettoyer sa climatisation avant l'été à Montpellier ?","description":"Avec les étés caniculaires de Montpellier et l'Hérault, un entretien annuel de votre clim est indispensable.","author":{"@type":"Organization","name":"Climeo34","url":"https://climeo34.fr"},"publisher":{"@type":"Organization","name":"Climeo34","url":"https://climeo34.fr"},"datePublished":"2025-04-01","dateModified":"2025-04-01","mainEntityOfPage":"https://climeo34.fr/blog/nettoyage-clim-ete-montpellier.html"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root { --navy:#1e3a5c; --brand-blue:#3d7ab5; --brand-blue-bg:#eef5fc; --green:#4da845; --gray-text:#5a7a9a; --font-head:'Manrope',sans-serif; --font-body:'Inter',sans-serif; --radius:16px; }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:var(--font-body);color:var(--navy);background:#fff;line-height:1.7;}
-  a{color:var(--brand-blue);text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(61,122,181,0.1);padding:0 6%;display:flex;align-items:center;justify-content:space-between;height:70px;}
-  .nav-logo img{height:56px;width:auto;display:block;}
-  .nav-links-blog{display:flex;align-items:center;gap:28px;list-style:none;}
-  .nav-links-blog a{font-family:var(--font-head);font-weight:700;font-size:0.85rem;color:var(--gray-text);transition:color 0.2s;}
-  .nav-links-blog a:hover{color:var(--brand-blue);}
-  .nav-links-blog .nav-cta{background:var(--brand-blue);color:white;padding:10px 22px;border-radius:50px;}
-  .article-wrap{max-width:760px;margin:0 auto;padding:60px 6% 100px;}
-  .article-back{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-head);font-weight:700;font-size:0.8rem;color:var(--gray-text);margin-bottom:36px;}
-  .article-back:hover{color:var(--brand-blue);text-decoration:none;}
-  .article-tag{display:inline-block;background:rgba(61,122,181,0.1);color:var(--brand-blue);font-family:var(--font-head);font-weight:800;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:16px;}
-  h1{font-family:var(--font-head);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;line-height:1.2;margin-bottom:16px;}
-  .article-meta{font-size:0.8rem;color:rgba(90,122,154,0.7);margin-bottom:40px;}
-  h2{font-family:var(--font-head);font-size:1.25rem;font-weight:800;margin:40px 0 14px;color:var(--navy);}
-  p{font-size:0.97rem;color:#334155;margin-bottom:18px;}
-  ul,ol{margin:0 0 18px 22px;}
-  li{font-size:0.97rem;color:#334155;margin-bottom:6px;}
-  .highlight{background:var(--brand-blue-bg);border-left:4px solid var(--brand-blue);border-radius:0 12px 12px 0;padding:20px 24px;margin:28px 0;}
-  .highlight p{margin:0;font-weight:500;}
-  .cta-box{background:var(--navy);color:white;border-radius:var(--radius);padding:36px;text-align:center;margin-top:56px;}
-  .cta-box h3{font-family:var(--font-head);font-size:1.3rem;font-weight:800;margin-bottom:10px;}
-  .cta-box p{color:rgba(255,255,255,0.7);font-size:0.9rem;margin-bottom:22px;}
-  .cta-box a{display:inline-block;background:#25D366;color:white;font-family:var(--font-head);font-weight:700;padding:14px 32px;border-radius:50px;font-size:0.9rem;}
-  .cta-box a:hover{text-decoration:none;background:#1da851;}
-  footer{background:#0f1e3d;text-align:center;padding:30px 6%;}
-  footer p{font-size:0.78rem;color:rgba(255,255,255,0.3);}
-  footer a{color:rgba(255,255,255,0.5);}
+  :root {
+    --navy: #0f172a;
+    --blue: #2563eb;
+    --blue-dim: #1d4ed8;
+    --blue-light: #dbeafe;
+    --blue-ultra: #eff6ff;
+    --orange: #f97316;
+    --orange-light: #fff7ed;
+    --green: #16a34a;
+    --green-light: #f0fdf4;
+    --yellow: #d97706;
+    --yellow-light: #fffbeb;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8faff;
+    --font-head: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-hover: 0 8px 40px rgba(37,99,235,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--navy); background: white; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* PROGRESS BAR */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue) 0%, #60a5fa 100%);
+    z-index: 200; width: 0; transition: width 0.1s linear;
+    pointer-events: none;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 max(24px, 5vw);
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo img { height: 52px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+  .nav-links a { font-family: var(--font-head); font-weight: 600; font-size: 0.83rem; color: var(--muted); transition: color 0.2s; cursor: pointer; }
+  .nav-links a:hover { color: var(--blue); text-decoration: none; }
+  .nav-links .cta { background: var(--orange); color: white; padding: 9px 22px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; transition: background 0.2s; }
+  .nav-links .cta:hover { background: #ea6d0a; text-decoration: none; }
+
+  /* ARTICLE LAYOUT */
+  .article-container { max-width: 760px; margin: 0 auto; padding: 52px max(24px, 5vw) 100px; }
+
+  /* Breadcrumb */
+  .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 36px; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; }
+  .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+  .breadcrumb a:hover { color: var(--blue); }
+  .breadcrumb-sep { color: #cbd5e1; }
+
+  /* Article header */
+  .article-tag {
+    display: inline-flex; align-items: center;
+    font-family: var(--font-head); font-weight: 700; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 18px;
+    background: var(--orange-light); color: #ea580c; border: 1px solid #fed7aa;
+  }
+  h1 { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.75rem, 4.5vw, 2.6rem); line-height: 1.15; color: var(--navy); margin-bottom: 20px; }
+  .article-meta {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    font-size: 0.78rem; color: #94a3b8; margin-bottom: 40px;
+    padding-bottom: 32px; border-bottom: 1px solid var(--border);
+  }
+  .meta-dot { color: #cbd5e1; }
+  .meta-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-ultra); color: var(--blue);
+    font-family: var(--font-head); font-weight: 600; font-size: 0.68rem;
+    padding: 4px 10px; border-radius: 6px;
+  }
+  .meta-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  /* Content */
+  h2 { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--navy); margin: 48px 0 16px; line-height: 1.3; }
+  p { font-size: 1rem; color: #334155; margin-bottom: 20px; line-height: 1.78; }
+  ul, ol { margin: 0 0 20px 0; padding-left: 24px; }
+  li { font-size: 0.97rem; color: #334155; margin-bottom: 8px; line-height: 1.72; }
+  strong { color: var(--navy); font-weight: 600; }
+
+  /* Callout */
+  .callout {
+    display: flex; gap: 16px; align-items: flex-start;
+    border-radius: var(--radius); padding: 20px 24px; margin: 32px 0;
+    background: var(--blue-ultra); border: 1px solid var(--blue-light);
+  }
+  .callout--tip { background: var(--green-light); border-color: #bbf7d0; }
+  .callout-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; color: var(--blue); }
+  .callout--tip .callout-icon { color: var(--green); }
+  .callout p { margin: 0; font-weight: 500; font-size: 0.93rem; color: #1e40af; line-height: 1.68; }
+  .callout--tip p { color: #14532d; }
+
+  /* Stats cards */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  .stat-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; text-align: center; }
+  .stat-card .stat-num { font-family: var(--font-head); font-weight: 800; font-size: 1.8rem; color: var(--blue); display: block; margin-bottom: 4px; }
+  .stat-card .stat-label { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+
+  /* CTA Box */
+  .cta-box {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+    border-radius: var(--radius); padding: 44px 40px; text-align: center;
+    margin-top: 64px; position: relative; overflow: hidden;
+  }
+  .cta-box::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: rgba(255,255,255,0.06); border-radius: 50%; pointer-events: none; }
+  .cta-box::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; background: rgba(255,255,255,0.04); border-radius: 50%; pointer-events: none; }
+  .cta-box h3 { font-family: var(--font-head); font-size: 1.45rem; font-weight: 800; color: white; margin-bottom: 10px; position: relative; z-index: 1; }
+  .cta-box p { color: rgba(255,255,255,0.72); font-size: 0.93rem; margin-bottom: 28px; position: relative; z-index: 1; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: white;
+    font-family: var(--font-head); font-weight: 700;
+    padding: 14px 32px; border-radius: 50px; font-size: 0.92rem;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer; text-decoration: none; position: relative; z-index: 1;
+  }
+  .cta-btn:hover { background: #1da851; transform: translateY(-2px); text-decoration: none; }
+  .cta-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* Related articles */
+  .related { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .related h2 { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--navy); margin-bottom: 22px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .related-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 22px;
+    transition: background 0.2s, box-shadow 0.2s; cursor: pointer; display: block;
+  }
+  .related-card:hover { background: white; box-shadow: var(--shadow); text-decoration: none; }
+  .related-tag { font-family: var(--font-head); font-weight: 700; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: block; }
+  .related-card h3 { font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; color: var(--navy); line-height: 1.42; margin-bottom: 10px; }
+  .related-read { font-family: var(--font-head); font-weight: 600; font-size: 0.77rem; color: var(--blue); }
+
+  /* Footer */
+  footer { background: #0f172a; text-align: center; padding: 32px max(24px, 5vw); }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.28); line-height: 1.8; }
+  footer a { color: rgba(255,255,255,0.45); transition: color 0.2s; }
+  footer a:hover { color: white; text-decoration: none; }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.65rem; }
+    .related-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .cta-box { padding: 32px 24px; }
+    .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } #progress { transition: none !important; } }
 </style>
 </head>
 <body>
 
+<div id="progress" role="progressbar" aria-label="Progression de lecture"></div>
+
 <nav>
-  <a href="https://climeo34.fr" class="nav-logo"><img src="../logo_transparent.png" alt="Logo Climeo34"></a>
-  <ul class="nav-links-blog">
-    <li><a href="index.html">← Blog</a></li>
+  <a href="https://climeo34.fr" class="nav-logo" aria-label="Climeo34 — Accueil">
+    <img src="../logo_transparent.png" alt="Logo Climeo34">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Blog</a></li>
     <li><a href="https://climeo34.fr/#tarifs">Tarifs</a></li>
-    <li><a href="https://wa.me/33603257679" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
+    <li>
+      <a href="https://wa.me/33603257679" class="cta" target="_blank" rel="noopener">Devis gratuit</a>
+    </li>
   </ul>
 </nav>
 
-<div class="article-wrap">
-  <a href="index.html" class="article-back">← Retour au blog</a>
+<div class="article-container">
+
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="https://climeo34.fr">Accueil</a>
+    <span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <a href="index.html">Blog</a>
+    <span class="breadcrumb-sep" aria-hidden="true">›</span>
+    <span>Nettoyage avant l'été</span>
+  </nav>
+
   <span class="article-tag">Entretien · Saisonnalité</span>
   <h1>Pourquoi nettoyer sa climatisation avant l'été à Montpellier ?</h1>
-  <p class="article-meta">Avril 2025 · 4 min de lecture · Par Climeo34, technicien certifié Hérault (34)</p>
+  <div class="article-meta">
+    <span>Avril 2025</span>
+    <span class="meta-dot" aria-hidden="true">·</span>
+    <span>4 min de lecture</span>
+    <span class="meta-dot" aria-hidden="true">·</span>
+    <span class="meta-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Climeo34, technicien certifié Hérault (34)
+    </span>
+  </div>
 
   <p>Montpellier figure régulièrement parmi les villes les plus chaudes de France en été. Quand les températures dépassent 35°C, votre climatisation devient votre meilleure alliée — à condition qu'elle soit en bon état. Un entretien annuel, idéalement réalisé en avril ou mai, peut faire toute la différence.</p>
 
@@ -85,11 +235,30 @@
   <p>Pendant les mois de faible utilisation, poussières, humidité et particules s'accumulent sur l'évaporateur et dans les filtres. Le bac de condensat, qui récupère l'eau produite par la condensation, peut développer des moisissures et des bactéries (légionelles, staphylocoques) en quelques semaines d'inactivité.</p>
   <p>À la remise en marche en juin, votre appareil propulse ces contaminants directement dans l'air de votre logement.</p>
 
-  <div class="highlight">
-    <p>💡 Une climatisation non entretenue peut réduire la qualité de l'air intérieur de 60% et la performance énergétique de 40%, selon l'ADEME.</p>
+  <div class="callout" role="note">
+    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+    </svg>
+    <p>Une climatisation non entretenue peut réduire la qualité de l'air intérieur de 60% et la performance énergétique de 40%, selon l'ADEME.</p>
   </div>
 
   <h2>Les 3 raisons de nettoyer avant l'été</h2>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-num">−40%</span>
+      <span class="stat-label">de puissance perdue sur un évaporateur encrassé</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">−25%</span>
+      <span class="stat-label">de consommation électrique après nettoyage professionnel</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">45 min</span>
+      <span class="stat-label">durée d'une intervention complète par split</span>
+    </div>
+  </div>
+
   <ol>
     <li><strong>Santé</strong> — Éliminer les bactéries et moisissures avant qu'elles se diffusent dans votre air intérieur. Particulièrement important pour les enfants, les personnes asthmatiques et les seniors.</li>
     <li><strong>Performance</strong> — Un évaporateur propre restitue 100% de la puissance de refroidissement. Un appareil encrassé consomme plus pour un résultat moindre.</li>
@@ -111,18 +280,55 @@
   <p>Le meilleur moment est <strong>avril–mai</strong>, avant les premières chaleurs. Vous évitez les délais d'attente de l'été (juin–août sont nos mois les plus chargés à Montpellier) et vous démarrez la saison avec un appareil au top.</p>
   <p>Pour les logements Airbnb dans l'Hérault (Palavas, La Grande-Motte, Carnon...), un entretien avant la saison estivale est fortement recommandé — voire obligatoire selon votre assurance.</p>
 
+  <div class="callout callout--tip" role="note">
+    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+    <p>Conseil pratique : réservez votre intervention en avril pour éviter les délais de juin–août. Nous intervenons sous 48h sur Montpellier et dans tout l'Hérault.</p>
+  </div>
+
   <div class="cta-box">
     <h3>Planifiez votre entretien avant l'été</h3>
     <p>Intervention sous 48h à Montpellier et dans l'Hérault (34). Devis gratuit, réponse immédiate.</p>
-    <a href="https://wa.me/33603257679" target="_blank" rel="noopener">Demander un devis sur WhatsApp</a>
+    <a href="https://wa.me/33603257679" class="cta-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Demander un devis sur WhatsApp
+    </a>
   </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <h2 id="related-title">Articles dans le même thème</h2>
+    <div class="related-grid">
+      <a href="odeur-clim-herault.html" class="related-card">
+        <span class="related-tag">Problèmes · Solutions</span>
+        <h3>Clim qui sent mauvais : causes et solutions dans l'Hérault</h3>
+        <span class="related-read">Lire l'article →</span>
+      </a>
+      <a href="airbnb-climatisation-montpellier.html" class="related-card">
+        <span class="related-tag">Airbnb · Réglementation</span>
+        <h3>Airbnb & climatisation à Montpellier : obligations et entretien</h3>
+        <span class="related-read">Lire l'article →</span>
+      </a>
+    </div>
+  </section>
+
 </div>
 
 <footer>
   <p>© 2025 Climeo34 · <a href="https://climeo34.fr">climeo34.fr</a> · Nettoyage climatisation Montpellier & Hérault (34)</p>
-  <p style="margin-top:10px;">Pages villes : <a href="/nettoyage-clim-montpellier/">Montpellier</a> · <a href="/nettoyage-clim-palavas/">Palavas</a> · <a href="/nettoyage-clim-carnon/">Carnon</a> · <a href="/nettoyage-clim-la-grande-motte/">La Grande-Motte</a></p>
-  <p style="margin-top:6px;">Autres articles : <a href="airbnb-climatisation-montpellier.html">Airbnb & climatisation</a> · <a href="odeur-clim-herault.html">Odeur de climatisation</a></p>
+  <p>Pages villes : <a href="/nettoyage-clim-montpellier/">Montpellier</a> · <a href="/nettoyage-clim-palavas/">Palavas</a> · <a href="/nettoyage-clim-carnon/">Carnon</a> · <a href="/nettoyage-clim-la-grande-motte/">La Grande-Motte</a></p>
 </footer>
 
+<script>
+  (function() {
+    var bar = document.getElementById('progress');
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>
