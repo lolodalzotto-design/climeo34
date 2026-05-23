@@ -2418,7 +2418,7 @@ hoverEls.forEach(btn => {
 /* ---- Bip d'allumage climatisation ---- */
 (function() {
   var loadTime = Date.now();
-  var TARGET_DELAY = 1000;
+  var TARGET_DELAY = 300;
 
   function doBeep(ctx) {
     function beep(t, dur, freq, vol) {
@@ -2436,8 +2436,8 @@ hoverEls.forEach(btn => {
       osc.stop(t + dur);
     }
     var now = ctx.currentTime;
-    beep(now,        0.10, 2637, 0.22);
-    beep(now + 0.16, 0.10, 2637, 0.22);
+    beep(now,        0.10, 2637, 0.08);
+    beep(now + 0.16, 0.10, 2637, 0.08);
   }
 
   function onFirstInteraction() {
