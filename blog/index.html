@@ -184,27 +184,17 @@
   .read-link:hover { gap: 12px; }
   .read-link:hover svg { transform: translateX(4px); }
 
-  /* CARDS GRID — pages villes */
-  .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .city-card {
-    background: white; border-radius: var(--radius);
-    border: 1px solid var(--border); overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: box-shadow var(--transition), transform var(--transition);
-    cursor: pointer; display: flex; flex-direction: column;
+  /* ZONE STRIP */
+  .zone-strip {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    margin-top: 32px; padding: 16px 20px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: 0.82rem; color: var(--muted);
   }
-  .city-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-  .card-thumb { height: 130px; display: flex; align-items: center; justify-content: center; }
-  .card-thumb svg { width: 44px; height: 44px; }
-  .card-thumb--blue { background: linear-gradient(145deg, #dbeafe 0%, #bfdbfe 100%); }
-  .card-thumb--blue svg { color: var(--blue); }
-  .card-thumb--teal { background: linear-gradient(145deg, #ccfbf1 0%, #99f6e4 100%); }
-  .card-thumb--teal svg { color: var(--teal); }
-  .card-body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; }
-  .card-tag { font-family: var(--font-head); font-weight: 700; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; display: block; }
-  .card-tag--teal { color: var(--teal); }
-  .city-card h2 { font-family: var(--font-head); font-weight: 700; font-size: 0.92rem; color: var(--navy); line-height: 1.4; margin-bottom: 14px; flex: 1; }
-  .city-card .read-link { margin-top: auto; font-size: 0.78rem; }
+  .zone-strip svg { width: 15px; height: 15px; color: var(--blue); flex-shrink: 0; }
+  .zone-label { font-family: var(--font-head); font-weight: 600; color: var(--navy); }
+  .zone-strip a { color: var(--blue); font-weight: 500; transition: color var(--transition); }
+  .zone-strip a:hover { color: var(--blue-dim); }
 
   /* FOOTER */
   .blog-footer { background: #0f172a; border-top: 1px solid rgba(255,255,255,0.04); padding: 52px max(24px, 5vw) 32px; }
@@ -222,19 +212,16 @@
   .footer-bottom a:hover { color: white; }
 
   /* RESPONSIVE */
-  @media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 900px) {
     .featured-card { grid-template-columns: 1fr; }
     .featured-thumb { min-height: 200px; }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 640px) {
-    .cards-grid { grid-template-columns: 1fr 1fr; }
     .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
     .hero { padding-top: 48px; padding-bottom: 48px; }
     .footer-top { grid-template-columns: 1fr; }
   }
-  @media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
 </style>
 </head>
@@ -323,81 +310,18 @@
     </div>
   </a>
 
-  <hr class="section-divider">
-
-  <div class="section-label">
-    <h2>Nos zones d'intervention</h2>
-    <span>Entretien climatisation dans l'Hérault</span>
-  </div>
-
-  <div class="cards-grid">
-
-    <a href="/nettoyage-clim-montpellier/" class="city-card">
-      <div class="card-thumb card-thumb--blue">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <span class="card-tag">Entretien · Montpellier</span>
-        <h2>Nettoyage climatisation à Montpellier</h2>
-        <span class="read-link">
-          Voir la page
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a href="/nettoyage-clim-palavas/" class="city-card">
-      <div class="card-thumb card-thumb--teal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 12c2-4 6-4 8 0s6 4 8 0"/>
-          <path d="M2 18c2-4 6-4 8 0s6 4 8 0"/>
-          <path d="M2 6c2-4 6-4 8 0s6 4 8 0"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <span class="card-tag card-tag--teal">Entretien · Palavas</span>
-        <h2>Nettoyage climatisation à Palavas-les-Flots</h2>
-        <span class="read-link">
-          Voir la page
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a href="/nettoyage-clim-carnon/" class="city-card">
-      <div class="card-thumb card-thumb--teal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 15H2a10 10 0 0 0 20 0h-3"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <span class="card-tag card-tag--teal">Entretien · Carnon</span>
-        <h2>Nettoyage climatisation à Carnon-Plage</h2>
-        <span class="read-link">
-          Voir la page
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a href="/nettoyage-clim-la-grande-motte/" class="city-card">
-      <div class="card-thumb card-thumb--teal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <span class="card-tag card-tag--teal">Entretien · La Grande-Motte</span>
-        <h2>Nettoyage climatisation à La Grande-Motte</h2>
-        <span class="read-link">
-          Voir la page
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-      </div>
-    </a>
-
+  <div class="zone-strip">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span class="zone-label">Intervention :</span>
+    <a href="/nettoyage-clim-montpellier/">Montpellier</a>
+    <span aria-hidden="true">·</span>
+    <a href="/nettoyage-clim-palavas/">Palavas-les-Flots</a>
+    <span aria-hidden="true">·</span>
+    <a href="/nettoyage-clim-carnon/">Carnon</a>
+    <span aria-hidden="true">·</span>
+    <a href="/nettoyage-clim-la-grande-motte/">La Grande-Motte</a>
+    <span aria-hidden="true">·</span>
+    <span>tout l'Hérault (34)</span>
   </div>
 </div>
 
