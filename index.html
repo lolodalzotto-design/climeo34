@@ -232,6 +232,7 @@ body {
 #hero {
   scroll-margin-top: 92px;
   min-height: 100vh;
+  background: #04111F;
   position: relative; display: flex; align-items: center;
   overflow: hidden; padding: 160px 6% 100px;
   z-index: 0;
@@ -1234,7 +1235,7 @@ function gtag_report_conversion(url) {
 <!-- HERO -->
 <header id="hero" role="banner">
   <div class="hero-video-bg" aria-hidden="true">
-    <video loop muted playsinline preload="auto" id="hero-vid"
+    <video autoplay muted playsinline preload="auto" id="hero-vid"
       oncanplay="this.playbackRate=2;">
       <source src="hero-video-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
       <source src="hero-video.mp4" type="video/mp4">
@@ -2418,7 +2419,7 @@ hoverEls.forEach(btn => {
   var vid = document.getElementById('hero-vid');
   if (!vid) return;
   vid.addEventListener('playing', function(){ vid.style.opacity = '1'; }, { once: true });
-  setTimeout(function(){ vid.play(); }, 2000);
+  vid.addEventListener('ended', function(){ vid.pause(); });
   var lastMobile = window.innerWidth <= 767;
   window.addEventListener('resize', function(){
     var isMobile = window.innerWidth <= 767;
@@ -2427,7 +2428,7 @@ hoverEls.forEach(btn => {
       vid.style.opacity = '0';
       vid.load();
       vid.addEventListener('playing', function(){ vid.style.opacity = '1'; }, { once: true });
-      setTimeout(function(){ vid.play(); }, 2000);
+      vid.play();
     }
   });
 })();
