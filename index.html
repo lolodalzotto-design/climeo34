@@ -2417,10 +2417,7 @@ hoverEls.forEach(btn => {
 <script>
 /* ---- Bip d'allumage climatisation ---- */
 (function() {
-  var played = false;
   function playAcBeep() {
-    if (played) return;
-    played = true;
     try {
       var ctx = new (window.AudioContext || window.webkitAudioContext)();
       function beep(t, dur, freq, vol) {
@@ -2442,9 +2439,7 @@ hoverEls.forEach(btn => {
       beep(now + 0.16, 0.10, 2637, 0.22);
     } catch(e) {}
   }
-  ['click', 'touchstart', 'keydown'].forEach(function(ev) {
-    document.addEventListener(ev, playAcBeep, { once: true, passive: true });
-  });
+  setTimeout(playAcBeep, 500);
 })();
 </script>
 <script>
