@@ -81,50 +81,50 @@
 
 <style>
 :root {
-  /* Blue brand palette — #0E2F4F / #6FC7F1 / #DFF5FF */
-  --brand: #0E2F4F;
-  --brand-hover: #0a2540;
-  --brand-dark: #081d32;
-  --brand-light: #6FC7F1;
-  --brand-pale: #6FC7F1;
-  --brand-bg: #DFF5FF;
+  /* Blue brand palette — #001E5A / #00A5FF / #E0F3FF */
+  --brand: #001E5A;
+  --brand-hover: #001249;
+  --brand-dark: #000D33;
+  --brand-light: #00A5FF;
+  --brand-pale: #00A5FF;
+  --brand-bg: #E0F3FF;
   /* CTA green */
   --cta: #22C55E;
   --cta-hover: #16A34A;
   /* Hero dark */
-  --hero-1: #0E2F4F;
-  --hero-2: #0E2F4F;
-  --hero-3: #0a2a45;
+  --hero-1: #001E5A;
+  --hero-2: #001E5A;
+  --hero-3: #001249;
   /* Neutrals */
   --white: #FFFFFF;
-  --text: #0E2F4F;
+  --text: #001E5A;
   --text-muted: #475569;
   --text-light: #94A3B8;
   --border: #E2E8F0;
   --bg-alt: #F8FAFC;
   /* Legacy aliases — used by JS-rendered content */
-  --navy: #0E2F4F;
-  --navy-dark: #0E2F4F;
-  --navy-50: #DFF5FF;
-  --navy-100: #6FC7F1;
+  --navy: #001E5A;
+  --navy-dark: #001E5A;
+  --navy-50: #E0F3FF;
+  --navy-100: #00A5FF;
   --green: #22C55E;
   --green-dark: #16A34A;
   --green-50: #F0FDF4;
   --gray-cold: #F8FAFC;
   --gray-text: #475569;
-  --brand-blue: #0E2F4F;
-  --brand-blue-light: #6FC7F1;
-  --brand-blue-pale: #6FC7F1;
-  --brand-blue-bg: #DFF5FF;
-  --dark-text: #0E2F4F;
+  --brand-blue: #001E5A;
+  --brand-blue-light: #00A5FF;
+  --brand-blue-pale: #00A5FF;
+  --brand-blue-bg: #E0F3FF;
+  --dark-text: #001E5A;
   --font-head: 'Poppins', sans-serif;
   --font-body: 'Open Sans', sans-serif;
   --radius: 16px;
   --radius-sm: 8px;
   --radius-xl: 24px;
-  --shadow: 0 2px 12px rgba(14,47,79,0.07), 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-md: 0 6px 24px rgba(14,47,79,0.11), 0 2px 8px rgba(0,0,0,0.05);
-  --shadow-lg: 0 16px 48px rgba(14,47,79,0.15), 0 4px 16px rgba(0,0,0,0.07);
+  --shadow: 0 2px 12px rgba(0,30,90,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 6px 24px rgba(0,30,90,0.11), 0 2px 8px rgba(0,0,0,0.05);
+  --shadow-lg: 0 16px 48px rgba(0,30,90,0.15), 0 4px 16px rgba(0,0,0,0.07);
   --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -176,7 +176,7 @@ body {
   border-radius: 20px;
   padding: 0 24px;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(14,47,79,0.80);
+  background: rgba(0,30,90,0.80);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.10);
@@ -184,8 +184,8 @@ body {
 }
 #nav.scrolled {
   background: rgba(255,255,255,0.97);
-  border-color: rgba(14,47,79,0.14);
-  box-shadow: 0 4px 28px rgba(14,47,79,0.12), 0 1px 4px rgba(0,0,0,0.06);
+  border-color: rgba(0,30,90,0.14);
+  box-shadow: 0 4px 28px rgba(0,30,90,0.12), 0 1px 4px rgba(0,0,0,0.06);
   backdrop-filter: blur(16px);
 }
 .nav-logo { text-decoration: none; display: flex; align-items: center; }
@@ -239,9 +239,9 @@ body {
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg,
-    rgba(14,47,79,0.45) 0%,
-    rgba(14,47,79,0.18) 40%,
-    rgba(14,47,79,0.45) 100%
+    rgba(0,30,90,0.45) 0%,
+    rgba(0,30,90,0.18) 40%,
+    rgba(0,30,90,0.45) 100%
   );
 }
 .hero-inner {
@@ -281,19 +281,19 @@ body {
   background: var(--brand); color: white; text-decoration: none;
   font-family: var(--font-head); font-weight: 700; font-size: 0.9rem;
   padding: 15px 30px; border-radius: 50px;
-  box-shadow: 0 4px 24px rgba(14,47,79,0.4);
+  box-shadow: 0 4px 24px rgba(0,30,90,0.4);
   transition: all var(--transition);
 }
-.btn-primary:hover { background: var(--brand-hover); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(14,47,79,0.5); }
+.btn-primary:hover { background: var(--brand-hover); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,30,90,0.5); }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(14,47,79,0.07); color: var(--text); text-decoration: none;
+  background: rgba(0,30,90,0.07); color: var(--text); text-decoration: none;
   font-family: var(--font-head); font-weight: 600; font-size: 0.9rem;
   padding: 15px 30px; border-radius: 50px;
-  border: 1px solid rgba(14,47,79,0.18);
+  border: 1px solid rgba(0,30,90,0.18);
   transition: all var(--transition); backdrop-filter: blur(8px);
 }
-.btn-ghost:hover { background: rgba(14,47,79,0.12); transform: translateY(-2px); }
+.btn-ghost:hover { background: rgba(0,30,90,0.12); transform: translateY(-2px); }
 .hero-kpis {
   display: flex; flex-wrap: wrap; gap: 32px; margin-top: 36px;
 }
@@ -367,7 +367,7 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   transform: scaleY(0); transform-origin: bottom;
   transition: transform 0.4s ease;
 }
-.prob-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: rgba(14,47,79,0.2); }
+.prob-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: rgba(0,30,90,0.2); }
 .prob-card:hover::after { transform: scaleY(1); }
 .prob-ico {
   width: 52px; height: 52px; border-radius: var(--radius-sm);
@@ -376,7 +376,7 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   transition: transform 0.35s ease, background 0.35s ease;
 }
 .prob-ico svg { width: 24px; height: 24px; }
-.prob-card:hover .prob-ico { transform: translateY(-3px); background: rgba(14,47,79,0.12); }
+.prob-card:hover .prob-ico { transform: translateY(-3px); background: rgba(0,30,90,0.12); }
 .prob-card h3 {
   font-family: var(--font-head); font-weight: 700; font-size: 0.95rem;
   color: var(--text); margin-bottom: 10px;
@@ -394,7 +394,7 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   position: relative; width: 100%; height: 420px;
   border-radius: 20px; overflow: hidden;
   cursor: col-resize; user-select: none;
-  box-shadow: 0 20px 60px rgba(14,47,79,0.15);
+  box-shadow: 0 20px 60px rgba(0,30,90,0.15);
   touch-action: none;
 }
 .ba-after, .ba-before { position: absolute; inset: 0; height: 100%; }
@@ -459,7 +459,7 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   transition: all var(--transition);
   border: 1px solid transparent;
 }
-.step-card:hover { background: var(--brand-bg); transform: translateY(-3px); border-color: rgba(14,47,79,0.15); }
+.step-card:hover { background: var(--brand-bg); transform: translateY(-3px); border-color: rgba(0,30,90,0.15); }
 .step-num {
   font-family: var(--font-head); font-weight: 800; font-size: 2.5rem;
   color: var(--brand-pale); line-height: 1; margin-bottom: 20px;
@@ -486,10 +486,10 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   border-radius: var(--radius); padding: 36px 28px;
   transition: all var(--transition); position: relative;
 }
-.price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(14,47,79,0.25); }
+.price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(0,30,90,0.25); }
 .price-card.featured {
   border-color: var(--brand);
-  background: linear-gradient(145deg, #0E2F4F, #6FC7F1);
+  background: linear-gradient(145deg, #001E5A, #00A5FF);
 }
 .badge-hot {
   position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
@@ -570,7 +570,7 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   height: 3px; background: linear-gradient(90deg, var(--brand), var(--brand-light));
   transform: scaleX(0); transition: transform 0.4s ease;
 }
-.cible:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(14,47,79,0.2); }
+.cible:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(0,30,90,0.2); }
 .cible:hover::before { transform: scaleX(1); }
 .cible-label {
   font-family: var(--font-head); font-weight: 700; font-size: 0.72rem;
@@ -600,7 +600,7 @@ section { padding: 96px 6%; scroll-margin-top: 92px; }
   font-family: var(--font-head); font-weight: 600; font-size: 0.78rem;
   padding: 8px 16px; border-radius: 50px; transition: all var(--transition); cursor: default;
   text-decoration: none; display: inline-block;
-  border: 1px solid rgba(14,47,79,0.15);
+  border: 1px solid rgba(0,30,90,0.15);
 }
 a.pill { cursor: pointer; }
 .pill.main { background: var(--brand); color: white; border-color: var(--brand); }
@@ -612,7 +612,7 @@ a.pill { cursor: pointer; }
 .avis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .avis-skeleton {
   min-height: 200px;
-  background: linear-gradient(90deg, #DFF5FF 25%, #b8dcf2 50%, #DFF5FF 75%);
+  background: linear-gradient(90deg, #E0F3FF 25%, #b8dcf2 50%, #E0F3FF 75%);
   background-size: 200% 100%;
   animation: shimmer 1.6s infinite;
   border-radius: var(--radius);
@@ -623,7 +623,7 @@ a.pill { cursor: pointer; }
   background: white; border-radius: var(--radius); padding: 32px;
   border: 1.5px solid var(--border); transition: all var(--transition);
 }
-.avis:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(14,47,79,0.2); }
+.avis:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(0,30,90,0.2); }
 .stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 16px; }
 .avis-text {
   font-size: 0.88rem; color: var(--text); line-height: 1.75;
@@ -669,14 +669,14 @@ a.pill { cursor: pointer; }
 
 /* CTA */
 #contact {
-  background: linear-gradient(135deg, #081d32 0%, #0E2F4F 50%, #1a4a6e 100%);
+  background: linear-gradient(135deg, #000D33 0%, #001E5A 50%, #1a4a6e 100%);
   text-align: center; padding: 110px 6%;
   position: relative; overflow: hidden;
 }
 #contact::before {
   content: ''; position: absolute;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(14,47,79,0.14), transparent 70%);
+  background: radial-gradient(circle, rgba(0,30,90,0.14), transparent 70%);
   top: -200px; right: -200px; pointer-events: none;
 }
 #contact .s-title { color: white; }
@@ -734,7 +734,7 @@ a.pill { cursor: pointer; }
 .mention-block em { font-size: 0.8rem; color: #9ca3af; }
 
 /* FOOTER */
-footer { background: #0E2F4F; padding: 48px 6% 28px; }
+footer { background: #001E5A; padding: 48px 6% 28px; }
 .footer-inner {
   display: flex; justify-content: space-between;
   align-items: flex-start; flex-wrap: wrap; gap: 28px;
@@ -779,10 +779,10 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
   width: 54px; height: 54px;
   background: linear-gradient(135deg, var(--brand), var(--brand-light));
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(14,47,79,0.45); cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,30,90,0.45); cursor: pointer;
   border: none; transition: all var(--transition);
 }
-.diag-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(14,47,79,0.6); }
+.diag-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(0,30,90,0.6); }
 .diag-fab svg { width: 24px; height: 24px; fill: white; }
 .diag-fab-badge {
   position: absolute; top: -4px; right: -4px;
@@ -804,7 +804,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
   position: fixed; bottom: 88px; right: 24px; z-index: 91;
   width: 320px; max-width: calc(100vw - 48px);
   background: white; border-radius: var(--radius);
-  box-shadow: 0 16px 56px rgba(14,47,79,0.14), 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 16px 56px rgba(0,30,90,0.14), 0 4px 16px rgba(0,0,0,0.08);
   overflow: hidden; transform-origin: bottom right;
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.4,0,0.2,1);
 }
@@ -869,7 +869,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
 .diag-bubble-hint {
   position: fixed; bottom: 88px; right: 88px; z-index: 91;
   background: white; padding: 8px 14px; border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(14,47,79,0.15);
+  box-shadow: 0 4px 20px rgba(0,30,90,0.15);
   font-size: 0.78rem; color: var(--text); font-weight: 500; white-space: nowrap;
   pointer-events: none;
   animation: diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 2s both;
@@ -917,7 +917,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
   #nav .nav-links.open {
     display: flex; flex-direction: column; position: fixed;
     top: 82px; left: 8px; right: 8px; z-index: 999;
-    background: rgba(14,47,79,0.97); padding: 20px 20px 28px; gap: 16px;
+    background: rgba(0,30,90,0.97); padding: 20px 20px 28px; gap: 16px;
     border-radius: 16px;
     backdrop-filter: blur(24px);
     box-shadow: 0 12px 32px rgba(0,0,0,0.35);
@@ -981,7 +981,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
 .hero-form input::placeholder { color: rgba(255,255,255,0.4); }
 .hero-form input:focus,
 .hero-form select:focus {
-  border-color: rgba(14,47,79,0.7);
+  border-color: rgba(0,30,90,0.7);
   background: rgba(255,255,255,0.13);
 }
 .hero-form select {
@@ -993,7 +993,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
   background-color: rgba(255,255,255,0.09);
   padding-right: 36px;
 }
-.hero-form select option { background: #0E2F4F; color: #fff; }
+.hero-form select option { background: #001E5A; color: #fff; }
 .hero-form-submit {
   grid-column: 1 / -1;
   background: var(--green);
@@ -1393,7 +1393,7 @@ function gtag_report_conversion(url) {
   <div class="problems">
     <article class="prob-card fade-up">
       <div class="prob-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0E2F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#001E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
       </div>
       <h3>Mauvaise odeur de moisi</h3>
       <p>Moisissures et bactéries développées sur l'évaporateur et dans le bac de condensat.</p>
@@ -1401,7 +1401,7 @@ function gtag_report_conversion(url) {
     </article>
     <article class="prob-card fade-up d1">
       <div class="prob-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0E2F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#001E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
       </div>
       <h3>Allergies aggravées</h3>
       <p>Filtres encrassés — spores, allergènes et poussières diffusés directement dans l'air ambiant.</p>
@@ -1409,7 +1409,7 @@ function gtag_report_conversion(url) {
     </article>
     <article class="prob-card fade-up d2">
       <div class="prob-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0E2F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#001E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
       </div>
       <h3>Plus assez de froid</h3>
       <p>Un évaporateur encrassé perd jusqu'à 40% de ses capacités de refroidissement.</p>
@@ -1417,7 +1417,7 @@ function gtag_report_conversion(url) {
     </article>
     <article class="prob-card fade-up">
       <div class="prob-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0E2F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#001E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
       </div>
       <h3>Climatisation qui coule</h3>
       <p>Le bac de condensat est bouché — l'eau ne s'évacue plus et déborde sur vos murs.</p>
@@ -1425,7 +1425,7 @@ function gtag_report_conversion(url) {
     </article>
     <article class="prob-card fade-up d1">
       <div class="prob-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0E2F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#001E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
       <h3>Surconsommation électrique</h3>
       <p>Une clim encrassée consomme jusqu'à 30% d'énergie en plus pour produire le même froid.</p>
@@ -1433,7 +1433,7 @@ function gtag_report_conversion(url) {
     </article>
     <article class="prob-card fade-up d2">
       <div class="prob-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0E2F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#001E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
       <h3>Bactéries & légionelles</h3>
       <p>Les canalisations humides d'une clim non entretenue sont un terrain idéal pour les pathogènes.</p>
