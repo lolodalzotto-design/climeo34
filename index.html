@@ -188,22 +188,14 @@ body {
   box-shadow: 0 4px 28px rgba(14,47,79,0.12), 0 1px 4px rgba(0,0,0,0.06);
   backdrop-filter: blur(16px);
 }
-.nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; }
-.nav-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-.nav-brand-name {
-  font-family: var(--font-head); font-weight: 800; font-size: 1.1rem;
-  color: rgba(255,255,255,0.95); letter-spacing: -0.02em;
-  transition: color var(--transition);
+.nav-logo {
+  text-decoration: none; display: flex; align-items: center;
+  background: rgba(255,255,255,0.92); border-radius: 10px;
+  padding: 5px 14px; transition: background var(--transition), box-shadow var(--transition);
+  box-shadow: 0 1px 6px rgba(14,47,79,0.10);
 }
-.nav-brand-name span { color: var(--brand-light); font-weight: 900; }
-#nav.scrolled .nav-brand-name { color: var(--text); }
-#nav.scrolled .nav-brand-name span { color: var(--brand); }
-.nav-brand-tagline {
-  font-family: var(--font-body); font-style: italic; font-size: 0.65rem;
-  color: rgba(100,230,140,0.85); letter-spacing: 0.02em; margin-top: 1px;
-  transition: color var(--transition);
-}
-#nav.scrolled .nav-brand-tagline { color: var(--cta); }
+#nav.scrolled .nav-logo { background: transparent; box-shadow: none; padding: 5px 0; }
+.nav-logo img { display: block; height: 38px; width: auto; }
 #nav .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 #nav .nav-links a {
   font-family: var(--font-head); font-weight: 600; font-size: 0.8rem;
@@ -1202,18 +1194,10 @@ function gtag_report_conversion(url) {
 <!-- NAV -->
 <nav id="nav" role="navigation" aria-label="Navigation principale">
   <a href="#" class="nav-logo" aria-label="Climeo34 — Nettoyage climatisation Montpellier">
-    <picture>
-      <source srcset="icone-climeo34-nettoyage-climatisation.webp" type="image/webp">
-      <img src="icone-climeo34-nettoyage-climatisation.png"
-           alt="Flocon logo Climeo34 nettoyage climatisation Montpellier Hérault"
-           height="52" width="52"
-           style="display:block; border-radius:8px; background:rgba(255,255,255,0.9);"
-           fetchpriority="high">
-    </picture>
-    <div class="nav-brand-text">
-      <span class="nav-brand-name">Climeo<span>34</span></span>
-      <span class="nav-brand-tagline">Respirez la différence</span>
-    </div>
+    <img src="climeo34-logo-horizontal.png"
+         alt="Climeo34 — Nettoyage et entretien climatisation Montpellier Hérault"
+         height="38"
+         fetchpriority="high">
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#avant-apres">Avant / Après</a></li>
