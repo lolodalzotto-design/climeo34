@@ -741,8 +741,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
   padding-bottom: 32px; margin-bottom: 28px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.footer-brand picture { display: block; margin-bottom: 16px; }
-.footer-brand img { height: 64px; width: 64px; display: block; }
+.footer-brand-logo { display: block; margin-bottom: 16px; height: 32px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
 .footer-brand p { font-size: 0.78rem; color: rgba(255,255,255,0.3); line-height: 1.7; max-width: 280px; font-weight: 300; }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
 .footer-nav a {
@@ -1767,14 +1766,10 @@ function gtag_report_conversion(url) {
 <footer role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
-      <picture>
-        <source srcset="icone-climeo34-nettoyage-climatisation.webp" type="image/webp">
-        <img src="icone-climeo34-nettoyage-climatisation.png"
-             alt="Icône Climeo34 — Nettoyage désinfection climatisation Montpellier Hérault 34"
-             height="64" width="64"
-             loading="lazy"
-             style="display:block; border-radius:10px; background:rgba(255,255,255,0.92); padding:6px;">
-      </picture>
+      <img src="climeo34-logo-horizontal.png"
+           alt="Climeo34 — Nettoyage désinfection climatisation Montpellier Hérault 34"
+           height="32" loading="lazy"
+           class="footer-brand-logo">
       <p>Nettoyage & désinfection climatisation<br>Hérault (34) — 06 03 25 76 79</p>
       <div class="footer-social">
         <a href="https://www.instagram.com/climeo34?igsh=MXZpZ2MwdHA1YWgzOQ==" target="_blank" rel="noopener" aria-label="Instagram Climeo34">
