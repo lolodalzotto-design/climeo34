@@ -172,7 +172,7 @@ body {
   position: fixed;
   top: 12px; left: 12px; right: 12px;
   z-index: 1000;
-  height: 176px;
+  height: 116px;
   border-radius: 20px;
   padding: 0 24px;
   display: flex; align-items: center; justify-content: space-between;
@@ -189,6 +189,7 @@ body {
   backdrop-filter: blur(16px);
 }
 .nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo-clip { overflow: hidden; height: 100px; display: flex; align-items: center; }
 .nav-logo img {
   display: block; height: 156px; width: auto;
   filter: brightness(0) invert(1);
@@ -912,7 +913,7 @@ footer { background: #0E2F4F; padding: 48px 6% 28px; }
   .problems { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  #nav { padding: 0 18px; height: 170px; top: 8px; left: 8px; right: 8px; border-radius: 16px; }
+  #nav { padding: 0 18px; height: 116px; top: 8px; left: 8px; right: 8px; border-radius: 16px; }
   #nav .nav-links { display: none; }
   .nav-burger { display: flex; }
   #nav .nav-links.open {
@@ -1193,10 +1194,12 @@ function gtag_report_conversion(url) {
 <!-- NAV -->
 <nav id="nav" role="navigation" aria-label="Navigation principale">
   <a href="#" class="nav-logo" aria-label="Climeo34 — Nettoyage climatisation Montpellier">
-    <img src="climeo34-logo-horizontal.png"
-         alt="Climeo34 — Nettoyage et entretien climatisation Montpellier Hérault"
-         height="38"
-         fetchpriority="high">
+    <span class="nav-logo-clip">
+      <img src="climeo34-logo-horizontal.png"
+           alt="Climeo34 — Nettoyage et entretien climatisation Montpellier Hérault"
+           height="156"
+           fetchpriority="high">
+    </span>
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#avant-apres">Avant / Après</a></li>
