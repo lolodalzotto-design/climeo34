@@ -188,14 +188,13 @@ body {
   box-shadow: 0 4px 28px rgba(14,47,79,0.12), 0 1px 4px rgba(0,0,0,0.06);
   backdrop-filter: blur(16px);
 }
-.nav-logo {
-  text-decoration: none; display: flex; align-items: center;
-  background: rgba(255,255,255,0.92); border-radius: 10px;
-  padding: 5px 14px; transition: background var(--transition), box-shadow var(--transition);
-  box-shadow: 0 1px 6px rgba(14,47,79,0.10);
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo img {
+  display: block; height: 38px; width: auto;
+  filter: brightness(0) invert(1);
+  transition: filter var(--transition);
 }
-#nav.scrolled .nav-logo { background: transparent; box-shadow: none; padding: 5px 0; }
-.nav-logo img { display: block; height: 38px; width: auto; }
+#nav.scrolled .nav-logo img { filter: none; }
 #nav .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 #nav .nav-links a {
   font-family: var(--font-head); font-weight: 600; font-size: 0.8rem;
