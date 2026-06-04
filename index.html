@@ -1290,16 +1290,21 @@ section { position: relative; }
   display: none;
 }
 @media (max-width: 768px) {
+  /* Espace sous le contenu pour que la barre ne cache rien */
+  body { padding-bottom: 76px; }
+
   #mobile-cta-bar {
     display: flex;
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    z-index: 8000;
-    background: rgba(0,14,45,0.97);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 10px 12px max(10px, env(safe-area-inset-bottom)) 12px;
-    gap: 10px;
+    z-index: 9990;
+    background: rgba(0,14,45,0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 10px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    gap: 8px;
   }
   #mobile-cta-bar.hidden { display: none !important; }
   .mob-cta-call, .mob-cta-wa {
@@ -1307,19 +1312,31 @@ section { position: relative; }
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 13px 10px;
-    border-radius: 12px;
+    gap: 6px;
+    padding: 12px 6px;
+    border-radius: 10px;
     text-decoration: none;
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     color: #fff;
+    white-space: nowrap;
     transition: opacity 0.2s;
+    min-width: 0;
+    overflow: hidden;
   }
-  .mob-cta-call:active, .mob-cta-wa:active { opacity: 0.8; }
+  .mob-cta-call:active, .mob-cta-wa:active { opacity: 0.75; }
   .mob-cta-call { background: var(--brand); }
   .mob-cta-wa { background: #25D366; }
+  /* Décaler le cookie banner au-dessus de la barre */
+  #cookie-banner {
+    bottom: 76px !important;
+    border-radius: 14px !important;
+  }
+  /* Décaler le bouton WhatsApp flottant */
+  .wa-btn { bottom: 88px !important; }
+  /* Décaler le diagnostic FAB */
+  .diag-fab { bottom: 88px !important; }
 }
 
 /* ─── TARIFS — lien téléphone discret ─── */
@@ -1549,7 +1566,7 @@ function gtag_report_conversion(url) {
           <input type="checkbox" name="botcheck" style="display:none">
           <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
           <input type="text" name="ville" placeholder="Votre ville ou code postal *" required autocomplete="postal-code">
-          <input type="text" name="prenom" placeholder="Prénom *" required autocomplete="given-name">
+          <input type="text" name="nom" placeholder="Nom *" required autocomplete="family-name">
           <button type="submit" class="hero-form-submit" id="hero-form-btn">Recevoir mon devis gratuit</button>
         </form>
         <div class="hero-form-success" id="hero-form-success">
