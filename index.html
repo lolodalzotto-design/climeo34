@@ -2826,28 +2826,28 @@ hoverEls.forEach(btn => {
     telInput.type        = 'tel';
     telInput.placeholder = 'Téléphone *';
 
-    var prenomInput = document.createElement('input');
-    prenomInput.type        = 'text';
-    prenomInput.placeholder = 'Prénom *';
+    var nomInput = document.createElement('input');
+    nomInput.type        = 'text';
+    nomInput.placeholder = 'Nom *';
 
     var submitBtn = document.createElement('button');
     submitBtn.className   = 'diag-submit-btn';
     submitBtn.textContent = 'Recevoir mon devis gratuit →';
 
     submitBtn.addEventListener('click', function() {
-      var tel    = telInput.value.trim();
-      var prenom = prenomInput.value.trim();
+      var tel = telInput.value.trim();
+      var nom = nomInput.value.trim();
       telInput.style.borderColor = '';
-      prenomInput.style.borderColor = '';
-      if (!tel)    { telInput.style.borderColor    = '#e53e3e'; telInput.focus();    return; }
-      if (!prenom) { prenomInput.style.borderColor = '#e53e3e'; prenomInput.focus(); return; }
+      nomInput.style.borderColor = '';
+      if (!tel) { telInput.style.borderColor = '#e53e3e'; telInput.focus(); return; }
+      if (!nom) { nomInput.style.borderColor = '#e53e3e'; nomInput.focus(); return; }
       submitBtn.textContent = 'Envoi en cours…';
       submitBtn.disabled    = true;
-      submitDiag('', prenom, '', tel, '', submitBtn);
+      submitDiag(nom, '', '', tel, '', submitBtn);
     });
 
     form.appendChild(telInput);
-    form.appendChild(prenomInput);
+    form.appendChild(nomInput);
     form.appendChild(submitBtn);
     body.appendChild(form);
   }
