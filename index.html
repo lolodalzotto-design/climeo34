@@ -796,17 +796,25 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 /* DIAGNOSTIC QUIZ BUBBLE */
 .diag-fab {
   position: fixed; bottom: 24px; right: 24px; z-index: 91;
-  width: 54px; height: 54px;
+  height: 50px;
+  width: auto;
+  padding: 0 20px 0 14px;
+  gap: 9px;
   background: linear-gradient(135deg, var(--brand), var(--brand-light));
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  border-radius: 50px; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 20px rgba(0,30,90,0.45); cursor: pointer;
   border: none; transition: all var(--transition);
+  white-space: nowrap;
 }
-.diag-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(0,30,90,0.6); }
-.diag-fab svg { width: 24px; height: 24px; fill: white; }
+.diag-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,30,90,0.55); }
+.diag-fab svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+.diag-fab-label {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.85rem;
+  color: white; letter-spacing: 0.01em;
+}
 .diag-fab-badge {
-  position: absolute; top: -4px; right: -4px;
-  width: 18px; height: 18px; background: #EF4444; border-radius: 50%;
+  position: absolute; top: -5px; right: -5px;
+  width: 20px; height: 20px; background: #EF4444; border-radius: 50%;
   font-size: 0.65rem; font-weight: 700; color: white;
   display: flex; align-items: center; justify-content: center;
   border: 2px solid white;
@@ -900,8 +908,9 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 }
 @media (max-width: 480px) {
   .diag-panel { left: 12px; right: 12px; width: auto; max-width: none; bottom: 82px; }
-  .diag-fab { right: 16px; bottom: 16px; }
-  .diag-bubble-hint { right: 82px; bottom: 22px; }
+  .diag-fab { right: 12px; bottom: 16px; padding: 0 14px 0 12px; gap: 7px; height: 46px; }
+  .diag-fab-label { font-size: 0.78rem; }
+  .diag-bubble-hint { right: auto; left: 12px; bottom: 22px; }
 }
 
 /* ANIMATIONS */
@@ -2178,6 +2187,7 @@ function gtag_report_conversion(url) {
 
 <button class="diag-fab" id="diag-fab" aria-label="Estimation climatisation rapide">
   <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  <span class="diag-fab-label">Devis en 2 min</span>
   <span class="diag-fab-badge" id="diag-fab-badge">1</span>
 </button>
 
@@ -2773,69 +2783,71 @@ hoverEls.forEach(btn => {
     }
   }
 
+  function getEstimate() {
+    var souhait = '';
+    var nbSplits = 0;
+    answers.forEach(function(a) {
+      if (a.key === 'souhait') souhait = a.value;
+      if (a.key === 'nb_splits' || a.key === 'nb_sorties') nbSplits = parseInt(a.value) || 0;
+    });
+    if (souhait !== 'Entretenir ma climatisation') return null;
+    if (nbSplits === 1) return { label: '1 split', price: '80€ TTC' };
+    if (nbSplits === 2) return { label: '2 splits', price: '140€ TTC' };
+    if (nbSplits === 3) return { label: '3 splits', price: '190€ TTC' };
+    if (nbSplits >= 4)  return { label: nbSplits + ' splits', price: 'Sur devis (tarif dégressif)' };
+    return null;
+  }
+
   function renderEmailForm() {
     updateProgress(MAX_STEPS);
     body.innerHTML = '';
 
+    // Bloc estimation de prix
+    var estimate = getEstimate();
+    if (estimate) {
+      var priceBox = document.createElement('div');
+      priceBox.style.cssText = 'background:var(--brand-bg);border-radius:10px;padding:12px 14px;margin-bottom:14px;text-align:center;';
+      priceBox.innerHTML =
+        '<p style="font-size:0.72rem;color:var(--gray-text);margin-bottom:2px;">Votre estimation pour ' + estimate.label + '</p>' +
+        '<p style="font-size:1.4rem;font-weight:800;color:var(--brand);font-family:var(--font-head);line-height:1.1;">' + estimate.price + '</p>' +
+        '<p style="font-size:0.7rem;color:var(--gray-text);margin-top:3px;">Tout inclus · Résultat garanti</p>';
+      body.appendChild(priceBox);
+    }
+
     var qEl = document.createElement('p');
     qEl.className   = 'diag-question';
-    qEl.textContent = 'Vos coordonnées :';
+    qEl.textContent = 'Où vous rappeler ?';
     body.appendChild(qEl);
 
-    var intro = document.createElement('p');
-    intro.style.cssText = 'font-size:0.78rem;color:var(--gray-text);margin:-4px 0 12px;line-height:1.5;';
-    intro.textContent   = 'Estimation gratuite par retour sous 24h.';
-    body.appendChild(intro);
-
-    var form       = document.createElement('div');
+    var form = document.createElement('div');
     form.className = 'diag-email-form';
 
-    var nomInput        = document.createElement('input');
-    nomInput.type         = 'text';
-    nomInput.placeholder  = 'Nom *';
+    var telInput = document.createElement('input');
+    telInput.type        = 'tel';
+    telInput.placeholder = 'Téléphone *';
 
-    var prenomInput     = document.createElement('input');
-    prenomInput.type      = 'text';
+    var prenomInput = document.createElement('input');
+    prenomInput.type        = 'text';
     prenomInput.placeholder = 'Prénom *';
 
-    var adresseInput    = document.createElement('input');
-    adresseInput.type     = 'text';
-    adresseInput.placeholder = 'Adresse *';
-
-    var telInput        = document.createElement('input');
-    telInput.type         = 'tel';
-    telInput.placeholder  = 'Téléphone *';
-
-    var emailInput      = document.createElement('input');
-    emailInput.type       = 'email';
-    emailInput.placeholder = 'E-mail *';
-
-    var submitBtn       = document.createElement('button');
+    var submitBtn = document.createElement('button');
     submitBtn.className   = 'diag-submit-btn';
-    submitBtn.textContent = 'Recevoir mon estimation gratuite →';
+    submitBtn.textContent = 'Recevoir mon devis gratuit →';
 
     submitBtn.addEventListener('click', function() {
-      var nom     = nomInput.value.trim();
-      var prenom  = prenomInput.value.trim();
-      var adresse = adresseInput.value.trim();
-      var tel     = telInput.value.trim();
-      var email   = emailInput.value.trim();
-      [nomInput, prenomInput, adresseInput, telInput, emailInput].forEach(function(i) { i.style.borderColor = ''; });
-      if (!nom)     { nomInput.style.borderColor     = '#e53e3e'; nomInput.focus();     return; }
-      if (!prenom)  { prenomInput.style.borderColor  = '#e53e3e'; prenomInput.focus();  return; }
-      if (!adresse) { adresseInput.style.borderColor = '#e53e3e'; adresseInput.focus(); return; }
-      if (!tel)     { telInput.style.borderColor     = '#e53e3e'; telInput.focus();     return; }
-      if (!email || !email.includes('@')) { emailInput.style.borderColor = '#e53e3e'; emailInput.focus(); return; }
+      var tel    = telInput.value.trim();
+      var prenom = prenomInput.value.trim();
+      telInput.style.borderColor = '';
+      prenomInput.style.borderColor = '';
+      if (!tel)    { telInput.style.borderColor    = '#e53e3e'; telInput.focus();    return; }
+      if (!prenom) { prenomInput.style.borderColor = '#e53e3e'; prenomInput.focus(); return; }
       submitBtn.textContent = 'Envoi en cours…';
       submitBtn.disabled    = true;
-      submitDiag(nom, prenom, adresse, tel, email, submitBtn);
+      submitDiag('', prenom, '', tel, '', submitBtn);
     });
 
-    form.appendChild(nomInput);
-    form.appendChild(prenomInput);
-    form.appendChild(adresseInput);
     form.appendChild(telInput);
-    form.appendChild(emailInput);
+    form.appendChild(prenomInput);
     form.appendChild(submitBtn);
     body.appendChild(form);
   }
