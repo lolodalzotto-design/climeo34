@@ -1181,6 +1181,260 @@ section { position: relative; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 
+/* ─── HERO 2-COLONNES (desktop) ─── */
+.hero-inner {
+  max-width: 1240px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 56px !important;
+}
+.hero-content { flex: 1; min-width: 0; }
+.hero-image-wrap {
+  flex: 0 0 400px;
+  width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+  position: relative;
+}
+.hero-image-wrap img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 1050px) {
+  .hero-image-wrap { flex: 0 0 320px; width: 320px; }
+  .hero-image-wrap img { height: 380px; }
+}
+@media (max-width: 900px) {
+  .hero-inner { flex-direction: column !important; gap: 36px !important; }
+  .hero-image-wrap { flex: none; width: 100%; max-width: 520px; margin: 0 auto; }
+  .hero-image-wrap img { height: 280px; }
+}
+
+/* ─── HERO EYEBROW — meilleure visibilité ─── */
+#hero .hero-eyebrow span {
+  color: rgba(255,255,255,0.92) !important;
+  background: rgba(255,107,53,0.18);
+  border: 1px solid rgba(255,107,53,0.4);
+  padding: 4px 12px;
+  border-radius: 50px;
+  letter-spacing: 0.06em;
+}
+#hero .hero-dot {
+  background: #ff6b35 !important;
+  box-shadow: 0 0 0 0 rgba(255,107,53,0.5) !important;
+  animation: dotPulse 1.5s infinite !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+@keyframes dotPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,107,53,0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(255,107,53,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+}
+
+/* ─── HERO SOCIAL PROOF ─── */
+.hero-social-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50px;
+  padding: 8px 16px 8px 10px;
+  text-decoration: none;
+  margin-bottom: 28px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.hero-social-proof:hover { background: rgba(255,255,255,0.14); }
+.hero-social-proof span {
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.88);
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .hero-social-proof span { font-size: 0.72rem; white-space: normal; }
+}
+
+/* ─── HERO FORM — 3 champs ─── */
+.hero-form {
+  grid-template-columns: 1fr !important;
+}
+
+/* ─── MOBILE STICKY CTA BAR ─── */
+#mobile-cta-bar {
+  display: none;
+}
+@media (max-width: 768px) {
+  #mobile-cta-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 8000;
+    background: rgba(0,14,45,0.97);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 12px max(10px, env(safe-area-inset-bottom)) 12px;
+    gap: 10px;
+  }
+  #mobile-cta-bar.hidden { display: none !important; }
+  .mob-cta-call, .mob-cta-wa {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #fff;
+    transition: opacity 0.2s;
+  }
+  .mob-cta-call:active, .mob-cta-wa:active { opacity: 0.8; }
+  .mob-cta-call { background: var(--brand); }
+  .mob-cta-wa { background: #25D366; }
+}
+
+/* ─── TARIFS — lien téléphone discret ─── */
+.price-tel-link {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.price-tel-link:hover { color: var(--brand); }
+
+/* ─── ANIMATIONS — délais réduits ─── */
+.fade-up.d1 { transition-delay: 0.08s !important; }
+.fade-up.d2 { transition-delay: 0.13s !important; }
+.fade-up.d3 { transition-delay: 0.15s !important; }
+.fade-up.d4 { transition-delay: 0.15s !important; }
+.fade-up { transition-duration: 0.5s !important; }
+
+/* Sur mobile : toutes les animations désactivées */
+@media (max-width: 768px) {
+  .fade-up, .fade-left, .fade-right, .scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── EXIT INTENT POPUP ─── */
+#exit-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+#exit-popup-overlay.open { display: flex; }
+#exit-popup {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 32px 28px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+  position: relative;
+  animation: popIn 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+#exit-popup .ep-close {
+  position: absolute; top: 14px; right: 16px;
+  background: none; border: none; font-size: 1.4rem; cursor: pointer;
+  color: var(--text-muted); line-height: 1; padding: 4px;
+}
+#exit-popup h3 {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: 1.35rem; color: var(--navy);
+  margin-bottom: 6px;
+}
+#exit-popup p {
+  font-size: 0.9rem; color: var(--text-muted);
+  margin-bottom: 20px; line-height: 1.6;
+}
+#exit-popup-form { display: flex; flex-direction: column; gap: 10px; }
+#exit-popup-form input {
+  border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 12px 14px; font-size: 0.9rem; font-family: var(--font-body);
+  outline: none; transition: border-color 0.2s;
+  color: var(--text);
+}
+#exit-popup-form input:focus { border-color: var(--brand); }
+#exit-popup-form button {
+  background: var(--cta); color: #fff; border: none;
+  border-radius: 50px; padding: 14px;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; transition: background 0.2s;
+  margin-top: 4px;
+}
+#exit-popup-form button:hover { background: var(--cta-hover); }
+.ep-no {
+  display: block; text-align: center; margin-top: 12px;
+  font-size: 0.8rem; color: var(--text-muted);
+  cursor: pointer; text-decoration: underline;
+}
+#exit-popup-success {
+  display: none; text-align: center; padding: 12px 0;
+}
+#exit-popup-success p { font-weight: 700; color: var(--navy); font-family: var(--font-head); }
+
+/* ─── À PROPOS ─── */
+#apropos {
+  background: var(--bg-alt);
+}
+.apropos-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.apropos-text h2 {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--navy); margin-bottom: 16px;
+}
+.apropos-text p {
+  font-size: 0.97rem; color: var(--gray-text);
+  line-height: 1.8; margin-bottom: 14px;
+}
+.apropos-img {
+  border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.apropos-img img { width: 100%; height: 380px; object-fit: cover; display: block; }
+.apropos-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.apropos-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--brand-bg); color: var(--brand);
+  border-radius: 50px; padding: 6px 14px;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.78rem;
+}
+@media (max-width: 768px) {
+  .apropos-inner { grid-template-columns: 1fr; gap: 28px; }
+  .apropos-img img { height: 260px; }
+}
+
 </style>
 <!-- Google Ads tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18153085489"></script>
@@ -1261,6 +1515,11 @@ function gtag_report_conversion(url) {
         tout l'Hérault — filtres, évaporateur, bac de condensat.
         <strong>Tarif entretien climatisation dès 80€ TTC. Résultat garanti.</strong>
       </p>
+      <!-- SOCIAL PROOF -->
+      <a class="hero-social-proof" href="https://www.google.com/maps/search/?api=1&query_place_id=ChIJodubwNeGWo0R8j-otvrAcW0" target="_blank" rel="noopener" aria-label="Voir nos avis Google">
+        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.1 33.9 29.5 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.9 20-21 0-1.4-.1-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3c-7.6 0-14.2 4.5-17.7 11.7z"/><path fill="#FBBC05" d="M24 45c5.4 0 10.3-1.8 14.1-4.9l-6.5-5.5C29.4 36.4 26.8 37 24 37c-5.4 0-10-3-12.1-7.4l-7 5.4C8.3 40.9 15.6 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-.9 2.5-2.6 4.6-4.8 6.1l6.5 5.5C41.1 36.9 45 31 45 24c0-1.4-.1-2.7-.5-4z"/></svg>
+        <span>⭐ 5/5 · 12 avis Google · Montpellier, Lattes, Palavas, Carnon…</span>
+      </a>
       <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
       <div class="hero-form-wrap" id="hero-form-wrap">
         <p class="hero-form-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:6px;opacity:0.85"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Recevoir mon devis gratuit — réponse sous 24h</p>
@@ -1270,6 +1529,7 @@ function gtag_report_conversion(url) {
           <input type="hidden" name="from_name" value="Climeo34">
           <input type="checkbox" name="botcheck" style="display:none">
           <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
+          <input type="text" name="ville" placeholder="Votre ville ou code postal *" required autocomplete="postal-code">
           <input type="text" name="prenom" placeholder="Prénom *" required autocomplete="given-name">
           <button type="submit" class="hero-form-submit" id="hero-form-btn">Recevoir mon devis gratuit</button>
         </form>
@@ -1284,6 +1544,15 @@ function gtag_report_conversion(url) {
         <div class="kpi"><div class="kpi-val">99,9%</div><div class="kpi-label">Bactéries & champignons éliminés</div></div>
         <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
       </div>
+    </div>
+    <!-- IMAGE HERO — technicien en intervention -->
+    <div class="hero-image-wrap" aria-hidden="true">
+      <picture>
+        <source srcset="Homme-Nettoie-climatiseur.webp" type="image/webp">
+        <img src="Homme-Nettoie-climatiseur.jpg"
+             alt="Technicien Climeo34 en intervention nettoyage climatisation Montpellier"
+             width="400" height="480" fetchpriority="high">
+      </picture>
     </div>
   </div>
   <div class="hero-wave" aria-hidden="true">
@@ -1493,6 +1762,33 @@ function gtag_report_conversion(url) {
   </div>
 </section>
 
+<!-- À PROPOS -->
+<section id="apropos" aria-labelledby="t-apropos">
+  <div class="apropos-inner">
+    <div class="apropos-text fade-up">
+      <span class="s-tag">Votre technicien</span>
+      <h2 id="t-apropos">Laurent, technicien climatisation Montpellier & Hérault</h2>
+      <p>Passionné par la qualité de l'air intérieur, Laurent intervient depuis plusieurs années sur Montpellier et tout le département de l'Hérault (34). Formé aux techniques de nettoyage haute pression et de désinfection bactéricide, il traite chaque climatisation comme si c'était la sienne.</p>
+      <p>Son engagement : vous fournir un résultat garanti, des produits certifiés sûrs pour vos enfants et vos animaux, et une attestation d'entretien fournie sur demande.</p>
+      <div class="apropos-badges">
+        <span class="apropos-badge">✅ Intervention rapide 48h</span>
+        <span class="apropos-badge">🌿 Produits certifiés</span>
+        <span class="apropos-badge">📋 Attestation incluse</span>
+        <span class="apropos-badge">🏡 Hérault (34)</span>
+      </div>
+    </div>
+    <div class="apropos-img fade-up d1">
+      <!-- Remplacer par une photo du technicien en tenue de travail -->
+      <picture>
+        <source srcset="Homme-Nettoie-climatiseur.webp" type="image/webp">
+        <img src="Homme-Nettoie-climatiseur.jpg"
+             alt="Laurent, technicien Climeo34, en intervention nettoyage climatisation Montpellier"
+             width="480" height="380" loading="lazy">
+      </picture>
+    </div>
+  </div>
+</section>
+
 <!-- TARIFS -->
 <section id="tarifs" aria-labelledby="t-tarifs">
   <div class="centered">
@@ -1515,6 +1811,7 @@ function gtag_report_conversion(url) {
         <li>Test de fonctionnement</li>
       </ul>
       <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-book outline" target="_blank" rel="noopener">Réserver via WhatsApp</a>
+      <a href="tel:0603257679" class="price-tel-link">Ou appelez le 06 03 25 76 79</a>
     </article>
     <article class="price-card featured fade-up d1">
       <span class="badge-hot">Le plus demandé</span>
@@ -1530,6 +1827,7 @@ function gtag_report_conversion(url) {
         <li>Test de fonctionnement x2</li>
       </ul>
       <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-book" target="_blank" rel="noopener">Réserver via WhatsApp</a>
+      <a href="tel:0603257679" class="price-tel-link">Ou appelez le 06 03 25 76 79</a>
     </article>
     <article class="price-card fade-up d2">
       <h3 class="price-name">3 Splits</h3>
@@ -1544,6 +1842,7 @@ function gtag_report_conversion(url) {
         <li>Test de fonctionnement x3</li>
       </ul>
       <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-book outline" target="_blank" rel="noopener">Réserver via WhatsApp</a>
+      <a href="tel:0603257679" class="price-tel-link">Ou appelez le 06 03 25 76 79</a>
     </article>
     <article class="price-card fade-up d3">
       <h3 class="price-name">Sur devis</h3>
@@ -1558,6 +1857,7 @@ function gtag_report_conversion(url) {
         <li>Facture professionnelle</li>
       </ul>
       <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-book" target="_blank" rel="noopener">Demander un devis</a>
+      <a href="tel:0603257679" class="price-tel-link">Ou appelez le 06 03 25 76 79</a>
     </article>
   </div>
   <p class="pricing-note fade-up">Pour les locataires : l'entretien climatisation est généralement à votre charge selon le bail. Climeo34 vous délivre une attestation d'entretien sur demande, utile pour votre propriétaire ou votre assurance.</p>
@@ -1819,6 +2119,37 @@ function gtag_report_conversion(url) {
   </div>
 </footer>
 
+<!-- MOBILE STICKY CTA BAR -->
+<div id="mobile-cta-bar" role="complementary" aria-label="Appel ou WhatsApp rapide">
+  <a class="mob-cta-call" href="tel:0603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    📞 06 03 25 76 79
+  </a>
+  <a class="mob-cta-wa" href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.914 2C6.441 2 2 6.441 2 11.914c0 1.892.523 3.661 1.432 5.178L2 22l5.087-1.404C8.536 21.46 10.194 22 11.914 22 17.387 22 22 17.387 22 11.914 22 6.441 17.387 2 11.914 2z"/></svg>
+    💬 WhatsApp
+  </a>
+</div>
+
+<!-- EXIT INTENT POPUP -->
+<div id="exit-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="exit-popup-title">
+  <div id="exit-popup">
+    <button class="ep-close" id="ep-close-btn" aria-label="Fermer">✕</button>
+    <h3 id="exit-popup-title">Avant de partir — estimation en 2 min</h3>
+    <p>Réponse sous 24h, sans engagement. Intervention sur Montpellier & Hérault (34).</p>
+    <form id="exit-popup-form">
+      <input type="tel" name="telephone" placeholder="Votre téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
+      <input type="text" name="ville" placeholder="Votre ville *" required>
+      <button type="submit">Recevoir mon devis gratuit</button>
+    </form>
+    <div id="exit-popup-success">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+      <p>Merci ! Laurent vous rappelle sous 24h.</p>
+    </div>
+    <span class="ep-no" id="ep-no-btn">Non merci</span>
+  </div>
+</div>
+
 <!-- FLOATING WHATSAPP BUTTON -->
 <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="wa-btn" target="_blank" rel="noopener" aria-label="Contacter Climeo34 sur WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.914 2C6.441 2 2 6.441 2 11.914c0 1.892.523 3.661 1.432 5.178L2 22l5.087-1.404C8.536 21.46 10.194 22 11.914 22 17.387 22 22 17.387 22 11.914 22 6.441 17.387 2 11.914 2zm0 18.065c-1.677 0-3.235-.47-4.558-1.284l-.327-.194-3.019.832.848-3.094-.213-.342a8.12 8.12 0 0 1-1.264-4.269c0-4.498 3.659-8.157 8.157-8.157 4.498 0 8.157 3.659 8.157 8.157 0 4.498-3.659 8.157-8.157 8.157z"/></svg>
@@ -2011,6 +2342,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       if (resp.status === 'fulfilled' && resp.value.ok) {
         form.style.display = 'none';
         document.getElementById('hero-form-success').style.display = 'block';
+        localStorage.setItem('climeo34_form_done', '1');
         gtag('event', 'conversion', {'send_to': 'AW-18153085489/tsRgCPyp7q0cELG0iNBD'});
         return;
       }
@@ -2168,27 +2500,8 @@ import { animate } from "https://esm.sh/motion";
 
 const q = s => document.querySelector(s);
 
-const contentEls = [
-  [q('.hero-eyebrow'),    0.08],
-  [q('.hero-title'),      0.22],
-  [q('.hero-lead'),       0.38],
-  [q('.hero-actions'),    0.52],
-  [q('.hero-kpis'),       0.66],
-];
-const imgWrap = q('.hero-image-wrap');
+// Hero elements visible dès le premier rendu (LCP optimisé — pas d'animation bloquante)
 const ease = [0.22, 1, 0.36, 1];
-
-contentEls.forEach(([el]) => { if (el) el.style.opacity = '0'; });
-if (imgWrap) imgWrap.style.opacity = '0';
-
-contentEls.forEach(([el, delay]) => {
-  if (!el) return;
-  animate(el, { opacity: [0, 1], y: [26, 0] }, { duration: 0.72, delay, easing: ease });
-});
-
-if (imgWrap) {
-  animate(imgWrap, { opacity: [0, 1], x: [42, 0] }, { duration: 0.9, delay: 0.18, easing: ease });
-}
 
 const hoverEls = document.querySelectorAll('.btn-primary, .btn-ghost');
 hoverEls.forEach(btn => {
@@ -2199,6 +2512,84 @@ hoverEls.forEach(btn => {
     animate(btn, { scale: 1, y: 0 }, { duration: 0.25, easing: 'ease-out' })
   );
 });
+
+// ─── Mobile sticky CTA bar — masquer quand formulaire visible ────────────────
+(function() {
+  var bar = document.getElementById('mobile-cta-bar');
+  if (!bar) return;
+  var form = document.getElementById('hero-form-wrap');
+  if (!form) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      bar.classList.toggle('hidden', e.isIntersecting);
+    });
+  }, { threshold: 0.5 });
+  obs.observe(form);
+})();
+
+// ─── Exit Intent Popup ────────────────────────────────────────────────────────
+(function() {
+  var overlay = document.getElementById('exit-popup-overlay');
+  var closeBtn = document.getElementById('ep-close-btn');
+  var noBtn = document.getElementById('ep-no-btn');
+  var form = document.getElementById('exit-popup-form');
+  var success = document.getElementById('exit-popup-success');
+  if (!overlay) return;
+
+  var shown = false;
+  var formSubmitted = localStorage.getItem('climeo34_form_done') === '1';
+  if (formSubmitted) return;
+
+  function showPopup() {
+    if (shown || localStorage.getItem('climeo34_form_done') === '1') return;
+    shown = true;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function hidePopup() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Desktop: exit intent sur mouvement vers le haut
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY < 30) showPopup();
+  });
+
+  // Mobile: après 60s sans action
+  var mobileTimer = setTimeout(function() {
+    if (window.innerWidth < 768) showPopup();
+  }, 60000);
+
+  closeBtn && closeBtn.addEventListener('click', hidePopup);
+  noBtn && noBtn.addEventListener('click', hidePopup);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) hidePopup(); });
+
+  form && form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var data = new FormData(form);
+    var payload = {
+      access_key: '618df005-2b3e-4ec4-a780-db2b01f6923a',
+      subject: '🔔 Devis Climeo34 — Exit Intent',
+      from_name: 'Climeo34',
+      telephone: data.get('telephone'),
+      ville: data.get('ville'),
+      source: 'exit-popup'
+    };
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    localStorage.setItem('climeo34_form_done', '1');
+    form.style.display = 'none';
+    success.style.display = 'block';
+    setTimeout(hidePopup, 2800);
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', { 'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD' });
+    }
+  });
+})();
 
 // ─── Diagnostic Quiz Bubble (branched tree) ──────────────────────────────────
 (function() {
