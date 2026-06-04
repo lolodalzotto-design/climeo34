@@ -2794,7 +2794,7 @@ hoverEls.forEach(btn => {
     if (nbSplits === 1) return { label: '1 split', price: '80€ TTC' };
     if (nbSplits === 2) return { label: '2 splits', price: '140€ TTC' };
     if (nbSplits === 3) return { label: '3 splits', price: '190€ TTC' };
-    if (nbSplits >= 4)  return { label: nbSplits + ' splits', price: 'Sur devis (tarif dégressif)' };
+    if (nbSplits >= 4)  return { label: nbSplits + ' splits', price: (190 + (nbSplits - 3) * 50) + '€ TTC' };
     return null;
   }
 
