@@ -38,6 +38,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Page dépannage -->
+  <url>
+    <loc>https://climeo34.fr/depannage-clim-montpellier/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Blog -->
   <url>
     <loc>https://climeo34.fr/blog/</loc>
