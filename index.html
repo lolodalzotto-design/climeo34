@@ -2414,7 +2414,15 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       if (countEl && place.userRatingCount) countEl.textContent = place.userRatingCount;
 
       var rawReviews = place.reviews || [];
-      var reviews = rawReviews.filter(function(r){ return r.rating >= 4; }).slice(0, 6);
+      var reviews = rawReviews.filter(function(r){ return r.rating >= 4; });
+      reviews.sort(function(a, b) {
+        var na = ((a.authorAttribution && a.authorAttribution.displayName) || '').toLowerCase();
+        var nb = ((b.authorAttribution && b.authorAttribution.displayName) || '').toLowerCase();
+        if (na.startsWith('adrien')) return -1;
+        if (nb.startsWith('adrien')) return 1;
+        return 0;
+      });
+      reviews = reviews.slice(0, 6);
       if (!reviews.length) return;
 
       grid.innerHTML = reviews.map(function(r) {
