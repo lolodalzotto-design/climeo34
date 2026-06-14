@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nettoyage & Entretien Climatisation Montpellier | Climeo34 — Hérault (34)</title>
-<meta name="description" content="Nettoyage, entretien et désinfection climatisation à Montpellier et Hérault (34). Tarif entretien climatisation réversible dès 80€ TTC. Technicien certifié. Intervention sous 48h. Devis gratuit.">
+<meta name="description" content="Votre climatisation est-elle aussi encrassée que ça ? Climeo34 assure le nettoyage & désinfection professionnel de clim à Montpellier et dans tout l'Hérault (34). Dès 80€ TTC. Technicien certifié, intervention sous 48h. Devis gratuit.">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="nettoyage climatisation Montpellier, entretien climatisation Montpellier, désinfection clim Hérault, tarif entretien climatisation réversible, entretien climatisation locataire, prix entretien climatisation, nettoyage split Montpellier, technicien climatisation Hérault, Climeo34">
 <meta name="author" content="Climeo34">
@@ -75,6 +75,7 @@
 }
 </script>
 
+<link rel="preload" as="image" href="climatiseur-sale-avant-nettoyage.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1209,27 +1210,60 @@ section { position: relative; }
 }
 .hero-content { flex: 1; min-width: 0; }
 .hero-image-wrap {
-  flex: 0 0 400px;
-  width: 400px;
+  flex: 0 0 460px;
+  width: 460px;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+  box-shadow: 0 24px 72px rgba(0,0,0,0.45), 0 0 0 3px rgba(255,107,53,0.55);
   position: relative;
+  animation: heroImgPulse 3s ease-in-out infinite;
+}
+@keyframes heroImgPulse {
+  0%, 100% { box-shadow: 0 24px 72px rgba(0,0,0,0.45), 0 0 0 3px rgba(255,107,53,0.55); }
+  50%       { box-shadow: 0 24px 72px rgba(0,0,0,0.45), 0 0 0 6px rgba(255,107,53,0.28); }
 }
 .hero-image-wrap img {
   width: 100%;
-  height: 480px;
+  height: 490px;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
+.hero-img-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(220,38,38,0.92);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 50px;
+  z-index: 2;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+.hero-img-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%);
+  color: rgba(255,255,255,0.92);
+  font-size: 0.78rem;
+  padding: 28px 14px 12px;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
 @media (max-width: 1050px) {
-  .hero-image-wrap { flex: 0 0 320px; width: 320px; }
-  .hero-image-wrap img { height: 380px; }
+  .hero-image-wrap { flex: 0 0 340px; width: 340px; }
+  .hero-image-wrap img { height: 400px; }
 }
 @media (max-width: 900px) {
   .hero-inner { flex-direction: column !important; gap: 36px !important; }
   .hero-image-wrap { flex: none; width: 100%; max-width: 520px; margin: 0 auto; }
-  .hero-image-wrap img { height: 280px; }
+  .hero-image-wrap img { height: 260px; }
 }
 
 /* ─── HERO EYEBROW — meilleure visibilité ─── */
@@ -1593,13 +1627,17 @@ function gtag_report_conversion(url) {
         <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
       </div>
     </div>
-    <!-- IMAGE HERO — technicien en intervention -->
-    <div class="hero-image-wrap" aria-hidden="true">
+    <!-- IMAGE HERO — climatiseur encrassé avant entretien -->
+    <div class="hero-image-wrap">
+      <div class="hero-img-badge">⚠️ Clim <strong>non entretenue</strong></div>
       <picture>
-        <img src="Photo technicien .jpg"
-             alt="Technicien Climeo34 en intervention nettoyage climatisation Montpellier"
-             width="400" height="480" fetchpriority="high">
+        <source srcset="climatiseur-sale-avant-nettoyage.webp" type="image/webp">
+        <img src="climatiseur-sale-avant-nettoyage.jpg"
+             alt="Climatiseur encrassé avec moisissures et poussières — avant nettoyage Climeo34 Montpellier"
+             width="800" height="540" fetchpriority="high"
+             decoding="async">
       </picture>
+      <div class="hero-img-caption">👆 La réalité de 9 clims sur 10 à Montpellier</div>
     </div>
   </div>
   <div class="hero-wave" aria-hidden="true">
