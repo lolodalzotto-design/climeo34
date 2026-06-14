@@ -1210,60 +1210,43 @@ section { position: relative; }
 }
 .hero-content { flex: 1; min-width: 0; }
 .hero-image-wrap {
-  flex: 0 0 460px;
-  width: 460px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 24px 72px rgba(0,0,0,0.45), 0 0 0 3px rgba(255,107,53,0.55);
+  flex: 0 0 400px;
+  max-width: 400px;
   position: relative;
-  animation: heroImgPulse 3s ease-in-out infinite;
 }
-@keyframes heroImgPulse {
-  0%, 100% { box-shadow: 0 24px 72px rgba(0,0,0,0.45), 0 0 0 3px rgba(255,107,53,0.55); }
-  50%       { box-shadow: 0 24px 72px rgba(0,0,0,0.45), 0 0 0 6px rgba(255,107,53,0.28); }
-}
-.hero-image-wrap img {
+.hero-photo {
   width: 100%;
-  height: 490px;
+  height: 500px;
   object-fit: cover;
   object-position: center;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
   display: block;
 }
-.hero-img-badge {
+.hero-badge {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  background: rgba(220,38,38,0.92);
-  color: #fff;
+  bottom: -18px;
+  left: -18px;
+  background: var(--brand);
+  color: white;
+  font-weight: 700;
   font-size: 0.78rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 50px;
-  z-index: 2;
-  letter-spacing: 0.03em;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
-}
-.hero-img-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%);
-  color: rgba(255,255,255,0.92);
-  font-size: 0.78rem;
-  padding: 28px 14px 12px;
-  text-align: center;
-  letter-spacing: 0.01em;
+  line-height: 1.5;
+  padding: 12px 18px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,30,90,0.5);
+  white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 @media (max-width: 1050px) {
-  .hero-image-wrap { flex: 0 0 340px; width: 340px; }
-  .hero-image-wrap img { height: 400px; }
+  .hero-image-wrap { flex: 0 0 320px; max-width: 320px; }
+  .hero-photo { height: 400px; }
 }
 @media (max-width: 900px) {
-  .hero-inner { flex-direction: column !important; gap: 36px !important; }
-  .hero-image-wrap { flex: none; width: 100%; max-width: 520px; margin: 0 auto; }
-  .hero-image-wrap img { height: 260px; }
+  .hero-inner { flex-direction: column-reverse !important; gap: 36px !important; }
+  .hero-image-wrap { flex: none; max-width: 100%; width: 100%; }
+  .hero-photo { height: 260px; }
+  .hero-badge { bottom: -14px; left: 14px; }
 }
 
 /* ─── HERO EYEBROW — meilleure visibilité ─── */
@@ -1629,15 +1612,14 @@ function gtag_report_conversion(url) {
     </div>
     <!-- IMAGE HERO — climatiseur encrassé avant entretien -->
     <div class="hero-image-wrap">
-      <div class="hero-img-badge">⚠️ Clim <strong>non entretenue</strong></div>
       <picture>
         <source srcset="climatiseur-sale-avant-nettoyage.webp" type="image/webp">
         <img src="climatiseur-sale-avant-nettoyage.jpg"
              alt="Climatiseur encrassé avec moisissures et poussières — avant nettoyage Climeo34 Montpellier"
-             width="800" height="540" fetchpriority="high"
-             decoding="async">
+             class="hero-photo" width="400" height="500"
+             loading="eager" fetchpriority="high" decoding="async">
       </picture>
-      <div class="hero-img-caption">👆 La réalité de 9 clims sur 10 à Montpellier</div>
+      <div class="hero-badge">⚠️ Clim non entretenue<br>La réalité de 9 clims sur 10</div>
     </div>
   </div>
   <div class="hero-wave" aria-hidden="true">
