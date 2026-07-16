@@ -584,7 +584,11 @@ footer{background:#001E5A;padding:48px 6% 28px;}
   </div>
   <div class="avis-slider-outer">
     <div class="avis-slider-viewport">
-      <div class="avis-grid" id="google-reviews-grid"></div>
+      <div class="avis-grid" id="google-reviews-grid">
+        <div class="avis-skeleton"></div>
+        <div class="avis-skeleton"></div>
+        <div class="avis-skeleton"></div>
+      </div>
     </div>
     <div class="avis-slider-controls">
       <button class="avis-arrow" id="avis-prev" aria-label="Avis précédent" disabled>
@@ -1095,11 +1099,18 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
   function escHtml(str) {
     return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+  function showAvisFallback(grid) {
+    grid.innerHTML = '<div class="avis-error">Nos avis clients ne se sont pas chargés. '
+      + 'Retrouvez-les directement sur <a href="https://www.google.com/maps/search/?api=1&query_place_id='
+      + 'ChIJodubwNeGWo0R8j-otvrAcW0" target="_blank" rel="noopener noreferrer">notre fiche Google</a>.</div>';
+    var controls = document.querySelector('.avis-slider-controls');
+    if (controls) controls.style.display = 'none';
+  }
 
   window._googlePlacesCallback = async function() {
+    var grid = document.getElementById('google-reviews-grid');
+    if (!grid) return;
     try {
-      var grid = document.getElementById('google-reviews-grid');
-      if (!grid) return;
       const { Place } = await google.maps.importLibrary('places');
       const place = new Place({ id: PLACE_ID, requestedLanguage: 'fr' });
       await place.fetchFields({ fields: ['rating', 'userRatingCount', 'reviews'] });
@@ -1115,7 +1126,7 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
         return 0;
       });
       reviews = reviews.slice(0, 6);
-      if (!reviews.length) return;
+      if (!reviews.length) { showAvisFallback(grid); return; }
       grid.innerHTML = reviews.map(function(r) {
         var name    = escHtml((r.authorAttribution && r.authorAttribution.displayName) || 'Client');
         var text    = escHtml((r.text && r.text.text) || (typeof r.text === 'string' ? r.text : ''));
@@ -1132,6 +1143,7 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
       initAvisSlider();
     } catch(e) {
       console.error('[Climeo34] Erreur Places:', e);
+      showAvisFallback(grid);
     }
   };
 
@@ -1184,6 +1196,10 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
   var s = document.createElement('script');
   s.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY + '&callback=_googlePlacesCallback&loading=async&language=fr';
   s.async = true; s.defer = true;
+  s.onerror = function() {
+    var grid = document.getElementById('google-reviews-grid');
+    if (grid) showAvisFallback(grid);
+  };
   document.head.appendChild(s);
 })();
 </script>
