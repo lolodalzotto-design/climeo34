@@ -2181,6 +2181,7 @@ function gtag_report_conversion(url) {
     <h3 id="exit-popup-title">Avant de partir — estimation en 2 min</h3>
     <p>Réponse sous 24h, sans engagement. Intervention sur Montpellier & Hérault (34).</p>
     <form id="exit-popup-form">
+      <input type="text" name="nom" placeholder="Votre nom *" required autocomplete="family-name">
       <input type="tel" name="telephone" placeholder="Votre téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
       <input type="text" name="ville" placeholder="Votre ville *" required>
       <button type="submit">Recevoir mon devis gratuit</button>
@@ -2632,6 +2633,7 @@ hoverEls.forEach(btn => {
       access_key: '618df005-2b3e-4ec4-a780-db2b01f6923a',
       subject: '🔔 Devis Climeo34 — Exit Intent',
       from_name: 'Climeo34',
+      nom: data.get('nom'),
       telephone: data.get('telephone'),
       ville: data.get('ville'),
       source: 'exit-popup'
@@ -2854,6 +2856,10 @@ hoverEls.forEach(btn => {
     var form = document.createElement('div');
     form.className = 'diag-email-form';
 
+    // Ville déjà collectée plus tôt dans l'arbre (réparation/installation) ?
+    var villeConnue = '';
+    answers.forEach(function(a) { if (a.key === 'ville' || a.key === 'ville_installation') villeConnue = a.value; });
+
     var telInput = document.createElement('input');
     telInput.type        = 'tel';
     telInput.placeholder = 'Téléphone *';
@@ -2862,29 +2868,40 @@ hoverEls.forEach(btn => {
     nomInput.type        = 'text';
     nomInput.placeholder = 'Nom *';
 
+    var villeInput = null;
+    if (!villeConnue) {
+      villeInput = document.createElement('input');
+      villeInput.type        = 'text';
+      villeInput.placeholder = 'Ville d\'intervention *';
+    }
+
     var submitBtn = document.createElement('button');
     submitBtn.className   = 'diag-submit-btn';
     submitBtn.textContent = 'Recevoir mon devis gratuit →';
 
     submitBtn.addEventListener('click', function() {
-      var tel = telInput.value.trim();
-      var nom = nomInput.value.trim();
+      var tel   = telInput.value.trim();
+      var nom   = nomInput.value.trim();
+      var ville = villeConnue || (villeInput ? villeInput.value.trim() : '');
       telInput.style.borderColor = '';
       nomInput.style.borderColor = '';
+      if (villeInput) villeInput.style.borderColor = '';
       if (!tel) { telInput.style.borderColor = '#e53e3e'; telInput.focus(); return; }
       if (!nom) { nomInput.style.borderColor = '#e53e3e'; nomInput.focus(); return; }
+      if (!ville) { villeInput.style.borderColor = '#e53e3e'; villeInput.focus(); return; }
       submitBtn.textContent = 'Envoi en cours…';
       submitBtn.disabled    = true;
-      submitDiag(nom, '', '', tel, '', submitBtn);
+      submitDiag(nom, '', ville, tel, '', submitBtn);
     });
 
     form.appendChild(telInput);
     form.appendChild(nomInput);
+    if (villeInput) form.appendChild(villeInput);
     form.appendChild(submitBtn);
     body.appendChild(form);
   }
 
-  async function submitDiag(nom, prenom, adresse, tel, email, submitBtn) {
+  async function submitDiag(nom, prenom, ville, tel, email, submitBtn) {
     var details = answers.map(function(a) { return a.key + ' : ' + a.value; }).join('\n');
     var souhait = answers.length ? answers[0].value : '';
     var fullName = prenom + ' ' + nom;
@@ -2895,9 +2912,9 @@ hoverEls.forEach(btn => {
     fd.append('from_name',  'Climeo34 Estimation');
     fd.append('name',       fullName);
     fd.append('email',      email);
-    fd.append('message',    'ESTIMATION RAPIDE\n\nNom : ' + nom + '\nPrénom : ' + prenom + '\nAdresse : ' + adresse + '\nTéléphone : ' + tel + '\nE-mail : ' + email + '\n\n' + details);
+    fd.append('message',    'ESTIMATION RAPIDE\n\nNom : ' + nom + '\nPrénom : ' + prenom + '\nVille : ' + ville + '\nTéléphone : ' + tel + '\nE-mail : ' + email + '\n\n' + details);
 
-    var sheetData = { source: 'estimation-quiz', nom: nom, prenom: prenom, adresse: adresse, telephone: tel, email: email, t: Date.now() };
+    var sheetData = { source: 'estimation-quiz', nom: nom, prenom: prenom, ville: ville, telephone: tel, email: email, t: Date.now() };
     answers.forEach(function(a) { sheetData[a.key] = a.value; });
 
     try {
