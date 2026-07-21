@@ -1,6 +1,6 @@
 # Climeo34 — Nettoyage climatisation Montpellier & Hérault (34)
 
-> Climeo34 est un service de nettoyage et désinfection professionnelle de climatisation à Montpellier et dans tout l'Hérault (34). Technicien certifié, intervention sous 48h, à partir de 80€ TTC.
+> Climeo34 est un service de nettoyage et désinfection professionnelle de climatisation à Montpellier et dans tout l'Hérault (34). Technicien certifié, intervention sous 48h, à partir de 120€ TTC.
 
 ## Services
 
@@ -11,9 +11,10 @@
 
 ## Tarifs
 
-- 1 split : 80€ TTC
-- 2 splits : 140€ TTC
-- 3 splits : 190€ TTC
+- 1 split : 120€ TTC
+- 2 splits : 190€ TTC
+- 3 splits : 260€ TTC
+- Au-delà de 3 splits : devis gratuit
 - Tout inclus : démontage, nettoyage haute pression, désinfection, remontage
 
 ## Zone d'intervention
