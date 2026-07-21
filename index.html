@@ -793,6 +793,8 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .footer-copy { font-size: 0.73rem; color: rgba(255,255,255,0.2); }
 .footer-seo { font-size: 0.7rem; color: rgba(255,255,255,0.1); max-width: 560px; line-height: 1.6; }
+.footer-note { font-size: 0.68rem; color: rgba(255,255,255,0.32); max-width: 620px; line-height: 1.6; margin-top: 6px; }
+.price-note { text-decoration: none; color: inherit; font-size: 0.6em; vertical-align: super; cursor: pointer; }
 
 
 /* DIAGNOSTIC QUIZ BUBBLE */
@@ -1564,7 +1566,7 @@ function gtag_report_conversion(url) {
       </div>
       <h1 class="hero-title">
         Nettoyage Climatisation Montpellier<br>
-        <span class="accent">— À Partir de 80€ TTC</span>
+        <span class="accent">— À Partir de 80€ TTC<a href="#footnote-frais" class="price-note">*</a></span>
       </h1>
       <p class="hero-lead">
         Votre climatisation ne performe plus ? Avant toute intervention coûteuse,
@@ -1755,7 +1757,7 @@ function gtag_report_conversion(url) {
     <h2 class="s-title fade-up d1" id="t-tarifs">Nos tarifs — Clairs et sans surprise</h2>
     <div class="fade-up d2" style="margin: 0 auto 40px; max-width: 560px;">
       <div style="font-family: var(--font-head); font-size: clamp(3.5rem, 8vw, 5.5rem); font-weight: 800; color: var(--brand); line-height: 1;">
-        80€ <span style="font-size: 0.38em; font-weight: 600; color: var(--text-muted); vertical-align: middle;">TTC</span>
+        80€ <span style="font-size: 0.38em; font-weight: 600; color: var(--text-muted); vertical-align: middle;">TTC</span><a href="#footnote-frais" class="price-note">*</a>
       </div>
       <p style="font-size: 1rem; color: var(--text-muted); margin: 8px 0 24px;">Nettoyage complet · Tout inclus · Annoncé avant intervention</p>
       <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 32px;">Diagnostic option +30 € · Recharge gaz sur devis si nécessaire</p>
@@ -1796,7 +1798,7 @@ function gtag_report_conversion(url) {
     <article class="prob-card fade-up d1">
       <div class="prob-ico" style="font-size:1.6rem; background:none; justify-content:flex-start;">💶</div>
       <h3>Prix</h3>
-      <p>À partir de 80 € TTC, tarif annoncé avant intervention.</p>
+      <p>À partir de 80 € TTC<a href="#footnote-frais" class="price-note">*</a>, tarif annoncé avant intervention.</p>
     </article>
     <article class="prob-card fade-up d2">
       <div class="prob-ico" style="font-size:1.6rem; background:none; justify-content:flex-start;">✅</div>
@@ -2017,7 +2019,7 @@ function gtag_report_conversion(url) {
 <section id="contact" aria-labelledby="t-contact">
   <span class="s-tag" style="color:var(--brand-blue)">Prendre rendez-vous</span>
   <h2 class="s-title" id="t-contact">Votre clim ne performe plus ? Appelez maintenant.</h2>
-  <p class="s-sub">Intervention sous 48h — à partir de 80 € TTC — Hérault (34).</p>
+  <p class="s-sub">Intervention sous 48h — à partir de 80 € TTC<a href="#footnote-frais" class="price-note">*</a> — Hérault (34).</p>
   <div class="contact-btns">
     <a href="tel:0603257679" class="btn-call" onclick="return gtag_report_conversion('tel:0603257679')">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -2122,6 +2124,7 @@ function gtag_report_conversion(url) {
     <p class="footer-copy">© 2026 Climeo34 · Tous droits réservés</p>
     <p class="footer-seo">Nettoyage climatisation Montpellier · Entretien climatisation Hérault · Prix entretien climatisation réversible · Entretien climatisation locataire · Désinfection clim Montpellier · Nettoyage split Palavas La Grande-Motte Carnon</p>
   </div>
+  <p id="footnote-frais" class="footer-note">* Le tarif indiqué s'entend pour l'entretien d'un split standard. Selon la zone d'intervention, des frais de déplacement pourront s'appliquer et un nombre minimum de splits à entretenir pourra être requis pour certains secteurs plus éloignés.</p>
 </footer>
 
 <!-- MOBILE STICKY CTA BAR -->
