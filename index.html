@@ -613,7 +613,7 @@ a.pill { cursor: pointer; }
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .avis-error { text-align: center; padding: 40px 20px; color: var(--text-muted); flex: 0 0 100%; }
 .avis-slider-outer { position: relative; max-width: 1100px; margin: 28px auto 0; }
-.avis-slider-viewport { overflow: hidden; border-radius: var(--radius); padding: 4px 2px 8px; }
+.avis-slider-viewport { overflow: hidden; border-radius: var(--radius); padding: 4px 2px 8px; transition: height 0.35s ease; }
 .avis-grid {
   display: flex;
   align-items: flex-start;
@@ -2463,6 +2463,18 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       }
     }
 
+    function updateHeight() {
+      var pp = perPage();
+      var start = current * pp;
+      var end = Math.min(start + pp, total);
+      var maxH = 0;
+      for (var i = start; i < end; i++) {
+        maxH = Math.max(maxH, cards[i].offsetHeight);
+      }
+      var viewport = grid.parentElement;
+      if (viewport) viewport.style.height = maxH + 'px';
+    }
+
     function goTo(page) {
       var p = pages();
       current = Math.max(0, Math.min(page, p - 1));
@@ -2475,6 +2487,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
       });
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current >= p - 1;
+      updateHeight();
     }
 
     prevBtn.addEventListener('click', function() { goTo(current - 1); });
