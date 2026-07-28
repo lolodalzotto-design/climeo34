@@ -6,8 +6,10 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
+import { Audio } from "@remotion/media";
 import { bodyFont } from "../fonts";
 import { colors } from "../theme";
+import { voiceoverPath } from "../voiceover-script";
 
 const PhoneIcon: React.FC = () => (
   <svg width={26} height={26} viewBox="0 0 24 24" fill="none">
@@ -21,7 +23,7 @@ const PhoneIcon: React.FC = () => (
   </svg>
 );
 
-export const Outro: React.FC = () => {
+export const Outro: React.FC<{ hasAudio: boolean }> = ({ hasAudio }) => {
   const frame = useCurrentFrame();
 
   const logoOpacity = interpolate(frame, [0, 22], [0, 1], {
@@ -63,6 +65,7 @@ export const Outro: React.FC = () => {
         padding: 120,
       }}
     >
+      {hasAudio ? <Audio src={staticFile(voiceoverPath("outro"))} /> : null}
       <Img
         src={staticFile("climeo34-logo.png")}
         style={{

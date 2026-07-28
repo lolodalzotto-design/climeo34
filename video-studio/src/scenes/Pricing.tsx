@@ -2,10 +2,13 @@ import {
   AbsoluteFill,
   Easing,
   interpolate,
+  staticFile,
   useCurrentFrame,
 } from "remotion";
+import { Audio } from "@remotion/media";
 import { headingFont, bodyFont } from "../fonts";
 import { colors } from "../theme";
+import { voiceoverPath } from "../voiceover-script";
 
 const Card: React.FC<{ label: string; price: string; delay: number }> = ({
   label,
@@ -84,7 +87,7 @@ const Card: React.FC<{ label: string; price: string; delay: number }> = ({
   );
 };
 
-export const Pricing: React.FC = () => {
+export const Pricing: React.FC<{ hasAudio: boolean }> = ({ hasAudio }) => {
   const frame = useCurrentFrame();
 
   const titleOpacity = interpolate(frame, [0, 22], [0, 1], {
@@ -110,6 +113,7 @@ export const Pricing: React.FC = () => {
         alignItems: "center",
       }}
     >
+      {hasAudio ? <Audio src={staticFile(voiceoverPath("pricing"))} /> : null}
       <div
         style={{
           fontFamily: headingFont,

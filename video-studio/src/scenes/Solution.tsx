@@ -2,10 +2,13 @@ import {
   AbsoluteFill,
   Easing,
   interpolate,
+  staticFile,
   useCurrentFrame,
 } from "remotion";
+import { Audio } from "@remotion/media";
 import { headingFont, bodyFont } from "../fonts";
 import { colors } from "../theme";
+import { voiceoverPath } from "../voiceover-script";
 
 const CheckIcon: React.FC = () => (
   <svg width={28} height={28} viewBox="0 0 24 24" fill="none">
@@ -66,7 +69,7 @@ const Pill: React.FC<{ label: string; delay: number }> = ({
   );
 };
 
-export const Solution: React.FC = () => {
+export const Solution: React.FC<{ hasAudio: boolean }> = ({ hasAudio }) => {
   const frame = useCurrentFrame();
 
   const titleOpacity = interpolate(frame, [0, 25], [0, 1], {
@@ -88,6 +91,9 @@ export const Solution: React.FC = () => {
         padding: 140,
       }}
     >
+      {hasAudio ? (
+        <Audio src={staticFile(voiceoverPath("solution"))} />
+      ) : null}
       <div
         style={{
           fontFamily: headingFont,

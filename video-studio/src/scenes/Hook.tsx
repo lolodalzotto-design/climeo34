@@ -6,10 +6,12 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
+import { Audio } from "@remotion/media";
 import { headingFont, bodyFont } from "../fonts";
 import { colors } from "../theme";
+import { voiceoverPath } from "../voiceover-script";
 
-export const Hook: React.FC = () => {
+export const Hook: React.FC<{ hasAudio: boolean }> = ({ hasAudio }) => {
   const frame = useCurrentFrame();
 
   const badgeScale = interpolate(frame, [0, 20], [0.6, 1], {
@@ -57,6 +59,7 @@ export const Hook: React.FC = () => {
         padding: 120,
       }}
     >
+      {hasAudio ? <Audio src={staticFile(voiceoverPath("hook"))} /> : null}
       <Img
         src={staticFile("climeo34-icon.png")}
         style={{
