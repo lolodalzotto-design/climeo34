@@ -334,45 +334,21 @@ body {
 .nav-burger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.88); border-radius: 2px; transition: all var(--transition); }
 #nav.scrolled .nav-burger span { background: var(--text); }
 
-/* HERO — vidéo pilotée par le défilement */
+/* HERO */
 #hero {
   scroll-margin-top: 92px;
-  position: relative;
-  background: #001E5A;
-  z-index: 0;
-}
-.hero-scroll-track {
-  position: relative;
-  height: 300vh;
-}
-.hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  min-height: 560px;
-  max-height: 100vh;
-  overflow: hidden;
-  display: flex; align-items: center;
+  min-height: 100vh;
   background: linear-gradient(135deg, #001E5A 0%, #001249 60%, #00102E 100%);
-  padding: 160px 6% 100px;
-}
-.hero-video-wrap { position: absolute; inset: 0; z-index: 0; background: #001E5A; }
-.hero-video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  display: block;
+  position: relative; display: flex; align-items: center;
+  overflow: hidden; padding: 160px 6% 100px;
+  z-index: 0;
 }
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg,
-    rgba(0,20,60,0.55) 0%,
-    rgba(0,20,60,0.30) 40%,
-    rgba(0,16,50,0.62) 100%
-  ), linear-gradient(100deg,
-    rgba(0,14,45,0.78) 0%,
-    rgba(0,20,60,0.35) 45%,
-    rgba(0,20,60,0.15) 75%
+    rgba(0,30,90,0.45) 0%,
+    rgba(0,30,90,0.18) 40%,
+    rgba(0,30,90,0.45) 100%
   );
 }
 .hero-inner {
@@ -380,31 +356,6 @@ body {
   width: 100%; max-width: 820px;
 }
 .hero-content { width: 100%; }
-/* Panneaux de texte empilés — un seul visible à la fois, transition en fondu */
-.hero-stages { display: grid; }
-.hero-stage {
-  grid-area: 1 / 1;
-  opacity: 0; transform: translateY(14px);
-  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
-  pointer-events: none;
-}
-.hero-stage.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.hero-scroll-cue {
-  position: absolute; left: 50%; bottom: 28px; z-index: 2;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  background: none; border: none; cursor: default; padding: 0;
-  font-family: var(--font-head); font-weight: 600; font-size: 0.72rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  transition: opacity 0.4s ease;
-  animation: heroCueBob 1.8s ease-in-out infinite;
-}
-.hero-scroll-cue.hidden { opacity: 0; }
-@keyframes heroCueBob {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 6px); }
-}
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   margin-bottom: 28px;
@@ -467,8 +418,8 @@ body {
 #hero .hero-title .accent { color: var(--brand-light); }
 #hero .hero-lead { color: rgba(255,255,255,0.68); }
 #hero .hero-lead strong { color: #ffffff; font-weight: 500; }
-#hero .kpi-val, #hero-lead-strip .kpi-val { color: var(--brand-light); }
-#hero .kpi-label, #hero-lead-strip .kpi-label { color: rgba(255,255,255,0.42); }
+#hero .kpi-val { color: var(--brand-light); }
+#hero .kpi-label { color: rgba(255,255,255,0.42); }
 #hero .btn-ghost {
   background: rgba(255,255,255,0.07);
   color: rgba(255,255,255,0.92);
@@ -481,14 +432,8 @@ body {
 }
 /* HERO RESPONSIVE */
 @media (max-width: 900px) {
-  .hero-sticky { padding: 120px 5% 80px; }
+  #hero { padding: 120px 5% 80px; }
 }
-@media (max-width: 768px) {
-  .hero-scroll-track { height: 240vh; }
-}
-/* Repli mouvement réduit / défilement impossible : héros statique, vidéo en lecture normale */
-.hero-scroll-track.no-scrub { height: 100vh; min-height: 560px; }
-.hero-scroll-track.no-scrub .hero-sticky { position: relative; }
 
 /* SECTIONS */
 section { padding: 96px 6%; scroll-margin-top: 92px; }
@@ -1372,8 +1317,53 @@ section { position: relative; }
 }
 .prob-card:hover .prob-ico-photo img { transform: scale(1.06); }
 
-/* ─── HERO — colonne de texte unique (la vidéo occupe tout le fond) ─── */
-.hero-inner { max-width: 760px; }
+/* ─── HERO 2-COLONNES (desktop) ─── */
+.hero-inner {
+  max-width: 1240px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 56px !important;
+}
+.hero-content { flex: 1; min-width: 0; }
+.hero-image-wrap {
+  flex: 0 0 400px;
+  max-width: 400px;
+  position: relative;
+}
+.hero-photo {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+  display: block;
+}
+.hero-badge {
+  position: absolute;
+  bottom: -18px;
+  left: -18px;
+  background: var(--brand);
+  color: white;
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  padding: 12px 18px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,30,90,0.5);
+  white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+@media (max-width: 1050px) {
+  .hero-image-wrap { flex: 0 0 320px; max-width: 320px; }
+  .hero-photo { height: 400px; }
+}
+@media (max-width: 900px) {
+  .hero-inner { flex-direction: column-reverse !important; gap: 36px !important; }
+  .hero-image-wrap { flex: none; max-width: 100%; width: 100%; }
+  .hero-photo { height: 260px; }
+  .hero-badge { bottom: -14px; left: 14px; }
+}
 
 /* ─── HERO EYEBROW — meilleure visibilité ─── */
 #hero .hero-eyebrow span {
@@ -1434,6 +1424,15 @@ section { position: relative; }
   from { opacity: 0; transform: translateY(22px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes heroImageReveal {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes heroBadgePop {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.85); }
+  70%  { transform: translateY(-2px) scale(1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
 .hero-reveal {
   opacity: 0;
   animation: heroReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -1446,6 +1445,17 @@ section { position: relative; }
 .hero-reveal.r5 { animation-delay: 0.56s; }
 .hero-reveal.r6 { animation-delay: 0.68s; }
 .hero-reveal.r7 { animation-delay: 0.80s; }
+.hero-image-wrap.hero-reveal {
+  animation-name: heroImageReveal;
+  animation-delay: 0.22s;
+}
+.hero-badge {
+  opacity: 0;
+  animation: heroBadgePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.85s;
+}
+/* Parallax léger piloté par JS (translateY appliqué en inline style) */
+.hero-image-wrap { transition: transform 0.1s linear; }
 /* Micro-interactions CTA — retour tactile au clic, sans décalage de layout */
 .btn-primary, .btn-ghost {
   will-change: transform;
@@ -1456,8 +1466,7 @@ section { position: relative; }
 .hero-social-link { transition: transform 0.25s ease, box-shadow 0.25s ease; }
 .hero-social-link:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(61,122,181,.18); }
 @media (prefers-reduced-motion: reduce) {
-  .hero-stage { transition: none !important; }
-  .hero-scroll-cue { display: none !important; }
+  .hero-image-wrap { transform: none !important; transition: none !important; }
 }
 
 /* ─── HERO FORM — 3 champs ─── */
@@ -1649,28 +1658,6 @@ section { position: relative; }
   .apropos-img img { height: 260px; }
 }
 
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-}
-
-/* ─── BANDE DE CONVERSION — suite directe du héros vidéo ─── */
-#hero-lead-strip {
-  background: linear-gradient(135deg, #001E5A 0%, #001249 60%, #00102E 100%);
-  padding: 56px 6% 0;
-  position: relative;
-}
-.lead-strip-inner { max-width: 620px; margin: 0 auto; }
-.lead-strip-kpis {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 32px; margin-bottom: 8px; text-align: center;
-}
-#hero-lead-strip .hero-form-wrap { max-width: 560px; margin: 28px auto 0; }
-@media (max-width: 600px) {
-  #hero-lead-strip { padding: 44px 5% 0; }
-  .lead-strip-kpis { gap: 20px; }
-}
 </style>
 <!-- Google Ads tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18153085489"></script>
@@ -1734,135 +1721,89 @@ function gtag_report_conversion(url) {
 
 <!-- HERO -->
 <header id="hero" role="banner">
-  <div class="hero-scroll-track" id="hero-scroll-track">
-    <div class="hero-sticky" id="hero-sticky">
-      <div class="hero-video-wrap" aria-hidden="true">
-        <video id="hero-video" class="hero-video" muted playsinline webkit-playsinline="true"
-               preload="auto" poster="climatiseur-sale-avant-nettoyage.webp"
-               disablepictureinpicture disableremoteplayback>
-          <source src="hero-video-mobile.webm" type="video/webm" media="(max-width: 768px)">
-          <source src="hero-video-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
-          <source src="hero-video.mp4" type="video/mp4">
-        </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow hero-reveal r1">
+        <div class="hero-dot"></div>
+        <span>Juillet & Août : planning chargé — créneaux limités cette semaine</span>
       </div>
-      <div class="hero-overlay" aria-hidden="true"></div>
-      <p class="sr-only">Vidéo silencieuse montrant un technicien Climeo34 démonter, nettoyer à haute pression et désinfecter une climatisation murale à Montpellier.</p>
-
-      <div class="hero-inner">
-        <div class="hero-content">
-          <div class="hero-stages" id="hero-stages">
-            <div class="hero-stage active" data-stage="0">
-              <div class="hero-eyebrow hero-reveal r1">
-                <div class="hero-dot"></div>
-                <span>Juillet & Août : planning chargé — créneaux limités cette semaine</span>
-              </div>
-              <h1 class="hero-title hero-reveal r2">
-                Nettoyage Climatisation Montpellier<br>
-                <span class="accent">— À Partir de 120€ TTC<a href="#footnote-frais" class="price-note">*</a></span>
-              </h1>
-              <p class="hero-lead hero-reveal r3">
-                Odeurs, clim qui coule, air qui ne refroidit plus : dans la majorité des cas,
-                un nettoyage complet suffit — avant toute intervention coûteuse.
-                <strong>Climeo34 intervient sous 48h sur Montpellier et tout l'Hérault.</strong>
-              </p>
-            </div>
-            <div class="hero-stage" data-stage="1">
-              <div class="hero-eyebrow">
-                <div class="hero-dot"></div>
-                <span>L'intervention, en direct</span>
-              </div>
-              <h1 class="hero-title">
-                Démontage. Haute pression.<br>
-                <span class="accent">Désinfection bactéricide.</span>
-              </h1>
-              <p class="hero-lead">
-                Filtres, évaporateur, bac de condensat : chaque recoin traité
-                par un technicien certifié Climeo34.
-              </p>
-            </div>
-            <div class="hero-stage" data-stage="2">
-              <div class="hero-eyebrow">
-                <div class="hero-dot"></div>
-                <span>Le résultat</span>
-              </div>
-              <h1 class="hero-title">
-                Une climatisation comme neuve<br>
-                <span class="accent">— sous 48h.</span>
-              </h1>
-              <p class="hero-lead">
-                Prix clair dès le départ, aucune surprise.
-                <strong>Garanti sans odeur.</strong>
-              </p>
-            </div>
-          </div>
-          <!-- CTA HERO -->
-          <div class="hero-actions hero-reveal r4">
-            <a href="tel:0603257679" class="btn-primary" onclick="return gtag_report_conversion('tel:0603257679')">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              06 03 25 76 79
-            </a>
-            <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-ghost" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.914 2C6.441 2 2 6.441 2 11.914c0 1.892.523 3.661 1.432 5.178L2 22l5.087-1.404C8.536 21.46 10.194 22 11.914 22 17.387 22 22 17.387 22 11.914 22 6.441 17.387 2 11.914 2z"/></svg>
-              WhatsApp
-            </a>
-            <a href="#hero-form-wrap" class="btn-ghost">Devis gratuit</a>
-          </div>
-          <!-- SOCIAL PROOF -->
-          <a href="https://www.google.com/maps/search/?api=1&query_place_id=ChIJodubwNeGWo0R8j-otvrAcW0" target="_blank" rel="noopener" aria-label="Voir nos avis Google"
-             class="hero-reveal r5 hero-social-link"
-             style="display:flex;width:100%;box-sizing:border-box;align-items:center;gap:14px;background:#fff;color:var(--navy);border:1.5px solid #e0e7f3;padding:14px 24px;border-radius:12px;text-decoration:none;box-shadow:0 2px 10px rgba(61,122,181,.08);">
-            <svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.1 33.9 29.5 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.9 20-21 0-1.4-.1-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3c-7.6 0-14.2 4.5-17.7 11.7z"/><path fill="#FBBC05" d="M24 45c5.4 0 10.3-1.8 14.1-4.9l-6.5-5.5C29.4 36.4 26.8 37 24 37c-5.4 0-10-3-12.1-7.4l-7 5.4C8.3 40.9 15.6 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-.9 2.5-2.6 4.6-4.8 6.1l6.5 5.5C41.1 36.9 45 31 45 24c0-1.4-.1-2.7-.5-4z"/></svg>
-            <span>
-              <span style="display:block;font-size:1.5rem;font-weight:800;line-height:1;color:var(--navy);">5,0</span>
-              <span style="display:block;color:#f5a623;font-size:0.95rem;letter-spacing:2px;line-height:1.3;">★★★★★</span>
-              <span style="display:block;font-size:0.78rem;color:var(--gray-text);margin-top:2px;">Avis Google · Voir la fiche</span>
-            </span>
-          </a>
+      <h1 class="hero-title hero-reveal r2">
+        Nettoyage Climatisation Montpellier<br>
+        <span class="accent">— À Partir de 120€ TTC<a href="#footnote-frais" class="price-note">*</a></span>
+      </h1>
+      <p class="hero-lead hero-reveal r3">
+        Votre climatisation ne performe plus ? Avant toute intervention coûteuse,
+        un nettoyage complet suffit dans la majorité des cas.
+        Climeo34 intervient sous 48h sur Montpellier et tout l'Hérault.
+        <strong>Prix clair dès le départ, aucune surprise.</strong>
+      </p>
+      <!-- CTA HERO -->
+      <div class="hero-actions hero-reveal r4">
+        <a href="tel:0603257679" class="btn-primary" onclick="return gtag_report_conversion('tel:0603257679')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          06 03 25 76 79
+        </a>
+        <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-ghost" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.914 2C6.441 2 2 6.441 2 11.914c0 1.892.523 3.661 1.432 5.178L2 22l5.087-1.404C8.536 21.46 10.194 22 11.914 22 17.387 22 22 17.387 22 11.914 22 6.441 17.387 2 11.914 2z"/></svg>
+          WhatsApp
+        </a>
+        <a href="#hero-form-wrap" class="btn-ghost">Devis gratuit</a>
+      </div>
+      <!-- SOCIAL PROOF -->
+      <a href="https://www.google.com/maps/search/?api=1&query_place_id=ChIJodubwNeGWo0R8j-otvrAcW0" target="_blank" rel="noopener" aria-label="Voir nos avis Google"
+         class="hero-reveal r5 hero-social-link"
+         style="display:flex;width:100%;box-sizing:border-box;align-items:center;gap:14px;background:#fff;color:var(--navy);border:1.5px solid #e0e7f3;padding:14px 24px;border-radius:12px;text-decoration:none;box-shadow:0 2px 10px rgba(61,122,181,.08);margin-bottom:28px;">
+        <svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.1 33.9 29.5 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.9 20-21 0-1.4-.1-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3c-7.6 0-14.2 4.5-17.7 11.7z"/><path fill="#FBBC05" d="M24 45c5.4 0 10.3-1.8 14.1-4.9l-6.5-5.5C29.4 36.4 26.8 37 24 37c-5.4 0-10-3-12.1-7.4l-7 5.4C8.3 40.9 15.6 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-.9 2.5-2.6 4.6-4.8 6.1l6.5 5.5C41.1 36.9 45 31 45 24c0-1.4-.1-2.7-.5-4z"/></svg>
+        <span>
+          <span style="display:block;font-size:1.5rem;font-weight:800;line-height:1;color:var(--navy);">5,0</span>
+          <span style="display:block;color:#f5a623;font-size:0.95rem;letter-spacing:2px;line-height:1.3;">★★★★★</span>
+          <span style="display:block;font-size:0.78rem;color:var(--gray-text);margin-top:2px;">Avis Google · Voir la fiche</span>
+        </span>
+      </a>
+      <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
+      <div class="hero-form-wrap hero-reveal r6" id="hero-form-wrap">
+        <p class="hero-form-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:6px;opacity:0.85"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Recevoir mon devis gratuit — réponse sous 24h</p>
+        <form class="hero-form" id="hero-capture-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="618df005-2b3e-4ec4-a780-db2b01f6923a">
+          <input type="hidden" name="subject" value="🔔 Nouveau devis Climeo34">
+          <input type="hidden" name="from_name" value="Climeo34">
+          <input type="checkbox" name="botcheck" style="display:none">
+          <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
+          <input type="text" name="ville" placeholder="Votre ville ou code postal *" required autocomplete="postal-code">
+          <input type="text" name="nom" placeholder="Nom *" required autocomplete="family-name">
+          <button type="submit" class="hero-form-submit" id="hero-form-btn">Recevoir mon devis gratuit</button>
+        </form>
+        <div class="hero-form-success" id="hero-form-success">
+          <div class="hero-form-success-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <p>Merci ! Laurent vous rappelle sous 24h maxi.</p>
         </div>
       </div>
-
-      <button type="button" class="hero-scroll-cue" id="hero-scroll-cue" tabindex="-1">
-        <span>Faites défiler</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- BANDE DE CONVERSION — devis gratuit, suite directe du héros vidéo -->
-<section id="hero-lead-strip" aria-label="Recevoir un devis gratuit">
-  <div class="lead-strip-inner">
-    <div class="lead-strip-kpis">
-      <div class="kpi"><div class="kpi-val"><span style="color:#f59e0b;font-size:1.4rem;vertical-align:-2px;">★</span> 5/5</div><div class="kpi-label">Note Google</div></div>
-      <div class="kpi"><div class="kpi-val">48h</div><div class="kpi-label">Délai d'intervention</div></div>
-      <div class="kpi"><div class="kpi-val">99,9%</div><div class="kpi-label">Bactéries & champignons éliminés</div></div>
-      <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
-    </div>
-    <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
-    <div class="hero-form-wrap" id="hero-form-wrap">
-      <p class="hero-form-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-3px;margin-right:6px;opacity:0.85"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Recevoir mon devis gratuit — réponse sous 24h</p>
-      <form class="hero-form" id="hero-capture-form" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="618df005-2b3e-4ec4-a780-db2b01f6923a">
-        <input type="hidden" name="subject" value="🔔 Nouveau devis Climeo34">
-        <input type="hidden" name="from_name" value="Climeo34">
-        <input type="checkbox" name="botcheck" style="display:none">
-        <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
-        <input type="text" name="ville" placeholder="Votre ville ou code postal *" required autocomplete="postal-code">
-        <input type="text" name="nom" placeholder="Nom *" required autocomplete="family-name">
-        <button type="submit" class="hero-form-submit" id="hero-form-btn">Recevoir mon devis gratuit</button>
-      </form>
-      <div class="hero-form-success" id="hero-form-success">
-        <div class="hero-form-success-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <p>Merci ! Laurent vous rappelle sous 24h maxi.</p>
+      <div class="hero-kpis hero-reveal r7">
+        <div class="kpi"><div class="kpi-val"><span style="color:#f59e0b;font-size:1.4rem;vertical-align:-2px;">★</span> 5/5</div><div class="kpi-label">Note Google</div></div>
+        <div class="kpi"><div class="kpi-val">48h</div><div class="kpi-label">Délai d'intervention</div></div>
+        <div class="kpi"><div class="kpi-val">99,9%</div><div class="kpi-label">Bactéries & champignons éliminés</div></div>
+        <div class="kpi"><div class="kpi-val" data-target="100" data-suffix="%">100%</div><div class="kpi-label">Garanti sans odeur</div></div>
       </div>
+    </div>
+    <!-- IMAGE HERO — climatiseur encrassé avant entretien -->
+    <div class="hero-image-wrap hero-reveal" id="hero-image-wrap">
+      <picture>
+        <source srcset="climatiseur-sale-avant-nettoyage.webp" type="image/webp">
+        <img src="climatiseur-sale-avant-nettoyage.jpg"
+             alt="Climatiseur encrassé avec moisissures et poussières — avant nettoyage Climeo34 Montpellier"
+             class="hero-photo" width="400" height="500"
+             loading="eager" fetchpriority="high" decoding="async">
+      </picture>
+      <div class="hero-badge">⚠️ Clim non entretenue<br>La réalité de 9 clims sur 10</div>
     </div>
   </div>
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#E0F3FF"/>
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#ffffff"/>
     </svg>
   </div>
-</section>
+</header>
 
 <!-- AVIS -->
 <section id="avis" aria-labelledby="t-avis">
@@ -2520,100 +2461,34 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEach(r => observer.observe(r));
 
-// Hero — vidéo pilotée par la position de défilement, avec repli robuste
+// Hero — parallax léger sur l'image au scroll (désactivé si prefers-reduced-motion)
 (function() {
-  var track = document.getElementById('hero-scroll-track');
-  var video = document.getElementById('hero-video');
-  var stages = document.querySelectorAll('.hero-stage');
-  var cue = document.getElementById('hero-scroll-cue');
-  if (!track || !video || !stages.length) return;
-
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var conn = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
-  var saveData = !!(conn && (conn.saveData || /2g/.test(conn.effectiveType || '')));
-
-  var noScrub = reducedMotion || saveData;
-  var scrubReady = false;
-  var currentStage = 0;
-  var latestProgress = 0;
+  var img = document.getElementById('hero-image-wrap');
+  var hero = document.getElementById('hero');
+  if (!img || !hero) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Une fois l'animation d'entrée terminée, on la retire pour laisser
+  // le parallax (transform inline piloté par JS) prendre le relais.
+  img.addEventListener('animationend', function() {
+    img.style.animation = 'none';
+    img.style.opacity = '1';
+  }, { once: true });
   var ticking = false;
-  var listening = false;
-
-  function setStage(index) {
-    if (index === currentStage) return;
-    currentStage = index;
-    stages.forEach(function(s) {
-      s.classList.toggle('active', parseInt(s.dataset.stage, 10) === index);
-    });
-  }
-  function stageForProgress(p) { return p < 0.34 ? 0 : (p < 0.67 ? 1 : 2); }
-
-  function computeProgress() {
-    var rect = track.getBoundingClientRect();
-    var total = rect.height - window.innerHeight;
-    if (total <= 4) return 0;
-    return Math.min(1, Math.max(0, -rect.top / total));
-  }
-
-  function applyFrame() {
-    ticking = false;
-    var p = latestProgress;
-    setStage(stageForProgress(p));
-    if (cue) cue.classList.toggle('hidden', p > 0.02);
-    if (scrubReady && video.duration && isFinite(video.duration)) {
-      var t = p * video.duration;
-      if (Math.abs(video.currentTime - t) > 0.03) {
-        try { video.currentTime = t; } catch (e) {}
-      }
+  function updateParallax() {
+    var rect = hero.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+      var progress = 1 - (rect.bottom / (rect.height + window.innerHeight));
+      var offset = (progress - 0.5) * 40;
+      img.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
     }
+    ticking = false;
   }
-
-  function onScroll() {
-    latestProgress = computeProgress();
-    if (!ticking) { ticking = true; requestAnimationFrame(applyFrame); }
-  }
-
-  // Repli : lecture autonome en boucle, sans asservissement au scroll.
-  // Déclenché si prefers-reduced-motion, connexion économe en données,
-  // métadonnées jamais chargées, durée invalide ou erreur vidéo.
-  function fallbackToAutoplay() {
-    if (track.classList.contains('no-scrub')) return;
-    scrubReady = false;
-    track.classList.add('no-scrub');
-    video.loop = true;
-    video.play().catch(function() {});
-  }
-
-  if (noScrub) {
-    fallbackToAutoplay();
-  } else {
-    video.addEventListener('loadedmetadata', function() {
-      if (!isFinite(video.duration) || video.duration <= 0) { fallbackToAutoplay(); return; }
-      // Amorce silencieuse : force le décodage du premier GOP (nécessaire sur iOS/Safari)
-      // avant de rendre la main au défilement.
-      video.play().then(function() {
-        video.pause();
-        scrubReady = true;
-        onScroll();
-      }).catch(function() { scrubReady = true; });
-    }, { once: true });
-    setTimeout(function() { if (!scrubReady) fallbackToAutoplay(); }, 4000);
-    video.addEventListener('error', fallbackToAutoplay, { once: true });
-  }
-
-  var heroInView = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting && !listening) {
-        listening = true;
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-      } else if (!e.isIntersecting && listening) {
-        listening = false;
-        window.removeEventListener('scroll', onScroll);
-      }
-    });
-  }, { threshold: 0 });
-  heroInView.observe(track);
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
 })();
 
 // Scroll progress bar
