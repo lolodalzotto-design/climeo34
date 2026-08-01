@@ -372,8 +372,7 @@ footer{background:#001E5A;padding:48px 6% 28px;}
 #mobile-cta-bar{display:none;}
 @media(max-width:768px){
   body{padding-bottom:76px;}
-  #mobile-cta-bar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:9990;background:rgba(255,255,255,0.98);backdrop-filter:blur(12px);border-top:1px solid rgba(0,30,90,0.1);box-shadow:0 -6px 24px rgba(0,30,90,0.14);padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));gap:14px;justify-content:center;transform:translateY(0);opacity:1;transition:transform 0.4s ease,opacity 0.3s ease;}
-  #mobile-cta-bar.hidden{transform:translateY(100%);opacity:0;pointer-events:none;}
+  #mobile-cta-bar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:9990;background:rgba(255,255,255,0.98);backdrop-filter:blur(12px);border-top:1px solid rgba(0,30,90,0.1);box-shadow:0 -6px 24px rgba(0,30,90,0.14);padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));gap:14px;justify-content:center;}
   .mob-cta-call,.mob-cta-wa{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;color:white;text-decoration:none;box-shadow:0 4px 14px rgba(0,30,90,0.22);transition:opacity 0.2s,transform 0.2s;flex-shrink:0;}
   .mob-cta-call:active,.mob-cta-wa:active{opacity:0.75;transform:scale(0.92);}
   .mob-cta-call{background:var(--brand);}
@@ -1128,22 +1127,12 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
 </script>
 
 <script>
-// Mobile sticky CTA bar — visible dès le chargement, masquée quand formulaire visible
+// Mobile sticky CTA bar — figée en permanence à l'écran
 (function() {
   var bar = document.getElementById('mobile-cta-bar');
   if (!bar) return;
-  var form = document.getElementById('hero-form-wrap');
   var callBtn = bar.querySelector('.mob-cta-call');
   var waBtn = bar.querySelector('.mob-cta-wa');
-
-  if (form) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        bar.classList.toggle('hidden', e.isIntersecting);
-      });
-    }, { threshold: 0.5 });
-    obs.observe(form);
-  }
 
   // Petite animation d'invitation au clic sur les deux boutons, au premier scroll
   window.addEventListener('scroll', function onFirstScroll() {
