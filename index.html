@@ -1507,14 +1507,6 @@ section { position: relative; }
     padding-bottom: max(12px, env(safe-area-inset-bottom));
     gap: 14px;
     justify-content: center;
-    transform: translateY(0);
-    opacity: 1;
-    transition: transform 0.4s ease, opacity 0.3s ease;
-  }
-  #mobile-cta-bar.hidden {
-    transform: translateY(100%);
-    opacity: 0;
-    pointer-events: none;
   }
   .mob-cta-call, .mob-cta-wa {
     display: flex;
@@ -2333,22 +2325,12 @@ function gtag_report_conversion(url) {
 </div>
 
 <script>
-// ─── Mobile sticky CTA bar — visible dès le chargement, masquée quand formulaire visible ─
+// ─── Mobile sticky CTA bar — figée en permanence à l'écran ─
 (function() {
   var bar = document.getElementById('mobile-cta-bar');
   if (!bar) return;
-  var form = document.getElementById('hero-form-wrap');
   var callBtn = bar.querySelector('.mob-cta-call');
   var waBtn = bar.querySelector('.mob-cta-wa');
-
-  if (form) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        bar.classList.toggle('hidden', e.isIntersecting);
-      });
-    }, { threshold: 0.5 });
-    obs.observe(form);
-  }
 
   // Petite animation d'invitation au clic sur les deux boutons, au premier scroll
   window.addEventListener('scroll', function onFirstScroll() {
