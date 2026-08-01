@@ -911,27 +911,36 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .price-note { text-decoration: none; color: inherit; font-size: 0.6em; vertical-align: super; cursor: pointer; }
 
 
-/* DIAGNOSTIC QUIZ BUBBLE */
+/* DIAGNOSTIC QUIZ BUBBLE — onglet vertical collé au bord droit */
 .diag-fab {
-  position: fixed; bottom: 24px; right: 24px; z-index: 91;
-  height: 50px;
-  width: auto;
-  padding: 0 20px 0 14px;
-  gap: 9px;
-  background: linear-gradient(135deg, var(--brand), var(--brand-light));
-  border-radius: 50px; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(0,30,90,0.45); cursor: pointer;
-  border: none; transition: all var(--transition);
-  white-space: nowrap;
+  position: fixed; top: 58%; right: 0; z-index: 91;
+  width: 52px; height: 172px;
+  padding: 14px 0;
+  gap: 10px;
+  background: linear-gradient(160deg, var(--brand), var(--brand-light));
+  border-radius: 16px 0 0 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: -4px 6px 24px rgba(0,30,90,0.35); cursor: pointer;
+  border: none; transition: box-shadow 0.25s ease, transform 0.25s ease;
+  transform: translateY(-50%) translateX(100%);
+  pointer-events: none;
 }
-.diag-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,30,90,0.55); }
-.diag-fab svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+.diag-fab.visible { transform: translateY(-50%) translateX(0); pointer-events: auto; }
+.diag-fab.visible.pop-in { animation: diagFabSlideIn 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes diagFabSlideIn {
+  0%   { transform: translateY(-50%) translateX(100%); }
+  65%  { transform: translateY(-50%) translateX(-10px); }
+  100% { transform: translateY(-50%) translateX(0); }
+}
+.diag-fab.visible:hover { transform: translateY(-50%) translateX(-4px); box-shadow: -8px 6px 30px rgba(0,30,90,0.45); }
+.diag-fab svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
 .diag-fab-label {
-  font-family: var(--font-head); font-weight: 700; font-size: 0.85rem;
-  color: white; letter-spacing: 0.01em;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--font-head); font-weight: 700; font-size: 0.8rem;
+  color: white; letter-spacing: 0.03em; white-space: nowrap;
 }
 .diag-fab-badge {
-  position: absolute; top: -5px; right: -5px;
+  position: absolute; top: -6px; right: 10px;
   width: 20px; height: 20px; background: #EF4444; border-radius: 50%;
   font-size: 0.65rem; font-weight: 700; color: white;
   display: flex; align-items: center; justify-content: center;
@@ -947,14 +956,16 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
   100% { opacity: 1; transform: scale(1); }
 }
 .diag-panel {
-  position: fixed; bottom: 88px; right: 24px; z-index: 91;
-  width: 320px; max-width: calc(100vw - 48px);
+  position: fixed; top: 58%; right: 70px; z-index: 91;
+  width: 320px; max-width: calc(100vw - 88px);
+  max-height: 80vh; overflow-y: auto;
   background: white; border-radius: var(--radius);
   box-shadow: 0 16px 56px rgba(0,30,90,0.14), 0 4px 16px rgba(0,0,0,0.08);
-  overflow: hidden; transform-origin: bottom right;
+  transform: translateY(-50%);
+  transform-origin: center right;
   transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.4,0,0.2,1);
 }
-.diag-panel.hidden { opacity: 0; transform: scale(0.92) translateY(12px); pointer-events: none; }
+.diag-panel.hidden { opacity: 0; transform: translateY(-50%) scale(0.92) translateX(12px); pointer-events: none; }
 .diag-header {
   background: linear-gradient(135deg, var(--brand), var(--brand-light));
   padding: 14px 16px 12px;
@@ -1013,22 +1024,22 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .diag-success strong { display: block; color: var(--text); font-size: 0.9rem; margin-bottom: 6px; }
 .diag-success p { font-size: 0.8rem; color: var(--gray-text); line-height: 1.5; }
 .diag-bubble-hint {
-  position: fixed; bottom: 88px; right: 88px; z-index: 91;
+  position: fixed; top: 58%; right: 64px; z-index: 91;
+  transform: translateY(-50%);
   background: white; padding: 8px 14px; border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0,30,90,0.15);
   font-size: 0.78rem; color: var(--text); font-weight: 500; white-space: nowrap;
   pointer-events: none;
-  animation: diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 2s both;
 }
 @keyframes diagHintPop {
-  from { opacity: 0; transform: translateX(10px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateY(-50%) translateX(10px); }
+  to { opacity: 1; transform: translateY(-50%) translateX(0); }
 }
 @media (max-width: 480px) {
-  .diag-panel { left: 12px; right: 12px; width: auto; max-width: none; bottom: 82px; }
-  .diag-fab { right: 12px; bottom: 16px; padding: 0 14px 0 12px; gap: 7px; height: 46px; }
-  .diag-fab-label { font-size: 0.78rem; }
-  .diag-bubble-hint { right: auto; left: 12px; bottom: 22px; }
+  .diag-fab { width: 46px; height: 148px; }
+  .diag-fab-label { font-size: 0.72rem; }
+  .diag-panel { right: 58px; width: auto; max-width: calc(100vw - 74px); }
+  .diag-bubble-hint { right: 52px; }
 }
 
 /* ANIMATIONS */
@@ -1535,8 +1546,6 @@ section { position: relative; }
     bottom: 76px !important;
     border-radius: 14px !important;
   }
-  /* Décaler le diagnostic FAB */
-  .diag-fab { bottom: 88px !important; }
 }
 
 /* ─── TARIFS — lien téléphone discret ─── */
@@ -2841,6 +2850,8 @@ hoverEls.forEach(btn => {
   });
 })();
 
+</script>
+<script>
 // ─── Diagnostic Quiz Bubble (branched tree) ──────────────────────────────────
 (function() {
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwumPAq-SWNknazpEzGbIiJWpsUepMP5kMXz27AA112tNz-DMoL-fagoWAUOebkrTYr/exec';
@@ -2892,14 +2903,38 @@ hoverEls.forEach(btn => {
   var progLbl  = document.getElementById('diag-progress-label');
   var hint     = document.getElementById('diag-hint');
 
-  // Show hint + badge pop when user scrolls to section 2
+  // Petit son "pop" synthétisé (sans fichier audio externe)
+  function playPopSound() {
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      var ctx  = new Ctx();
+      var osc  = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(650, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(190, ctx.currentTime + 0.13);
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.16);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.17);
+      osc.onended = function() { ctx.close(); };
+    } catch (e) {}
+  }
+
+  // Bulle masquée au chargement — apparaît (pop + son) dès qu'on scrolle jusqu'à la 2e section
   var badge     = document.getElementById('diag-fab-badge');
   var hintShown = false;
-  var triggerEl = document.getElementById('avant-apres');
-  if (triggerEl) {
+  var triggerEl = document.getElementById('avis');
+  if (triggerEl && fab) {
     var hintObs = new IntersectionObserver(function(entries) {
       if (entries[0].isIntersecting && !hintShown) {
         hintShown = true;
+        fab.classList.add('visible', 'pop-in');
+        playPopSound();
         if (badge) badge.classList.add('pop');
         hint.style.display = 'block';
         hint.style.animation = 'diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both';
