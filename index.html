@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JSCNCLBQEB"></script>
+<!-- Google Consent Mode v2 — Default denied -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'wait_for_update': 500
+  });
+  if (localStorage.getItem('cookies') === 'accepted') {
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted'
+    });
+  }
+</script>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JSCNCLBQEB"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18153085489"></script>
+<script>
+  gtag('js', new Date());
   gtag('config', 'G-JSCNCLBQEB');
+  gtag('config', 'AW-18153085489');
 </script>
 
 <meta charset="UTF-8">
@@ -1692,15 +1712,6 @@ section { position: relative; }
 }
 
 </style>
-<!-- Google Ads tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18153085489"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18153085489');
-</script>
 <script>
 function gtag_report_conversion(url) {
   var callback = function () {
@@ -2483,10 +2494,18 @@ function gtag_report_conversion(url) {
 function acceptCookies() {
   localStorage.setItem('cookies', 'accepted');
   document.getElementById('cookie-banner').classList.add('hidden');
+  // Google Consent Mode v2 — l'utilisateur accepte
+  gtag('consent', 'update', {
+    'analytics_storage': 'granted',
+    'ad_storage': 'granted',
+    'ad_user_data': 'granted',
+    'ad_personalization': 'granted'
+  });
 }
 function refuseCookies() {
   localStorage.setItem('cookies', 'refused');
   document.getElementById('cookie-banner').classList.add('hidden');
+  // Google Consent Mode v2 — l'utilisateur refuse : consentement reste "denied" (valeur par défaut), aucune action nécessaire
 }
 if (localStorage.getItem('cookies')) {
   document.getElementById('cookie-banner').classList.add('hidden');
