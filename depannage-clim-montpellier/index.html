@@ -317,8 +317,12 @@ section{padding:96px 6%;scroll-margin-top:92px;}
 .avis-grid{display:flex;align-items:flex-start;gap:20px;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);will-change:transform;}
 .avis{flex:0 0 calc((100% - 40px) / 3);min-width:0;background:white;border-radius:var(--radius);padding:32px;border:1.5px solid var(--border);transition:box-shadow var(--transition),border-color var(--transition);}
 .avis:hover{box-shadow:var(--shadow-md);border-color:rgba(0,30,90,0.2);}
+.avis{cursor:pointer;}
 .stars{color:#f59e0b;font-size:0.85rem;letter-spacing:3px;margin-bottom:16px;}
-.avis-text{font-size:0.88rem;color:var(--text);line-height:1.75;margin-bottom:24px;font-style:italic;font-weight:300;}
+.avis-text{font-size:0.88rem;color:var(--text);line-height:1.75;margin-bottom:8px;font-style:italic;font-weight:300;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;}
+.avis-text.expanded{-webkit-line-clamp:unset;overflow:visible;}
+.avis-more{display:inline-block;background:none;border:none;padding:0;margin:0 0 16px;font-size:0.8rem;font-weight:700;color:var(--brand);cursor:pointer;font-family:inherit;}
+.avis-more:hover{text-decoration:underline;}
 .avis-author{display:flex;align-items:center;gap:12px;}
 .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:0.78rem;color:white;flex-shrink:0;}
 .avis-author strong{font-size:0.85rem;color:var(--text);display:block;font-weight:700;}
@@ -1165,8 +1169,9 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
 
 <script>
 (function() {
-  var PLACE_ID = 'ChIJodubwNeGWo0R8j-otvrAcW0';
-  var API_KEY  = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
+  var PLACE_ID   = 'ChIJodubwNeGWo0R8j-otvrAcW0';
+  var API_KEY    = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
+  var REVIEW_URL = 'https://www.google.com/maps/search/?api=1&query_place_id=' + PLACE_ID;
 
   function starsHtml(n) {
     var s = '';
@@ -1198,11 +1203,7 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
       var rawReviews = place.reviews || [];
       var reviews = rawReviews.filter(function(r){ return r.rating >= 4; });
       reviews.sort(function(a, b) {
-        var na = ((a.authorAttribution && a.authorAttribution.displayName) || '').toLowerCase();
-        var nb = ((b.authorAttribution && b.authorAttribution.displayName) || '').toLowerCase();
-        if (na.startsWith('adrien')) return -1;
-        if (nb.startsWith('adrien')) return 1;
-        return 0;
+        return new Date(b.publishTime || 0) - new Date(a.publishTime || 0);
       });
       reviews = reviews.slice(0, 6);
       if (!reviews.length) { showAvisFallback(grid); return; }
@@ -1211,20 +1212,49 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
         var text    = escHtml((r.text && r.text.text) || (typeof r.text === 'string' ? r.text : ''));
         var relTime = escHtml(r.relativePublishTimeDescription || '');
         var note    = r.rating || 5;
-        return '<div class="avis">'
+        return '<div class="avis" data-href="' + REVIEW_URL + '" role="link" tabindex="0" aria-label="Voir cet avis sur Google">'
           + '<div class="stars">' + starsHtml(note) + '</div>'
           + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
+          + (text ? '<button type="button" class="avis-more">Lire la suite</button>' : '')
           + '<div class="avis-author">'
           + '<div class="avatar">' + initials(name) + '</div>'
           + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
           + '</div></div>';
       }).join('');
       initAvisSlider();
+      setupAvisInteractions(grid);
     } catch(e) {
       console.error('[Climeo34] Erreur Places:', e);
       showAvisFallback(grid);
     }
   };
+
+  function setupAvisInteractions(grid) {
+    grid.querySelectorAll('.avis').forEach(function(card) {
+      var textEl  = card.querySelector('.avis-text');
+      var moreBtn = card.querySelector('.avis-more');
+      if (textEl && moreBtn) {
+        if (textEl.scrollHeight <= textEl.clientHeight + 2) {
+          moreBtn.style.display = 'none';
+        } else {
+          moreBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var expanded = textEl.classList.toggle('expanded');
+            moreBtn.textContent = expanded ? 'Voir moins' : 'Lire la suite';
+          });
+        }
+      }
+      function openReview(e) {
+        if (e.target.closest('.avis-more')) return;
+        var url = card.dataset.href;
+        if (url) window.open(url, '_blank', 'noopener,noreferrer');
+      }
+      card.addEventListener('click', openReview);
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReview(e); }
+      });
+    });
+  }
 
   function initAvisSlider() {
     var grid     = document.getElementById('google-reviews-grid');
