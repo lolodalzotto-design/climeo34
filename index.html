@@ -1432,16 +1432,17 @@ section { position: relative; }
   letter-spacing: 0.06em;
 }
 #hero .hero-dot {
-  background: #ff6b35 !important;
-  box-shadow: 0 0 0 0 rgba(255,107,53,0.5) !important;
-  animation: dotPulse 1.5s infinite !important;
+  background: #ff3b30 !important;
+  box-shadow: 0 0 0 0 rgba(255,59,48,0.6) !important;
+  animation: dotPulse 1.4s infinite !important;
   width: 10px !important;
   height: 10px !important;
 }
 @keyframes dotPulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,107,53,0.6); }
-  70% { box-shadow: 0 0 0 8px rgba(255,107,53,0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0.7); }
+  50% { transform: scale(1.35); }
+  70% { box-shadow: 0 0 0 10px rgba(255,59,48,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,48,0); }
 }
 
 /* ─── HERO SOCIAL PROOF ─── */
