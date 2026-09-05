@@ -1776,22 +1776,24 @@ section>.centered{position:relative;z-index:2}
 @keyframes calcShine{0%,68%{left:-35%}88%,100%{left:120%}}
 .hero-kpis{margin-top:24px!important;padding-left:4px}.kpi{padding-right:26px;border-right:1px solid rgba(255,255,255,.12)}.kpi:last-child{border:0}
 .steam-label-smoke{
-  position:absolute;right:7%;bottom:13%;width:150px;height:120px;z-index:2;
-  pointer-events:none;overflow:visible;filter:blur(6px);
+  position:absolute;right:3%;bottom:10%;width:210px;height:170px;z-index:2;
+  pointer-events:none;overflow:visible;filter:blur(7px);
 }
 .steam-label-smoke span{
-  position:absolute;right:18px;bottom:0;width:42px;height:42px;border-radius:50%;
+  position:absolute;right:28px;bottom:-2px;width:62px;height:62px;border-radius:50%;
   opacity:0;will-change:transform,opacity;
-  background:radial-gradient(circle at 48% 58%,rgba(255,255,255,.82) 0 18%,rgba(202,237,252,.55) 38%,rgba(142,216,250,.18) 58%,transparent 74%);
-  animation:smokeBehindLabel 5.4s ease-out infinite;
+  background:radial-gradient(circle at 48% 58%,rgba(255,255,255,.96) 0 20%,rgba(210,241,255,.78) 39%,rgba(111,199,241,.34) 61%,transparent 78%);
+  animation:smokeBehindLabel 4.8s ease-out infinite;
 }
-.steam-label-smoke span:nth-child(2){right:48px;width:50px;height:50px;animation-delay:-1.8s}
-.steam-label-smoke span:nth-child(3){right:4px;width:36px;height:36px;animation-delay:-3.6s}
+.steam-label-smoke span:nth-child(2){right:76px;width:72px;height:72px;animation-delay:-.95s}
+.steam-label-smoke span:nth-child(3){right:4px;width:54px;height:54px;animation-delay:-1.9s}
+.steam-label-smoke span:nth-child(4){right:112px;width:58px;height:58px;animation-delay:-2.85s}
+.steam-label-smoke span:nth-child(5){right:48px;width:82px;height:82px;animation-delay:-3.8s}
 @keyframes smokeBehindLabel{
-  0%{opacity:0;transform:translate3d(0,12px,0) scale(.55)}
-  16%{opacity:.7}
-  55%{opacity:.48;transform:translate3d(-14px,-42px,0) scale(1.25)}
-  100%{opacity:0;transform:translate3d(18px,-92px,0) scale(1.85)}
+  0%{opacity:0;transform:translate3d(0,16px,0) scale(.5)}
+  12%{opacity:.94}
+  52%{opacity:.72;transform:translate3d(-18px,-62px,0) scale(1.35)}
+  100%{opacity:0;transform:translate3d(24px,-138px,0) scale(2.05)}
 }
 .hero-image-wrap::after{content:"VAPEUR\A HAUTE TEMPÉRATURE";white-space:pre;position:absolute;z-index:3;right:4%;bottom:8%;padding:11px 15px;border-radius:13px;background:rgba(0,18,71,.78);border:1px solid rgba(142,216,250,.72);color:#fff;font:700 .7rem/1.35 var(--font-head);letter-spacing:.08em;backdrop-filter:blur(10px);opacity:0;transform:translateY(14px) scale(.96);box-shadow:0 0 0 rgba(61,174,233,0),0 12px 30px rgba(0,0,0,.24);animation:badgeRevealNeon 2.4s cubic-bezier(.22,1,.36,1) .45s forwards,badgeFloat 4s ease-in-out 2.85s infinite,badgeNeonPulse 3.6s ease-in-out 2.85s infinite}
 @keyframes badgeRevealNeon{0%{opacity:0;transform:translateY(14px) scale(.96);filter:brightness(.8)}55%{opacity:.72;box-shadow:0 0 12px rgba(61,174,233,.3),0 12px 30px rgba(0,0,0,.24)}100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1.08);box-shadow:0 0 10px rgba(61,174,233,.48),0 0 28px rgba(61,174,233,.28),0 12px 30px rgba(0,0,0,.24)}}
@@ -1826,7 +1828,7 @@ section>.centered{position:relative;z-index:2}
 
 /* Mouvement piloté par le scroll */
 [data-depth]{transform:translate3d(0,var(--section-shift,0),0);will-change:transform}
-@media(max-width:900px){#hero{min-height:auto;padding-top:105px}.hero-title{font-size:clamp(2.15rem,10vw,3.25rem)!important}.hero-image-wrap::after{right:8%;bottom:2%}.steam-label-smoke{right:9%;bottom:7%;transform:scale(.78);transform-origin:bottom right}.hero-form-wrap{width:100%}.hero-light{right:-32%;top:9%;width:105vw;height:105vw;filter:blur(20px)}#tarifs .centered>div,#nettoyage-suffit .centered,.apropos-inner{padding:28px 20px;border-radius:22px}}
+@media(max-width:900px){#hero{min-height:auto;padding-top:105px}.hero-title{font-size:clamp(2.15rem,10vw,3.25rem)!important}.hero-image-wrap::after{right:8%;bottom:2%}.steam-label-smoke{right:4%;bottom:4%;transform:scale(.82);transform-origin:bottom right}.hero-form-wrap{width:100%}.hero-light{right:-32%;top:9%;width:105vw;height:105vw;filter:blur(20px)}#tarifs .centered>div,#nettoyage-suffit .centered,.apropos-inner{padding:28px 20px;border-radius:22px}}
 @media(prefers-reduced-motion:reduce){.steam-label-smoke{display:none!important}.calc-open::after,.hero-image-wrap::after{animation:none!important}.hero-image-wrap::after{opacity:1!important;transform:none!important;filter:none!important;box-shadow:0 0 10px rgba(61,174,233,.36),0 12px 30px rgba(0,0,0,.24)!important}[data-depth],.hero-title,.hero-form-wrap,.hero-light{transform:none!important}.hero-light{opacity:.24!important}}
 
 </style>
@@ -1943,7 +1945,7 @@ function gtag_report_conversion(url) {
     </div>
     <!-- IMAGE HERO — illustration climatiseur encrassé avant entretien -->
     <div class="hero-image-wrap hero-reveal" id="hero-image-wrap">
-      <div class="steam-label-smoke" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="steam-label-smoke" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
       <picture>
         <source srcset="hero-photo-11-aout.webp" type="image/webp">
         <img src="hero-photo-11-aout.png"
