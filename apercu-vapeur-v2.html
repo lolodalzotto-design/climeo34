@@ -34,7 +34,7 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('motion-ready');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APERÇU V4 — Vapeur au scroll | Climeo34</title>
+<title>APERÇU V5 — Vapeur immersive | Climeo34</title>
 <meta name="description" content="Nettoyage vapeur haute température de climatisation à Montpellier et dans l'Hérault. Monosplit dès 150 € TTC avec groupe extérieur. Devis gratuit, intervention sous 48h.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="keywords" content="climatisation Montpellier, entretien climatisation Montpellier, maintenance climatisation Montpellier, dépannage climatisation Montpellier, nettoyage climatisation Hérault, désinfection clim Hérault, tarif entretien climatisation réversible, entretien climatisation locataire, prix entretien climatisation, technicien climatisation Hérault, Climeo34">
@@ -405,6 +405,27 @@ body {
 }
 .hero-airline::before,.hero-airline::after{content:"";position:absolute;inset:28px -4% auto 8%;height:45%;border-top:1px solid rgba(111,199,241,.32);border-radius:50%}
 .hero-airline::after{inset:64px 8% auto -8%;border-color:rgba(255,255,255,.16)}
+.steam-burst{
+  position:fixed;inset:0;z-index:950;pointer-events:none;overflow:hidden;
+  opacity:var(--burst-opacity,0);visibility:hidden;
+  transition:visibility 0s linear .12s;will-change:opacity;
+}
+.steam-burst.is-active{visibility:visible;transition:none}
+.steam-burst-cloud{
+  position:absolute;left:var(--burst-x,72%);top:var(--burst-y,43%);
+  width:44vmin;height:44vmin;border-radius:48% 52% 46% 54%;
+  transform:translate(-50%,-50%) translate3d(var(--burst-drift,0),var(--burst-rise,0),0) scale(var(--burst-scale,.18));
+  transform-origin:center;will-change:transform,opacity;
+  background:
+    radial-gradient(circle at 35% 40%,rgba(255,255,255,.94) 0 15%,transparent 43%),
+    radial-gradient(circle at 68% 54%,rgba(232,248,255,.9) 0 19%,transparent 49%),
+    radial-gradient(circle at 48% 72%,rgba(183,228,249,.62) 0 18%,transparent 52%);
+  filter:blur(10px);mix-blend-mode:screen;
+}
+.steam-burst-cloud:nth-child(2){margin-left:-8vw;margin-top:8vh;width:36vmin;height:36vmin;opacity:.64;filter:blur(18px)}
+.steam-burst-cloud:nth-child(3){margin-left:9vw;margin-top:-7vh;width:30vmin;height:30vmin;opacity:.48;filter:blur(22px)}
+@media(max-width:768px){.steam-burst{--burst-x:68%;--burst-y:34%}.steam-burst-cloud{width:62vmin;height:62vmin;filter:blur(8px)}}
+@media(prefers-reduced-motion:reduce){.steam-burst{display:none!important}}
 .steam-proof {
   display:inline-flex; align-items:center; gap:8px; margin:0 0 22px; padding:8px 14px;
   color:#fff; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22);
@@ -1868,8 +1889,9 @@ function gtag_report_conversion(url) {
 </script>
 </head>
 <body>
-<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V4 · SCROLL</div>
+<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V5 · VAPEUR WOW</div>
 <div id="scroll-progress"></div>
+<div class="steam-burst" id="steam-burst" aria-hidden="true"><span class="steam-burst-cloud"></span><span class="steam-burst-cloud"></span><span class="steam-burst-cloud"></span></div>
 
 <!-- COOKIE -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
@@ -2748,6 +2770,18 @@ window.addEventListener('scroll', () => {
   document.documentElement.style.setProperty('--steam-lift', (70 - steamJourney * 260).toFixed(1) + 'px');
   document.documentElement.style.setProperty('--air-rise', (-steamJourney * 85).toFixed(1) + 'px');
   document.documentElement.style.setProperty('--air-drift', (-steamJourney * 50).toFixed(1) + 'px');
+
+  // Bouffée au premier scroll : départ depuis la clim, approche caméra, dissipation.
+  const burst = document.getElementById('steam-burst');
+  let burstOpacity = 0;
+  if (scrolled > 12 && scrolled <= 105) burstOpacity = (scrolled - 12) / 93;
+  if (scrolled > 105 && scrolled < 390) burstOpacity = 1 - ((scrolled - 105) / 285);
+  const burstJourney = Math.max(0, Math.min(1, (scrolled - 12) / 378));
+  document.documentElement.style.setProperty('--burst-opacity', (burstOpacity * .84).toFixed(3));
+  document.documentElement.style.setProperty('--burst-scale', (.2 + burstJourney * 4.1).toFixed(3));
+  document.documentElement.style.setProperty('--burst-drift', (-burstJourney * 18).toFixed(1) + 'vw');
+  document.documentElement.style.setProperty('--burst-rise', (-burstJourney * 10).toFixed(1) + 'vh');
+  if (burst) burst.classList.toggle('is-active', burstOpacity > .015);
 }, { passive: true });
 
 // KPI counter animation
