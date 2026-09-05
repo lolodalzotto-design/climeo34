@@ -34,7 +34,7 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('motion-ready');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APERÇU V3 — Refonte motion | Climeo34</title>
+<title>APERÇU V4 — Vapeur au scroll | Climeo34</title>
 <meta name="description" content="Nettoyage vapeur haute température de climatisation à Montpellier et dans l'Hérault. Monosplit dès 150 € TTC avec groupe extérieur. Devis gratuit, intervention sous 48h.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="keywords" content="climatisation Montpellier, entretien climatisation Montpellier, maintenance climatisation Montpellier, dépannage climatisation Montpellier, nettoyage climatisation Hérault, désinfection clim Hérault, tarif entretien climatisation réversible, entretien climatisation locataire, prix entretien climatisation, technicien climatisation Hérault, Climeo34">
@@ -373,7 +373,7 @@ body {
   overflow: hidden; padding: 160px 6% 100px;
   z-index: 0;
 }
-.steam-field { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; mix-blend-mode:screen; }
+.steam-field { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; mix-blend-mode:screen; opacity:var(--steam-presence,0); transition:opacity .08s linear; }
 .steam-wisp {
   position:absolute; bottom:-8%; width:clamp(130px,16vw,240px); height:72%;
   opacity:.62; filter:blur(8px);
@@ -400,7 +400,8 @@ body {
   position:absolute; z-index:2; right:5%; top:20%; width:42%; height:46%;
   border-top:1px solid rgba(255,255,255,.22); border-radius:50%;
   transform:translate3d(var(--air-drift,0px),var(--air-rise,0px),0) rotate(-8deg);
-  opacity:.7; pointer-events:none;
+  opacity:calc(var(--steam-presence,0) * .7); pointer-events:none;
+  transition:opacity .08s linear;
 }
 .hero-airline::before,.hero-airline::after{content:"";position:absolute;inset:28px -4% auto 8%;height:45%;border-top:1px solid rgba(111,199,241,.32);border-radius:50%}
 .hero-airline::after{inset:64px 8% auto -8%;border-color:rgba(255,255,255,.16)}
@@ -1867,7 +1868,7 @@ function gtag_report_conversion(url) {
 </script>
 </head>
 <body>
-<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V3 · MOTION UX</div>
+<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V4 · SCROLL</div>
 <div id="scroll-progress"></div>
 
 <!-- COOKIE -->
@@ -1966,10 +1967,6 @@ function gtag_report_conversion(url) {
           <p>Merci ! Laurent vous rappelle sous 24h maxi.</p>
         </div>
         </div>
-      </div>
-      <div class="hero-kpis hero-reveal r7">
-        <div class="kpi"><div class="kpi-val"><span style="color:#f59e0b;font-size:1.4rem;vertical-align:-2px;">★</span> 5/5</div><div class="kpi-label">Note Google</div></div>
-        <div class="kpi"><div class="kpi-val">99,9%</div><div class="kpi-label">Jusqu'à 99,9 % des bactéries éliminées</div></div>
       </div>
     </div>
     <!-- IMAGE HERO — illustration climatiseur encrassé avant entretien -->
@@ -2741,9 +2738,16 @@ window.addEventListener('scroll', () => {
   const maxScroll = document.body.scrollHeight - window.innerHeight;
   const progress = (scrolled / maxScroll) * 100;
   document.getElementById('scroll-progress').style.width = progress + '%';
-  document.documentElement.style.setProperty('--steam-lift', -Math.min(scrolled * 0.34, 220) + 'px');
-  document.documentElement.style.setProperty('--air-rise', -Math.min(scrolled * 0.12, 80) + 'px');
-  document.documentElement.style.setProperty('--air-drift', -Math.min(scrolled * 0.06, 42) + 'px');
+  // La vapeur arrive au premier geste, accompagne brièvement la lecture,
+  // puis s'efface avant la section suivante.
+  let steamPresence = 0;
+  if (scrolled > 18 && scrolled <= 180) steamPresence = (scrolled - 18) / 162;
+  if (scrolled > 180 && scrolled < 620) steamPresence = 1 - ((scrolled - 180) / 440);
+  const steamJourney = Math.max(0, Math.min(1, (scrolled - 18) / 602));
+  document.documentElement.style.setProperty('--steam-presence', steamPresence.toFixed(3));
+  document.documentElement.style.setProperty('--steam-lift', (70 - steamJourney * 260).toFixed(1) + 'px');
+  document.documentElement.style.setProperty('--air-rise', (-steamJourney * 85).toFixed(1) + 'px');
+  document.documentElement.style.setProperty('--air-drift', (-steamJourney * 50).toFixed(1) + 'px');
 }, { passive: true });
 
 // KPI counter animation
