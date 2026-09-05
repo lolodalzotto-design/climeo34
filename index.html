@@ -2805,9 +2805,28 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     if (controls) controls.style.display = 'none';
   }
 
-  // Point d'accès Google historique — seul à accepter reviews_sort=newest
-  // (la librairie JS "places" ne renvoie que les avis jugés "pertinents" par
-  // Google, pas forcément les plus récents).
+  // Cache statique régénéré côté serveur (GitHub Actions, voir
+  // .github/workflows/update-google-reviews.yml). C'est la seule source qui
+  // garantit réellement "le plus récent en premier" : l'appel direct au point
+  // d'accès Google ci-dessous échoue systématiquement depuis un navigateur
+  // (Google n'autorise pas les requêtes CORS sur cette API), donc sans ce
+  // cache le site retombe sur la librairie JS "places", qui ne trie pas par
+  // date et ne renvoie que les avis jugés "pertinents" par Google.
+  function fetchReviewsFromCache() {
+    return fetch('/data/google-reviews.json', { cache: 'no-store' }).then(function(res) {
+      if (!res.ok) throw new Error('cache HTTP ' + res.status);
+      return res.json();
+    }).then(function(data) {
+      if (!data || !Array.isArray(data.reviews) || !data.reviews.length) {
+        throw new Error('cache vide');
+      }
+      return data;
+    });
+  }
+
+  // Point d'accès Google historique — seul à accepter reviews_sort=newest,
+  // mais bloqué par CORS depuis un navigateur (voir plus haut). Conservé en
+  // repli au cas où un jour Google l'autoriserait, ou pour un usage serveur.
   function fetchReviewsNewestFirst() {
     var url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + PLACE_ID
       + '&fields=rating,user_ratings_total,reviews&reviews_sort=newest&language=fr&key=' + API_KEY;
@@ -2907,11 +2926,16 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
   function init() {
     var grid = document.getElementById('google-reviews-grid');
     if (!grid) return;
-    fetchReviewsNewestFirst().then(function(data) {
+    fetchReviewsFromCache().then(function(data) {
       renderReviews(grid, data);
     }).catch(function(e) {
-      console.warn('[Climeo34] Avis triés par date indisponibles, repli sur la librairie JS:', e);
-      loadJsLibraryFallback(grid);
+      console.warn('[Climeo34] Cache avis indisponible, tentative d’appel direct à Google:', e);
+      fetchReviewsNewestFirst().then(function(data) {
+        renderReviews(grid, data);
+      }).catch(function(e2) {
+        console.warn('[Climeo34] Avis triés par date indisponibles, repli sur la librairie JS:', e2);
+        loadJsLibraryFallback(grid);
+      });
     });
   }
 
