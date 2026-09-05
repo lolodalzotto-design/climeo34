@@ -1891,7 +1891,6 @@ function gtag_report_conversion(url) {
 </head>
 <body>
 <div id="scroll-progress"></div>
-<div class="steam-burst" id="steam-burst" aria-hidden="true"><span class="steam-burst-cloud"></span><span class="steam-burst-cloud"></span><span class="steam-burst-cloud"></span></div>
 
 <!-- COOKIE -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
@@ -1929,8 +1928,6 @@ function gtag_report_conversion(url) {
 <!-- HERO -->
 <header id="hero" role="banner">
   <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="steam-field" aria-hidden="true"><span class="steam-wisp"></span><span class="steam-wisp"></span><span class="steam-wisp"></span></div>
-  <div class="hero-airline" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-eyebrow hero-reveal r1">
@@ -2755,30 +2752,11 @@ document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEac
 })();
 
 // Scroll progress bar
-let steamBurstPlayed = false;
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
   const progress = (scrolled / maxScroll) * 100;
   document.getElementById('scroll-progress').style.width = progress + '%';
-  // La vapeur arrive au premier geste, accompagne brièvement la lecture,
-  // puis s'efface avant la section suivante.
-  let steamPresence = 0;
-  if (scrolled > 18 && scrolled <= 180) steamPresence = (scrolled - 18) / 162;
-  if (scrolled > 180 && scrolled < 620) steamPresence = 1 - ((scrolled - 180) / 440);
-  const steamJourney = Math.max(0, Math.min(1, (scrolled - 18) / 602));
-  document.documentElement.style.setProperty('--steam-presence', steamPresence.toFixed(3));
-  document.documentElement.style.setProperty('--steam-lift', (70 - steamJourney * 260).toFixed(1) + 'px');
-  document.documentElement.style.setProperty('--air-rise', (-steamJourney * 85).toFixed(1) + 'px');
-  document.documentElement.style.setProperty('--air-drift', (-steamJourney * 50).toFixed(1) + 'px');
-
-  // Bouffée au premier scroll : durée fixe, même lors d'un geste très rapide.
-  const burst = document.getElementById('steam-burst');
-  if (burst && !steamBurstPlayed && scrolled > 8 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    steamBurstPlayed = true;
-    burst.classList.add('is-active');
-    setTimeout(function(){ burst.classList.remove('is-active'); }, 1700);
-  }
 }, { passive: true });
 
 // KPI counter animation
