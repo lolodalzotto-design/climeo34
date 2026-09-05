@@ -381,12 +381,6 @@ body {
 }
 .hero-light::before{content:"";position:absolute;left:2%;top:44%;width:92%;height:12%;border-radius:50%;background:linear-gradient(90deg,transparent,rgba(201,240,255,.5),transparent);filter:blur(16px);transform:rotate(-18deg) scaleX(var(--beam-scale,.7));opacity:var(--beam-opacity,.25)}
 .hero-light::after{content:"";position:absolute;inset:17%;border-radius:50%;border:1px solid rgba(190,237,255,.34);box-shadow:0 0 110px rgba(111,199,241,.30),inset 0 0 80px rgba(111,199,241,.12)}
-.steam-proof {
-  display:inline-flex; align-items:center; gap:8px; margin:0 0 22px; padding:8px 14px;
-  color:#fff; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22);
-  border-radius:999px; font-family:var(--font-head); font-size:.78rem; font-weight:600;
-  backdrop-filter:blur(10px);
-}
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg,
@@ -1898,7 +1892,6 @@ function gtag_report_conversion(url) {
         nettoie en profondeur votre split, sa turbine et son échangeur.
         <strong>Dès 150€ TTC<a href="#footnote-frais" class="price-note">*</a>, groupe extérieur inclus.</strong>
       </p>
-      <div class="steam-proof hero-reveal r3">♨ Vapeur haute température · jusqu'à 99,9 % des bactéries éliminées</div>
       <!-- CTA HERO -->
       <div class="hero-actions hero-reveal r4">
         <a href="tel:0603257679" class="btn-primary" onclick="return gtag_report_conversion('tel:0603257679')">
@@ -2900,8 +2893,12 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     var countEl = document.getElementById('google-avis-count');
     if (countEl && data.count) countEl.textContent = data.count;
 
-    var reviews = (data.reviews || []).filter(function(r){ return r.rating >= 4; });
-    reviews.sort(function(a, b) { return (b.time || 0) - (a.time || 0); });
+    var reviews = (data.reviews || []).slice();
+    reviews.sort(function(a, b) {
+      var newest = Number(b.time) || 0;
+      var oldest = Number(a.time) || 0;
+      return newest - oldest;
+    });
     reviews = reviews.slice(0, 6);
     if (!reviews.length) { showAvisFallback(grid); return; }
 
