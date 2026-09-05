@@ -1063,25 +1063,6 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
   65%  { transform: scale(1.35); }
   100% { opacity: 1; transform: scale(1); }
 }
-/* ONGLET INSTAGRAM — logo seul, collé au bord droit sous l'onglet devis */
-.ig-fab {
-  position: fixed; top: 76%; right: 0; z-index: 90;
-  width: 52px; height: 52px;
-  display: flex; align-items: center; justify-content: center;
-  background: white;
-  border-radius: 16px 0 0 16px;
-  box-shadow: -4px 6px 24px rgba(0,30,90,0.18);
-  transform: translateY(-50%);
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.ig-fab:hover { transform: translateY(-50%) translateX(-4px); box-shadow: -8px 6px 30px rgba(0,30,90,0.28); }
-.ig-fab svg { width: 26px; height: 26px; }
-@media (max-width: 600px) {
-  .ig-fab { width: 46px; height: 46px; top: 78%; }
-  .ig-fab svg { width: 22px; height: 22px; }
-}
-
 .diag-panel {
   position: fixed; top: 58%; right: 70px; z-index: 91;
   width: 320px; max-width: calc(100vw - 88px);
@@ -1150,23 +1131,12 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .diag-success-icon { font-size: 2.2rem; margin-bottom: 8px; }
 .diag-success strong { display: block; color: var(--text); font-size: 0.9rem; margin-bottom: 6px; }
 .diag-success p { font-size: 0.8rem; color: var(--gray-text); line-height: 1.5; }
-.diag-bubble-hint {
-  position: fixed; top: 58%; right: 64px; z-index: 91;
-  transform: translateY(-50%);
-  background: white; padding: 8px 14px; border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,30,90,0.15);
-  font-size: 0.78rem; color: var(--text); font-weight: 500; white-space: nowrap;
-  pointer-events: none;
-}
-@keyframes diagHintPop {
-  from { opacity: 0; transform: translateY(-50%) translateX(10px); }
   to { opacity: 1; transform: translateY(-50%) translateX(0); }
 }
 @media (max-width: 480px) {
   .diag-fab { width: 46px; height: 148px; }
   .diag-fab-label { font-size: 0.72rem; }
   .diag-panel { right: 58px; width: auto; max-width: calc(100vw - 74px); }
-  .diag-bubble-hint { right: 52px; }
 }
 
 /* ANIMATIONS */
@@ -2567,7 +2537,6 @@ function gtag_report_conversion(url) {
 
 
 <!-- DIAGNOSTIC QUIZ BUBBLE -->
-<div class="diag-bubble-hint" id="diag-hint" style="display:none">Estimation en 2 min chrono !</div>
 
 <button class="diag-fab" id="diag-fab" aria-label="Estimation climatisation rapide">
   <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
@@ -2575,19 +2544,6 @@ function gtag_report_conversion(url) {
   <span class="diag-fab-badge" id="diag-fab-badge">1</span>
 </button>
 
-<a class="ig-fab" href="https://www.instagram.com/climeo34?igsh=MXZpZ2MwdHA1YWgzOQ==" target="_blank" rel="noopener" aria-label="Instagram Climeo34">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <defs>
-      <linearGradient id="igGradientFab" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#FFDD55"/>
-        <stop offset="35%" stop-color="#FF543E"/>
-        <stop offset="70%" stop-color="#C837AB"/>
-        <stop offset="100%" stop-color="#3051F3"/>
-      </linearGradient>
-    </defs>
-    <path fill="url(#igGradientFab)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-  </svg>
-</a>
 
 <div class="diag-panel hidden" id="diag-panel">
   <div class="diag-header">
@@ -3248,29 +3204,7 @@ hoverEls.forEach(btn => {
   var progLbl  = document.getElementById('diag-progress-label');
   var hint     = document.getElementById('diag-hint');
 
-  // Petit son "pop" synthétisé (sans fichier audio externe)
-  function playPopSound() {
-    try {
-      var Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) return;
-      var ctx  = new Ctx();
-      var osc  = ctx.createOscillator();
-      var gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(650, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(190, ctx.currentTime + 0.13);
-      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + 0.012);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.16);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.17);
-      osc.onended = function() { ctx.close(); };
-    } catch (e) {}
-  }
-
-  // Bulle masquée au chargement — apparaît (pop + son) dès qu'on scrolle jusqu'à la 2e section
+  // L’onglet Devis apparaît discrètement à partir de la section Avis
   var badge     = document.getElementById('diag-fab-badge');
   var hintShown = false;
   var triggerEl = document.getElementById('avis');
@@ -3279,12 +3213,7 @@ hoverEls.forEach(btn => {
       if (entries[0].isIntersecting && !hintShown) {
         hintShown = true;
         fab.classList.add('visible', 'pop-in');
-        playPopSound();
         if (badge) badge.classList.add('pop');
-        hint.style.display = 'block';
-        hint.style.animation = 'diagHintPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both';
-        setTimeout(function() { hint.style.transition = 'opacity 0.5s'; hint.style.opacity = '0'; }, 5000);
-        setTimeout(function() { hint.style.display = 'none'; }, 5600);
         hintObs.disconnect();
       }
     }, { threshold: 0.2 });
