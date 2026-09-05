@@ -372,38 +372,6 @@ body {
   overflow: hidden; padding: 160px 6% 100px;
   z-index: 0;
 }
-.steam-field { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; mix-blend-mode:screen; opacity:var(--steam-presence,0); transition:opacity .08s linear; }
-.steam-wisp {
-  position:absolute; bottom:-8%; width:clamp(130px,16vw,240px); height:72%;
-  opacity:.62; filter:blur(8px);
-  transform:translate3d(0,var(--steam-lift,0px),0);
-  will-change:transform;
-}
-.steam-wisp::before,.steam-wisp::after {
-  content:""; position:absolute; inset:0; border-radius:48% 52% 44% 56%;
-  background:
-    radial-gradient(ellipse at 45% 82%,rgba(255,255,255,.72),transparent 34%),
-    radial-gradient(ellipse at 60% 48%,rgba(224,243,255,.58),transparent 31%),
-    radial-gradient(ellipse at 42% 17%,rgba(255,255,255,.45),transparent 28%);
-  animation:steamCurl 5.8s ease-in-out infinite alternate;
-}
-.steam-wisp::after { opacity:.58; filter:blur(15px); animation-duration:8s; animation-direction:alternate-reverse; }
-.steam-wisp:nth-child(1){left:47%}.steam-wisp:nth-child(2){left:66%;height:82%;opacity:.48}.steam-wisp:nth-child(3){left:83%;height:62%;opacity:.52}
-.steam-wisp:nth-child(2)::before{animation-delay:-3.5s}.steam-wisp:nth-child(3)::before{animation-delay:-1.8s}
-@keyframes steamCurl {
-  0%{transform:translate3d(-18px,32px,0) rotate(-9deg) scale(.88);opacity:.45}
-  45%{transform:translate3d(18px,-12px,0) rotate(7deg) scale(1.03);opacity:.82}
-  100%{transform:translate3d(-6px,-62px,0) rotate(-3deg) scale(1.14);opacity:.25}
-}
-.hero-airline {
-  position:absolute; z-index:2; right:5%; top:20%; width:42%; height:46%;
-  border-top:1px solid rgba(255,255,255,.22); border-radius:50%;
-  transform:translate3d(var(--air-drift,0px),var(--air-rise,0px),0) rotate(-8deg);
-  opacity:calc(var(--steam-presence,0) * .7); pointer-events:none;
-  transition:opacity .08s linear;
-}
-.hero-airline::before,.hero-airline::after{content:"";position:absolute;inset:28px -4% auto 8%;height:45%;border-top:1px solid rgba(111,199,241,.32);border-radius:50%}
-.hero-airline::after{inset:64px 8% auto -8%;border-color:rgba(255,255,255,.16)}
 .hero-light{
   position:absolute;z-index:1;right:0;top:12%;width:58vw;height:58vw;max-width:850px;max-height:850px;
   border-radius:50%;pointer-events:none;opacity:var(--light-opacity,.72);
@@ -413,29 +381,6 @@ body {
 }
 .hero-light::before{content:"";position:absolute;left:2%;top:44%;width:92%;height:12%;border-radius:50%;background:linear-gradient(90deg,transparent,rgba(201,240,255,.5),transparent);filter:blur(16px);transform:rotate(-18deg) scaleX(var(--beam-scale,.7));opacity:var(--beam-opacity,.25)}
 .hero-light::after{content:"";position:absolute;inset:17%;border-radius:50%;border:1px solid rgba(190,237,255,.34);box-shadow:0 0 110px rgba(111,199,241,.30),inset 0 0 80px rgba(111,199,241,.12)}
-.steam-burst{
-  position:fixed;inset:0;z-index:950;pointer-events:none;overflow:hidden;
-  opacity:0;visibility:hidden;will-change:opacity;
-}
-.steam-burst.is-active{visibility:visible;animation:steamBurstFade 1.65s ease-out both}
-.steam-burst-cloud{
-  position:absolute;left:72%;top:60%;
-  width:44vmin;height:44vmin;border-radius:48% 52% 46% 54%;
-  transform:translate(-50%,-50%) scale(.18);
-  transform-origin:center;will-change:transform,opacity;
-  background:
-    radial-gradient(circle at 35% 40%,rgba(255,255,255,.94) 0 15%,transparent 43%),
-    radial-gradient(circle at 68% 54%,rgba(232,248,255,.9) 0 19%,transparent 49%),
-    radial-gradient(circle at 48% 72%,rgba(183,228,249,.62) 0 18%,transparent 52%);
-  filter:blur(10px);mix-blend-mode:screen;
-}
-.steam-burst.is-active .steam-burst-cloud{animation:steamToCamera 1.65s cubic-bezier(.18,.72,.22,1) both}
-.steam-burst-cloud:nth-child(2){margin-left:-8vw;margin-top:8vh;width:36vmin;height:36vmin;opacity:.64;filter:blur(18px)}
-.steam-burst-cloud:nth-child(3){margin-left:9vw;margin-top:-7vh;width:30vmin;height:30vmin;opacity:.48;filter:blur(22px)}
-@keyframes steamBurstFade{0%{opacity:0}18%{opacity:.8}58%{opacity:.86}100%{opacity:0}}
-@keyframes steamToCamera{0%{transform:translate(-50%,-50%) translate3d(0,25px,0) scale(.18)}55%{transform:translate(-50%,-50%) translate3d(-8vw,-3vh,0) scale(1.75)}100%{transform:translate(-50%,-50%) translate3d(-18vw,-10vh,0) scale(4.4)}}
-@media(max-width:768px){.steam-burst-cloud{left:66%;top:56%;width:62vmin;height:62vmin;filter:blur(8px)}}
-@media(prefers-reduced-motion:reduce){.steam-burst{display:none!important}}
 .steam-proof {
   display:inline-flex; align-items:center; gap:8px; margin:0 0 22px; padding:8px 14px;
   color:#fff; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22);
@@ -459,6 +404,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+}
+.steam-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 .hero-dot {
   width: 10px;
@@ -1917,11 +1868,11 @@ function gtag_report_conversion(url) {
   <div class="hero-inner">
     <div class="hero-content">
       <h1 class="hero-title hero-reveal r1">
-        <span class="hero-title-line"><span class="hero-dot" aria-hidden="true"></span><span>Nettoyage vapeur de climatisation</span></span><br>
+        <span class="hero-title-line"><span>Nettoyage vapeur de climatisation</span></span><br>
         <span class="accent">à Montpellier &amp; dans l'Hérault</span>
       </h1>
       <p class="hero-lead hero-reveal r3">
-        Découvrez une méthode encore rare dans la région : la <strong>vapeur haute température</strong>
+        Découvrez une méthode encore rare dans la région : la <span class="steam-highlight"><span class="hero-dot" aria-hidden="true"></span><strong>vapeur haute température</strong></span>
         nettoie en profondeur votre split, sa turbine et son échangeur.
         <strong>Dès 150€ TTC<a href="#footnote-frais" class="price-note">*</a>, groupe extérieur inclus.</strong>
       </p>
