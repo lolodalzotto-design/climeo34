@@ -1,0 +1,78 @@
+name: Update Google reviews cache
+
+# Récupère les avis Google côté serveur (aucune restriction CORS ici, contrairement
+# au navigateur), triés par date décroissante, et les écrit dans data/google-reviews.json.
+# Le site charge ce fichier statique en priorité pour garantir que les avis les plus
+# récents s'affichent réellement en premier.
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # tous les jours à 5h UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-google-reviews
+  cancel-in-progress: false
+
+jobs:
+  update-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Récupérer les avis Google (triés par date)
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_PLACE_ID: ChIJodubwNeGWo0R8j-otvrAcW0
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GOOGLE_PLACES_API_KEY:-}" ]; then
+            echo "::error::Secret GOOGLE_PLACES_API_KEY manquant — voir README du repo pour le configurer."
+            exit 1
+          fi
+
+          curl -sS -G "https://maps.googleapis.com/maps/api/place/details/json" \
+            -H "Referer: https://climeo34.fr/" \
+            --data-urlencode "place_id=${GOOGLE_PLACE_ID}" \
+            --data-urlencode "fields=rating,user_ratings_total,reviews" \
+            --data-urlencode "reviews_sort=newest" \
+            --data-urlencode "language=fr" \
+            --data-urlencode "key=${GOOGLE_PLACES_API_KEY}" \
+            -o /tmp/google-place-details.json
+
+          status=$(jq -r '.status // "UNKNOWN"' /tmp/google-place-details.json)
+          if [ "$status" != "OK" ]; then
+            echo "::error::Google API a répondu status=$status — le fichier existant est conservé."
+            jq -r '.error_message // empty' /tmp/google-place-details.json || true
+            exit 1
+          fi
+
+          mkdir -p data
+          jq --arg fetched_at "$(date -u +%FT%TZ)" '
+            {
+              fetched_at: $fetched_at,
+              count: .result.user_ratings_total,
+              rating: .result.rating,
+              reviews: (
+                (.result.reviews // [])
+                | map({
+                    name: (.author_name // "Client"),
+                    text: (.text // ""),
+                    relTime: (.relative_time_description // ""),
+                    rating: (.rating // 5),
+                    time: ((.time // 0) * 1000)
+                  })
+                | sort_by(-.time)
+              )
+            }' /tmp/google-place-details.json > data/google-reviews.json
+
+      - name: Commit et push si changement
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: actualise le cache des avis Google"
+          file_pattern: data/google-reviews.json
