@@ -34,7 +34,7 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('motion-ready');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APERÇU V8 — Motion lumière | Climeo34</title>
+<title>APERÇU V9 — Motion accentuée | Climeo34</title>
 <meta name="description" content="Nettoyage vapeur haute température de climatisation à Montpellier et dans l'Hérault. Monosplit dès 150 € TTC avec groupe extérieur. Devis gratuit, intervention sous 48h.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="keywords" content="climatisation Montpellier, entretien climatisation Montpellier, maintenance climatisation Montpellier, dépannage climatisation Montpellier, nettoyage climatisation Hérault, désinfection clim Hérault, tarif entretien climatisation réversible, entretien climatisation locataire, prix entretien climatisation, technicien climatisation Hérault, Climeo34">
@@ -406,13 +406,14 @@ body {
 .hero-airline::before,.hero-airline::after{content:"";position:absolute;inset:28px -4% auto 8%;height:45%;border-top:1px solid rgba(111,199,241,.32);border-radius:50%}
 .hero-airline::after{inset:64px 8% auto -8%;border-color:rgba(255,255,255,.16)}
 .hero-light{
-  position:absolute;z-index:1;right:4%;top:18%;width:52vw;height:52vw;max-width:760px;max-height:760px;
-  border-radius:50%;pointer-events:none;opacity:var(--light-opacity,.44);
-  background:radial-gradient(circle,rgba(116,211,255,.34) 0%,rgba(61,174,233,.16) 28%,rgba(61,174,233,.045) 52%,transparent 72%);
+  position:absolute;z-index:1;right:0;top:12%;width:58vw;height:58vw;max-width:850px;max-height:850px;
+  border-radius:50%;pointer-events:none;opacity:var(--light-opacity,.72);
+  background:radial-gradient(circle,rgba(191,237,255,.72) 0%,rgba(84,194,244,.38) 20%,rgba(61,174,233,.16) 43%,transparent 70%);
   transform:translate3d(var(--light-x,0),var(--light-y,0),0) scale(var(--light-scale,1));
-  filter:blur(28px);will-change:transform,opacity;
+  filter:blur(18px);will-change:transform,opacity;
 }
-.hero-light::after{content:"";position:absolute;inset:18%;border-radius:50%;border:1px solid rgba(166,226,255,.16);box-shadow:0 0 70px rgba(111,199,241,.12)}
+.hero-light::before{content:"";position:absolute;left:2%;top:44%;width:92%;height:12%;border-radius:50%;background:linear-gradient(90deg,transparent,rgba(201,240,255,.5),transparent);filter:blur(16px);transform:rotate(-18deg) scaleX(var(--beam-scale,.7));opacity:var(--beam-opacity,.25)}
+.hero-light::after{content:"";position:absolute;inset:17%;border-radius:50%;border:1px solid rgba(190,237,255,.34);box-shadow:0 0 110px rgba(111,199,241,.30),inset 0 0 80px rgba(111,199,241,.12)}
 .steam-burst{
   position:fixed;inset:0;z-index:950;pointer-events:none;overflow:hidden;
   opacity:0;visibility:hidden;will-change:opacity;
@@ -1899,7 +1900,7 @@ function gtag_report_conversion(url) {
 </script>
 </head>
 <body>
-<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V8 · LUMIÈRE</div>
+<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V9 · MOTION +</div>
 <div id="scroll-progress"></div>
 
 <!-- COOKIE -->
@@ -2749,8 +2750,9 @@ document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEac
     var rect = hero.getBoundingClientRect();
     if (rect.bottom > 0 && rect.top < window.innerHeight) {
       var progress = 1 - (rect.bottom / (rect.height + window.innerHeight));
-      var offset = (progress - 0.5) * 40;
-      img.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
+      var offset = (progress - 0.5) * 88;
+      var depthScale = 1 + Math.max(0, Math.min(1, progress)) * 0.045;
+      img.style.transform = 'translateY(' + offset.toFixed(1) + 'px) scale(' + depthScale.toFixed(3) + ')';
     }
     ticking = false;
   }
@@ -2769,15 +2771,17 @@ window.addEventListener('scroll', () => {
   const progress = (scrolled / maxScroll) * 100;
   document.getElementById('scroll-progress').style.width = progress + '%';
   const heroMotion = Math.max(0, Math.min(1, scrolled / 720));
-  document.documentElement.style.setProperty('--light-x', (-heroMotion * 28).toFixed(1) + 'vw');
-  document.documentElement.style.setProperty('--light-y', (heroMotion * 34).toFixed(1) + 'vh');
-  document.documentElement.style.setProperty('--light-scale', (1 + heroMotion * .42).toFixed(3));
-  document.documentElement.style.setProperty('--light-opacity', (.44 - heroMotion * .32).toFixed(3));
-  document.documentElement.style.setProperty('--title-rise', (-heroMotion * 14).toFixed(1) + 'px');
-  document.documentElement.style.setProperty('--title-scale', (1 - heroMotion * .035).toFixed(3));
-  document.documentElement.style.setProperty('--calc-rise', (-heroMotion * 18).toFixed(1) + 'px');
-  document.documentElement.style.setProperty('--calc-glow', (.02 + heroMotion * .16).toFixed(3));
-  document.documentElement.style.setProperty('--calc-border', (.18 + heroMotion * .24).toFixed(3));
+  document.documentElement.style.setProperty('--light-x', (-heroMotion * 42).toFixed(1) + 'vw');
+  document.documentElement.style.setProperty('--light-y', (heroMotion * 45).toFixed(1) + 'vh');
+  document.documentElement.style.setProperty('--light-scale', (1 + heroMotion * .7).toFixed(3));
+  document.documentElement.style.setProperty('--light-opacity', (.72 - heroMotion * .48).toFixed(3));
+  document.documentElement.style.setProperty('--beam-scale', (.7 + heroMotion * 1.15).toFixed(3));
+  document.documentElement.style.setProperty('--beam-opacity', (.25 + heroMotion * .42).toFixed(3));
+  document.documentElement.style.setProperty('--title-rise', (-heroMotion * 24).toFixed(1) + 'px');
+  document.documentElement.style.setProperty('--title-scale', (1 - heroMotion * .065).toFixed(3));
+  document.documentElement.style.setProperty('--calc-rise', (-heroMotion * 34).toFixed(1) + 'px');
+  document.documentElement.style.setProperty('--calc-glow', (.04 + heroMotion * .3).toFixed(3));
+  document.documentElement.style.setProperty('--calc-border', (.2 + heroMotion * .46).toFixed(3));
 }, { passive: true });
 
 // KPI counter animation
