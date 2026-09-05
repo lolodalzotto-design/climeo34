@@ -406,14 +406,13 @@ body {
 .hero-airline::after{inset:64px 8% auto -8%;border-color:rgba(255,255,255,.16)}
 .steam-burst{
   position:fixed;inset:0;z-index:950;pointer-events:none;overflow:hidden;
-  opacity:var(--burst-opacity,0);visibility:hidden;
-  transition:visibility 0s linear .12s;will-change:opacity;
+  opacity:0;visibility:hidden;will-change:opacity;
 }
-.steam-burst.is-active{visibility:visible;transition:none}
+.steam-burst.is-active{visibility:visible;animation:steamBurstFade 1.65s ease-out both}
 .steam-burst-cloud{
-  position:absolute;left:var(--burst-x,72%);top:var(--burst-y,43%);
+  position:absolute;left:72%;top:60%;
   width:44vmin;height:44vmin;border-radius:48% 52% 46% 54%;
-  transform:translate(-50%,-50%) translate3d(var(--burst-drift,0),var(--burst-rise,0),0) scale(var(--burst-scale,.18));
+  transform:translate(-50%,-50%) scale(.18);
   transform-origin:center;will-change:transform,opacity;
   background:
     radial-gradient(circle at 35% 40%,rgba(255,255,255,.94) 0 15%,transparent 43%),
@@ -421,9 +420,12 @@ body {
     radial-gradient(circle at 48% 72%,rgba(183,228,249,.62) 0 18%,transparent 52%);
   filter:blur(10px);mix-blend-mode:screen;
 }
+.steam-burst.is-active .steam-burst-cloud{animation:steamToCamera 1.65s cubic-bezier(.18,.72,.22,1) both}
 .steam-burst-cloud:nth-child(2){margin-left:-8vw;margin-top:8vh;width:36vmin;height:36vmin;opacity:.64;filter:blur(18px)}
 .steam-burst-cloud:nth-child(3){margin-left:9vw;margin-top:-7vh;width:30vmin;height:30vmin;opacity:.48;filter:blur(22px)}
-@media(max-width:768px){.steam-burst{--burst-x:68%;--burst-y:34%}.steam-burst-cloud{width:62vmin;height:62vmin;filter:blur(8px)}}
+@keyframes steamBurstFade{0%{opacity:0}18%{opacity:.8}58%{opacity:.86}100%{opacity:0}}
+@keyframes steamToCamera{0%{transform:translate(-50%,-50%) translate3d(0,25px,0) scale(.18)}55%{transform:translate(-50%,-50%) translate3d(-8vw,-3vh,0) scale(1.75)}100%{transform:translate(-50%,-50%) translate3d(-18vw,-10vh,0) scale(4.4)}}
+@media(max-width:768px){.steam-burst-cloud{left:66%;top:56%;width:62vmin;height:62vmin;filter:blur(8px)}}
 @media(prefers-reduced-motion:reduce){.steam-burst{display:none!important}}
 .steam-proof {
   display:inline-flex; align-items:center; gap:8px; margin:0 0 22px; padding:8px 14px;
@@ -2753,6 +2755,7 @@ document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEac
 })();
 
 // Scroll progress bar
+let steamBurstPlayed = false;
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
@@ -2769,17 +2772,13 @@ window.addEventListener('scroll', () => {
   document.documentElement.style.setProperty('--air-rise', (-steamJourney * 85).toFixed(1) + 'px');
   document.documentElement.style.setProperty('--air-drift', (-steamJourney * 50).toFixed(1) + 'px');
 
-  // Bouffée au premier scroll : départ depuis la clim, approche caméra, dissipation.
+  // Bouffée au premier scroll : durée fixe, même lors d'un geste très rapide.
   const burst = document.getElementById('steam-burst');
-  let burstOpacity = 0;
-  if (scrolled > 12 && scrolled <= 105) burstOpacity = (scrolled - 12) / 93;
-  if (scrolled > 105 && scrolled < 390) burstOpacity = 1 - ((scrolled - 105) / 285);
-  const burstJourney = Math.max(0, Math.min(1, (scrolled - 12) / 378));
-  document.documentElement.style.setProperty('--burst-opacity', (burstOpacity * .84).toFixed(3));
-  document.documentElement.style.setProperty('--burst-scale', (.2 + burstJourney * 4.1).toFixed(3));
-  document.documentElement.style.setProperty('--burst-drift', (-burstJourney * 18).toFixed(1) + 'vw');
-  document.documentElement.style.setProperty('--burst-rise', (-burstJourney * 10).toFixed(1) + 'vh');
-  if (burst) burst.classList.toggle('is-active', burstOpacity > .015);
+  if (burst && !steamBurstPlayed && scrolled > 8 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    steamBurstPlayed = true;
+    burst.classList.add('is-active');
+    setTimeout(function(){ burst.classList.remove('is-active'); }, 1700);
+  }
 }, { passive: true });
 
 // KPI counter animation
