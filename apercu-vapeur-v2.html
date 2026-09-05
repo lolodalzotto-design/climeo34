@@ -34,7 +34,7 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('motion-ready');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APERÇU V6 — Vapeur temporisée | Climeo34</title>
+<title>APERÇU V7 — Sans animation vapeur | Climeo34</title>
 <meta name="description" content="Nettoyage vapeur haute température de climatisation à Montpellier et dans l'Hérault. Monosplit dès 150 € TTC avec groupe extérieur. Devis gratuit, intervention sous 48h.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="keywords" content="climatisation Montpellier, entretien climatisation Montpellier, maintenance climatisation Montpellier, dépannage climatisation Montpellier, nettoyage climatisation Hérault, désinfection clim Hérault, tarif entretien climatisation réversible, entretien climatisation locataire, prix entretien climatisation, technicien climatisation Hérault, Climeo34">
@@ -1891,9 +1891,8 @@ function gtag_report_conversion(url) {
 </script>
 </head>
 <body>
-<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V6 · VAPEUR 1,65 S</div>
+<div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V7 · SANS VAPEUR</div>
 <div id="scroll-progress"></div>
-<div class="steam-burst" id="steam-burst" aria-hidden="true"><span class="steam-burst-cloud"></span><span class="steam-burst-cloud"></span><span class="steam-burst-cloud"></span></div>
 
 <!-- COOKIE -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
@@ -1931,8 +1930,6 @@ function gtag_report_conversion(url) {
 <!-- HERO -->
 <header id="hero" role="banner">
   <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="steam-field" aria-hidden="true"><span class="steam-wisp"></span><span class="steam-wisp"></span><span class="steam-wisp"></span></div>
-  <div class="hero-airline" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-eyebrow hero-reveal r1">
@@ -2757,30 +2754,11 @@ document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEac
 })();
 
 // Scroll progress bar
-let steamBurstPlayed = false;
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
   const progress = (scrolled / maxScroll) * 100;
   document.getElementById('scroll-progress').style.width = progress + '%';
-  // La vapeur arrive au premier geste, accompagne brièvement la lecture,
-  // puis s'efface avant la section suivante.
-  let steamPresence = 0;
-  if (scrolled > 18 && scrolled <= 180) steamPresence = (scrolled - 18) / 162;
-  if (scrolled > 180 && scrolled < 620) steamPresence = 1 - ((scrolled - 180) / 440);
-  const steamJourney = Math.max(0, Math.min(1, (scrolled - 18) / 602));
-  document.documentElement.style.setProperty('--steam-presence', steamPresence.toFixed(3));
-  document.documentElement.style.setProperty('--steam-lift', (70 - steamJourney * 260).toFixed(1) + 'px');
-  document.documentElement.style.setProperty('--air-rise', (-steamJourney * 85).toFixed(1) + 'px');
-  document.documentElement.style.setProperty('--air-drift', (-steamJourney * 50).toFixed(1) + 'px');
-
-  // Bouffée au premier scroll : durée fixe, même lors d'un geste très rapide.
-  const burst = document.getElementById('steam-burst');
-  if (burst && !steamBurstPlayed && scrolled > 8 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    steamBurstPlayed = true;
-    burst.classList.add('is-active');
-    setTimeout(function(){ burst.classList.remove('is-active'); }, 1700);
-  }
 }, { passive: true });
 
 // KPI counter animation
