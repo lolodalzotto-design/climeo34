@@ -815,7 +815,6 @@ a.pill { cursor: pointer; }
   font-size: 0.78rem; color: white; flex-shrink: 0;
 }
 .avis-author strong { font-size: 0.85rem; color: var(--text); display: block; font-weight: 700; }
-.avis-author span { font-size: 0.75rem; color: var(--text-muted); }
 .avis-slider-controls {
   display: flex; align-items: center; justify-content: center;
   gap: 16px; margin-top: 24px;
@@ -2907,17 +2906,16 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     if (!reviews.length) { showAvisFallback(grid); return; }
 
     grid.innerHTML = reviews.map(function(r) {
-      var name    = escHtml(r.name);
-      var text    = escHtml(r.text);
-      var relTime = escHtml(r.relTime);
-      var note    = r.rating || 5;
+      var name = escHtml(r.name);
+      var text = escHtml(r.text);
+      var note = r.rating || 5;
       return '<div class="avis" data-href="' + REVIEW_URL + '" role="link" tabindex="0" aria-label="Voir cet avis sur Google">'
         + '<div class="stars">' + starsHtml(note) + '</div>'
         + (text ? '<p class="avis-text">« ' + text + ' »</p>' : '')
         + (text ? '<button type="button" class="avis-more">Lire la suite</button>' : '')
         + '<div class="avis-author">'
         + '<div class="avatar">' + initials(name) + '</div>'
-        + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
+        + '<div><strong>' + name + '</strong></div>'
         + '</div></div>';
     }).join('');
     initAvisSlider();
