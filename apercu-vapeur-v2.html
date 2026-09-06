@@ -2978,7 +2978,6 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     grid.innerHTML = reviews.map(function(r) {
       var name    = escHtml(r.name);
       var text    = escHtml(r.text);
-      var relTime = escHtml(r.relTime);
       var note    = r.rating || 5;
       return '<div class="avis" data-href="' + REVIEW_URL + '" role="link" tabindex="0" aria-label="Voir cet avis sur Google">'
         + '<div class="stars">' + starsHtml(note) + '</div>'
@@ -2986,7 +2985,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
         + (text ? '<button type="button" class="avis-more">Lire la suite</button>' : '')
         + '<div class="avis-author">'
         + '<div class="avatar">' + initials(name) + '</div>'
-        + '<div><strong>' + name + '</strong><span>' + relTime + '</span></div>'
+        + '<div><strong>' + name + '</strong></div>'
         + '</div></div>';
     }).join('');
     initAvisSlider();
