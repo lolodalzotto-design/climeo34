@@ -4,6 +4,16 @@ name: Update Google reviews cache
 # au navigateur), triés par date décroissante, et les écrit dans data/google-reviews.json.
 # Le site charge ce fichier statique en priorité pour garantir que les avis les plus
 # récents s'affichent réellement en premier.
+#
+# IMPORTANT — clé API : GOOGLE_PLACES_API_KEY doit être une clé SANS restriction
+# "référent HTTP" (une clé avec ce type de restriction est catégoriquement refusée
+# par ce point d'accès pour tout appel serveur, quel que soit l'en-tête Referer
+# envoyé — message Google : "API keys with referer restrictions cannot be used
+# with this API"). La clé déjà utilisée côté navigateur dans index.html a ce
+# type de restriction et NE PEUT PAS être réutilisée ici : il faut créer une
+# clé dédiée dans Google Cloud Console, restreinte uniquement par API
+# ("Places API") et sans restriction d'application (ou restreinte par IP si
+# possible), puis la renseigner comme secret GOOGLE_PLACES_API_KEY.
 
 on:
   schedule:
@@ -48,7 +58,11 @@ jobs:
           status=$(jq -r '.status // "UNKNOWN"' /tmp/google-place-details.json)
           if [ "$status" != "OK" ]; then
             echo "::error::Google API a répondu status=$status — le fichier existant est conservé."
-            jq -r '.error_message // empty' /tmp/google-place-details.json || true
+            error_message=$(jq -r '.error_message // empty' /tmp/google-place-details.json || true)
+            echo "$error_message"
+            if [ "$status" = "REQUEST_DENIED" ] && printf '%s' "$error_message" | grep -qi "referer restrictions"; then
+              echo "::error::Le secret GOOGLE_PLACES_API_KEY utilise une clé avec restriction de référent HTTP, incompatible avec cette API côté serveur. Créez une clé dédiée sans restriction d'application (limitée à l'API 'Places API') dans Google Cloud Console et mettez à jour le secret."
+            fi
             exit 1
           fi
 
