@@ -313,7 +313,7 @@ section{padding:96px 6%;scroll-margin-top:92px;}
 @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 .avis-error{text-align:center;padding:40px 20px;color:var(--text-muted);flex:0 0 100%;}
 .avis-slider-outer{position:relative;max-width:1100px;margin:28px auto 0;}
-.avis-slider-viewport{overflow:hidden;border-radius:var(--radius);padding:4px 2px 8px;}
+.avis-slider-viewport{overflow:hidden;border-radius:var(--radius);padding:4px 2px 8px;transition:height 0.35s ease;}
 .avis-grid{display:flex;align-items:flex-start;gap:20px;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);will-change:transform;}
 .avis{flex:0 0 calc((100% - 40px) / 3);min-width:0;background:white;border-radius:var(--radius);padding:32px;border:1.5px solid var(--border);transition:box-shadow var(--transition),border-color var(--transition);}
 .avis:hover{box-shadow:var(--shadow-md);border-color:rgba(0,30,90,0.2);}
@@ -1326,6 +1326,7 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
 
   function initAvisSlider() {
     var grid     = document.getElementById('google-reviews-grid');
+    var viewport = document.querySelector('.avis-slider-viewport');
     var prevBtn  = document.getElementById('avis-prev');
     var nextBtn  = document.getElementById('avis-next');
     var dotsWrap = document.getElementById('avis-dots');
@@ -1347,6 +1348,19 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
         dotsWrap.appendChild(btn);
       }
     }
+    function updateHeight() {
+      if (!viewport) return;
+      var pp    = perPage();
+      var start = current * pp;
+      var maxH  = 0;
+      for (var i = start; i < Math.min(start + pp, total); i++) {
+        maxH = Math.max(maxH, cards[i].offsetHeight);
+      }
+      if (maxH) {
+        var cs = getComputedStyle(viewport);
+        viewport.style.height = (maxH + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)) + 'px';
+      }
+    }
     function goTo(page) {
       var p = pages();
       current = Math.max(0, Math.min(page, p - 1));
@@ -1357,6 +1371,7 @@ document.getElementById('cta-depannage-form').addEventListener('submit', async f
       dotsWrap.querySelectorAll('.avis-dot').forEach(function(d, i) { d.classList.toggle('active', i === current); });
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current >= p - 1;
+      updateHeight();
     }
     prevBtn.addEventListener('click', function() { goTo(current - 1); });
     nextBtn.addEventListener('click', function() { goTo(current + 1); });
