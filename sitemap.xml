@@ -12,7 +12,7 @@
   <!-- Pages nettoyage villes -->
   <url>
     <loc>https://climeo34.fr/nettoyage-clim-montpellier/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -49,15 +49,57 @@
   <!-- Blog -->
   <url>
     <loc>https://climeo34.fr/blog/</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://climeo34.fr/blog/clim-qui-coule-chaleur-herault.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>yearly</changefreq>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/odeur-clim-herault.html</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/prix-entretien-climatisation-montpellier.html</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/nettoyage-clim-ete-montpellier.html</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/que-nettoyer-climatisation.html</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/entretien-climatisation-locataire-proprietaire.html</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://climeo34.fr/blog/deroulement-nettoyage-climatisation.html</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 

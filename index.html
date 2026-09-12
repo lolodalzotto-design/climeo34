@@ -1831,6 +1831,23 @@ section>.centered{position:relative;z-index:2}
 #zone{background:linear-gradient(145deg,#001247,#002d72)}#zone .s-title,#zone h3{color:#fff!important}#zone .s-sub,#zone p{color:rgba(255,255,255,.7)!important}#zone a:not(.btn-primary){color:#8ed8fa!important}
 .faq-item{border-radius:16px!important;border:1px solid var(--line)!important;margin-bottom:10px!important;background:#fff!important;box-shadow:0 8px 25px rgba(0,30,90,.04)}.faq-q{transition:background .25s ease,padding .25s ease}.faq-item.open .faq-q{background:#f3faff}.faq-toggle{transition:transform .35s var(--ease-premium)!important}.faq-item.open .faq-toggle{transform:rotate(45deg)}
 
+/* Conseils — passerelle entre la page commerciale et le blog */
+#conseils{background:linear-gradient(180deg,#fff,#f3faff);padding:96px 6%}
+.home-blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:42px auto 0}
+.home-blog-card{display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 34px rgba(0,30,90,.065);transition:transform .42s var(--ease-premium),box-shadow .42s var(--ease-premium)}
+.home-blog-card:hover{transform:translateY(-7px);box-shadow:0 26px 58px rgba(0,30,90,.14)}
+.home-blog-img{height:190px;overflow:hidden;background:var(--brand-bg)}
+.home-blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .75s var(--ease-premium)}
+.home-blog-card:hover img{transform:scale(1.05)}
+.home-blog-body{padding:25px;display:flex;flex:1;flex-direction:column}
+.home-blog-tag{font:700 .68rem var(--font-head);letter-spacing:.09em;text-transform:uppercase;color:var(--brand-light)}
+.home-blog-body h3{font:700 1.08rem/1.35 var(--font-head);color:var(--navy);margin:9px 0 11px}
+.home-blog-body p{font-size:.86rem;line-height:1.65;color:var(--gray-text);margin-bottom:20px}
+.home-blog-link{margin-top:auto;font:700 .82rem var(--font-head);color:var(--brand);display:inline-flex;gap:8px;align-items:center}
+.home-blog-all{display:flex;justify-content:center;margin-top:34px}
+@media(max-width:850px){.home-blog-grid{grid-template-columns:1fr 1fr}.home-blog-card:last-child{grid-column:1/-1}}
+@media(max-width:560px){#conseils{padding:72px 5%}.home-blog-grid{grid-template-columns:1fr}.home-blog-card:last-child{grid-column:auto}.home-blog-img{height:205px}}
+
 /* Mouvement piloté par le scroll */
 [data-depth]{transform:translate3d(0,var(--section-shift,0),0);will-change:transform}
 @media(max-width:900px){#hero{min-height:auto;padding-top:105px}.hero-title{font-size:clamp(2.15rem,10vw,3.25rem)!important}.hero-steam-badge{right:8%;bottom:2%}.steam-label-smoke{right:4%;bottom:4%;transform:scale(.82);transform-origin:bottom right}.hero-form-wrap{width:100%}.hero-form-wrap::before{inset:-10px -8px;filter:blur(11px);opacity:.5;animation-duration:6s}.hero-light{right:-32%;top:9%;width:105vw;height:105vw;filter:blur(20px)}.transition-steam{top:-94px;height:190px}.transition-steam span{width:72%;filter:blur(11px)}.transition-steam span:nth-child(3){left:40%;width:55%}#tarifs .centered>div,#nettoyage-suffit .centered,.apropos-inner{padding:28px 20px;border-radius:22px}}
@@ -1873,13 +1890,10 @@ function gtag_report_conversion(url) {
          fetchpriority="high">
   </a>
   <ul class="nav-links" id="nav-links">
+    <li><a href="#avis">Avis clients</a></li>
     <li><a href="#avant-apres">Avant / Après</a></li>
-    <li><a href="#pourquoi">Pourquoi ?</a></li>
-    <li><a href="#tarifs">Tarifs</a></li>
-    <li><a href="#zone">Zone</a></li>
-    <li><a href="https://maps.app.goo.gl/kad8NLF7N8Bi8GSPA?g_st=ac" target="_blank" rel="noopener noreferrer">Avis clients</a></li>
+    <li><a href="#conseils">Conseils</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="/depannage-clim-montpellier/">Dépannage</a></li>
     <li><a href="/blog/">Blog</a></li>
     <li><a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
   </ul>
@@ -2083,188 +2097,28 @@ function gtag_report_conversion(url) {
   </div>
 </section>
 
-<!-- TARIFS -->
-<section id="tarifs" aria-labelledby="t-tarifs">
+<!-- CONSEILS / BLOG -->
+<section id="conseils" aria-labelledby="t-conseils">
   <div class="centered">
-    <span class="s-tag fade-up">Tarifs transparents</span>
-    <h2 class="s-title fade-up d1" id="t-tarifs">Nos tarifs — Clairs et sans surprise</h2>
-    <div class="fade-up d2" style="margin: 0 auto 40px; max-width: 560px;">
-      <div style="font-family: var(--font-head); font-size: clamp(3.5rem, 8vw, 5.5rem); font-weight: 800; color: var(--brand); line-height: 1;">
-        120€ <span style="font-size: 0.38em; font-weight: 600; color: var(--text-muted); vertical-align: middle;">TTC</span><a href="#footnote-frais" class="price-note">*</a>
-      </div>
-      <p style="font-size: 1rem; color: var(--text-muted); margin: 8px 0 24px;">Nettoyage vapeur haute température · Premier split + groupe extérieur</p>
-      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px;">1 split 120 € · 2 splits 210 € · 3 splits 300 € · Puis 90 € par split supplémentaire</p>
-      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 32px;">Diagnostic option +30 € · Recharge gaz sur devis si nécessaire</p>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
-        <a href="tel:0603257679" class="btn-primary" onclick="return gtag_report_conversion('tel:0603257679')">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Devis gratuit — 06 03 25 76 79
-        </a>
-        <a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-ghost" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
+    <span class="s-tag fade-up">Conseils pratiques</span>
+    <h2 class="s-title fade-up d1" id="t-conseils">Les réponses aux problèmes de votre climatisation</h2>
+    <p class="s-sub fade-up d2">Odeur, écoulement, entretien ou prix : les conseils de Climeo34 pour votre climatisation à Montpellier, Mauguio et dans les communes situées autour de Montpellier.</p>
   </div>
-</section>
-
-<!-- NETTOYAGE SUFFIT -->
-<section id="nettoyage-suffit" aria-labelledby="t-nettoyage-suffit" style="background: var(--bg-alt);">
-  <div class="centered">
-    <span class="s-tag fade-up">Notre approche</span>
-    <h2 class="s-title fade-up d1" id="t-nettoyage-suffit">Parfois un simple nettoyage suffit</h2>
-    <p class="s-sub fade-up d2">Beaucoup de clients pensent avoir besoin d'une recharge de gaz ou d'une réparation coûteuse. Dans la majorité des cas, un nettoyage complet suffit à retrouver des performances optimales.</p>
-    <p class="s-sub fade-up d3">Climeo34 commence toujours par un nettoyage complet avant tout diagnostic. Un appareil propre consomme moins, refroidit mieux et dure plus longtemps.</p>
-    <p class="s-sub fade-up d4">Si après nettoyage un manque de gaz est détecté, nous vous proposons un diagnostic pression/température à +30 € TTC — uniquement si nécessaire.</p>
+  <div class="home-blog-grid">
+    <a class="home-blog-card fade-up" href="/blog/odeur-clim-herault.html">
+      <div class="home-blog-img"><img src="/climatiseur-sale-avant-nettoyage.webp" alt="Climatiseur encrassé avant nettoyage" loading="lazy" width="640" height="420"></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Odeurs · Nettoyage</span><h3>Pourquoi ma climatisation sent-elle mauvais ?</h3><p>Les causes possibles, les vérifications simples et le moment où prévoir un nettoyage approfondi.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+    </a>
+    <a class="home-blog-card fade-up d1" href="/blog/clim-qui-coule-chaleur-herault.html">
+      <div class="home-blog-img"><img src="/Screenshot_20260417_072904_Chrome.webp" alt="Climatisation avant entretien" loading="lazy" width="640" height="420"></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Écoulement d’eau</span><h3>Pourquoi ma climatisation coule-t-elle ?</h3><p>Condensats, évacuation ou encrassement : les bons réflexes pour limiter les dégâts.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+    </a>
+    <a class="home-blog-card fade-up d2" href="/blog/prix-entretien-climatisation-montpellier.html">
+      <div class="home-blog-img"><img src="/Homme-Nettoie-climatiseur.webp" alt="Nettoyage professionnel d'une climatisation" loading="lazy" width="640" height="420"></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Prix & prestation</span><h3>Combien coûte un nettoyage de climatisation ?</h3><p>Le tarif Climeo34 et les éléments à comparer pour comprendre ce qui est réellement inclus.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+    </a>
   </div>
-</section>
-
-<!-- POURQUOI -->
-<section id="pourquoi" aria-labelledby="t-pourquoi">
-  <div class="centered">
-    <span class="s-tag fade-up">Nos engagements</span>
-    <h2 class="s-title fade-up d1" id="t-pourquoi">Pourquoi choisir Climeo34 ?</h2>
-  </div>
-  <div class="problems" style="grid-template-columns: repeat(2, 1fr);">
-    <article class="prob-card fade-up">
-      <div class="prob-ico" style="font-size:1.6rem; background:none; justify-content:flex-start;">⚡</div>
-      <h3>Rapidité</h3>
-      <p>Intervention sous 48h sur tout l'Hérault.</p>
-    </article>
-    <article class="prob-card fade-up d1">
-      <div class="prob-ico" style="font-size:1.6rem; background:none; justify-content:flex-start;">💶</div>
-      <h3>Prix</h3>
-      <p>120 € TTC<a href="#footnote-frais" class="price-note">*</a> pour le premier split avec groupe extérieur, puis 90 € par split supplémentaire.</p>
-    </article>
-    <article class="prob-card fade-up d2">
-      <div class="prob-ico" style="font-size:1.6rem; background:none; justify-content:flex-start;">✅</div>
-      <h3>Honnêteté</h3>
-      <p>On ne vous vend que ce dont vous avez besoin.</p>
-    </article>
-    <article class="prob-card fade-up d3">
-      <div class="prob-ico" style="font-size:1.6rem; background:none; justify-content:flex-start;">🔧</div>
-      <h3>Expertise</h3>
-      <p>Technicien certifié fluides frigorigènes.</p>
-    </article>
-  </div>
-</section>
-
-<!-- METHODE -->
-<section id="methode" aria-labelledby="t-methode">
-  <div class="centered">
-    <span class="s-tag fade-up">Notre protocole</span>
-    <h2 class="s-title fade-up d1" id="t-methode">Notre protocole d'entretien climatisation en 4 étapes</h2>
-    <p class="s-sub fade-up d2">Filtres, évaporateur, bac de condensat — tout est traité lors d'une seule intervention.</p>
-  </div>
-  <div class="steps">
-    <div class="step-card fade-up">
-      <div class="step-num">01</div>
-      <h3>Contact & rendez-vous</h3>
-      <p>Appel ou WhatsApp — réponse rapide, rendez-vous confirmé sous 48h en Hérault.</p>
-    </div>
-    <div class="step-card fade-up d1">
-      <div class="step-num">02</div>
-      <h3>Diagnostic sur place</h3>
-      <p>Inspection visuelle de l'encrassement et évaluation de l'état des filtres et de l'évaporateur.</p>
-    </div>
-    <div class="step-card fade-up d2">
-      <div class="step-num">03</div>
-      <h3>Nettoyage complet</h3>
-      <p>Démontage, vapeur haute température sur l'échangeur et la turbine, nettoyage du bac de condensat, puis remontage.</p>
-    </div>
-    <div class="step-card fade-up d3">
-      <div class="step-num">04</div>
-      <h3>Air pur garanti</h3>
-      <p>Test de fonctionnement et vérification des performances — résultat immédiat et garanti.</p>
-    </div>
-  </div>
-</section>
-
-<!-- À PROPOS -->
-<section id="apropos" aria-labelledby="t-apropos">
-  <div class="apropos-inner">
-    <div class="apropos-text fade-up">
-      <span class="s-tag">Votre technicien</span>
-      <h2 id="t-apropos">Laurent, technicien climatisation Montpellier & Hérault</h2>
-      <p>Passionné par la qualité de l'air intérieur, Laurent intervient depuis plusieurs années sur Montpellier et tout le département de l'Hérault (34). Formé au nettoyage vapeur haute température des climatisations, il traite chaque appareil comme si c'était le sien.</p>
-      <p>Son engagement : vous fournir un résultat garanti, des produits certifiés sûrs pour vos enfants et vos animaux, et une attestation d'entretien fournie sur demande.</p>
-      <div class="apropos-badges">
-        <span class="apropos-badge">✅ Intervention rapide 48h</span>
-        <span class="apropos-badge">🌿 Produits certifiés</span>
-        <span class="apropos-badge">📋 Attestation incluse</span>
-        <span class="apropos-badge">🏡 Hérault (34)</span>
-      </div>
-    </div>
-    <div class="apropos-img fade-up d1">
-      <picture>
-        <source srcset="photo-technicien-climeo34.webp" type="image/webp">
-        <img src="photo-technicien-climeo34.jpg"
-             alt="Laurent, technicien Climeo34, en intervention nettoyage climatisation Montpellier"
-             width="480" height="380" loading="lazy">
-      </picture>
-    </div>
-  </div>
-</section>
-
-<!-- CIBLES -->
-<section id="cibles" aria-labelledby="t-cibles">
-  <div class="centered">
-    <span class="s-tag fade-up">Nos clients</span>
-    <h2 class="s-title fade-up d1" id="t-cibles">Particuliers & propriétaires Airbnb</h2>
-    <p class="s-sub fade-up d2">Deux situations différentes, une même exigence de qualité.</p>
-  </div>
-  <div class="cibles">
-    <article class="cible fade-up">
-      <div class="cible-label">Résidences principales & locataires</div>
-      <h3>Votre confort au quotidien</h3>
-      <p>Votre clim pose problème ? Mauvaise odeur, allergies, surconsommation, panne de froid — Climeo34 intervient sous 48h pour restaurer confort et qualité de l'air.</p>
-      <ul class="cible-list">
-        <li>Clim qui sent mauvais — éliminé à la source</li>
-        <li>Allergies aggravées — filtres nettoyés en profondeur</li>
-        <li>Clim qui coule — bac de condensat débouché</li>
-        <li>Facture électrique réduite jusqu'à 30%</li>
-        <li>Produits certifiés, logement immédiatement réoccupable</li>
-        <li>Attestation d'entretien climatisation locataire fournie sur demande</li>
-      </ul>
-    </article>
-    <article class="cible fade-up d1">
-      <div class="cible-label">Locations saisonnières & Airbnb</div>
-      <h3>L'expérience voyageur premium</h3>
-      <p>Une clim propre et performante, c'est la garantie d'avis 5 étoiles et d'une réputation préservée sur Airbnb. Climeo34 est le partenaire des propriétaires exigeants.</p>
-      <ul class="cible-list">
-        <li>Zéro commentaire négatif sur l'odeur ou la clim</li>
-        <li>Logement impeccable entre chaque séjour</li>
-        <li>Désinfection tous les 6 mois — rappel automatique</li>
-        <li>Devis groupé pour plusieurs logements</li>
-        <li>Partenariat conciergeries — tarif préférentiel</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-<!-- ZONE -->
-<section id="zone" aria-labelledby="t-zone">
-  <div class="zone-grid">
-    <div>
-      <span class="s-tag fade-up">Zone d'intervention</span>
-      <h2 class="s-title fade-up d1" id="t-zone">Zone d'intervention entretien climatisation — Montpellier & Hérault (34)</h2>
-      <p class="s-sub fade-up d2" style="margin-bottom: 28px;">Intervention rapide sur Montpellier et l'ensemble du département Hérault (34).</p>
-      <div class="zone-pills fade-up d2">
-        <a href="/nettoyage-clim-montpellier/" class="pill main">Montpellier</a>
-        <span class="pill">Lattes</span>
-        <span class="pill">Pérols</span>
-        <a href="/nettoyage-clim-palavas/" class="pill">Palavas-les-Flots</a>
-        <a href="/nettoyage-clim-la-grande-motte/" class="pill">La Grande-Motte</a>
-        <a href="/nettoyage-clim-carnon/" class="pill">Carnon</a>
-        <span class="pill">Castelnau-le-Lez</span>
-        <span class="pill">Mauguio</span>
-        <span class="pill">Lunel</span>
-        <span class="pill">Sète</span>
-        <span class="pill">Le Grau-du-Roi</span>
-        <span class="pill">+ tout l'Hérault</span>
-      </div>
-      <p class="s-sub fade-up d3" style="margin-top: 24px; margin-bottom: 24px;">Climeo34 assure le nettoyage et l'entretien climatisation sur Montpellier, Lattes, Pérols, Palavas-les-Flots, La Grande-Motte, Carnon, Castelnau-le-Lez, Mauguio, Lunel, Sète et l'ensemble du département Hérault (34). Délai d'intervention : 48h maximum.</p>
-      <a href="tel:0603257679" class="btn-primary fade-up d3" style="display:inline-flex;" onclick="return gtag_report_conversion('tel:0603257679')">Vérifier ma zone</a>
-    </div>
-  </div>
+  <div class="home-blog-all fade-up"><a class="btn-primary" href="/blog/">Voir tous les conseils</a></div>
 </section>
 
 <!-- FAQ -->
@@ -2455,8 +2309,8 @@ function gtag_report_conversion(url) {
     </div>
     <nav class="footer-nav" aria-label="Liens footer">
       <a href="/depannage-clim-montpellier/">Dépannage</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#zone">Zone</a>
+      <a href="#avis">Avis clients</a>
+      <a href="#conseils">Conseils</a>
       <a href="#faq">FAQ</a>
       <a href="/blog/">Blog</a>
       <a href="/nettoyage-clim-montpellier/">Montpellier</a>
