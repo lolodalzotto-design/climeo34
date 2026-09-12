@@ -1831,6 +1831,23 @@ section>.centered{position:relative;z-index:2}
 #zone{background:linear-gradient(145deg,#001247,#002d72)}#zone .s-title,#zone h3{color:#fff!important}#zone .s-sub,#zone p{color:rgba(255,255,255,.7)!important}#zone a:not(.btn-primary){color:#8ed8fa!important}
 .faq-item{border-radius:16px!important;border:1px solid var(--line)!important;margin-bottom:10px!important;background:#fff!important;box-shadow:0 8px 25px rgba(0,30,90,.04)}.faq-q{transition:background .25s ease,padding .25s ease}.faq-item.open .faq-q{background:#f3faff}.faq-toggle{transition:transform .35s var(--ease-premium)!important}.faq-item.open .faq-toggle{transform:rotate(45deg)}
 
+/* Conseils — passerelle entre la page commerciale et le blog */
+#conseils{background:linear-gradient(180deg,#fff,#f3faff);padding:96px 6%}
+.home-blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:42px auto 0}
+.home-blog-card{display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 34px rgba(0,30,90,.065);transition:transform .42s var(--ease-premium),box-shadow .42s var(--ease-premium)}
+.home-blog-card:hover{transform:translateY(-7px);box-shadow:0 26px 58px rgba(0,30,90,.14)}
+.home-blog-img{height:190px;overflow:hidden;background:var(--brand-bg)}
+.home-blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .75s var(--ease-premium)}
+.home-blog-card:hover img{transform:scale(1.05)}
+.home-blog-body{padding:25px;display:flex;flex:1;flex-direction:column}
+.home-blog-tag{font:700 .68rem var(--font-head);letter-spacing:.09em;text-transform:uppercase;color:var(--brand-light)}
+.home-blog-body h3{font:700 1.08rem/1.35 var(--font-head);color:var(--navy);margin:9px 0 11px}
+.home-blog-body p{font-size:.86rem;line-height:1.65;color:var(--gray-text);margin-bottom:20px}
+.home-blog-link{margin-top:auto;font:700 .82rem var(--font-head);color:var(--brand);display:inline-flex;gap:8px;align-items:center}
+.home-blog-all{display:flex;justify-content:center;margin-top:34px}
+@media(max-width:850px){.home-blog-grid{grid-template-columns:1fr 1fr}.home-blog-card:last-child{grid-column:1/-1}}
+@media(max-width:560px){#conseils{padding:72px 5%}.home-blog-grid{grid-template-columns:1fr}.home-blog-card:last-child{grid-column:auto}.home-blog-img{height:205px}}
+
 /* Mouvement piloté par le scroll */
 [data-depth]{transform:translate3d(0,var(--section-shift,0),0);will-change:transform}
 @media(max-width:900px){#hero{min-height:auto;padding-top:105px}.hero-title{font-size:clamp(2.15rem,10vw,3.25rem)!important}.hero-steam-badge{right:8%;bottom:2%}.steam-label-smoke{right:4%;bottom:4%;transform:scale(.82);transform-origin:bottom right}.hero-form-wrap{width:100%}.hero-form-wrap::before{inset:-10px -8px;filter:blur(11px);opacity:.5;animation-duration:6s}.hero-light{right:-32%;top:9%;width:105vw;height:105vw;filter:blur(20px)}.transition-steam{top:-94px;height:190px}.transition-steam span{width:72%;filter:blur(11px)}.transition-steam span:nth-child(3){left:40%;width:55%}#tarifs .centered>div,#nettoyage-suffit .centered,.apropos-inner{padding:28px 20px;border-radius:22px}}
@@ -2265,6 +2282,30 @@ function gtag_report_conversion(url) {
       <a href="tel:0603257679" class="btn-primary fade-up d3" style="display:inline-flex;" onclick="return gtag_report_conversion('tel:0603257679')">Vérifier ma zone</a>
     </div>
   </div>
+</section>
+
+<!-- CONSEILS / BLOG -->
+<section id="conseils" aria-labelledby="t-conseils">
+  <div class="centered">
+    <span class="s-tag fade-up">Conseils pratiques</span>
+    <h2 class="s-title fade-up d1" id="t-conseils">Les réponses aux problèmes de votre climatisation</h2>
+    <p class="s-sub fade-up d2">Odeur, écoulement, entretien ou prix : comprenez ce qui se passe avant de décider de la bonne intervention.</p>
+  </div>
+  <div class="home-blog-grid">
+    <a class="home-blog-card fade-up" href="/blog/odeur-clim-herault.html">
+      <div class="home-blog-img"><img src="/climatiseur-sale-avant-nettoyage.webp" alt="Climatiseur encrassé avant nettoyage" loading="lazy" width="640" height="420"></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Odeurs · Nettoyage</span><h3>Pourquoi ma climatisation sent-elle mauvais ?</h3><p>Les causes possibles, les vérifications simples et le moment où prévoir un nettoyage approfondi.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+    </a>
+    <a class="home-blog-card fade-up d1" href="/blog/clim-qui-coule-chaleur-herault.html">
+      <div class="home-blog-img"><img src="/Screenshot_20260417_072904_Chrome.webp" alt="Climatisation avant entretien" loading="lazy" width="640" height="420"></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Écoulement d’eau</span><h3>Pourquoi ma climatisation coule-t-elle ?</h3><p>Condensats, évacuation ou encrassement : les bons réflexes pour limiter les dégâts.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+    </a>
+    <a class="home-blog-card fade-up d2" href="/blog/prix-entretien-climatisation-montpellier.html">
+      <div class="home-blog-img"><img src="/Homme-Nettoie-climatiseur.webp" alt="Nettoyage professionnel d'une climatisation" loading="lazy" width="640" height="420"></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Prix & prestation</span><h3>Combien coûte un nettoyage de climatisation ?</h3><p>Le tarif Climeo34 et les éléments à comparer pour comprendre ce qui est réellement inclus.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+    </a>
+  </div>
+  <div class="home-blog-all fade-up"><a class="btn-primary" href="/blog/">Voir tous les conseils</a></div>
 </section>
 
 <!-- FAQ -->
