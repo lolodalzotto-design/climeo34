@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '2026-09-06';
+  var VERSION = '2026-09-12';
   var sentOnce = new Set();
   var leadSentAt = 0;
   var diagnosticStep = 0;
@@ -227,7 +227,35 @@
     }, true);
   }
 
+  function initContactDock() {
+    var dock = document.getElementById('mobile-cta-bar');
+    if (!dock) {
+      dock = document.createElement('div');
+      dock.id = 'climeo-contact-dock';
+      dock.setAttribute('role', 'complementary');
+      dock.setAttribute('aria-label', 'Appel ou WhatsApp rapide');
+      dock.innerHTML = '<a class="mob-cta-call" href="tel:0603257679" aria-label="Appeler Climeo34 au 06 03 25 76 79"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a><a class="mob-cta-wa" href="https://wa.me/33603257679" aria-label="Contacter Climeo34 sur WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.914 2C6.441 2 2 6.441 2 11.914c0 1.892.523 3.661 1.432 5.178L2 22l5.087-1.404C8.536 21.46 10.194 22 11.914 22 17.387 22 22 17.387 22 11.914 22 6.441 17.387 2 11.914 2z"/></svg></a>';
+      document.body.appendChild(dock);
+    }
+    dock.classList.add('climeo-contact-dock');
+
+    if (!document.getElementById('climeo-contact-dock-style')) {
+      var style = document.createElement('style');
+      style.id = 'climeo-contact-dock-style';
+      style.textContent = '.climeo-contact-dock{display:none!important}@media(max-width:768px){.climeo-contact-dock{display:flex!important;position:fixed!important;left:auto!important;right:16px!important;bottom:calc(16px + env(safe-area-inset-bottom))!important;z-index:9990!important;flex-direction:column!important;align-items:flex-end!important;justify-content:flex-start!important;gap:11px!important;width:auto!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;transition:opacity .25s ease,transform .25s ease!important}.climeo-contact-dock.climeo-near-footer{opacity:0!important;transform:translateY(12px)!important;pointer-events:none!important}.climeo-contact-dock .mob-cta-call,.climeo-contact-dock .mob-cta-wa{display:flex!important;align-items:center!important;justify-content:center!important;width:54px!important;height:54px!important;min-width:54px!important;padding:0!important;border:0!important;border-radius:50%!important;color:#fff!important;text-decoration:none!important;transition:transform .15s ease!important}.climeo-contact-dock .mob-cta-call{background:#001e5a!important;box-shadow:0 4px 14px rgba(0,30,90,.35),0 0 16px 2px rgba(61,174,233,.45)!important}.climeo-contact-dock .mob-cta-wa{background:#25d366!important;box-shadow:0 4px 14px rgba(0,0,0,.2),0 0 16px 2px rgba(37,211,102,.45)!important}.climeo-contact-dock .mob-cta-call:active,.climeo-contact-dock .mob-cta-wa:active{transform:scale(.91)!important}.climeo-contact-dock svg{width:24px!important;height:24px!important}}@media(prefers-reduced-motion:reduce){.climeo-contact-dock,.climeo-contact-dock a{transition:none!important;animation:none!important}}';
+      document.head.appendChild(style);
+    }
+
+    var footer = document.querySelector('footer');
+    if (footer && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        dock.classList.toggle('climeo-near-footer', entries[0].isIntersecting);
+      }, { threshold: 0.05 }).observe(footer);
+    }
+  }
+
   function init() {
+    initContactDock();
     initScrollTracking();
     initSectionTracking();
     initInteractionTracking();
