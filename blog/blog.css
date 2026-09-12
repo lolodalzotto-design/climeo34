@@ -6,3 +6,6 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.motion-ready .reveal{opacity:1;transform:none}}
 .nav-logo{display:flex;align-items:center;text-decoration:none}.nav-logo img{display:block;height:24px;width:auto;filter:brightness(0) invert(1);transition:filter .3s}.nav.scrolled .nav-logo img{filter:none}
 .nav-logo{position:relative}.nav-logo img{filter:none}.nav-logo .logo-color{position:absolute;left:0;top:50%;transform:translateY(-50%);opacity:0}.nav.scrolled .nav-logo .logo-white{opacity:0}.nav.scrolled .nav-logo .logo-color{opacity:1}.footer-logo{display:inline-flex;align-items:center}.footer-logo img{display:block;width:auto;height:28px}
+/* Responsive media: preserve natural proportions in article content. */
+.article figure img{display:block;width:100%;max-width:100%;height:auto!important;aspect-ratio:auto;object-fit:contain}
+@media(max-width:700px){.article figure{margin:28px 0}.article figure img{width:100%;height:auto!important;object-fit:contain}}
