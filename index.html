@@ -34,8 +34,8 @@
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('motion-ready');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nettoyage vapeur climatisation Montpellier | Climeo34</title>
-<meta name="description" content="Nettoyage vapeur haute température de climatisation à Montpellier et dans l'Hérault. Premier split dès 120 € TTC avec groupe extérieur. Devis gratuit, intervention sous 48h.">
+<title>Nettoyage climatisation Montpellier &amp; Hérault | Climeo34</title>
+<meta name="description" content="Nettoyage de climatisation à Montpellier et dans l'Hérault : méthode vapeur, split dès 120 € TTC avec groupe extérieur. Devis gratuit sous 24 h.">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="climatisation Montpellier, entretien climatisation Montpellier, maintenance climatisation Montpellier, dépannage climatisation Montpellier, nettoyage climatisation Hérault, désinfection clim Hérault, tarif entretien climatisation réversible, entretien climatisation locataire, prix entretien climatisation, technicien climatisation Hérault, Climeo34">
 <meta name="author" content="Climeo34">
@@ -49,8 +49,8 @@
 <link rel="icon" type="image/png" href="favicon.png" sizes="512x512">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 
-<meta property="og:title" content="Climeo34 — Nettoyage vapeur de climatisation à Montpellier">
-<meta property="og:description" content="Nettoyage vapeur haute température de votre climatisation dans l'Hérault. Dès 120 € TTC avec groupe extérieur, intervention sous 48h.">
+<meta property="og:title" content="Nettoyage climatisation Montpellier &amp; Hérault | Climeo34">
+<meta property="og:description" content="Nettoyage de climatisation à Montpellier et dans l'Hérault : méthode vapeur, split dès 120 € TTC avec groupe extérieur. Devis gratuit sous 24 h.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://climeo34.fr/">
 <meta property="og:locale" content="fr_FR">
@@ -3344,31 +3344,6 @@ hoverEls.forEach(btn => {
   function escDiag(s) {
     return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
-})();
-</script>
-<script>
-/* ---- Bip d'allumage climatisation ---- */
-(function() {
-  var AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) return;
-  setTimeout(function() {
-    try {
-      var ctx = new AC();
-      ctx.resume().then(function() {
-        var t = ctx.currentTime;
-        [0, 0.16].forEach(function(off) {
-          var o = ctx.createOscillator(), g = ctx.createGain();
-          o.type = 'sine'; o.frequency.value = 2637;
-          o.connect(g); g.connect(ctx.destination);
-          g.gain.setValueAtTime(0, t + off);
-          g.gain.linearRampToValueAtTime(0.08, t + off + 0.008);
-          g.gain.setValueAtTime(0.08, t + off + 0.075);
-          g.gain.linearRampToValueAtTime(0, t + off + 0.10);
-          o.start(t + off); o.stop(t + off + 0.11);
-        });
-      });
-    } catch(e) {}
-  }, 300);
 })();
 </script>
 <script>
