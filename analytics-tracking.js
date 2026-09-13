@@ -20,11 +20,7 @@
   }
 
   function baseParams(extra) {
-    return Object.assign({
-      tracking_version: VERSION,
-      page_path: location.pathname,
-      page_type: pageType()
-    }, extra || {});
+    return Object.assign({ tracking_version: VERSION, page_path: location.pathname, page_type: pageType() }, extra || {});
   }
 
   function track(name, params) {
@@ -78,29 +74,20 @@
     var now = Date.now();
     if (now - leadSentAt < 10000) return;
     leadSentAt = now;
-    track('generate_lead', {
-      lead_source: source || 'website',
-      form_id: formId || lastLeadFormId || 'unknown'
-    });
+    track('generate_lead', { lead_source: source || 'website', form_id: formId || lastLeadFormId || 'unknown' });
   }
 
-  /* Intercept the site's existing diagnostic success event and turn it into
-     the standard GA4 generate_lead event. */
   if (typeof window.gtag === 'function' && !window.gtag.__climeoWrapped) {
     var originalGtag = window.gtag;
     var wrappedGtag = function () {
       var args = Array.prototype.slice.call(arguments);
       originalGtag.apply(window, args);
-      if (args[0] === 'event' && args[1] === 'diag_submit') {
-        trackLead('diagnostic', 'diagnostic');
-      }
+      if (args[0] === 'event' && args[1] === 'diag_submit') trackLead('diagnostic', 'diagnostic');
     };
     wrappedGtag.__climeoWrapped = true;
     window.gtag = wrappedGtag;
   }
 
-  /* Web3Forms success = a genuine submitted lead. This lets us measure other
-     forms too, without reading or sending their field values. */
   if (typeof window.fetch === 'function' && !window.fetch.__climeoWrapped) {
     var originalFetch = window.fetch;
     var wrappedFetch = function () {
@@ -131,10 +118,7 @@
       });
     }
     window.addEventListener('scroll', function () {
-      if (!ticking) {
-        ticking = true;
-        window.requestAnimationFrame(check);
-      }
+      if (!ticking) { ticking = true; window.requestAnimationFrame(check); }
     }, { passive: true });
     check();
   }
@@ -151,10 +135,7 @@
         var id = section.id || '';
         var name = safeText(heading) || id || 'section';
         var key = 'section:' + (id || name);
-        once(key, 'section_view', {
-          section_id: id.slice(0, 60),
-          section_name: name.slice(0, 80)
-        });
+        once(key, 'section_view', { section_id: id.slice(0, 60), section_name: name.slice(0, 80) });
         observer.unobserve(section);
       });
     }, { threshold: [0.35] });
@@ -169,29 +150,17 @@
     return /web3forms|hero|contact|devis|quote|diag/.test(action + ' ' + id + ' ' + cls);
   }
 
-  function formId(form) {
-    return (form && (form.id || form.getAttribute('name'))) || 'lead_form';
-  }
+  function formId(form) { return (form && (form.id || form.getAttribute('name'))) || 'lead_form'; }
 
   function initInteractionTracking() {
     document.addEventListener('click', function (event) {
       var el = event.target.closest && event.target.closest('a,button');
       if (!el) return;
-
-      if (el.matches('.diag-opt')) {
-        diagnosticStep += 1;
-        track('diagnostic_step', { step_number: diagnosticStep });
-      }
-
+      if (el.matches('.diag-opt')) { diagnosticStep += 1; track('diagnostic_step', { step_number: diagnosticStep }); }
       var type = ctaType(el);
       if (!type) return;
-      var params = {
-        cta_type: type,
-        cta_location: locationLabel(el),
-        cta_text: safeText(el)
-      };
+      var params = { cta_type: type, cta_location: locationLabel(el), cta_text: safeText(el) };
       track('cta_click', params);
-
       if (type === 'phone') track('phone_click', params);
       else if (type === 'whatsapp') track('whatsapp_click', params);
       else if (type === 'maps') track('maps_click', params);
@@ -220,36 +189,25 @@
       var field = event.target;
       var form = field && field.form;
       if (!isLeadForm(form)) return;
-      track('form_error', {
-        form_id: formId(form),
-        field_type: (field.type || field.tagName || 'field').toLowerCase()
-      });
+      track('form_error', { form_id: formId(form), field_type: (field.type || field.tagName || 'field').toLowerCase() });
     }, true);
   }
 
   function initCookieBannerUX() {
     var banner = document.getElementById('cookie-banner');
     if (!banner) return;
-
     if (!document.getElementById('climeo-cookie-mobile-style')) {
       var style = document.createElement('style');
       style.id = 'climeo-cookie-mobile-style';
-      style.textContent = '@media(max-width:768px){#cookie-banner{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;top:auto!important;width:auto!important;max-width:none!important;min-height:0!important;height:auto!important;padding:12px 12px 11px!important;margin:0!important;border-radius:16px!important;display:grid!important;grid-template-columns:1fr!important;gap:9px!important;align-items:center!important;overflow:visible!important;z-index:10000!important;box-sizing:border-box!important}#cookie-banner p{margin:0!important;font-size:12px!important;line-height:1.35!important;text-align:left!important}#cookie-banner .cookie-btns{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;margin:0!important;flex-shrink:1!important}#cookie-banner .btn-cookie-ok,#cookie-banner .btn-cookie-no{width:100%!important;min-width:0!important;min-height:44px!important;height:44px!important;margin:0!important;padding:8px 10px!important;border-radius:11px!important;font-size:14px!important;font-weight:700!important;line-height:1!important;opacity:1!important;box-sizing:border-box!important}#cookie-banner .btn-cookie-no{color:#fff!important;border:1px solid rgba(255,255,255,.65)!important}html.climeo-cookie-open .climeo-contact-dock{opacity:0!important;pointer-events:none!important;transform:translateY(12px)!important}}';
+      style.textContent = '@media(max-width:768px){#cookie-banner{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;top:auto!important;transform:none!important;width:auto!important;max-width:none!important;min-height:0!important;height:auto!important;padding:12px 12px 11px!important;margin:0!important;border-radius:16px!important;display:grid!important;grid-template-columns:1fr!important;gap:9px!important;align-items:center!important;overflow:visible!important;z-index:10000!important;box-sizing:border-box!important}#cookie-banner p{margin:0!important;font-size:12px!important;line-height:1.35!important;text-align:left!important}#cookie-banner .cookie-btns{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;margin:0!important;flex-shrink:1!important}#cookie-banner .btn-cookie-ok,#cookie-banner .btn-cookie-no{width:100%!important;min-width:0!important;min-height:44px!important;height:44px!important;margin:0!important;padding:8px 10px!important;border-radius:11px!important;font-size:14px!important;font-weight:700!important;line-height:1!important;opacity:1!important;box-sizing:border-box!important}#cookie-banner .btn-cookie-no{color:#fff!important;border:1px solid rgba(255,255,255,.65)!important}html.climeo-cookie-open .climeo-contact-dock{opacity:0!important;pointer-events:none!important;transform:translateY(12px)!important}}';
       document.head.appendChild(style);
     }
-
     function syncCookieState() {
       var visible = !banner.hidden && window.getComputedStyle(banner).display !== 'none';
       document.documentElement.classList.toggle('climeo-cookie-open', visible);
     }
-
     syncCookieState();
-    if ('MutationObserver' in window) {
-      new MutationObserver(syncCookieState).observe(banner, {
-        attributes: true,
-        attributeFilter: ['style', 'class', 'hidden']
-      });
-    }
+    if ('MutationObserver' in window) new MutationObserver(syncCookieState).observe(banner, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
   }
 
   function initContactDock() {
@@ -263,19 +221,15 @@
       document.body.appendChild(dock);
     }
     dock.classList.add('climeo-contact-dock');
-
     if (!document.getElementById('climeo-contact-dock-style')) {
       var style = document.createElement('style');
       style.id = 'climeo-contact-dock-style';
       style.textContent = '.climeo-contact-dock{display:none!important}@media(max-width:768px){.climeo-contact-dock{display:flex!important;position:fixed!important;left:auto!important;right:16px!important;bottom:calc(16px + env(safe-area-inset-bottom))!important;z-index:9990!important;flex-direction:column!important;align-items:flex-end!important;justify-content:flex-start!important;gap:11px!important;width:auto!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;transition:opacity .25s ease,transform .25s ease!important}.climeo-contact-dock.climeo-near-footer{opacity:0!important;transform:translateY(12px)!important;pointer-events:none!important}.climeo-contact-dock .mob-cta-call,.climeo-contact-dock .mob-cta-wa{display:flex!important;align-items:center!important;justify-content:center!important;width:54px!important;height:54px!important;min-width:54px!important;padding:0!important;border:0!important;border-radius:50%!important;color:#fff!important;text-decoration:none!important;transition:transform .15s ease!important}.climeo-contact-dock .mob-cta-call{background:#001e5a!important;box-shadow:0 4px 14px rgba(0,30,90,.35),0 0 16px 2px rgba(61,174,233,.45)!important}.climeo-contact-dock .mob-cta-wa{background:#25d366!important;box-shadow:0 4px 14px rgba(0,0,0,.2),0 0 16px 2px rgba(37,211,102,.45)!important}.climeo-contact-dock .mob-cta-call:active,.climeo-contact-dock .mob-cta-wa:active{transform:scale(.91)!important}.climeo-contact-dock svg{width:24px!important;height:24px!important}}@media(prefers-reduced-motion:reduce){.climeo-contact-dock,.climeo-contact-dock a{transition:none!important;animation:none!important}}';
       document.head.appendChild(style);
     }
-
     var footer = document.querySelector('footer');
     if (footer && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        dock.classList.toggle('climeo-near-footer', entries[0].isIntersecting);
-      }, { threshold: 0.05 }).observe(footer);
+      new IntersectionObserver(function (entries) { dock.classList.toggle('climeo-near-footer', entries[0].isIntersecting); }, { threshold: 0.05 }).observe(footer);
     }
   }
 
