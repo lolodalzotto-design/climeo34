@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '2026-09-12';
+  var VERSION = '2026-09-13';
   var sentOnce = new Set();
   var leadSentAt = 0;
   var diagnosticStep = 0;
@@ -227,6 +227,31 @@
     }, true);
   }
 
+  function initCookieBannerUX() {
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    if (!document.getElementById('climeo-cookie-mobile-style')) {
+      var style = document.createElement('style');
+      style.id = 'climeo-cookie-mobile-style';
+      style.textContent = '@media(max-width:768px){#cookie-banner{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;top:auto!important;width:auto!important;max-width:none!important;min-height:0!important;height:auto!important;padding:12px 12px 11px!important;margin:0!important;border-radius:16px!important;display:grid!important;grid-template-columns:1fr!important;gap:9px!important;align-items:center!important;overflow:visible!important;z-index:10000!important;box-sizing:border-box!important}#cookie-banner p{margin:0!important;font-size:12px!important;line-height:1.35!important;text-align:left!important}#cookie-banner .cookie-btns{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important;margin:0!important;flex-shrink:1!important}#cookie-banner .btn-cookie-ok,#cookie-banner .btn-cookie-no{width:100%!important;min-width:0!important;min-height:44px!important;height:44px!important;margin:0!important;padding:8px 10px!important;border-radius:11px!important;font-size:14px!important;font-weight:700!important;line-height:1!important;opacity:1!important;box-sizing:border-box!important}#cookie-banner .btn-cookie-no{color:#fff!important;border:1px solid rgba(255,255,255,.65)!important}html.climeo-cookie-open .climeo-contact-dock{opacity:0!important;pointer-events:none!important;transform:translateY(12px)!important}}';
+      document.head.appendChild(style);
+    }
+
+    function syncCookieState() {
+      var visible = !banner.hidden && window.getComputedStyle(banner).display !== 'none';
+      document.documentElement.classList.toggle('climeo-cookie-open', visible);
+    }
+
+    syncCookieState();
+    if ('MutationObserver' in window) {
+      new MutationObserver(syncCookieState).observe(banner, {
+        attributes: true,
+        attributeFilter: ['style', 'class', 'hidden']
+      });
+    }
+  }
+
   function initContactDock() {
     var dock = document.getElementById('mobile-cta-bar');
     if (!dock) {
@@ -255,6 +280,7 @@
   }
 
   function init() {
+    initCookieBannerUX();
     initContactDock();
     initScrollTracking();
     initSectionTracking();
