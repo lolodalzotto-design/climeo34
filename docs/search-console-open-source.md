@@ -6,7 +6,7 @@ Il n’ajoute aucune balise au site et n’utilise aucun service payant tiers.
 ## Autorisation unique
 
 1. Dans Google Cloud Console, créer ou sélectionner un projet.
-2. Activer **Google Search Console API** et **URL Inspection API**.
+2. Activer **Google Search Console API** ; elle couvre aussi l’inspection des URL.
 3. Créer un compte de service et télécharger sa clé JSON.
 4. Dans Google Search Console, ouvrir la propriété `climeo34.fr`, puis
    **Paramètres > Utilisateurs et autorisations > Ajouter un utilisateur**.
