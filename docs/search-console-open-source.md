@@ -19,7 +19,8 @@ Il n’ajoute aucune balise au site et n’utilise aucun service payant tiers.
 ## Exécution
 
 Le workflow **Rapport SEO Search Console** peut être lancé manuellement dans
-l’onglet Actions. Il s’exécute aussi chaque lundi matin et produit :
+l’onglet Actions. Il s’exécute aussi chaque lundi matin et produit une archive
+temporaire conservée pendant un jour, sans publier les données dans le dépôt :
 
 - `pages.csv` : clics, impressions, CTR et position par page ;
 - `queries.csv` : mêmes métriques par requête et page ;
@@ -32,4 +33,5 @@ attend deux jours avant la date de fin afin de limiter les données partielles.
 ## Sécurité
 
 La clé du compte de service reste dans les secrets chiffrés GitHub Actions.
-Le script utilise uniquement l’accès Search Console en lecture seule.
+Le script utilise uniquement l’accès Search Console en lecture seule. Les
+requêtes et statistiques ne sont jamais enregistrées dans le dépôt public.
