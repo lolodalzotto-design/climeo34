@@ -1,0 +1,44 @@
+name: Rapport SEO Search Console
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 5 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: search-console-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements-search-console.txt
+
+      - name: Générer le rapport Search Console
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: sc-domain:climeo34.fr
+          GSC_SITEMAP_URL: https://climeo34.fr/sitemap.xml
+        run: python scripts/search_console_report.py --days 90
+
+      - name: Archiver le rapport dans le dépôt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add seo-reports/search-console/latest
+          git diff --cached --quiet || git commit -m "chore(seo): actualiser le rapport Search Console"
+          git push
