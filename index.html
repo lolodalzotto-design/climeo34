@@ -3004,17 +3004,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     goTo(0);
   }
 
-  var reviewsSection = document.getElementById('avis');
-  if ('IntersectionObserver' in window && reviewsSection) {
-    var reviewsObserver = new IntersectionObserver(function(entries) {
-      if (!entries[0].isIntersecting) return;
-      reviewsObserver.disconnect();
-      init();
-    }, { rootMargin: '350px 0px' });
-    reviewsObserver.observe(reviewsSection);
-  } else {
-    init();
-  }
+  init();
 })();
 // ──────────────────────────────────────────────────────────────────────────
 
