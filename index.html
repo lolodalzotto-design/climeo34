@@ -1919,16 +1919,14 @@ section>.centered{position:relative;z-index:2}
 </style>
 <script>
 function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-    'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD',
-    'event_callback': callback
-  });
-  return false;
+  if (typeof gtag === 'function') {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD',
+      'transport_type': 'beacon'
+    });
+  }
+  /* Retourner true laisse le navigateur ouvrir immédiatement le lien tel:. */
+  return true;
 }
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="c413569a-f857-48f2-8357-5c594c7e5817"></script>
