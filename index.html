@@ -2496,26 +2496,6 @@ function gtag_report_conversion(url) {
   }
 })();
 
-function acceptCookies() {
-  localStorage.setItem('cookies', 'accepted');
-  document.getElementById('cookie-banner').classList.add('hidden');
-  // Google Consent Mode v2 — l'utilisateur accepte
-  gtag('consent', 'update', {
-    'analytics_storage': 'granted',
-    'ad_storage': 'granted',
-    'ad_user_data': 'granted',
-    'ad_personalization': 'granted'
-  });
-}
-function refuseCookies() {
-  localStorage.setItem('cookies', 'refused');
-  document.getElementById('cookie-banner').classList.add('hidden');
-  // Google Consent Mode v2 — l'utilisateur refuse : consentement reste "denied" (valeur par défaut), aucune action nécessaire
-}
-if (localStorage.getItem('cookies')) {
-  document.getElementById('cookie-banner').classList.add('hidden');
-}
-
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
@@ -2695,7 +2675,9 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     priceEl.textContent = price + ' €';
     splitsInput.value = splitCount;
     estimateInput.value = price + ' € TTC';
-    priceEl.animate([{transform:'scale(.9)',opacity:.4},{transform:'scale(1)',opacity:1}],{duration:220,easing:'ease-out'});
+    if (typeof priceEl.animate === 'function') {
+      priceEl.animate([{transform:'scale(.9)',opacity:.4},{transform:'scale(1)',opacity:1}],{duration:220,easing:'ease-out'});
+    }
   }
   document.getElementById('split-minus').addEventListener('click', function(){ splitCount=Math.max(1,splitCount-1);refreshEstimate(); });
   document.getElementById('split-plus').addEventListener('click', function(){ splitCount=Math.min(12,splitCount+1);refreshEstimate(); });
