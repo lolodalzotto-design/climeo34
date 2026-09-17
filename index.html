@@ -1916,6 +1916,73 @@ section>.centered{position:relative;z-index:2}
   .hero-mobile-call { margin-top: 6px; }
 }
 
+/* Bandeau des zones d'intervention — animation CSS légère et continue */
+.city-marquee {
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+  width: 100%;
+  padding: 13px 0;
+  background: #fff;
+  border-top: 1px solid rgba(0,30,90,.08);
+  border-bottom: 1px solid rgba(0,30,90,.1);
+  box-shadow: 0 8px 24px rgba(0,30,90,.05);
+}
+.city-marquee::before,
+.city-marquee::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 54px;
+  pointer-events: none;
+}
+.city-marquee::before { left: 0; background: linear-gradient(90deg,#fff,transparent); }
+.city-marquee::after { right: 0; background: linear-gradient(270deg,#fff,transparent); }
+.city-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: cityMarquee 34s linear infinite;
+  will-change: transform;
+}
+.city-marquee-list {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-right: 22px;
+  list-style: none;
+  white-space: nowrap;
+}
+.city-marquee-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--brand);
+  font: 700 .76rem var(--font-head);
+  letter-spacing: .025em;
+}
+.city-marquee-list li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-light);
+  box-shadow: 0 0 8px rgba(61,174,233,.55);
+}
+@keyframes cityMarquee { to { transform: translateX(-50%); } }
+@media (max-width: 600px) {
+  .city-marquee { padding: 11px 0; }
+  .city-marquee-list { gap: 18px; padding-right: 18px; }
+  .city-marquee-list li { font-size: .71rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .city-marquee-track { animation: none; }
+  .city-marquee { overflow-x: auto; scrollbar-width: none; }
+  .city-marquee::-webkit-scrollbar { display: none; }
+  .city-marquee-list[aria-hidden="true"] { display: none; }
+}
+
 </style>
 <script>
 function gtag_report_conversion(url) {
@@ -2090,6 +2157,17 @@ function gtag_report_conversion(url) {
     </div>
   </div>
 </section>
+
+<div class="city-marquee" aria-label="Communes desservies par Climeo34">
+  <div class="city-marquee-track">
+    <ul class="city-marquee-list">
+      <li>Montpellier</li><li>Saint-Gély-du-Fesc</li><li>Mauguio</li><li>Castries</li><li>Saint-Jean-de-Védas</li><li>Palavas-les-Flots</li><li>Lattes</li><li>Pérols</li><li>Carnon</li><li>La Grande-Motte</li><li>Vendargues</li><li>Castelnau-le-Lez</li><li>Montferrier-sur-Lez</li><li>Villeneuve-lès-Maguelone</li><li>Combaillaux</li><li>Le Crès</li><li>Baillargues</li>
+    </ul>
+    <ul class="city-marquee-list" aria-hidden="true">
+      <li>Montpellier</li><li>Saint-Gély-du-Fesc</li><li>Mauguio</li><li>Castries</li><li>Saint-Jean-de-Védas</li><li>Palavas-les-Flots</li><li>Lattes</li><li>Pérols</li><li>Carnon</li><li>La Grande-Motte</li><li>Vendargues</li><li>Castelnau-le-Lez</li><li>Montferrier-sur-Lez</li><li>Villeneuve-lès-Maguelone</li><li>Combaillaux</li><li>Le Crès</li><li>Baillargues</li>
+    </ul>
+  </div>
+</div>
 
 <!-- AVANT APRES -->
 <section id="avant-apres" aria-labelledby="t-avant-apres">
