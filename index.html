@@ -1429,6 +1429,10 @@ section { position: relative; }
   object-position: center;
   display: block;
 }
+.hero-photo-call { display: block; border-radius: 18px; cursor: pointer; }
+.hero-photo-call:focus-visible,
+.hero-steam-badge:focus-visible { outline: 3px solid var(--brand-light); outline-offset: 4px; }
+.hero-steam-badge { text-decoration: none; cursor: pointer; }
 .hero-badge {
   position: absolute;
   bottom: -18px;
@@ -2016,15 +2020,17 @@ function gtag_report_conversion(url) {
     <!-- IMAGE HERO — illustration climatiseur encrassé avant entretien -->
     <div class="hero-image-wrap hero-reveal" id="hero-image-wrap">
       <div class="steam-label-smoke" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-      <picture>
-        <source media="(max-width: 900px)" srcset="hero-photo-mobile.webp" type="image/webp">
-        <source srcset="hero-photo-11-aout.webp" type="image/webp">
-        <img src="hero-photo-11-aout.png"
-             alt="Illustration d'un climatiseur encrassé avec moisissures, bactéries et fuite d'eau — avant nettoyage Climeo34 Montpellier"
-             class="hero-photo" width="400" height="500"
-             loading="eager" fetchpriority="high" decoding="async">
-      </picture>
-      <div class="hero-steam-badge">Nettoyage <span class="hot-steam">VAPEUR</span> haute pression</div>
+      <a class="hero-photo-call" href="tel:0603257679" onclick="return gtag_report_conversion('tel:0603257679')" aria-label="Appeler Climeo34 en cliquant sur la photo">
+        <picture>
+          <source media="(max-width: 900px)" srcset="hero-photo-mobile.webp" type="image/webp">
+          <source srcset="hero-photo-11-aout.webp" type="image/webp">
+          <img src="hero-photo-11-aout.png"
+               alt="Illustration d'un climatiseur encrassé avec moisissures, bactéries et fuite d'eau — avant nettoyage Climeo34 Montpellier"
+               class="hero-photo" width="400" height="500"
+               loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+      </a>
+      <a class="hero-steam-badge" href="tel:0603257679" onclick="return gtag_report_conversion('tel:0603257679')" aria-label="Appeler Climeo34 pour un nettoyage vapeur">Nettoyage <span class="hot-steam">VAPEUR</span> haute pression</a>
       <a class="hero-mobile-call" href="tel:0603257679" onclick="return gtag_report_conversion('tel:0603257679')" aria-label="Appelez-nous au 06 03 25 76 79">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span class="hero-mobile-call-copy"><strong>Appelez-nous</strong></span>
