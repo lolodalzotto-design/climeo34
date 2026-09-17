@@ -310,6 +310,8 @@ body {
 }
 .btn-cookie-no:hover { color: white; border-color: #64748b; }
 #cookie-banner.hidden { display: none; }
+/* Le bandeau cookies visuel a été retiré : garde-fou contre toute ancienne version injectée ou mise en cache. */
+#cookie-banner { display: none !important; }
 
 /* NAV — floating pill */
 #nav {
@@ -1439,27 +1441,27 @@ section { position: relative; }
   .hero-photo { height: 260px; }
   .hero-badge { bottom: -14px; left: 14px; }
   .hero-mobile-call {
-    display: inline-flex;
+    display: flex;
     position: relative;
     z-index: 2;
     align-items: center;
     justify-content: center;
     gap: 9px;
-    width: min(310px, calc(100% - 32px));
+    width: min(320px, calc(100% - 28px));
     min-height: 52px;
-    margin: 10px auto 0;
+    margin: 6px auto 0;
     padding: 12px 20px;
-    border-radius: 12px;
+    border-radius: 6px 6px 14px 14px;
     color: #fff;
     background: linear-gradient(135deg, var(--cta), var(--cta-hover));
     border: 1px solid rgba(255,255,255,.2);
-    box-shadow: 0 8px 22px rgba(0,0,0,.2);
+    box-shadow: 0 10px 24px rgba(0,0,0,.22);
     font-family: var(--font-head);
     text-decoration: none;
     letter-spacing: .01em;
   }
-  .hero-mobile-call-copy { display: grid; gap: 1px; text-align: left; line-height: 1.15; }
-  .hero-mobile-call-copy strong { font-size: .94rem; font-weight: 800; }
+  .hero-mobile-call-copy { display: block; text-align: center; line-height: 1.15; }
+  .hero-mobile-call-copy strong { font-size: 1rem; font-weight: 800; }
   .hero-mobile-call-copy small { font-size: .72rem; font-weight: 600; color: rgba(255,255,255,.82); }
   .hero-mobile-call:active { background: var(--cta-hover); transform: scale(.98); }
 }
@@ -1885,14 +1887,16 @@ section>.centered{position:relative;z-index:2}
     right: auto !important;
     bottom: auto !important;
     display: block;
-    width: min(310px, calc(100% - 32px));
+    width: min(320px, calc(100% - 28px));
     margin: 12px auto 0;
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
     white-space: normal;
+    border-radius: 14px 14px 6px 6px;
+    text-align: center;
   }
-  .hero-mobile-call { margin-top: 8px; }
+  .hero-mobile-call { margin-top: 6px; }
 }
 
 </style>
