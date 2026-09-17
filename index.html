@@ -1928,6 +1928,11 @@ section>.centered{position:relative;z-index:2}
   border-bottom: 1px solid rgba(0,30,90,.1);
   box-shadow: 0 8px 24px rgba(0,30,90,.05);
 }
+.hero-content > .city-marquee {
+  max-width: 720px;
+  border-radius: 14px;
+}
+.hero-content > .city-marquee + .hero-form-wrap { margin-top: 12px; }
 .city-marquee::before,
 .city-marquee::after {
   content: "";
@@ -2049,6 +2054,16 @@ function gtag_report_conversion(url) {
           WhatsApp
         </a>
       </div>
+      <div class="city-marquee" aria-label="Communes desservies par Climeo34">
+        <div class="city-marquee-track">
+          <ul class="city-marquee-list">
+            <li>Montpellier</li><li>Saint-Gély-du-Fesc</li><li>Mauguio</li><li>Castries</li><li>Saint-Jean-de-Védas</li><li>Palavas-les-Flots</li><li>Lattes</li><li>Pérols</li><li>Carnon</li><li>La Grande-Motte</li><li>Vendargues</li><li>Castelnau-le-Lez</li><li>Montferrier-sur-Lez</li><li>Villeneuve-lès-Maguelone</li><li>Combaillaux</li><li>Le Crès</li><li>Baillargues</li>
+          </ul>
+          <ul class="city-marquee-list" aria-hidden="true">
+            <li>Montpellier</li><li>Saint-Gély-du-Fesc</li><li>Mauguio</li><li>Castries</li><li>Saint-Jean-de-Védas</li><li>Palavas-les-Flots</li><li>Lattes</li><li>Pérols</li><li>Carnon</li><li>La Grande-Motte</li><li>Vendargues</li><li>Castelnau-le-Lez</li><li>Montferrier-sur-Lez</li><li>Villeneuve-lès-Maguelone</li><li>Combaillaux</li><li>Le Crès</li><li>Baillargues</li>
+          </ul>
+        </div>
+      </div>
       <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
       <div class="hero-form-wrap hero-reveal r6" id="hero-form-wrap">
         <div class="hero-mini-calc" aria-label="Estimation du tarif d'entretien">
@@ -2157,17 +2172,6 @@ function gtag_report_conversion(url) {
     </div>
   </div>
 </section>
-
-<div class="city-marquee" aria-label="Communes desservies par Climeo34">
-  <div class="city-marquee-track">
-    <ul class="city-marquee-list">
-      <li>Montpellier</li><li>Saint-Gély-du-Fesc</li><li>Mauguio</li><li>Castries</li><li>Saint-Jean-de-Védas</li><li>Palavas-les-Flots</li><li>Lattes</li><li>Pérols</li><li>Carnon</li><li>La Grande-Motte</li><li>Vendargues</li><li>Castelnau-le-Lez</li><li>Montferrier-sur-Lez</li><li>Villeneuve-lès-Maguelone</li><li>Combaillaux</li><li>Le Crès</li><li>Baillargues</li>
-    </ul>
-    <ul class="city-marquee-list" aria-hidden="true">
-      <li>Montpellier</li><li>Saint-Gély-du-Fesc</li><li>Mauguio</li><li>Castries</li><li>Saint-Jean-de-Védas</li><li>Palavas-les-Flots</li><li>Lattes</li><li>Pérols</li><li>Carnon</li><li>La Grande-Motte</li><li>Vendargues</li><li>Castelnau-le-Lez</li><li>Montferrier-sur-Lez</li><li>Villeneuve-lès-Maguelone</li><li>Combaillaux</li><li>Le Crès</li><li>Baillargues</li>
-    </ul>
-  </div>
-</div>
 
 <!-- AVANT APRES -->
 <section id="avant-apres" aria-labelledby="t-avant-apres">
