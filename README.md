@@ -33,3 +33,23 @@ Ce n’est **pas** la clé navigateur déjà présente dans `index.html` (restri
 
 Si l’appel API échoue, le JSON déjà commité est conservé : le bandeau du site
 ne redevient pas une 404.
+
+### Place ID
+
+Les liens du site
+
+- https://maps.app.goo.gl/kad8NLF7N8Bi8GSPA
+- https://maps.app.goo.gl/LucxK36ZqRZLxfrQ9
+
+redirigent vers la même fiche
+`Climeo34 - Nettoyage Climatisation Montpellier et Hérault`,
+CID `0x8d5a86d7c09bdba1:0x6d71c0fab6a83ff2`, soit
+`ChIJodubwNeGWo0R8j-otvrAcW0`.
+
+C’est une **entreprise de zone de service** (pas de vitrine physique).
+Places API (New) avec `includePureServiceAreaBusinesses=true` confirme
+cette fiche (`climeo34.fr`, 5,0 / 53 avis). L’API Places historique
+répond `NOT_FOUND` pour le même ID : ce n’est pas un mauvais identifiant,
+c’est pour ça que le workflow appelle **Places API (New)** en premier.
+
+Ne pas substituer un homonyme (Climmed34, Climeo Energies, …).

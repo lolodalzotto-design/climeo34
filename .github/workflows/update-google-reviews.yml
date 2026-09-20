@@ -5,21 +5,22 @@ name: Update Google reviews cache
 # Le site charge ce fichier statique en priorité pour garantir que les avis les plus
 # récents s'affichent réellement en premier.
 #
-# IMPORTANT — clé API : GOOGLE_PLACES_API_KEY doit être une clé SANS restriction
-# "référent HTTP" (une clé avec ce type de restriction est catégoriquement refusée
-# par le point d'accès historique pour tout appel serveur, quel que soit l'en-tête
-# Referer envoyé — message Google : "API keys with referer restrictions cannot be
-# used with this API"). La clé déjà utilisée côté navigateur dans index.html a ce
-# type de restriction et NE PEUT PAS être réutilisée ici : il faut créer une
-# clé dédiée dans Google Cloud Console, restreinte uniquement par API
-# ("Places API (New)" obligatoire ; "Places API" historique optionnel) et sans
-# restriction d'application (ou restreinte par IP si possible), puis la renseigner
-# comme secret GOOGLE_PLACES_API_KEY. Voir README.md.
+# Place ID (vérifié 2026-09-20, toujours le bon) :
+#   https://maps.app.goo.gl/kad8NLF7N8Bi8GSPA
+#   https://maps.app.goo.gl/LucxK36ZqRZLxfrQ9
+# redirigent tous deux vers
+#   CID 0x8d5a86d7c09bdba1:0x6d71c0fab6a83ff2
+#   = ChIJodubwNeGWo0R8j-otvrAcW0
+# Places API (New) searchText + includePureServiceAreaBusinesses=true
+# renvoie exactement cette fiche (climeo34.fr, 5,0 / 53 avis).
+# C’est une entreprise de zone de service : l’API Places historique
+# (maps.googleapis.com/.../place/details) répond NOT_FOUND pour cet ID
+# même s’il est courant. Ne pas le remplacer par un homonyme
+# (Climmed34, Climeo Energies, …).
 #
-# Le Place ID ci-dessous est toujours valide sur Places API (New) mais le point
-# d'accès historique Place Details peut répondre NOT_FOUND. Le job tente d'abord
-# l'historique (reviews_sort=newest), puis se rabat sur Places API (New) et
-# trie les avis par date côté serveur.
+# IMPORTANT — clé API : GOOGLE_PLACES_API_KEY doit être une clé SANS restriction
+# "référent HTTP". La clé navigateur de index.html NE PEUT PAS être réutilisée.
+# Activer "Places API (New)" sur le projet. Voir README.md.
 
 on:
   schedule:
@@ -43,6 +44,7 @@ jobs:
       - name: Récupérer les avis Google (triés par date)
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          # Résolu depuis les liens maps.app du site (voir en-tête). Identique à index.html.
           GOOGLE_PLACE_ID: ChIJodubwNeGWo0R8j-otvrAcW0
         run: |
           set -euo pipefail
@@ -53,6 +55,7 @@ jobs:
           fi
 
           mkdir -p data
+          place_id="${GOOGLE_PLACE_ID}"
 
           write_from_legacy() {
             jq --arg fetched_at "$(date -u +%FT%TZ)" '
@@ -98,55 +101,80 @@ jobs:
               }' /tmp/google-place-new.json > data/google-reviews.json
           }
 
-          curl -sS -G "https://maps.googleapis.com/maps/api/place/details/json" \
-            --data-urlencode "place_id=${GOOGLE_PLACE_ID}" \
-            --data-urlencode "fields=rating,user_ratings_total,reviews" \
-            --data-urlencode "reviews_sort=newest" \
-            --data-urlencode "language=fr" \
-            --data-urlencode "key=${GOOGLE_PLACES_API_KEY}" \
-            -o /tmp/google-place-legacy.json
+          new_ok() {
+            jq -e '(.error | not) and (.reviews | type == "array") and (.reviews | length > 0)' /tmp/google-place-new.json >/dev/null
+          }
 
-          legacy_status=$(jq -r '.status // "UNKNOWN"' /tmp/google-place-legacy.json)
-          if [ "$legacy_status" = "OK" ]; then
-            write_from_legacy
-          else
-            legacy_error=$(jq -r '.error_message // empty' /tmp/google-place-legacy.json || true)
-            echo "::warning::API Places historique status=${legacy_status} — ${legacy_error} Repli sur Places API (New)."
-            if [ "$legacy_status" = "REQUEST_DENIED" ] && printf '%s' "$legacy_error" | grep -qi "referer restrictions"; then
-              echo "::error::Le secret GOOGLE_PLACES_API_KEY utilise une clé avec restriction de référent HTTP, incompatible avec l'API historique. Créez une clé dédiée sans restriction d'application (limitée à 'Places API (New)') dans Google Cloud Console et mettez à jour le secret."
-            fi
-            if [ "$legacy_status" = "NOT_FOUND" ]; then
-              echo "::warning::Le Place ID est refusé par l'API historique (souvent obsolète ou non activée) mais peut rester valide sur Places API (New)."
-            fi
-
-            curl -sS "https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}?languageCode=fr" \
+          fetch_new() {
+            curl -sS "https://places.googleapis.com/v1/places/${1}?languageCode=fr" \
               -H "X-Goog-Api-Key: ${GOOGLE_PLACES_API_KEY}" \
-              -H "X-Goog-FieldMask: rating,userRatingCount,reviews" \
+              -H "X-Goog-FieldMask: id,displayName,websiteUri,rating,userRatingCount,reviews" \
               -o /tmp/google-place-new.json
+          }
 
-            if jq -e '.error' /tmp/google-place-new.json >/dev/null; then
-              new_status=$(jq -r '.error.status // "UNKNOWN"' /tmp/google-place-new.json)
-              new_message=$(jq -r '.error.message // empty' /tmp/google-place-new.json)
-              echo "::error::Places API (New) a échoué status=${new_status} — ${new_message}. Activez 'Places API (New)' sur la clé serveur et relancez Actions → Update Google reviews cache. Le fichier existant est conservé."
-              exit 1
+          # 1) Places API (New) — seul point d'accès qui résout cette fiche service-area.
+          fetch_new "${place_id}"
+          if ! new_ok; then
+            new_status=$(jq -r '.error.status // "UNKNOWN"' /tmp/google-place-new.json)
+            new_message=$(jq -r '.error.message // empty' /tmp/google-place-new.json)
+            echo "::warning::Get Place (New) a échoué pour ${place_id} status=${new_status} — ${new_message}. Recherche par nom (includePureServiceAreaBusinesses)."
+
+            curl -sS -X POST "https://places.googleapis.com/v1/places:searchText" \
+              -H "Content-Type: application/json" \
+              -H "X-Goog-Api-Key: ${GOOGLE_PLACES_API_KEY}" \
+              -H "X-Goog-FieldMask: places.id,places.displayName,places.websiteUri,places.rating,places.userRatingCount" \
+              -d '{"textQuery":"Climeo34","languageCode":"fr","regionCode":"FR","includePureServiceAreaBusinesses":true}' \
+              -o /tmp/google-place-search.json
+
+            resolved=$(jq -r '
+              [.places[]? | select((.websiteUri // "") | test("climeo34\\.fr"; "i"))]
+              | .[0].id // empty
+            ' /tmp/google-place-search.json)
+
+            if [ -n "${resolved}" ]; then
+              if [ "${resolved}" != "${place_id}" ]; then
+                echo "::warning::Place ID courant différent du dépôt : ${resolved} (ancien ${place_id}). Mettre à jour GOOGLE_PLACE_ID et index.html."
+              fi
+              place_id="${resolved}"
+              fetch_new "${place_id}"
             fi
+          fi
 
-            if ! jq -e '(.reviews | type == "array") and (.reviews | length > 0)' /tmp/google-place-new.json >/dev/null; then
-              echo "::error::Places API (New) n'a renvoyé aucun avis — le fichier existant est conservé."
-              exit 1
-            fi
-
+          if new_ok; then
             write_from_new
+          else
+            # 2) Historique optionnel (reviews_sort=newest). Attend NOT_FOUND pour cette fiche.
+            curl -sS -G "https://maps.googleapis.com/maps/api/place/details/json" \
+              --data-urlencode "place_id=${place_id}" \
+              --data-urlencode "fields=rating,user_ratings_total,reviews" \
+              --data-urlencode "reviews_sort=newest" \
+              --data-urlencode "language=fr" \
+              --data-urlencode "key=${GOOGLE_PLACES_API_KEY}" \
+              -o /tmp/google-place-legacy.json
+
+            legacy_status=$(jq -r '.status // "UNKNOWN"' /tmp/google-place-legacy.json)
+            if [ "$legacy_status" = "OK" ]; then
+              write_from_legacy
+            else
+              legacy_error=$(jq -r '.error_message // empty' /tmp/google-place-legacy.json || true)
+              echo "::error::Places API (New) et l'API historique ont échoué. historique=${legacy_status} ${legacy_error}. Activez 'Places API (New)' sur la clé serveur. Le fichier existant est conservé."
+              if [ "$legacy_status" = "REQUEST_DENIED" ] && printf '%s' "$legacy_error" | grep -qi "referer restrictions"; then
+                echo "::error::Le secret GOOGLE_PLACES_API_KEY utilise une clé avec restriction de référent HTTP. Créez une clé serveur dédiée (Places API New, sans restriction HTTP)."
+              fi
+              if [ "$legacy_status" = "NOT_FOUND" ]; then
+                echo "::error::NOT_FOUND sur l'API historique est attendu pour cette fiche de zone de service. Le job doit passer par Places API (New), pas par Place Details historique."
+              fi
+              exit 1
+            fi
           fi
 
           if ! jq -e '(.reviews | type == "array") and (.reviews | length > 0) and (.count != null)' data/google-reviews.json >/dev/null; then
             echo "::error::Cache généré invalide ou vide — le commit est annulé."
-            rm -f data/google-reviews.json
             git checkout -- data/google-reviews.json 2>/dev/null || true
             exit 1
           fi
 
-          echo "Cache écrit : $(jq -r '"\(.count) avis, \(.reviews|length) extraits, fetched_at=\(.fetched_at)"' data/google-reviews.json)"
+          echo "Cache écrit : $(jq -r '"\(.count) avis, \(.reviews|length) extraits, fetched_at=\(.fetched_at)"' data/google-reviews.json) place_id=${place_id}"
 
       - name: Commit et push si changement
         uses: stefanzweifel/git-auto-commit-action@v5

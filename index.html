@@ -2811,6 +2811,9 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
 
 // ─── Google Places — Avis clients (le plus récent en premier) ────────────────
 (function () {
+  // Place ID vérifié 2026-09-20 : maps.app.goo.gl/kad8NLF7N8Bi8GSPA et
+  // LucxK36ZqRZLxfrQ9 → CID 0x8d5a86d7c09bdba1:0x6d71c0fab6a83ff2.
+  // Fiche zone de service climeo34.fr ; l'API Places historique répond NOT_FOUND.
   var PLACE_ID   = 'ChIJodubwNeGWo0R8j-otvrAcW0';
   var API_KEY    = 'AIzaSyAOQa2cXeDsWdbgOjepMu3nGef8Dfkw2yU';
   var REVIEW_URL = 'https://maps.app.goo.gl/kad8NLF7N8Bi8GSPA?g_st=ac';
