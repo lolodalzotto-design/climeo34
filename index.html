@@ -831,6 +831,7 @@ a.pill { cursor: pointer; }
   font-size: 0.78rem; color: white; flex-shrink: 0;
 }
 .avis-author strong { font-size: 0.85rem; color: var(--text); display: block; font-weight: 700; }
+.avis-author span { font-size: 0.75rem; color: var(--text-muted); }
 .avis-slider-controls {
   display: flex; align-items: center; justify-content: center;
   gap: 16px; margin-top: 24px;
@@ -2924,6 +2925,37 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     document.head.appendChild(s);
   }
 
+  function formatRelTime(review) {
+    var fromCache = review && review.relTime ? String(review.relTime).replace(/\s+/g, ' ').trim() : '';
+    if (fromCache) return fromCache;
+
+    var published = Number(review && review.time) || 0;
+    if (!published) return '';
+
+    var elapsedMs = Date.now() - published;
+    if (elapsedMs < 0) elapsedMs = 0;
+    var minutes = Math.floor(elapsedMs / 60000);
+    var hours = Math.floor(elapsedMs / 3600000);
+    var days = Math.floor(elapsedMs / 86400000);
+
+    function frenchCount(n, singular, plural) {
+      if (n === 1) return 'un ' + singular;
+      if (n === 2) return 'deux ' + plural;
+      return n + ' ' + plural;
+    }
+
+    if (minutes < 1) return "à l'instant";
+    if (minutes < 60) return 'il y a ' + (minutes === 1 ? 'une minute' : frenchCount(minutes, 'minute', 'minutes'));
+    if (hours < 24) return 'il y a ' + (hours === 1 ? 'une heure' : frenchCount(hours, 'heure', 'heures'));
+    if (days < 7) return 'il y a ' + (days <= 1 ? 'un jour' : frenchCount(days, 'jour', 'jours'));
+    var weeks = Math.floor(days / 7);
+    if (weeks < 5) return 'il y a ' + (weeks === 1 ? 'une semaine' : frenchCount(weeks, 'semaine', 'semaines'));
+    var months = Math.floor(days / 30);
+    if (months < 12) return 'il y a ' + (months <= 1 ? 'un mois' : months + ' mois');
+    var years = Math.floor(days / 365);
+    return 'il y a ' + (years <= 1 ? 'un an' : years + ' ans');
+  }
+
   function renderReviews(grid, data) {
     var countEl = document.getElementById('google-avis-count');
     if (countEl && data.count) countEl.textContent = data.count;
@@ -2940,6 +2972,7 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
     grid.innerHTML = reviews.map(function(r) {
       var name = escHtml(r.name);
       var text = escHtml(r.text);
+      var relTime = escHtml(formatRelTime(r));
       var note = r.rating || 5;
       return '<div class="avis" data-href="' + REVIEW_URL + '" role="link" tabindex="0" aria-label="Voir cet avis sur Google">'
         + '<div class="stars">' + starsHtml(note) + '</div>'
@@ -2947,7 +2980,9 @@ document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.obse
         + (text ? '<button type="button" class="avis-more">Lire la suite</button>' : '')
         + '<div class="avis-author">'
         + '<div class="avatar">' + initials(name) + '</div>'
-        + '<div><strong>' + name + '</strong></div>'
+        + '<div><strong>' + name + '</strong>'
+        + (relTime ? '<span>' + relTime + '</span>' : '')
+        + '</div>'
         + '</div></div>';
     }).join('');
     initAvisSlider();
