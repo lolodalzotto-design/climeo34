@@ -1,19 +1,26 @@
 name: Update Google reviews cache
 
-# Récupère les avis Google côté serveur (aucune restriction CORS ici, contrairement
-# au navigateur), triés par date décroissante, et les écrit dans data/google-reviews.json.
-# Le site charge ce fichier statique en priorité pour garantir que les avis les plus
-# récents s'affichent réellement en premier.
+# Cause racine du NOT_FOUND (Actions run 35536076222 et suivants) :
+#   mauvais endpoint, pas un mauvais Place ID, pas un secret manquant.
 #
-# IMPORTANT — clé API : GOOGLE_PLACES_API_KEY doit être une clé SANS restriction
-# "référent HTTP" (une clé avec ce type de restriction est catégoriquement refusée
-# par ce point d'accès pour tout appel serveur, quel que soit l'en-tête Referer
-# envoyé — message Google : "API keys with referer restrictions cannot be used
-# with this API"). La clé déjà utilisée côté navigateur dans index.html a ce
-# type de restriction et NE PEUT PAS être réutilisée ici : il faut créer une
-# clé dédiée dans Google Cloud Console, restreinte uniquement par API
-# ("Places API") et sans restriction d'application (ou restreinte par IP si
-# possible), puis la renseigner comme secret GOOGLE_PLACES_API_KEY.
+# La fiche Maps est une entreprise de zone de service
+# (Places API New : pureServiceAreaBusiness=true) :
+#   Climeo34 – Nettoyage Climatisation Montpellier et Hérault
+#   5,0 / 53 avis, site climeo34.fr
+#   CID 7886296605541285874
+#   hex 0x8d5a86d7c09bdba1:0x6d71c0fab6a83ff2
+#   ftid /g/11z4c0c7p5
+#   place_id ChIJodubwNeGWo0R8j-otvrAcW0  ← déjà dans le dépôt, et ACCEPTÉ
+#     par GET https://places.googleapis.com/v1/places/{id}
+#   CID / ftid / g/11… ne sont PAS des place_id (Places New répond INVALID_ARGUMENT).
+#
+# L'ancien job appelait Place Details historique
+#   maps.googleapis.com/maps/api/place/details/json?reviews_sort=newest
+# qui répond NOT_FOUND pour cette fiche. reviews_sort=newest n'existe que là.
+# Ce workflow n'utilise plus cet endpoint : Place Details (New) + tri local.
+#
+# Secret GOOGLE_PLACES_API_KEY : clé serveur SANS restriction référent HTTP,
+# avec l'API « Places API (New) » activée. Voir README.md.
 
 on:
   schedule:
@@ -34,7 +41,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Récupérer les avis Google (triés par date)
+      - name: Récupérer les avis Google (Places API New)
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
           GOOGLE_PLACE_ID: ChIJodubwNeGWo0R8j-otvrAcW0
@@ -42,48 +49,54 @@ jobs:
           set -euo pipefail
 
           if [ -z "${GOOGLE_PLACES_API_KEY:-}" ]; then
-            echo "::error::Secret GOOGLE_PLACES_API_KEY manquant — voir README du repo pour le configurer."
-            exit 1
-          fi
-
-          curl -sS -G "https://maps.googleapis.com/maps/api/place/details/json" \
-            -H "Referer: https://climeo34.fr/" \
-            --data-urlencode "place_id=${GOOGLE_PLACE_ID}" \
-            --data-urlencode "fields=rating,user_ratings_total,reviews" \
-            --data-urlencode "reviews_sort=newest" \
-            --data-urlencode "language=fr" \
-            --data-urlencode "key=${GOOGLE_PLACES_API_KEY}" \
-            -o /tmp/google-place-details.json
-
-          status=$(jq -r '.status // "UNKNOWN"' /tmp/google-place-details.json)
-          if [ "$status" != "OK" ]; then
-            echo "::error::Google API a répondu status=$status — le fichier existant est conservé."
-            error_message=$(jq -r '.error_message // empty' /tmp/google-place-details.json || true)
-            echo "$error_message"
-            if [ "$status" = "REQUEST_DENIED" ] && printf '%s' "$error_message" | grep -qi "referer restrictions"; then
-              echo "::error::Le secret GOOGLE_PLACES_API_KEY utilise une clé avec restriction de référent HTTP, incompatible avec cette API côté serveur. Créez une clé dédiée sans restriction d'application (limitée à l'API 'Places API') dans Google Cloud Console et mettez à jour le secret."
-            fi
+            echo "::error::Secret GOOGLE_PLACES_API_KEY manquant. Settings → Secrets and variables → Actions → New repository secret. Clé serveur, Places API (New), sans restriction HTTP. Puis Actions → Update Google reviews cache → Run workflow."
             exit 1
           fi
 
           mkdir -p data
+
+          curl -sS "https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}?languageCode=fr" \
+            -H "X-Goog-Api-Key: ${GOOGLE_PLACES_API_KEY}" \
+            -H "X-Goog-FieldMask: id,rating,userRatingCount,reviews" \
+            -o /tmp/google-place-new.json
+
+          if jq -e '.error' /tmp/google-place-new.json >/dev/null; then
+            status=$(jq -r '.error.status // "UNKNOWN"' /tmp/google-place-new.json)
+            message=$(jq -r '.error.message // empty' /tmp/google-place-new.json)
+            echo "::error::Place Details (New) a échoué status=${status} — ${message}"
+            echo "::error::Activez « Places API (New) » sur le projet de la clé serveur. Ne pas utiliser maps.googleapis.com/maps/api/place/details (NOT_FOUND attendu sur cette fiche zone de service)."
+            exit 1
+          fi
+
           jq --arg fetched_at "$(date -u +%FT%TZ)" '
             {
               fetched_at: $fetched_at,
-              count: .result.user_ratings_total,
-              rating: .result.rating,
+              count: .userRatingCount,
+              rating: .rating,
               reviews: (
-                (.result.reviews // [])
+                (.reviews // [])
                 | map({
-                    name: (.author_name // "Client"),
-                    text: (.text // ""),
-                    relTime: (.relative_time_description // ""),
+                    name: (.authorAttribution.displayName // "Client"),
+                    text: ((.originalText.text // .text.text) // ""),
+                    relTime: (.relativePublishTimeDescription // ""),
                     rating: (.rating // 5),
-                    time: ((.time // 0) * 1000)
+                    time: (
+                      (.publishTime // "1970-01-01T00:00:00Z")
+                      | sub("\\.[0-9]+Z$"; "Z")
+                      | fromdateiso8601 * 1000
+                    )
                   })
                 | sort_by(-.time)
               )
-            }' /tmp/google-place-details.json > data/google-reviews.json
+            }' /tmp/google-place-new.json > data/google-reviews.json
+
+          if ! jq -e '(.reviews | type == "array") and (.reviews | length > 0) and (.count != null)' data/google-reviews.json >/dev/null; then
+            echo "::error::Cache généré invalide ou vide — le fichier commité est conservé."
+            git checkout -- data/google-reviews.json 2>/dev/null || true
+            exit 1
+          fi
+
+          echo "Cache écrit : $(jq -r '"\(.count) avis, \(.reviews|length) extraits, fetched_at=\(.fetched_at)"' data/google-reviews.json)"
 
       - name: Commit et push si changement
         uses: stefanzweifel/git-auto-commit-action@v5
