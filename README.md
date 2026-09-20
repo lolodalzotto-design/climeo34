@@ -15,8 +15,9 @@ Ce n’est **pas** la clé navigateur déjà présente dans `index.html` (restri
 
 1. Ouvrir [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
 2. Activer **Places API (New)** sur le projet (APIs & Services → Library).
-   L’ancienne « Places API » est optionnelle : elle permet `reviews_sort=newest`,
-   mais ce Place ID peut répondre `NOT_FOUND` sur ce point d’accès.
+   Obligatoire : le job appelle `places.googleapis.com/v1/places/{id}`,
+   pas l’ancien Place Details. L’ancienne « Places API » +
+   `reviews_sort=newest` répond `NOT_FOUND` pour cette fiche.
 3. Créer une clé API **serveur** :
    - restrictions d’API : `Places API (New)` (et éventuellement `Places API`) ;
    - **aucune** restriction « Sites web (référents HTTP) » ;
@@ -46,10 +47,18 @@ redirigent vers la même fiche
 CID `0x8d5a86d7c09bdba1:0x6d71c0fab6a83ff2`, soit
 `ChIJodubwNeGWo0R8j-otvrAcW0`.
 
-C’est une **entreprise de zone de service** (pas de vitrine physique).
-Places API (New) avec `includePureServiceAreaBusinesses=true` confirme
-cette fiche (`climeo34.fr`, 5,0 / 53 avis). L’API Places historique
-répond `NOT_FOUND` pour le même ID : ce n’est pas un mauvais identifiant,
-c’est pour ça que le workflow appelle **Places API (New)** en premier.
+Cause racine du `NOT_FOUND` Actions : **mauvais endpoint**, pas un ID faux
+et pas un secret manquant.
+
+| Identifiant | Accepté comme `place_id` ? |
+|---|---|
+| `ChIJodubwNeGWo0R8j-otvrAcW0` | Oui — Place Details **(New)** uniquement |
+| CID `7886296605541285874` / hex `0x8d5a86d7c09bdba1:0x6d71c0fab6a83ff2` | Non (`INVALID_ARGUMENT`) |
+| ftid `/g/11z4c0c7p5` | Non (`INVALID_ARGUMENT`) |
+
+Places API (New) renvoie `pureServiceAreaBusiness: true` pour cette fiche.
+Place Details historique (`maps.googleapis.com/.../details/json`) répond
+`NOT_FOUND` pour le même ChIJ. Changer le ChIJ pour la même chaîne ne
+change rien : il faut l’endpoint New.
 
 Ne pas substituer un homonyme (Climmed34, Climeo Energies, …).
