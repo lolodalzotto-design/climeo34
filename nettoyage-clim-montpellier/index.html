@@ -81,31 +81,28 @@ function gtag_report_conversion(url) {
   "description": "Service de nettoyage vapeur et d'entretien de climatisation à Montpellier pour particuliers et professionnels.",
   "url": "https://climeo34.fr/nettoyage-clim-montpellier/",
   "provider": {
-    "@type": "HomeAndConstructionBusiness",
-    "@id": "https://climeo34.fr/#organization",
-    "name": "Climeo34 - Nettoyage Climatisation Montpellier et Hérault",
-    "alternateName": "Climeo34",
-    "legalName": "DAL ZOTTO LAURENT",
-    "url": "https://climeo34.fr/",
-    "telephone": "+33757690322",
-    "email": "contact@climeo34.fr",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "1 Rue Lucien Neuwirth",
-      "addressLocality": "Mudaison",
-      "postalCode": "34130",
-      "addressRegion": "Hérault",
-      "addressCountry": "FR"
-    },
-    "taxID": "797611274"
+    "@id": "https://climeo34.fr/#business"
   },
   "image": "https://climeo34.fr/nettoyage-clim-montpellier-illustration.webp",
   "logo": "https://climeo34.fr/logo_transparent.png",
   "areaServed": [
-    {"@type": "City", "name": "Montpellier", "postalCode": "34000"},
-    {"@type": "City", "name": "Lattes", "postalCode": "34970"},
-    {"@type": "City", "name": "Castelnau-le-Lez", "postalCode": "34170"},
-    {"@type": "AdministrativeArea", "name": "Hérault", "identifier": "34"}
+    {
+      "@type": "City",
+      "name": "Montpellier"
+    },
+    {
+      "@type": "City",
+      "name": "Lattes"
+    },
+    {
+      "@type": "City",
+      "name": "Castelnau-le-Lez"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hérault",
+      "identifier": "34"
+    }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -118,7 +115,10 @@ function gtag_report_conversion(url) {
         "price": "120",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
-        "areaServed": {"@type": "City", "name": "Montpellier", "postalCode": "34000"}
+        "areaServed": {
+          "@type": "City",
+          "name": "Montpellier"
+        }
       },
       {
         "@type": "Offer",
@@ -127,7 +127,10 @@ function gtag_report_conversion(url) {
         "price": "210",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
-        "areaServed": {"@type": "City", "name": "Montpellier", "postalCode": "34000"}
+        "areaServed": {
+          "@type": "City",
+          "name": "Montpellier"
+        }
       },
       {
         "@type": "Offer",
@@ -136,7 +139,10 @@ function gtag_report_conversion(url) {
         "price": "300",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
-        "areaServed": {"@type": "City", "name": "Montpellier", "postalCode": "34000"}
+        "areaServed": {
+          "@type": "City",
+          "name": "Montpellier"
+        }
       }
     ]
   }
@@ -192,6 +198,48 @@ function gtag_report_conversion(url) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="c413569a-f857-48f2-8357-5c594c7e5817"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "LocalBusiness",
+    "HVACBusiness"
+  ],
+  "@id": "https://climeo34.fr/#business",
+  "name": "Climeo34 - Nettoyage Climatisation Montpellier et Hérault",
+  "telephone": "+33757690322",
+  "email": "contact@climeo34.fr",
+  "url": "https://climeo34.fr/",
+  "logo": "https://climeo34.fr/climeo34-logo-horizontal.png",
+  "image": "https://climeo34.fr/Homme-Nettoie-climatiseur.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Mudaison",
+    "postalCode": "34130",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Montpellier"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Hérault"
+    }
+  ],
+  "sameAs": [
+    "https://www.google.com/maps/place/?q=place_id:ChIJodubwNeGWo0R8j-otvrAcW0",
+    "https://www.justacote.com/mudaison-34130/chauffage/climeo34-nettoyage-climatisation-montpellier-et-herault-3222073.htm",
+    "https://hoodspot.fr/chauffagiste/climeo34-nettoyage-climatisation-montpellier-et-herault-79761127400078/",
+    "https://foursquare.com/v/climeo34/6ab93522a1a1464a727574ba",
+    "https://www.hotfrog.fr/company/AaDjS2MNcyK41e0CifwW_w",
+    "https://www.instagram.com/climeo34",
+    "https://www.tiktok.com/@climeo34"
+  ]
+}
+</script>
 </head>
 <style>
 :root {
@@ -397,7 +445,7 @@ footer a:hover{color:white;}
       </p>
       <div class="hero-actions">
         <a href="https://wa.me/33757690322" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-primary" target="_blank" rel="noopener">Devis gratuit sur WhatsApp</a>
-        <a href="tel:0757690322" class="btn-ghost" onclick="return gtag_report_conversion('tel:0757690322')">Appeler maintenant</a>
+        <a href="tel:+33757690322" class="btn-ghost" onclick="return gtag_report_conversion('tel:+33757690322')">Appeler maintenant</a>
       </div>
       <div class="hero-kpis">
         <div class="kpi"><div class="kpi-val">Local</div><div class="kpi-label">Montpellier & alentours</div></div>
@@ -623,14 +671,21 @@ footer a:hover{color:white;}
   <span class="s-tag">Disponible maintenant</span>
   <h2>Votre clim propre avant<br>la canicule à Montpellier</h2>
   <p>Demandez votre devis gratuit par téléphone ou WhatsApp. Le tarif et le créneau vous sont confirmés avant l'intervention.</p>
+  
+  <p class="cta-reassurance">Climeo34 - Nettoyage Climatisation Montpellier et Hérault<br>
+Mudaison (34130), intervention Montpellier et Hérault<br>
+<a href="tel:+33757690322" style="color:inherit">07 57 69 03 22</a> · <a href="mailto:contact@climeo34.fr" style="color:inherit">contact@climeo34.fr</a> · <a href="https://climeo34.fr/" style="color:inherit">https://climeo34.fr/</a></p>
   <div class="cta-actions">
     <a href="https://wa.me/33757690322" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="btn-whatsapp" target="_blank" rel="noopener">Devis gratuit sur WhatsApp</a>
-    <a href="tel:0757690322" class="btn-tel" onclick="return gtag_report_conversion('tel:0757690322')">07 57 69 03 22</a>
+    <a href="tel:+33757690322" class="btn-tel" onclick="return gtag_report_conversion('tel:+33757690322')">07 57 69 03 22</a>
   </div>
   <p class="cta-reassurance">Nettoyage vapeur · Montpellier · Communes proches · Hérault (34)</p>
 </section>
 
 <footer>
+  <p>Climeo34 - Nettoyage Climatisation Montpellier et Hérault<br>
+Mudaison (34130), intervention Montpellier et Hérault<br>
+<a href="tel:+33757690322">07 57 69 03 22</a> · <a href="mailto:contact@climeo34.fr">contact@climeo34.fr</a> · <a href="https://climeo34.fr/">https://climeo34.fr/</a></p>
   <p>© 2025 Climeo34 · <a href="https://climeo34.fr">climeo34.fr</a> · Nettoyage climatisation Montpellier (34000) · Particuliers, Airbnb & Copropriétés · <a href="https://climeo34.fr/#zone">Zone d'intervention</a></p>
   <p style="margin-top:10px;">Aussi disponible à : <a href="/nettoyage-clim-palavas/">Palavas-les-Flots</a> · <a href="/nettoyage-clim-carnon/">Carnon</a> · <a href="/nettoyage-clim-la-grande-motte/">La Grande-Motte</a></p>
   <p style="margin-top:6px;"><a href="/blog/">Blog</a> · <a href="/blog/prix-entretien-climatisation-montpellier.html">Prix entretien climatisation</a> · <a href="/blog/clim-qui-coule-chaleur-herault.html">Clim qui coule en été</a></p>
