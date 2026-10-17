@@ -23,6 +23,10 @@ name: Update Google reviews cache
 # avec l'API « Places API (New) » activée. Voir README.md.
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-google-reviews.yml'
   schedule:
     - cron: '0 5 * * *' # tous les jours à 5h UTC
   workflow_dispatch: {}
@@ -40,6 +44,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Récupérer les avis Google (Places API New)
         env:
