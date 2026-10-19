@@ -7,3 +7,6 @@ Thumbs.db
 node_modules/
 package.json
 package-lock.json
+
+# Graphify knowledge-graph build artifacts (local cache, machine-specific paths)
+graphify-out/
