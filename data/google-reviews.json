@@ -1,8 +1,15 @@
 {
-  "fetched_at": "2026-10-26T10:38:14Z",
+  "fetched_at": "2026-10-27T10:07:04Z",
   "count": 59,
   "rating": 5,
   "reviews": [
+    {
+      "name": "Carole Riera",
+      "text": "Je ne peux que recommander Climeo34 et Laurent. J ai envoyé un message et ai eu un retour dans les 3 minutes, un devis et une proposition de rdv le soir même après mon retour du travail. Laurent est non seulement professionnel, explique tout ce qu'il fait, donne des conseils et en plus il est souriant et très sympa. Un grand merci, je n hesiterai pas 1 seconde à refaire appel à vous",
+      "relTime": "il y a un mois",
+      "rating": 5,
+      "time": 1788456897000
+    },
     {
       "name": "Maxime Navarro",
       "text": "Un vrai nettoyage de climatisation en profondeur. Travail qualitatif en comparaison à certaines entreprises locales dominant le marché. Merci à Laurent pour son intervention, sa gentilesse, ses explications et disponibilité. Je recommande",
@@ -23,13 +30,6 @@
       "relTime": "il y a 2 mois",
       "rating": 5,
       "time": 1785493484000
-    },
-    {
-      "name": "francine Dambre",
-      "text": "Totalement satisfaite.Rendez-vous rapide. Nettoyage de ma clim impeccable avec explication du déroulement  de l'opération de nettoyage.Mérite les 5 étoiles. Je recommande.  N'hésitez pas a  le contacter. Technicien  sérieux.",
-      "relTime": "il y a 4 mois",
-      "rating": 5,
-      "time": 1782217673000
     },
     {
       "name": "Adeline Joly Begga",
