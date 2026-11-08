@@ -1209,17 +1209,12 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .ig-ready .ig-card:not(.is-active) .ig-open { pointer-events: none; }
 @media (max-width: 768px) {
   .ig-profile-fab { display: none; }
-  .ig-ready .ig-stage {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: min(420px, calc(100% - 84px));
-    margin-right: 84px;
-    margin-left: auto;
-    gap: 12px;
-  }
-  .ig-ready .ig-viewport { flex: 1 0 100%; width: 100%; height: 560px; order: -1; }
-  .ig-ready .ig-nav { position: static; }
+  .ig-ready .ig-stage { display: block; width: 100%; max-width: none; margin: 0; }
+  .ig-ready .ig-viewport { width: 100%; }
+  .ig-ready .ig-card { top: 0; }
+  .ig-ready .ig-nav { position: absolute; top: 16%; z-index: 20; }
+  .ig-ready .ig-prev { left: 0; }
+  .ig-ready .ig-next { right: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ig-ready .ig-card { transition: none; }
@@ -2422,19 +2417,19 @@ function gtag_report_conversion(url) {
 
   function render() {
     var stageW = viewport.clientWidth || 320;
-    var narrow = stageW < 640;
+    var narrow = stageW < 720;
     var cardW = narrow
-      ? Math.min(280, Math.max(200, stageW - 36))
+      ? Math.max(156, Math.min(280, stageW * 0.62))
       : Math.min(340, Math.max(240, stageW * 0.4));
-    var shift = narrow ? Math.min(78, stageW * 0.2) : Math.min(cardW * 0.62, stageW * 0.28);
+    var shift = narrow ? cardW * 0.5 : Math.min(cardW * 0.62, stageW * 0.28);
     cards.forEach(function (card, i) {
       var d = wrap(i - index);
       var abs = Math.abs(d);
       var sign = d < 0 ? -1 : 1;
-      var x = abs === 0 ? 0 : sign * shift * (abs === 1 ? 1 : 1.55);
-      var z = abs === 0 ? 40 : abs === 1 ? -210 : -360;
-      var rot = abs === 0 ? 0 : sign * (narrow ? (abs === 1 ? -18 : -28) : (abs === 1 ? -34 : -48));
-      var scale = abs === 0 ? 1 : abs === 1 ? (narrow ? 0.78 : 0.84) : 0.68;
+      var x = abs === 0 ? 0 : sign * shift * (abs === 1 ? 1 : (narrow ? 1.35 : 1.55));
+      var z = abs === 0 ? 40 : abs === 1 ? (narrow ? -90 : -210) : (narrow ? -170 : -360);
+      var rot = abs === 0 ? 0 : sign * (narrow ? (abs === 1 ? -24 : -34) : (abs === 1 ? -34 : -48));
+      var scale = abs === 0 ? 1 : abs === 1 ? (narrow ? 0.9 : 0.84) : (narrow ? 0.78 : 0.68);
       card.style.width = cardW + 'px';
       card.style.transform = 'translateX(calc(-50% + ' + x + 'px)) translateZ(' + z + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')';
       card.style.zIndex = String(12 - abs);
@@ -2443,6 +2438,8 @@ function gtag_report_conversion(url) {
       var link = card.querySelector('.ig-open');
       if (link) link.tabIndex = d === 0 ? 0 : -1;
     });
+    if (narrow) viewport.style.height = (cards[index].offsetHeight + 6) + 'px';
+    else viewport.style.height = '';
     var title = cards[index].querySelector('h3');
     status.textContent = (index + 1) + ' sur ' + n + (title ? ' — ' + title.textContent : '');
   }
@@ -2497,7 +2494,7 @@ function gtag_report_conversion(url) {
       step(dx < 0 ? 1 : -1);
     }
   });
-  viewport.addEventListener('pointercancel', function () { drag = null; });
+  viewport.addEventListener('pointercancel', function () { drag = null; suppressClick = false; });
   viewport.addEventListener('click', function (e) {
     if (suppressClick) {
       e.preventDefault();
