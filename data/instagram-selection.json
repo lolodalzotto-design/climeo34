@@ -1,0 +1,64 @@
+{
+  "profile": "https://www.instagram.com/climeo34/",
+  "selection": "static",
+  "liveFeed": false,
+  "title": "Retrouvez-nous sur Instagram",
+  "coveredFrom": "2026-10-30",
+  "coveredTo": "2026-11-03",
+  "note": "Sélection manuelle du 30 octobre au 3 novembre 2026, transmise par le journal CM. Pas un flux automatique. La fraîcheur après le 3 novembre 2026 n'est pas vérifiée.",
+  "refresh": "Manuel : remplacer le fichier image, la date et le permalien dans cette liste et dans index.html. Un flux public automatique n'est pas branché. Une mise à jour automatique future n'est acceptable qu'avec une API officielle Instagram déjà autorisée, sans nouvel accès créé ici.",
+  "excluded": [
+    {
+      "date": "2026-10-29",
+      "url": "https://www.instagram.com/climeo34/p/DfEm-0gICZE/",
+      "reason": "Concours daté, écarté d'une grille pérenne."
+    }
+  ],
+  "posts": [
+    {
+      "date": "2026-11-03",
+      "url": "https://www.instagram.com/climeo34/p/DfSUXcHInep/",
+      "title": "Un nettoyage en 4 étapes",
+      "kind": "Publication",
+      "image": "/instagram/2026-11-03-nettoyage-4-etapes",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "date": "2026-11-02",
+      "url": "https://www.instagram.com/climeo34/reel/DfPwVu3oeFE/",
+      "title": "3 signes que ta clim est sale",
+      "kind": "Couverture de Reel",
+      "image": "/instagram/2026-11-02-trois-signes",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "date": "2026-11-01",
+      "url": "https://www.instagram.com/climeo34/p/DfNLAQ_oB0k/",
+      "title": "Avis d'Armelle B. repris en visuel",
+      "kind": "Publication",
+      "image": "/instagram/2026-11-01-avis-armelle-b",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "date": "2026-10-31",
+      "url": "https://www.instagram.com/climeo34/p/DfKl_ppoBPA/",
+      "title": "Cet hiver, elle souffle quoi ?",
+      "kind": "Publication",
+      "image": "/instagram/2026-10-31-hiver-souffle-quoi",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "date": "2026-10-30",
+      "url": "https://www.instagram.com/climeo34/reel/DfIDEvtIUov/",
+      "title": "Avant de passer en chauffage",
+      "kind": "Couverture de Reel",
+      "image": "/instagram/2026-10-30-avant-hiver",
+      "width": 1080,
+      "height": 1920
+    }
+  ]
+}
