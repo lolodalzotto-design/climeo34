@@ -1130,108 +1130,100 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
   .diag-panel { right: 58px; width: auto; max-width: calc(100vw - 74px); }
 }
 
-/* Instagram — sélection statique après les avis */
-#instagram { padding: 28px 6% 72px; background: #fff; }
-.ig-intro { max-width: 740px; margin: 0 auto 28px; text-align: center; }
+/* Instagram — carrousel statique après les avis. Sans JS : liste lisible. */
+#instagram { padding: 28px 6% 72px; background: #fff; overflow-x: clip; }
+.ig-intro { max-width: 740px; margin: 0 auto 22px; text-align: center; }
 .ig-note { font-size: 0.98rem; color: var(--gray-text); line-height: 1.65; }
-.ig-grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+.ig-stage { position: relative; max-width: 1040px; margin: 0 auto; }
+.ig-viewport { touch-action: pan-y; outline: none; }
+.ig-viewport:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 6px; border-radius: 18px; }
+.ig-wheel { list-style: none; display: grid; gap: 22px; max-width: 420px; margin: 0 auto; }
 .ig-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
   background: #fff;
   border: 1px solid #e0e7f3;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  text-decoration: none;
   color: var(--navy);
   box-shadow: var(--shadow);
 }
-.ig-card:hover { box-shadow: var(--shadow-md); }
-.ig-card:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
-.ig-frame {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: #001E5A;
-}
-.ig-frame picture {
-  display: block;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.ig-frame img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-.ig-card figure { margin: 0; display: flex; flex-direction: column; height: 100%; }
-.ig-card figcaption { padding: 12px 14px 16px; }
+.ig-frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #001E5A; }
+.ig-frame picture { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+.ig-frame img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.ig-card figure { margin: 0; }
+.ig-card figcaption { padding: 12px 14px 8px; }
 .ig-card time { display: block; font-size: 0.75rem; letter-spacing: 0.02em; color: var(--gray-text); }
 .ig-card h3 { font-family: var(--font-head); font-size: 1rem; line-height: 1.35; font-weight: 700; margin-top: 4px; }
 .ig-kind { display: block; margin-top: 6px; font-size: 0.78rem; line-height: 1.4; color: var(--gray-text); }
-.ig-profile-link {
+.ig-open {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   min-height: 44px;
-  margin: 22px auto 0;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: var(--navy);
-  color: #fff;
+  margin: 0 14px 14px;
+  color: var(--brand-blue);
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 0.88rem;
   text-decoration: none;
 }
-.ig-profile-link:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
-.ig-intro .ig-profile-link { display: inline-flex; }
-.mob-cta-ig, .ig-profile-fab {
-  display: flex;
+.ig-open:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
+.ig-nav {
+  display: none;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
+  border: 0;
   border-radius: 50%;
   background: #fff;
-  border: 1.5px solid #e0e7f3;
-  box-shadow: 0 2px 10px rgba(0,30,90,0.16);
-  text-decoration: none;
+  color: var(--navy);
+  box-shadow: 0 8px 24px rgba(0,30,90,.16);
+  cursor: pointer;
+}
+.ig-nav:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
+.ig-nav svg { width: 20px; height: 20px; }
+.ig-status { min-height: 1.4em; margin: 14px auto 0; text-align: center; font-size: 0.82rem; color: var(--gray-text); font-family: var(--font-head); }
+.ig-profile-link {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+  margin: 8px auto 0; padding: 10px 18px; border-radius: 999px; background: var(--navy); color: #fff;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; text-decoration: none;
+}
+.ig-profile-link:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
+.mob-cta-ig, .ig-profile-fab {
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;
+  background: #fff; border: 1.5px solid #e0e7f3; box-shadow: 0 2px 10px rgba(0,30,90,0.16); text-decoration: none;
 }
 .mob-cta-ig svg, .ig-profile-fab svg { width: 22px; height: 22px; display: block; }
 .mob-cta-ig:focus-visible, .ig-profile-fab:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
-.ig-profile-fab {
-  position: fixed;
-  left: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
-  z-index: 90;
+.ig-profile-fab { position: fixed; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 90; }
+.ig-ready .ig-nav { display: flex; }
+.ig-ready .ig-stage { display: grid; grid-template-columns: 44px 1fr 44px; gap: 12px; align-items: center; }
+.ig-ready .ig-viewport { perspective: 1600px; perspective-origin: 50% 42%; height: 620px; overflow: hidden; }
+.ig-ready .ig-wheel { position: relative; height: 100%; max-width: none; display: block; margin: 0; transform-style: preserve-3d; }
+.ig-ready .ig-card {
+  position: absolute; top: 18px; left: 50%; width: min(340px, 42%);
+  margin: 0; transform-origin: center center;
+  transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .55s ease;
+  backface-visibility: hidden;
 }
-@media (max-width: 900px) {
-  .ig-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-}
+.ig-ready .ig-card.is-active { box-shadow: 0 22px 60px rgba(0,30,90,.22); }
+.ig-ready .ig-card:not(.is-active) .ig-open { pointer-events: none; }
 @media (max-width: 768px) {
   .ig-profile-fab { display: none; }
-  .ig-grid {
-    grid-template-columns: 1fr;
+  .ig-ready .ig-stage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: min(420px, calc(100% - 84px));
-    margin-left: auto;
     margin-right: 84px;
+    margin-left: auto;
+    gap: 12px;
   }
+  .ig-ready .ig-viewport { flex: 1 0 100%; width: 100%; height: 560px; order: -1; }
+  .ig-ready .ig-nav { position: static; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ig-card, .ig-profile-link, .mob-cta-ig, .ig-profile-fab { transition: none; }
+  .ig-ready .ig-card { transition: none; }
+  .ig-profile-link, .mob-cta-ig, .ig-profile-fab, .ig-nav { transition: none; }
 }
 
 /* ANIMATIONS */
@@ -2309,10 +2301,14 @@ function gtag_report_conversion(url) {
     <h2 class="s-title" id="t-instagram">Retrouvez-nous sur Instagram</h2>
     <p class="ig-note">Conseils et avis clients : une sélection de nos publications Instagram. Suivez-nous pour les nouveautés.</p>
   </div>
-  <ul class="ig-grid">
-    <li>
-      <a class="ig-card" href="https://www.instagram.com/climeo34/p/DfSUXcHInep/" target="_blank" rel="noopener noreferrer">
-        <figure>
+  <div class="ig-stage">
+    <button type="button" class="ig-nav ig-prev" aria-label="Publication précédente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="ig-viewport" id="ig-viewport" tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Publications Instagram. Flèches gauche et droite pour tourner.">
+  <ul class="ig-wheel">
+        <li class="ig-card">
+<figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-03-nettoyage-4-etapes-640.webp 640w, /instagram/2026-11-03-nettoyage-4-etapes-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2325,11 +2321,11 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
-      </a>
+        <a class="ig-open" href="https://www.instagram.com/climeo34/p/DfSUXcHInep/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
     </li>
-    <li>
-      <a class="ig-card" href="https://www.instagram.com/climeo34/reel/DfPwVu3oeFE/" target="_blank" rel="noopener noreferrer">
-        <figure>
+
+        <li class="ig-card">
+<figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-02-trois-signes-640.webp 640w, /instagram/2026-11-02-trois-signes-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2342,11 +2338,11 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Reel</span>
         </figcaption>
         </figure>
-      </a>
+        <a class="ig-open" href="https://www.instagram.com/climeo34/reel/DfPwVu3oeFE/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
     </li>
-    <li>
-      <a class="ig-card" href="https://www.instagram.com/climeo34/p/DfNLAQ_oB0k/" target="_blank" rel="noopener noreferrer">
-        <figure>
+
+        <li class="ig-card">
+<figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-01-avis-armelle-b-640.webp 640w, /instagram/2026-11-01-avis-armelle-b-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2359,11 +2355,11 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
-      </a>
+        <a class="ig-open" href="https://www.instagram.com/climeo34/p/DfNLAQ_oB0k/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
     </li>
-    <li>
-      <a class="ig-card" href="https://www.instagram.com/climeo34/p/DfKl_ppoBPA/" target="_blank" rel="noopener noreferrer">
-        <figure>
+
+        <li class="ig-card">
+<figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-10-31-hiver-souffle-quoi-640.webp 640w, /instagram/2026-10-31-hiver-souffle-quoi-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2376,11 +2372,11 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
-      </a>
+        <a class="ig-open" href="https://www.instagram.com/climeo34/p/DfKl_ppoBPA/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
     </li>
-    <li>
-      <a class="ig-card" href="https://www.instagram.com/climeo34/reel/DfIDEvtIUov/" target="_blank" rel="noopener noreferrer">
-        <figure>
+
+        <li class="ig-card">
+<figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-10-30-avant-hiver-640.webp 640w, /instagram/2026-10-30-avant-hiver-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2393,9 +2389,136 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Reel</span>
         </figcaption>
         </figure>
-      </a>
+        <a class="ig-open" href="https://www.instagram.com/climeo34/reel/DfIDEvtIUov/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
     </li>
+
   </ul>
+    </div>
+    <button type="button" class="ig-nav ig-next" aria-label="Publication suivante">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <p class="ig-status" id="ig-status" aria-live="polite"></p>
+<script>
+(function () {
+  var root = document.getElementById('instagram');
+  var viewport = document.getElementById('ig-viewport');
+  var status = document.getElementById('ig-status');
+  var stage = root && root.querySelector('.ig-stage');
+  if (!root || !viewport || !stage) return;
+  var cards = Array.prototype.slice.call(root.querySelectorAll('.ig-card'));
+  var n = cards.length;
+  if (!n) return;
+  var index = 0;
+  var busy = false;
+  var drag = null;
+  var suppressClick = false;
+
+  function wrap(d) {
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return d;
+  }
+
+  function render() {
+    var stageW = viewport.clientWidth || 320;
+    var narrow = stageW < 640;
+    var cardW = narrow
+      ? Math.min(280, Math.max(200, stageW - 36))
+      : Math.min(340, Math.max(240, stageW * 0.4));
+    var shift = narrow ? Math.min(78, stageW * 0.2) : Math.min(cardW * 0.62, stageW * 0.28);
+    cards.forEach(function (card, i) {
+      var d = wrap(i - index);
+      var abs = Math.abs(d);
+      var sign = d < 0 ? -1 : 1;
+      var x = abs === 0 ? 0 : sign * shift * (abs === 1 ? 1 : 1.55);
+      var z = abs === 0 ? 40 : abs === 1 ? -210 : -360;
+      var rot = abs === 0 ? 0 : sign * (narrow ? (abs === 1 ? -18 : -28) : (abs === 1 ? -34 : -48));
+      var scale = abs === 0 ? 1 : abs === 1 ? (narrow ? 0.78 : 0.84) : 0.68;
+      card.style.width = cardW + 'px';
+      card.style.transform = 'translateX(calc(-50% + ' + x + 'px)) translateZ(' + z + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')';
+      card.style.zIndex = String(12 - abs);
+      card.style.opacity = abs > 2 ? '0' : abs === 2 ? '0.75' : '1';
+      card.classList.toggle('is-active', d === 0);
+      var link = card.querySelector('.ig-open');
+      if (link) link.tabIndex = d === 0 ? 0 : -1;
+    });
+    var title = cards[index].querySelector('h3');
+    status.textContent = (index + 1) + ' sur ' + n + (title ? ' — ' + title.textContent : '');
+  }
+
+  function step(dir) {
+    if (busy) return;
+    busy = true;
+    index = (index + (dir > 0 ? 1 : -1) + n) % n;
+    render();
+    window.setTimeout(function () { busy = false; }, 560);
+  }
+
+  root.classList.add('ig-ready');
+  render();
+  window.addEventListener('resize', render);
+
+  root.querySelector('.ig-prev').addEventListener('click', function () { step(-1); });
+  root.querySelector('.ig-next').addEventListener('click', function () { step(1); });
+
+  viewport.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  });
+
+  viewport.addEventListener('wheel', function (e) {
+    var targeted = stage.contains(document.activeElement);
+    var horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 8;
+    if (!targeted && !horizontal) return;
+    if (Math.abs(e.deltaX) < 8 && Math.abs(e.deltaY) < 8) return;
+    e.preventDefault();
+    if (busy) return;
+    var delta = horizontal ? e.deltaX : e.deltaY;
+    step(delta > 0 ? 1 : -1);
+  }, { passive: false });
+
+  viewport.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    drag = { x: e.clientX, y: e.clientY, moved: false };
+  });
+  viewport.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (Math.abs(e.clientX - drag.x) > 12) drag.moved = true;
+  });
+  viewport.addEventListener('pointerup', function (e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.x;
+    var dy = e.clientY - drag.y;
+    var slide = drag.moved && Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.1;
+    drag = null;
+    if (slide) {
+      suppressClick = true;
+      step(dx < 0 ? 1 : -1);
+    }
+  });
+  viewport.addEventListener('pointercancel', function () { drag = null; });
+  viewport.addEventListener('click', function (e) {
+    if (suppressClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      suppressClick = false;
+      return;
+    }
+    var card = e.target.closest && e.target.closest('.ig-card');
+    if (!card || !viewport.contains(card)) return;
+    var i = cards.indexOf(card);
+    if (i > -1 && i !== index) {
+      e.preventDefault();
+      if (!busy) {
+        index = i;
+        render();
+      }
+    }
+  }, true);
+})();
+</script>
+
   <div class="centered" style="text-align:center;">
     <a class="ig-profile-link" href="https://www.instagram.com/climeo34/" target="_blank" rel="noopener noreferrer">Voir le profil Instagram</a>
   </div>
