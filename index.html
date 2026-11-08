@@ -43,7 +43,6 @@
 <meta name="geo.position" content="43.6108;3.8767">
 <meta name="ICBM" content="43.6108, 3.8767">
 <link rel="canonical" href="https://climeo34.fr/">
-<link rel="describedby" href="/llms.txt" type="text/plain" title="Résumé textuel du site">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="favicon.png" sizes="512x512">
@@ -1158,13 +1157,25 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .ig-card:hover { box-shadow: var(--shadow-md); }
 .ig-card:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
 .ig-frame {
+  position: relative;
   aspect-ratio: 4 / 5;
+  overflow: hidden;
   background: #001E5A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.ig-frame img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.ig-frame picture {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ig-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
 .ig-card figure { margin: 0; display: flex; flex-direction: column; height: 100%; }
 .ig-card figcaption { padding: 12px 14px 16px; }
 .ig-card time { display: block; font-size: 0.75rem; letter-spacing: 0.02em; color: var(--gray-text); }
@@ -1212,8 +1223,12 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 }
 @media (max-width: 768px) {
   .ig-profile-fab { display: none; }
-  .ig-grid { margin-right: 72px; }
-  footer { padding-bottom: calc(200px + env(safe-area-inset-bottom)); }
+  .ig-grid {
+    grid-template-columns: 1fr;
+    width: min(420px, calc(100% - 84px));
+    margin-left: auto;
+    margin-right: 84px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .ig-card, .ig-profile-link, .mob-cta-ig, .ig-profile-fab { transition: none; }
@@ -1771,10 +1786,10 @@ section { position: relative; }
   .diag-fab { display: none !important; }
   /* Le bandeau cookies reste au-dessus des deux pastilles */
   #cookie-banner {
-    bottom: calc(208px + env(safe-area-inset-bottom)) !important;
+    bottom: calc(190px + env(safe-area-inset-bottom)) !important;
     border-radius: 14px !important;
   }
-  .mob-cta-ig { width: 44px; height: 44px; margin-right: 5px; }
+  .mob-cta-ig { width: 44px; height: 44px; margin-right: 0; }
 }
 
 /* ─── TARIFS — lien téléphone discret ─── */
@@ -2292,7 +2307,7 @@ function gtag_report_conversion(url) {
   <div class="centered ig-intro">
     <span class="s-tag">Instagram</span>
     <h2 class="s-title" id="t-instagram">Retrouvez-nous sur Instagram</h2>
-    <p class="ig-note">Sélection figée de cinq publications du 30 octobre au 3 novembre 2026. Ce sont des visuels éditoriaux du compte Climeo34, pas un flux en direct et pas des photos d’intervention.</p>
+    <p class="ig-note">Conseils et avis clients : une sélection de nos publications Instagram. Suivez-nous pour les nouveautés.</p>
   </div>
   <ul class="ig-grid">
     <li>
@@ -2301,13 +2316,13 @@ function gtag_report_conversion(url) {
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-03-nettoyage-4-etapes-640.webp 640w, /instagram/2026-11-03-nettoyage-4-etapes-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
-            <img src="/instagram/2026-11-03-nettoyage-4-etapes-1080.webp" alt="Visuel éditorial : un nettoyage en quatre étapes, protection, démontage, nettoyage et désinfection, remontage et test. Ce n’est pas une photo d’intervention." width="1080" height="1350" loading="lazy" decoding="async">
+            <img src="/instagram/2026-11-03-nettoyage-4-etapes-1080.webp" alt="Affiche « Un nettoyage en 4 étapes » : protection sous la clim, démontage du capot, nettoyage de la turbine et du bac, remontage et test." width="1080" height="1350" loading="lazy" decoding="async">
           </picture>
         </div>
         <figcaption>
           <time datetime="2026-11-03">3 novembre 2026</time>
           <h3>Un nettoyage en 4 étapes</h3>
-          <span class="ig-kind">Publication · visuel éditorial</span>
+          <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
       </a>
@@ -2318,13 +2333,13 @@ function gtag_report_conversion(url) {
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-02-trois-signes-640.webp 640w, /instagram/2026-11-02-trois-signes-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
-            <img src="/instagram/2026-11-02-trois-signes-1080.webp" alt="Couverture éditoriale du Reel : trois signes qu’une climatisation est sale, avec une turbine encrassée. Ce n’est pas une photo d’intervention." width="1080" height="1920" loading="lazy" decoding="async">
+            <img src="/instagram/2026-11-02-trois-signes-1080.webp" alt="Couverture « 3 signes que ta clim est sale » : turbine noire couverte de poussière." width="1080" height="1920" loading="lazy" decoding="async">
           </picture>
         </div>
         <figcaption>
           <time datetime="2026-11-02">2 novembre 2026</time>
           <h3>3 signes que ta clim est sale</h3>
-          <span class="ig-kind">Couverture de Reel · visuel éditorial</span>
+          <span class="ig-kind">Reel</span>
         </figcaption>
         </figure>
       </a>
@@ -2335,13 +2350,13 @@ function gtag_report_conversion(url) {
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-01-avis-armelle-b-640.webp 640w, /instagram/2026-11-01-avis-armelle-b-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
-            <img src="/instagram/2026-11-01-avis-armelle-b-1080.webp" alt="Visuel éditorial reprenant un avis signé Armelle B., Combaillaux, affiché 4,0 sur 5 sur l’image. Ce n’est pas la note globale du site." width="1080" height="1350" loading="lazy" decoding="async">
+            <img src="/instagram/2026-11-01-avis-armelle-b-1080.webp" alt="Carte d’avis au nom d’Armelle B., à Combaillaux, notée 4,0 sur 5 : « Intervention très professionnelle sur notre climatisation pour le nettoyage. »" width="1080" height="1350" loading="lazy" decoding="async">
           </picture>
         </div>
         <figcaption>
           <time datetime="2026-11-01">1 novembre 2026</time>
           <h3>Avis d’Armelle B. repris en visuel</h3>
-          <span class="ig-kind">Publication · carte éditoriale, pas un avis ajouté ici</span>
+          <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
       </a>
@@ -2352,13 +2367,13 @@ function gtag_report_conversion(url) {
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-10-31-hiver-souffle-quoi-640.webp 640w, /instagram/2026-10-31-hiver-souffle-quoi-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
-            <img src="/instagram/2026-10-31-hiver-souffle-quoi-1080.webp" alt="Visuel éditorial : cet hiver, elle souffle quoi, à propos du mode chauffage et de filtres sales. Ce n’est pas une photo d’intervention." width="1080" height="1350" loading="lazy" decoding="async">
+            <img src="/instagram/2026-10-31-hiver-souffle-quoi-1080.webp" alt="Affiche « Cet hiver, elle souffle quoi ? » : split poussiéreux en mode chauffage." width="1080" height="1350" loading="lazy" decoding="async">
           </picture>
         </div>
         <figcaption>
           <time datetime="2026-10-31">31 octobre 2026</time>
           <h3>Cet hiver, elle souffle quoi ?</h3>
-          <span class="ig-kind">Publication · visuel éditorial</span>
+          <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
       </a>
@@ -2369,13 +2384,13 @@ function gtag_report_conversion(url) {
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-10-30-avant-hiver-640.webp 640w, /instagram/2026-10-30-avant-hiver-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
-            <img src="/instagram/2026-10-30-avant-hiver-1080.webp" alt="Couverture éditoriale du Reel : avant de passer en chauffage, avec un split ouvert et de la poussière. Ce n’est pas une photo d’intervention." width="1080" height="1920" loading="lazy" decoding="async">
+            <img src="/instagram/2026-10-30-avant-hiver-1080.webp" alt="Couverture « Avant de passer en chauffage » : split ouvert avec un nuage de poussière." width="1080" height="1920" loading="lazy" decoding="async">
           </picture>
         </div>
         <figcaption>
           <time datetime="2026-10-30">30 octobre 2026</time>
           <h3>Avant de passer en chauffage</h3>
-          <span class="ig-kind">Couverture de Reel · visuel éditorial</span>
+          <span class="ig-kind">Reel</span>
         </figcaption>
         </figure>
       </a>

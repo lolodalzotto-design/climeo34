@@ -5,7 +5,7 @@
   "title": "Retrouvez-nous sur Instagram",
   "coveredFrom": "2026-10-30",
   "coveredTo": "2026-11-03",
-  "note": "Sélection figée transmise par le journal CM. Visuels éditoriaux, pas des photos d'intervention et pas un flux automatique. La fraîcheur après le 3 novembre 2026 n'est pas vérifiée.",
+  "note": "Sélection manuelle du 30 octobre au 3 novembre 2026, transmise par le journal CM. Pas un flux automatique. La fraîcheur après le 3 novembre 2026 n'est pas vérifiée.",
   "refresh": "Manuel : remplacer le fichier image, la date et le permalien dans cette liste et dans index.html. Un flux public automatique n'est pas branché. Une mise à jour automatique future n'est acceptable qu'avec une API officielle Instagram déjà autorisée, sans nouvel accès créé ici.",
   "excluded": [
     {

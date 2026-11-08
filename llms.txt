@@ -43,7 +43,7 @@ Pour un split standard, le premier nettoyage coûte 140 € TTC, groupe extérie
 
 ## Instagram
 
-Le profil est [instagram.com/climeo34](https://www.instagram.com/climeo34/). L’accueil montre une sélection figée de cinq visuels éditoriaux publiés du 30 octobre au 3 novembre 2026. Ce n’est pas un flux automatique et ces images ne sont pas des photos d’intervention. Le concours du 29 octobre 2026 n’est pas repris.
+Le profil est [instagram.com/climeo34](https://www.instagram.com/climeo34/). L’accueil montre une sélection manuelle de cinq publications du 30 octobre au 3 novembre 2026, des conseils et un avis client. Ce n’est pas un flux automatique. Le concours du 29 octobre 2026 n’est pas repris. La liste datée est dans `data/instagram-selection.json`.
 
 ## Autres pages
 
