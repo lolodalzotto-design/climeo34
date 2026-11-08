@@ -1139,13 +1139,17 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
 .ig-viewport:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 6px; border-radius: 18px; }
 .ig-wheel { list-style: none; display: grid; gap: 22px; max-width: 420px; margin: 0 auto; }
 .ig-card {
+  display: block;
   background: #fff;
   border: 1px solid #e0e7f3;
   border-radius: 18px;
   overflow: hidden;
   color: var(--navy);
+  text-decoration: none;
+  cursor: pointer;
   box-shadow: var(--shadow);
 }
+.ig-card:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
 .ig-frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #001E5A; }
 .ig-frame picture { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
 .ig-frame img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
@@ -1165,7 +1169,6 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
   font-size: 0.88rem;
   text-decoration: none;
 }
-.ig-open:focus-visible { outline: 3px solid var(--brand-blue-light); outline-offset: 3px; }
 .ig-nav {
   display: none;
   align-items: center;
@@ -1204,9 +1207,14 @@ footer { background: #001E5A; padding: 48px 6% 28px; }
   margin: 0; transform-origin: center center;
   transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .55s ease;
   backface-visibility: hidden;
+  pointer-events: none;
+}
+.ig-hits { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.ig-hit {
+  position: absolute; display: block; pointer-events: auto; touch-action: pan-y;
+  background: transparent; cursor: pointer;
 }
 .ig-ready .ig-card.is-active { box-shadow: 0 22px 60px rgba(0,30,90,.22); }
-.ig-ready .ig-card:not(.is-active) .ig-open { pointer-events: none; }
 @media (max-width: 768px) {
   .ig-profile-fab { display: none; }
   .ig-ready .ig-stage { display: block; width: 100%; max-width: none; margin: 0; }
@@ -2302,8 +2310,9 @@ function gtag_report_conversion(url) {
     </button>
     <div class="ig-viewport" id="ig-viewport" tabindex="0" role="group" aria-roledescription="carrousel" aria-label="Publications Instagram. Flèches gauche et droite pour tourner.">
   <ul class="ig-wheel">
-        <li class="ig-card">
-<figure>
+                <li>
+        <a class="ig-card" href="https://www.instagram.com/climeo34/p/DfSUXcHInep/" target="_blank" rel="noopener noreferrer">
+        <figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-03-nettoyage-4-etapes-640.webp 640w, /instagram/2026-11-03-nettoyage-4-etapes-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2316,11 +2325,13 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
-        <a class="ig-open" href="https://www.instagram.com/climeo34/p/DfSUXcHInep/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
-    </li>
+        <span class="ig-open">Voir sur Instagram</span>
+        </a>
+        </li>
 
-        <li class="ig-card">
-<figure>
+                <li>
+        <a class="ig-card" href="https://www.instagram.com/climeo34/reel/DfPwVu3oeFE/" target="_blank" rel="noopener noreferrer">
+        <figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-02-trois-signes-640.webp 640w, /instagram/2026-11-02-trois-signes-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2333,11 +2344,13 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Reel</span>
         </figcaption>
         </figure>
-        <a class="ig-open" href="https://www.instagram.com/climeo34/reel/DfPwVu3oeFE/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
-    </li>
+        <span class="ig-open">Voir sur Instagram</span>
+        </a>
+        </li>
 
-        <li class="ig-card">
-<figure>
+                <li>
+        <a class="ig-card" href="https://www.instagram.com/climeo34/p/DfNLAQ_oB0k/" target="_blank" rel="noopener noreferrer">
+        <figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-11-01-avis-armelle-b-640.webp 640w, /instagram/2026-11-01-avis-armelle-b-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2350,11 +2363,13 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
-        <a class="ig-open" href="https://www.instagram.com/climeo34/p/DfNLAQ_oB0k/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
-    </li>
+        <span class="ig-open">Voir sur Instagram</span>
+        </a>
+        </li>
 
-        <li class="ig-card">
-<figure>
+                <li>
+        <a class="ig-card" href="https://www.instagram.com/climeo34/p/DfKl_ppoBPA/" target="_blank" rel="noopener noreferrer">
+        <figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-10-31-hiver-souffle-quoi-640.webp 640w, /instagram/2026-10-31-hiver-souffle-quoi-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2367,11 +2382,13 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Publication</span>
         </figcaption>
         </figure>
-        <a class="ig-open" href="https://www.instagram.com/climeo34/p/DfKl_ppoBPA/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
-    </li>
+        <span class="ig-open">Voir sur Instagram</span>
+        </a>
+        </li>
 
-        <li class="ig-card">
-<figure>
+                <li>
+        <a class="ig-card" href="https://www.instagram.com/climeo34/reel/DfIDEvtIUov/" target="_blank" rel="noopener noreferrer">
+        <figure>
         <div class="ig-frame">
           <picture>
             <source type="image/webp" srcset="/instagram/2026-10-30-avant-hiver-640.webp 640w, /instagram/2026-10-30-avant-hiver-1080.webp 1080w" sizes="(max-width: 900px) 46vw, 340px">
@@ -2384,8 +2401,9 @@ function gtag_report_conversion(url) {
           <span class="ig-kind">Reel</span>
         </figcaption>
         </figure>
-        <a class="ig-open" href="https://www.instagram.com/climeo34/reel/DfIDEvtIUov/" target="_blank" rel="noopener noreferrer">Voir sur Instagram</a>
-    </li>
+        <span class="ig-open">Voir sur Instagram</span>
+        </a>
+        </li>
 
   </ul>
     </div>
@@ -2435,13 +2453,12 @@ function gtag_report_conversion(url) {
       card.style.zIndex = String(12 - abs);
       card.style.opacity = abs > 2 ? '0' : abs === 2 ? '0.75' : '1';
       card.classList.toggle('is-active', d === 0);
-      var link = card.querySelector('.ig-open');
-      if (link) link.tabIndex = d === 0 ? 0 : -1;
     });
     if (narrow) viewport.style.height = (cards[index].offsetHeight + 6) + 'px';
     else viewport.style.height = '';
     var title = cards[index].querySelector('h3');
     status.textContent = (index + 1) + ' sur ' + n + (title ? ' — ' + title.textContent : '');
+    trackHits();
   }
 
   function step(dir) {
@@ -2450,6 +2467,51 @@ function gtag_report_conversion(url) {
     index = (index + (dir > 0 ? 1 : -1) + n) % n;
     render();
     window.setTimeout(function () { busy = false; }, 560);
+  }
+
+  var hits = document.createElement('div');
+  hits.className = 'ig-hits';
+  hits.setAttribute('aria-hidden', 'true');
+  var hitLinks = cards.map(function (card) {
+    var a = document.createElement('a');
+    a.className = 'ig-hit';
+    a.href = card.href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.tabIndex = -1;
+    a.draggable = false;
+    hits.appendChild(a);
+    return a;
+  });
+  viewport.appendChild(hits);
+
+  function placeHits() {
+    var vp = viewport.getBoundingClientRect();
+    for (var i = 0; i < n; i++) {
+      var card = cards[i];
+      var b = card.getBoundingClientRect();
+      var a = hitLinks[i];
+      a.style.left = (b.left - vp.left) + 'px';
+      a.style.top = (b.top - vp.top) + 'px';
+      a.style.width = Math.max(0, b.width) + 'px';
+      a.style.height = Math.max(0, b.height) + 'px';
+      a.style.zIndex = card.style.zIndex || '1';
+      var ry = card.offsetHeight ? (18 * b.height / card.offsetHeight) : 18;
+      a.style.borderRadius = ry + 'px';
+      a.style.pointerEvents = (card.style.opacity === '0' || b.width < 2) ? 'none' : 'auto';
+    }
+  }
+  var hitToken = 0;
+  function trackHits() {
+    var token = ++hitToken;
+    var start = performance.now();
+    function frame(now) {
+      if (token !== hitToken) return;
+      placeHits();
+      if (now - start < 700) requestAnimationFrame(frame);
+    }
+    placeHits();
+    requestAnimationFrame(frame);
   }
 
   root.classList.add('ig-ready');
@@ -2477,41 +2539,33 @@ function gtag_report_conversion(url) {
 
   viewport.addEventListener('pointerdown', function (e) {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
-    drag = { x: e.clientX, y: e.clientY, moved: false };
+    suppressClick = false;
+    drag = { x: e.clientX, y: e.clientY, moved: false, id: e.pointerId };
   });
   viewport.addEventListener('pointermove', function (e) {
     if (!drag) return;
-    if (Math.abs(e.clientX - drag.x) > 12) drag.moved = true;
+    if (Math.abs(e.clientX - drag.x) > 12 || Math.abs(e.clientY - drag.y) > 12) drag.moved = true;
   });
   viewport.addEventListener('pointerup', function (e) {
     if (!drag) return;
     var dx = e.clientX - drag.x;
     var dy = e.clientY - drag.y;
     var slide = drag.moved && Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.1;
+    var moved = drag.moved;
     drag = null;
-    if (slide) {
-      suppressClick = true;
-      step(dx < 0 ? 1 : -1);
-    }
+    if (moved) suppressClick = true;
+    if (slide) step(dx < 0 ? 1 : -1);
   });
-  viewport.addEventListener('pointercancel', function () { drag = null; suppressClick = false; });
+  viewport.addEventListener('pointercancel', function () {
+    var moved = drag && drag.moved;
+    drag = null;
+    suppressClick = !!moved;
+  });
   viewport.addEventListener('click', function (e) {
-    if (suppressClick) {
-      e.preventDefault();
-      e.stopPropagation();
-      suppressClick = false;
-      return;
-    }
-    var card = e.target.closest && e.target.closest('.ig-card');
-    if (!card || !viewport.contains(card)) return;
-    var i = cards.indexOf(card);
-    if (i > -1 && i !== index) {
-      e.preventDefault();
-      if (!busy) {
-        index = i;
-        render();
-      }
-    }
+    if (!suppressClick) return;
+    e.preventDefault();
+    e.stopPropagation();
+    suppressClick = false;
   }, true);
 })();
 </script>
