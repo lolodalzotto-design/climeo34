@@ -14,7 +14,7 @@
     var p = location.pathname.toLowerCase();
     if (p === '/' || p === '/index.html') return 'homepage';
     if (p.indexOf('/blog/') === 0) return 'blog';
-    if (p.indexOf('depannage-clim') !== -1) return 'depannage';
+    if (p.indexOf('depannage') !== -1) return 'depannage';
     if (p.indexOf('nettoyage-clim') !== -1) return 'local_service';
     return 'other';
   }
