@@ -46,6 +46,13 @@
     <priority>0.9</priority>
   </url>
 
+  <url>
+    <loc>https://climeo34.fr/depannage-climatisation-montpellier/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Blog -->
   <url>
     <loc>https://climeo34.fr/blog/</loc>
