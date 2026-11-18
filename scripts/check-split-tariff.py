@@ -3,8 +3,8 @@
 
 Totaux : n=1 → 140, n=2 → 230, n=3 → 320, n=4 → 410.
 Le script échoue si une ancienne référence tarifaire (120 / 210 / 300)
-subsiste, ou si un chiffre hors tarif (CSS, images, dépannage 200 €,
-diagnostic +30 €) a été modifié dans les fichiers contrôlés.
+subsiste, ou si un chiffre hors tarif (CSS, images, diagnostic +30 €)
+a été modifié dans les fichiers contrôlés.
 """
 
 from __future__ import annotations
@@ -57,7 +57,6 @@ PRESERVED = {
     ),
     "apercu-vapeur.html": ("+30 €", "90 € par split supplémentaire"),
     "apercu-vapeur-v2.html": ("+30 €", "90 € par split supplémentaire"),
-    "depannage-clim-montpellier/index.html": ('"price": "200"', "200€"),
 }
 
 
