@@ -1603,10 +1603,10 @@ section { position: relative; }
   aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: center;
-  background: #fff;
+  background: transparent;
   display: block;
 }
-.hero-photo-call { display: block; border-radius: 18px; cursor: pointer; overflow: hidden; }
+.hero-photo-call { display: block; border-radius: 18px; cursor: pointer; overflow: hidden; background: transparent; box-shadow: none; border: none; }
 .hero-photo-call:focus-visible,
 .hero-steam-badge:focus-visible { outline: 3px solid var(--brand-light); outline-offset: 4px; }
 .hero-steam-badge { text-decoration: none; cursor: pointer; }
@@ -1632,7 +1632,7 @@ section { position: relative; }
 @media (max-width: 900px) {
   .hero-inner { flex-direction: column-reverse !important; gap: 36px !important; }
   .hero-image-wrap { flex: none; max-width: 100%; width: 100%; }
-  .hero-photo { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: 360px; object-fit: contain; background: #fff; }
+  .hero-photo { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: 360px; object-fit: contain; background: transparent; }
   .hero-badge { bottom: -14px; left: 14px; }
   .hero-mobile-call {
     display: flex;
@@ -2279,10 +2279,10 @@ function gtag_report_conversion(url) {
       <a class="hero-photo-call" href="tel:+33603257679" onclick="return gtag_report_conversion('tel:+33603257679')" aria-label="Appeler Climeo34 au 06 03 25 76 79">
         <picture>
           <source srcset="/depannage-hero.webp" type="image/webp">
-          <img src="/depannage-hero.jpg"
+          <img src="/depannage-hero.png"
                alt="Illustration Climeo34 : climatisation en panne, diagnostic au multimètre"
-               class="hero-photo" width="1254" height="1254"
-               loading="eager" fetchpriority="high" decoding="async">
+               class="hero-photo" width="800" height="800"
+               fetchpriority="high" decoding="async">
         </picture>
       </a>
       <a class="hero-steam-badge" href="tel:+33603257679" onclick="return gtag_report_conversion('tel:+33603257679')" aria-label="Appeler Climeo34 pour un diagnostic à 110 euros TTC">Diagnostic <span class="hot-steam">110 €</span> TTC</a>
