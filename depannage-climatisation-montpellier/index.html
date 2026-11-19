@@ -56,12 +56,12 @@
 <meta property="og:image" content="https://climeo34.fr/depannage-og.jpg">
 <meta property="og:image:width" content="1964">
 <meta property="og:image:height" content="1309">
-<meta property="og:image:alt" content="Technicien Climeo34 en dépannage d’une climatisation réversible à Montpellier">
+<meta property="og:image:alt" content="Illustration Climeo34 : climatisation en panne, diagnostic au multimètre">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dépannage climatisation Montpellier : diagnostic 110 € | Climeo34">
 <meta name="twitter:description" content="Clim réversible en panne à Montpellier : elle ne chauffe ou ne refroidit plus ? Diagnostic 110 € TTC, frais de déplacement possibles. 06 03 25 76 79.">
 <meta name="twitter:image" content="https://climeo34.fr/depannage-og.jpg">
-<meta name="twitter:image:alt" content="Technicien Climeo34 en dépannage d’une climatisation réversible à Montpellier">
+<meta name="twitter:image:alt" content="Illustration Climeo34 : climatisation en panne, diagnostic au multimètre">
 
 <script type="application/ld+json">
 {
@@ -1599,9 +1599,11 @@ section { position: relative; }
 .hero-mobile-call { display: none; }
 .hero-photo {
   width: 100%;
-  height: 500px;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   object-position: center;
+  background: #fff;
   display: block;
 }
 .hero-photo-call { display: block; border-radius: 18px; cursor: pointer; overflow: hidden; }
@@ -1625,12 +1627,12 @@ section { position: relative; }
 }
 @media (max-width: 1050px) {
   .hero-image-wrap { flex: 0 0 320px; max-width: 320px; }
-  .hero-photo { height: 400px; }
+  .hero-photo { height: auto; aspect-ratio: 1 / 1; }
 }
 @media (max-width: 900px) {
   .hero-inner { flex-direction: column-reverse !important; gap: 36px !important; }
   .hero-image-wrap { flex: none; max-width: 100%; width: 100%; }
-  .hero-photo { height: 260px; }
+  .hero-photo { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: 360px; object-fit: contain; background: #fff; }
   .hero-badge { bottom: -14px; left: 14px; }
   .hero-mobile-call {
     display: flex;
@@ -2278,8 +2280,8 @@ function gtag_report_conversion(url) {
         <picture>
           <source srcset="/depannage-hero.webp" type="image/webp">
           <img src="/depannage-hero.jpg"
-               alt="Technicien Climeo34 en dépannage d’une climatisation réversible à Montpellier"
-               class="hero-photo" width="1200" height="799"
+               alt="Illustration Climeo34 : climatisation en panne, diagnostic au multimètre"
+               class="hero-photo" width="1254" height="1254"
                loading="eager" fetchpriority="high" decoding="async">
         </picture>
       </a>
