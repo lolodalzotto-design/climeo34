@@ -117,7 +117,7 @@
     "@id": "https://climeo34.fr/#business"
   },
   "about": {
-    "@id": "https://climeo34.fr/nettoyage-clim-montpellier/#service"
+    "@id": "https://climeo34.fr/depannage-climatisation-montpellier/#service"
   }
 }
 </script>
@@ -166,12 +166,6 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Accueil",
-      "item": "https://climeo34.fr/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
       "name": "Dépannage climatisation à Montpellier",
       "item": "https://climeo34.fr/depannage-climatisation-montpellier/"
     }
@@ -260,7 +254,7 @@
       "name": "Quelle différence avec un nettoyage ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Le dépannage part d’une panne : ne chauffe plus, ne refroidit plus, fuite, bruit, code erreur ou appareil qui ne démarre plus. Le nettoyage est un entretien de l’appareil. Les deux ne répondent pas au même besoin. Les tarifs d’entretien sont indiqués sur la page de nettoyage, pas sur celle-ci."
+        "text": "Le dépannage part d’une panne : ne chauffe plus, ne refroidit plus, fuite, bruit, code erreur ou appareil qui ne démarre plus. Un entretien répond à un autre besoin. Cette page indique le diagnostic, pas un tarif d’entretien."
       }
     },
     {
@@ -2200,10 +2194,10 @@ function gtag_report_conversion(url) {
   </a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#avis">Avis clients</a></li>
-    <li><a href="#avant-apres">Avant / Après</a></li>
+    <li><a href="#avant-apres">Encrassement</a></li>
     <li><a href="#conseils">Pannes</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="/blog/">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
   </ul>
   <div class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menu" role="button" tabindex="0">
@@ -2326,9 +2320,9 @@ function gtag_report_conversion(url) {
       <div class="home-blog-img"><picture><source srcset="/depannage/depannage-chauffe-plus.webp" type="image/webp"><img src="/depannage/depannage-chauffe-plus.png" alt="Illustration : climatisation réversible qui ne chauffe plus en hiver" width="800" height="800" loading="lazy" decoding="async"></picture></div>
       <div class="home-blog-body"><span class="home-blog-tag">Chauffage</span><h3>Elle ne chauffe plus</h3><p>Mode chauffage d’une clim réversible : filtres encrassés, unité extérieure, réglages ou télécommande, code erreur. Le diagnostic regarde ces points.</p><span class="home-blog-link">Ce que le diagnostic regarde <span aria-hidden="true">→</span></span></div>
     </a>
-    <a class="home-blog-card fade-up d1" href="/blog/clim-qui-coule-chaleur-herault.html">
+    <a class="home-blog-card fade-up d1" href="#faq-fuite">
       <div class="home-blog-img"><picture><source srcset="/depannage/depannage-fuit-eau.webp" type="image/webp"><img src="/depannage/depannage-fuit-eau.png" alt="Illustration : climatisation qui fuit de l’eau" width="800" height="800" loading="lazy" decoding="async"></picture></div>
-      <div class="home-blog-body"><span class="home-blog-tag">Eau</span><h3>Elle fuit de l’eau</h3><p>Souvent le bac de condensats ou l’évacuation. Le diagnostic contrôle l’écoulement et l’encrassement visible.</p><span class="home-blog-link">Lire le conseil <span aria-hidden="true">→</span></span></div>
+      <div class="home-blog-body"><span class="home-blog-tag">Eau</span><h3>Elle fuit de l’eau</h3><p>Souvent le bac de condensats ou l’évacuation. Le diagnostic contrôle l’écoulement et l’encrassement visible.</p><span class="home-blog-link">Ce que le diagnostic regarde <span aria-hidden="true">→</span></span></div>
     </a>
     <a class="home-blog-card fade-up d2" href="#faq-bruit">
       <div class="home-blog-img"><picture><source srcset="/depannage/depannage-bruit.webp" type="image/webp"><img src="/depannage/depannage-bruit.png" alt="Illustration : climatisation qui fait du bruit" width="800" height="800" loading="lazy" decoding="async"></picture></div>
@@ -2343,7 +2337,7 @@ function gtag_report_conversion(url) {
       <div class="home-blog-body"><span class="home-blog-tag">Démarrage</span><h3>Elle ne démarre plus</h3><p>Le diagnostic vérifie si l’unité réagit, la télécommande et l’alimentation apparente.</p><span class="home-blog-link">Ce que le diagnostic regarde <span aria-hidden="true">→</span></span></div>
     </a>
   </div>
-  <div class="home-blog-all fade-up"><a class="btn-primary" href="/blog/">Voir les conseils du blog</a></div>
+  <div class="home-blog-all fade-up"><a class="btn-primary" href="#faq">Voir les questions fréquentes</a></div>
 </section>
 
 <!-- AVANT APRES -->
@@ -2712,8 +2706,7 @@ function gtag_report_conversion(url) {
     <h2 class="s-title" id="t-prestation">Dépannage climatisation à Montpellier et alentours</h2>
     <p class="s-sub">Basée à Mudaison (34130), Climeo34 intervient rapidement à Montpellier et dans l’Hérault quand une climatisation ne chauffe plus, ne refroidit plus, fuit, fait du bruit, affiche un code erreur ou ne démarre plus.</p>
     <p class="s-sub"><strong>Diagnostic : 110 € TTC.</strong> Des frais de déplacement peuvent s’ajouter. Le montant vous est indiqué avant le rendez-vous. <a href="#footnote-frais">Voir la mention</a>.</p>
-    <p class="s-sub">Zone : <a href="/nettoyage-clim-montpellier/">Montpellier</a>, <a href="/nettoyage-clim-palavas/">Palavas-les-Flots</a>, <a href="/nettoyage-clim-carnon/">Carnon</a>, <a href="/nettoyage-clim-la-grande-motte/">La Grande-Motte</a>, <a href="/nettoyage-clim-lattes/">Lattes</a>, <a href="/nettoyage-clim-perols/">Pérols</a>, <a href="/nettoyage-clim-castelnau-le-lez/">Castelnau-le-Lez</a>, <a href="/nettoyage-clim-saint-jean-de-vedas/">Saint-Jean-de-Védas</a>, <a href="/nettoyage-clim-le-cres/">Le Crès</a>, <a href="/nettoyage-clim-montferrier-sur-lez/">Montferrier-sur-Lez</a>, <a href="/nettoyage-clim-saint-clement-de-riviere/">Saint-Clément-de-Rivière</a>.</p>
-    <p class="s-sub">Pour un entretien sans panne, voir le <a href="/nettoyage-clim-montpellier/">nettoyage de climatisation à Montpellier</a>.</p>
+    <p class="s-sub">Zone : Montpellier, Palavas-les-Flots, Carnon, La Grande-Motte, Lattes, Pérols, Castelnau-le-Lez, Saint-Jean-de-Védas, Le Crès, Montferrier-sur-Lez, Saint-Clément-de-Rivière.</p>
   </div>
 </section>
 
@@ -2783,7 +2776,7 @@ function gtag_report_conversion(url) {
       <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
         <h3>Quelle différence avec un nettoyage ?</h3><span class="faq-toggle">+</span>
       </div>
-      <div class="faq-a"><p>Le dépannage part d’une panne : ne chauffe plus, ne refroidit plus, fuite, bruit, code erreur ou appareil qui ne démarre plus. Le nettoyage est un entretien de l’appareil. Les deux ne répondent pas au même besoin. Les tarifs d’entretien sont indiqués sur la page de nettoyage, pas sur celle-ci.</p></div>
+      <div class="faq-a"><p>Le dépannage part d’une panne : ne chauffe plus, ne refroidit plus, fuite, bruit, code erreur ou appareil qui ne démarre plus. Un entretien répond à un autre besoin. Cette page indique le diagnostic, pas un tarif d’entretien.</p></div>
     </div>
     <div class="faq-item" id="faq-reparation">
       <div class="faq-q" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
@@ -2814,7 +2807,7 @@ function gtag_report_conversion(url) {
   
   <p class="s-sub">Climeo34 - Nettoyage Climatisation Montpellier et Hérault<br>
 Mudaison (34130), intervention Montpellier et Hérault<br>
-<a href="tel:+33603257679" style="color:inherit" onclick="return gtag_report_conversion('tel:+33603257679')">06 03 25 76 79</a> · <a href="mailto:lolo.dalzotto@gmail.com" style="color:inherit">lolo.dalzotto@gmail.com</a> · <a href="https://climeo34.fr/" style="color:inherit">https://climeo34.fr/</a></p>
+<a href="tel:+33603257679" style="color:inherit" onclick="return gtag_report_conversion('tel:+33603257679')">06 03 25 76 79</a> · <a href="mailto:lolo.dalzotto@gmail.com" style="color:inherit">lolo.dalzotto@gmail.com</a> · <a href="https://climeo34.fr/depannage-climatisation-montpellier/" style="color:inherit">https://climeo34.fr/depannage-climatisation-montpellier/</a></p>
   <div class="contact-btns">
     <a href="tel:+33603257679" class="btn-call" onclick="return gtag_report_conversion('tel:+33603257679')">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -2858,7 +2851,7 @@ Mudaison (34130), intervention Montpellier et Hérault<br>
         Zone d'intervention : Montpellier et Hérault (34) — entreprise de services, sans accueil sur place<br>
         Téléphone : <a href="tel:+33603257679" onclick="return gtag_report_conversion('tel:+33603257679')">06 03 25 76 79</a><br>
         Email : <a href="mailto:lolo.dalzotto@gmail.com">lolo.dalzotto@gmail.com</a><br>
-        Site : <a href="https://climeo34.fr/">https://climeo34.fr/</a></p>
+        Site : <a href="https://climeo34.fr/depannage-climatisation-montpellier/">https://climeo34.fr/depannage-climatisation-montpellier/</a></p>
       </div>
       <div class="mention-block">
         <h3>Hébergement</h3>
@@ -2899,7 +2892,7 @@ Mudaison (34130), intervention Montpellier et Hérault<br>
            class="footer-brand-logo">
       <p>Climeo34 - Nettoyage Climatisation Montpellier et Hérault<br>
 Mudaison (34130), intervention Montpellier et Hérault<br>
-<a href="tel:+33603257679" style="color:inherit" onclick="return gtag_report_conversion('tel:+33603257679')">06 03 25 76 79</a> · <a href="mailto:lolo.dalzotto@gmail.com" style="color:inherit">lolo.dalzotto@gmail.com</a> · <a href="https://climeo34.fr/" style="color:inherit">https://climeo34.fr/</a></p>
+<a href="tel:+33603257679" style="color:inherit" onclick="return gtag_report_conversion('tel:+33603257679')">06 03 25 76 79</a> · <a href="mailto:lolo.dalzotto@gmail.com" style="color:inherit">lolo.dalzotto@gmail.com</a> · <a href="https://climeo34.fr/depannage-climatisation-montpellier/" style="color:inherit">https://climeo34.fr/depannage-climatisation-montpellier/</a></p>
       <div class="footer-social">
         <a href="https://www.instagram.com/climeo34?igsh=MXZpZ2MwdHA1YWgzOQ==" target="_blank" rel="noopener" aria-label="Instagram Climeo34">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -2914,18 +2907,7 @@ Mudaison (34130), intervention Montpellier et Hérault<br>
       <a href="#avis">Avis clients</a>
       <a href="#conseils">Pannes</a>
       <a href="#faq">FAQ</a>
-      <a href="/blog/">Blog</a>
-      <a href="/nettoyage-clim-montpellier/">Montpellier</a>
-      <a href="/nettoyage-clim-palavas/">Palavas</a>
-      <a href="/nettoyage-clim-carnon/">Carnon</a>
-      <a href="/nettoyage-clim-la-grande-motte/">La Grande-Motte</a>
-      <a href="/nettoyage-clim-lattes/">Lattes</a>
-      <a href="/nettoyage-clim-perols/">Pérols</a>
-      <a href="/nettoyage-clim-castelnau-le-lez/">Castelnau-le-Lez</a>
-      <a href="/nettoyage-clim-saint-jean-de-vedas/">Saint-Jean-de-Védas</a>
-      <a href="/nettoyage-clim-le-cres/">Le Crès</a>
-      <a href="/nettoyage-clim-montferrier-sur-lez/">Montferrier-sur-Lez</a>
-      <a href="/nettoyage-clim-saint-clement-de-riviere/">Saint-Clément-de-Rivière</a>
+      <a href="#contact">Contact</a>
       <a href="#" onclick="openMentions();return false;">Mentions légales</a>
       <a href="#" onclick="openMentions();return false;">Confidentialité</a>
     </nav>
