@@ -366,7 +366,7 @@ body {
 .nav-logo .logo-color { position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; }
 #nav.scrolled .nav-logo .logo-white { opacity: 0; }
 #nav.scrolled .nav-logo .logo-color { opacity: 1; }
-#nav .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+#nav .nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
 #nav .nav-links a {
   font-family: var(--font-head); font-weight: 600; font-size: 0.8rem;
   text-decoration: none; color: rgba(255,255,255,0.85);
@@ -2141,12 +2141,14 @@ function gtag_report_conversion(url) {
     <img class="logo-color" src="climeo34-logo-horizontal.png" alt="" aria-hidden="true" height="24">
   </a>
   <ul class="nav-links" id="nav-links">
+    <li><a href="/">Nettoyage</a></li>
+    <li><a href="/depannage-climatisation-montpellier/">Dépannage</a></li>
     <li><a href="#avis">Avis clients</a></li>
     <li><a href="#avant-apres">Avant / Après</a></li>
     <li><a href="#conseils">Conseils</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="/blog/">Blog</a></li>
-    <li><a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
+    <li><a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="nav-cta" target="_blank" rel="noopener">Demander sur WhatsApp</a></li>
   </ul>
   <div class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menu" role="button" tabindex="0">
     <span></span><span></span><span></span>
@@ -2189,7 +2191,7 @@ function gtag_report_conversion(url) {
           </ul>
         </div>
       </div>
-      <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
+      <!-- FORMULAIRE DE CAPTURE — envoi via Web3Forms vers Lolo.dalzotto@gmail.com -->
       <div class="hero-form-wrap hero-reveal r6" id="hero-form-wrap">
         <div class="hero-mini-calc" aria-label="Estimation du tarif d'entretien">
           <span class="hero-mini-label">Combien de splits ?</span>
@@ -2841,7 +2843,7 @@ Mudaison (34130), intervention Montpellier et Hérault<br>
       </div>
       <div class="mention-block" id="confidentialite">
         <h3>Politique de confidentialité & RGPD</h3>
-        <p><strong>Données collectées :</strong> Ce site propose un formulaire de devis permettant de collecter votre prénom, adresse e-mail, numéro de téléphone, ville et nombre de splits. Ces données sont transmises via Formsubmit (prestataire tiers) à Climeo34 dans le seul but de vous contacter pour établir un devis. Elles ne sont ni revendues, ni partagées à des fins commerciales. Durée de conservation : 6 mois. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p><br>
+        <p><strong>Données collectées :</strong> Ce site propose un formulaire de devis permettant de collecter votre prénom, adresse e-mail, numéro de téléphone, ville et nombre de splits. Ces données sont transmises via Web3Forms (prestataire tiers) à Climeo34 dans le seul but de vous contacter pour établir un devis. Elles ne sont ni revendues, ni partagées à des fins commerciales. Durée de conservation : 6 mois. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p><br>
         <p><strong>Cookies :</strong> Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement. Aucun cookie publicitaire ou de tracking n'est déposé sans votre consentement.</p><br>
         <p><strong>Vos droits :</strong> Conformément au RGPD (Règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition. Pour exercer ces droits : <a href="mailto:lolo.dalzotto@gmail.com">lolo.dalzotto@gmail.com</a></p><br>
         <p><strong>Autorité de contrôle :</strong> <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
@@ -3180,7 +3182,7 @@ const kpiObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.observe(k));
 
-// Hero capture form — envoi async via Formsubmit.co + Google Sheets
+// Hero capture form — envoi async via Web3Forms + Google Sheets
 (function() {
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwumPAq-SWNknazpEzGbIiJWpsUepMP5kMXz27AA112tNz-DMoL-fagoWAUOebkrTYr/exec';
   var form = document.getElementById('hero-capture-form');
@@ -3946,6 +3948,6 @@ document.addEventListener('keydown', e => {
 </script>
 <script src="/analytics-tracking.js?v=20260912-3" defer></script>
 
-<script src="/analytics-tracking.js" defer></script>
+
 </body>
 </html>
