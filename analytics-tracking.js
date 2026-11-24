@@ -1,10 +1,17 @@
 /* Climeo34 — GA4 behavioural + lead tracking
  * No form values or personal data are sent to analytics.
+ *
+ * WhatsApp and Instagram Ads send_to labels live only here.
+ * Phone clicks stay on AW-18153085489/_jEBCKeo7q0cELG0iNBD.
+ * Consent Mode v2 is applied by gtag itself.
  */
+window.CLIMEO_WA_CONV = 'AW-18153085489/CAnFCL70vr4dELG0iNBD';
+window.CLIMEO_IG_CONV = 'AW-18153085489/K5T1CMH0vr4dELG0iNBD';
+
 (function () {
   'use strict';
 
-  var VERSION = '2026-09-13';
+  var VERSION = '2026-11-24';
   var sentOnce = new Set();
   var leadSentAt = 0;
   var diagnosticStep = 0;
@@ -68,6 +75,18 @@
     if (/avis|review/.test(text) && /google|maps/.test(href)) return 'reviews';
     if (/devis|estimation|diagnostic|calculateur|rendez-vous|rdv|quote/.test(text + ' ' + href + ' ' + cls)) return 'quote';
     return '';
+  }
+
+  function isAdsLabel(value) {
+    return typeof value === 'string' && /^AW-\d+\/[A-Za-z0-9_-]+$/.test(value) && value.indexOf('__') === -1;
+  }
+
+  function fireAdsConversion(sendTo, extra) {
+    if (typeof window.gtag !== 'function' || !isAdsLabel(sendTo)) return;
+    var payload = { send_to: sendTo };
+    if (extra && extra.value != null) payload.value = extra.value;
+    if (extra && extra.currency) payload.currency = extra.currency;
+    window.gtag('event', 'conversion', payload);
   }
 
   function trackLead(source, formId) {
@@ -157,15 +176,25 @@
       var el = event.target.closest && event.target.closest('a,button');
       if (!el) return;
       if (el.matches('.diag-opt')) { diagnosticStep += 1; track('diagnostic_step', { step_number: diagnosticStep }); }
+      var href = (el.getAttribute('href') || '').toLowerCase();
+      if (href.indexOf('mailto:') === 0) {
+        track('email_click', { cta_type: 'email', cta_location: locationLabel(el), cta_text: safeText(el) });
+      }
       var type = ctaType(el);
       if (!type) return;
       var params = { cta_type: type, cta_location: locationLabel(el), cta_text: safeText(el) };
       track('cta_click', params);
       if (type === 'phone') track('phone_click', params);
-      else if (type === 'whatsapp') track('whatsapp_click', params);
+      else if (type === 'whatsapp') {
+        track('whatsapp_click', params);
+        fireAdsConversion(window.CLIMEO_WA_CONV, { value: 1.0, currency: 'EUR' });
+      }
       else if (type === 'maps') track('maps_click', params);
       else if (type === 'reviews') track('reviews_click', params);
-      else if (type === 'instagram') track('instagram_click', params);
+      else if (type === 'instagram') {
+        track('instagram_click', params);
+        fireAdsConversion(window.CLIMEO_IG_CONV);
+      }
       else if (type === 'quote') track('quote_start', params);
     }, true);
 
