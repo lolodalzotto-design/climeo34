@@ -3,15 +3,20 @@
 <head>
 <!-- Google Consent Mode v2 — Default denied -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'ad_user_data': 'denied',
-    'ad_personalization': 'denied',
-    'wait_for_update': 500
-  });
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'wait_for_update': 500,
+  'url_passthrough': true,
+  'ads_data_redaction': true
+});
+gtag('set', 'url_passthrough', true);
+gtag('set', 'ads_data_redaction', true);
+try {
   if (localStorage.getItem('cookies') === 'accepted') {
     gtag('consent', 'update', {
       'analytics_storage': 'granted',
@@ -20,6 +25,7 @@
       'ad_personalization': 'granted'
     });
   }
+} catch (e) {}
 </script>
 
 <!-- Google tag (gtag.js) -->
@@ -795,5 +801,6 @@ function toggleFaq(btn) {
 <script src="/analytics-tracking.js?v=20260912-3" defer></script>
 
 <script src="/analytics-tracking.js" defer></script>
+<script src="/cookie-consent.js?v=20261124" defer></script>
 </body>
 </html>

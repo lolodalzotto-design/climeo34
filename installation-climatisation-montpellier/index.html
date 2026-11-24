@@ -3,15 +3,20 @@
 <head>
 <!-- Google Consent Mode v2 — Default denied -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'ad_user_data': 'denied',
-    'ad_personalization': 'denied',
-    'wait_for_update': 500
-  });
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'wait_for_update': 500,
+  'url_passthrough': true,
+  'ads_data_redaction': true
+});
+gtag('set', 'url_passthrough', true);
+gtag('set', 'ads_data_redaction', true);
+try {
   if (localStorage.getItem('cookies') === 'accepted') {
     gtag('consent', 'update', {
       'analytics_storage': 'granted',
@@ -20,6 +25,7 @@
       'ad_personalization': 'granted'
     });
   }
+} catch (e) {}
 </script>
 
 <!-- Google tag (gtag.js) -->
@@ -120,8 +126,6 @@ body {
 }
 .btn-cookie-no:hover { color: white; border-color: #64748b; }
 #cookie-banner.hidden { display: none; }
-/* Le bandeau cookies visuel a été retiré : garde-fou contre toute ancienne version injectée ou mise en cache. */
-#cookie-banner { display: none !important; }
 
 /* NAV — floating pill */
 #nav {
@@ -1565,11 +1569,6 @@ section { position: relative; }
   }
   /* Pastille latérale "Devis en 2 min" masquée sur mobile pour ne pas cumuler les CTA */
   .diag-fab { display: none !important; }
-  /* Le bandeau cookies reste au-dessus des deux pastilles */
-  #cookie-banner {
-    bottom: calc(190px + env(safe-area-inset-bottom)) !important;
-    border-radius: 14px !important;
-  }
   .mob-cta-ig { width: 44px; height: 44px; margin-right: 0; }
 }
 
@@ -3020,5 +3019,6 @@ document.addEventListener('keydown', e => {
 <script src="/analytics-tracking.js?v=20260912-3" defer></script>
 
 
-<script>document.querySelectorAll('#conseils a[href^="#faq-"]').forEach(function(a){a.addEventListener('click',function(){var item=document.querySelector(a.getAttribute('href'));if(item&&!item.classList.contains('open'))toggleFaq(item.querySelector('.faq-q'));});});</script></body>
+<script>document.querySelectorAll('#conseils a[href^="#faq-"]').forEach(function(a){a.addEventListener('click',function(){var item=document.querySelector(a.getAttribute('href'));if(item&&!item.classList.contains('open'))toggleFaq(item.querySelector('.faq-q'));});});</script><script src="/cookie-consent.js?v=20261124" defer></script>
+</body>
 </html>

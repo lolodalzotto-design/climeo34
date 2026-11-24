@@ -3,15 +3,20 @@
 <head>
 <!-- Google Consent Mode v2 — Default denied -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'ad_user_data': 'denied',
-    'ad_personalization': 'denied',
-    'wait_for_update': 500
-  });
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied',
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'wait_for_update': 500,
+  'url_passthrough': true,
+  'ads_data_redaction': true
+});
+gtag('set', 'url_passthrough', true);
+gtag('set', 'ads_data_redaction', true);
+try {
   if (localStorage.getItem('cookies') === 'accepted') {
     gtag('consent', 'update', {
       'analytics_storage': 'granted',
@@ -20,6 +25,7 @@
       'ad_personalization': 'granted'
     });
   }
+} catch (e) {}
 </script>
 
 <!-- Google tag (gtag.js) -->
@@ -1911,14 +1917,6 @@ function gtag_report_conversion(url) {
 <div style="position:fixed;right:14px;bottom:14px;z-index:10000;background:#ffb703;color:#001e5a;padding:8px 13px;border-radius:999px;font:700 12px Poppins,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.2);pointer-events:none">APERÇU V9 · MOTION +</div>
 <div id="scroll-progress"></div>
 
-<!-- COOKIE -->
-<div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
-  <p>Ce site utilise des cookies techniques pour améliorer votre expérience. <a href="#mentions-legales">En savoir plus</a>.</p>
-  <div class="cookie-btns">
-    <button class="btn-cookie-ok" onclick="acceptCookies()">Accepter</button>
-    <button class="btn-cookie-no" onclick="refuseCookies()">Refuser</button>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav id="nav" role="navigation" aria-label="Navigation principale">
@@ -2683,7 +2681,7 @@ Mudaison (34130), intervention Montpellier et Hérault<br>
 
 function acceptCookies() {
   localStorage.setItem('cookies', 'accepted');
-  document.getElementById('cookie-banner').classList.add('hidden');
+  var _cb=document.getElementById('cookie-banner');if(_cb)_cb.classList.add('hidden');
   // Google Consent Mode v2 — l'utilisateur accepte
   gtag('consent', 'update', {
     'analytics_storage': 'granted',
@@ -2694,11 +2692,11 @@ function acceptCookies() {
 }
 function refuseCookies() {
   localStorage.setItem('cookies', 'refused');
-  document.getElementById('cookie-banner').classList.add('hidden');
+  var _cb=document.getElementById('cookie-banner');if(_cb)_cb.classList.add('hidden');
   // Google Consent Mode v2 — l'utilisateur refuse : consentement reste "denied" (valeur par défaut), aucune action nécessaire
 }
 if (localStorage.getItem('cookies')) {
-  document.getElementById('cookie-banner').classList.add('hidden');
+  var _cb=document.getElementById('cookie-banner');if(_cb)_cb.classList.add('hidden');
 }
 
 const nav = document.getElementById('nav');
@@ -3582,5 +3580,6 @@ hoverEls.forEach(btn => {
 <script src="/analytics-tracking.js?v=20260912-3" defer></script>
 
 <script src="/analytics-tracking.js" defer></script>
+<script src="/cookie-consent.js?v=20261124" defer></script>
 </body>
 </html>
