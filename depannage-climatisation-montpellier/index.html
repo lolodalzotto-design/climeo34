@@ -63,8 +63,7 @@
 <meta name="twitter:image" content="https://climeo34.fr/depannage-og.jpg">
 <meta name="twitter:image:alt" content="Illustration Climeo34 : climatisation en panne, diagnostic au multimètre">
 
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": [
     "LocalBusiness",
@@ -103,10 +102,8 @@
     "https://www.instagram.com/climeo34",
     "https://www.tiktok.com/@climeo34"
   ]
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": "https://climeo34.fr/#website",
@@ -119,10 +116,8 @@
   "about": {
     "@id": "https://climeo34.fr/depannage-climatisation-montpellier/#service"
   }
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": "https://climeo34.fr/depannage-climatisation-montpellier/#service",
@@ -156,24 +151,26 @@
     }
   },
   "image": "https://climeo34.fr/depannage-og.jpg"
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
+      "name": "Accueil",
+      "item": "https://climeo34.fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
       "name": "Dépannage climatisation à Montpellier",
       "item": "https://climeo34.fr/depannage-climatisation-montpellier/"
     }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
+}</script>
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
@@ -282,8 +279,7 @@
       }
     }
   ]
-}
-</script>
+}</script>
 
 <link rel="preload" as="image" href="/depannage-hero.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -409,7 +405,7 @@ body {
 .nav-logo .logo-color { position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; }
 #nav.scrolled .nav-logo .logo-white { opacity: 0; }
 #nav.scrolled .nav-logo .logo-color { opacity: 1; }
-#nav .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+#nav .nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
 #nav .nav-links a {
   font-family: var(--font-head); font-weight: 600; font-size: 0.8rem;
   text-decoration: none; color: rgba(255,255,255,0.85);
@@ -2193,12 +2189,14 @@ function gtag_report_conversion(url) {
     <img class="logo-color" src="/climeo34-logo-horizontal.png" alt="" aria-hidden="true" height="24">
   </a>
   <ul class="nav-links" id="nav-links">
+    <li><a href="/">Nettoyage</a></li>
+    <li><a href="/depannage-climatisation-montpellier/">Dépannage</a></li>
     <li><a href="#avis">Avis clients</a></li>
-    <li><a href="#avant-apres">Encrassement</a></li>
+
     <li><a href="#conseils">Pannes</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="nav-cta" target="_blank" rel="noopener">Devis gratuit</a></li>
+    <li><a href="https://wa.me/33603257679" onclick="gtag('event', 'conversion', {'send_to': 'AW-18153085489/_jEBCKeo7q0cELG0iNBD'})" class="nav-cta" target="_blank" rel="noopener">Demander sur WhatsApp</a></li>
   </ul>
   <div class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menu" role="button" tabindex="0">
     <span></span><span></span><span></span>
@@ -2243,7 +2241,7 @@ function gtag_report_conversion(url) {
           </ul>
         </div>
       </div>
-      <!-- FORMULAIRE DE CAPTURE — envoi via Formsubmit.co vers Lolo.dalzotto@gmail.com -->
+      <!-- FORMULAIRE DE CAPTURE — envoi via Web3Forms vers Lolo.dalzotto@gmail.com -->
       <div class="hero-form-wrap hero-reveal r6" id="hero-form-wrap">
         <div class="hero-mini-calc" aria-label="Tarif du diagnostic">
           <span class="hero-mini-label">Diagnostic</span>
@@ -2263,6 +2261,9 @@ function gtag_report_conversion(url) {
           <input type="tel" name="telephone" placeholder="Téléphone *" required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
           <input type="text" name="ville" placeholder="Votre ville *" required autocomplete="address-level2">
           <input type="text" name="nom" placeholder="Nom *" required autocomplete="family-name">
+          <input type="text" name="panne" aria-label="Panne ou symptôme" placeholder="Votre panne ou symptôme *" required maxlength="500">
+          <input type="text" name="marque" aria-label="Marque de la climatisation" placeholder="Marque (si connue)" maxlength="100">
+          <input type="text" name="code_erreur" aria-label="Code erreur éventuel" placeholder="Code erreur (si affiché)" maxlength="100">
           <button type="submit" class="hero-form-submit" id="hero-form-btn">Être rappelé</button>
         </form>
         <div class="hero-form-success" id="hero-form-success">
@@ -2278,7 +2279,7 @@ function gtag_report_conversion(url) {
       <a class="hero-photo-call" href="tel:+33603257679" onclick="return gtag_report_conversion('tel:+33603257679')" aria-label="Appeler Climeo34 au 06 03 25 76 79">
         <picture>
           <source srcset="/depannage-hero.webp" type="image/webp">
-          <img src="/depannage-hero.png"
+          <img src="/depannage-hero.webp"
                alt="Illustration Climeo34 : climatisation en panne, diagnostic au multimètre"
                class="hero-photo" width="800" height="800"
                fetchpriority="high" decoding="async">
@@ -2308,7 +2309,8 @@ function gtag_report_conversion(url) {
 <section id="conseils" aria-labelledby="t-conseils">
   <div class="centered">
     <span class="s-tag fade-up">Pannes courantes</span>
-    <h2 class="s-title fade-up d1" id="t-conseils">Les pannes que le diagnostic regarde</h2>
+    <p class="s-sub">Besoin d’un entretien ? <a href="/">Découvrir le nettoyage vapeur Climeo34</a>.</p>
+    <h2 class="s-title fade-up d1" id="t-conseils">Les pannes de climatisation prises en charge</h2>
     <p class="s-sub fade-up d2">Six situations fréquentes, en mots simples. Le diagnostic constate avant de conclure. Rien n’est engagé au-delà sans un tarif annoncé.</p>
   </div>
   <div class="home-blog-grid">
@@ -2344,8 +2346,8 @@ function gtag_report_conversion(url) {
 <section id="avant-apres" aria-labelledby="t-avant-apres">
   <div class="centered">
     <span class="s-tag fade-up">Résultats concrets</span>
-    <h2 class="s-title fade-up d1" id="t-avant-apres">Une clim encrassée peut expliquer la panne</h2>
-    <p class="s-sub fade-up d2">Filtres, turbine ou bac : le diagnostic regarde d’abord ce qui se voit.</p>
+    <h2 class="s-title fade-up d1" id="t-avant-apres">Du diagnostic à la réparation : les étapes</h2>
+    <p class="s-sub fade-up d2">Diagnostic à 110 € TTC, avec frais de déplacement possibles annoncés avant le rendez-vous. Nous vous expliquons la cause constatée, puis proposons une suite chiffrée avant toute réparation.</p>
   </div>
 
   <div class="depannage-pair fade-up d2">
@@ -2427,7 +2429,7 @@ function gtag_report_conversion(url) {
   <div class="centered ig-intro">
     <span class="s-tag">Instagram</span>
     <h2 class="s-title" id="t-instagram">Interventions et conseils sur Instagram</h2>
-    <p class="ig-note">Une sélection de publications Climeo34. L’encrassement montré ici est souvent ce que le diagnostic regarde en premier : filtres, turbine, bac.</p>
+    <p class="ig-note">Découvrez les interventions et conseils de Climeo34. Ces publications présentent notamment notre activité de nettoyage et d’entretien.</p>
   </div>
   <div class="ig-stage">
     <button type="button" class="ig-nav ig-prev" aria-label="Publication précédente">
@@ -2869,7 +2871,7 @@ Mudaison (34130), intervention Montpellier et Hérault<br>
       </div>
       <div class="mention-block" id="confidentialite">
         <h3>Politique de confidentialité & RGPD</h3>
-        <p><strong>Données collectées :</strong> Ce site propose un formulaire permettant de collecter votre nom, numéro de téléphone, ville et la description de la panne. Ces données sont transmises via Formsubmit (prestataire tiers) à Climeo34 dans le seul but de vous contacter pour établir un devis. Elles ne sont ni revendues, ni partagées à des fins commerciales. Durée de conservation : 6 mois. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p><br>
+        <p><strong>Données collectées :</strong> Ce site propose un formulaire permettant de collecter votre nom, numéro de téléphone, ville, description de la panne, marque et code erreur éventuel. Ces données sont transmises via Web3Forms (prestataire tiers) à Climeo34 dans le seul but de vous contacter pour établir un devis. Elles ne sont ni revendues, ni partagées à des fins commerciales. Durée de conservation : 6 mois. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p><br>
         <p><strong>Cookies :</strong> Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement. Aucun cookie publicitaire ou de tracking n'est déposé sans votre consentement.</p><br>
         <p><strong>Vos droits :</strong> Conformément au RGPD (Règlement UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition. Pour exercer ces droits : <a href="mailto:lolo.dalzotto@gmail.com">lolo.dalzotto@gmail.com</a></p><br>
         <p><strong>Autorité de contrôle :</strong> <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
@@ -3151,7 +3153,7 @@ const kpiObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.kpi-val[data-target]').forEach(k => kpiObserver.observe(k));
 
-// Hero capture form — envoi async via Formsubmit.co + Google Sheets
+// Hero capture form — envoi async via Web3Forms + Google Sheets
 (function() {
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwumPAq-SWNknazpEzGbIiJWpsUepMP5kMXz27AA112tNz-DMoL-fagoWAUOebkrTYr/exec';
   var form = document.getElementById('hero-capture-form');
@@ -3877,6 +3879,6 @@ document.addEventListener('keydown', e => {
 </script>
 <script src="/analytics-tracking.js?v=20260912-3" defer></script>
 
-<script src="/analytics-tracking.js" defer></script>
+
 </body>
 </html>
