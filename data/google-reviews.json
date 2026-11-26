@@ -1,21 +1,21 @@
 {
-  "fetched_at": "2026-11-25T15:08:07Z",
+  "fetched_at": "2026-11-26T14:35:33Z",
   "count": 66,
   "rating": 5,
   "reviews": [
+    {
+      "name": "clément Fajolles",
+      "text": "Très satisfait de la prestation de Laurent pour la révision de notre climatisation ! Il est ponctuel, efficace et très pro, je referai appel à lui sans problème.",
+      "relTime": "il y a moins d'une semaine",
+      "rating": 5,
+      "time": 1795200610000
+    },
     {
       "name": "Maëlle",
       "text": "Laurent est très sympathique, professionnel et efficace. L'entretien de la clim a été réalisé rapidement et avec beaucoup de sérieux. Rien à redire, nous sommes très satisfaits. Je recommande sans hésiter !",
       "relTime": "il y a moins d'une semaine",
       "rating": 5,
       "time": 1795174809000
-    },
-    {
-      "name": "Cedric Couillerot",
-      "text": "Une prise de rendez-vous ultra rapide !\nUn tarif ultra compétitif !\nUn travail d'une qualité irréprochable !\nLaurent est intervenu pour l'entretien annuel de ma climatisation réversible. Le nettoyage a été fait en profondeur (unités intérieures et bloc extérieur), bien au-delà d'un simple coup de spray. Tout a été parfaitement protégé pour éviter les projections d'eau dans la maison. En plus d'être très professionnel, ponctuel et minutieux, Je recommande les yeux fermés bravo et merci Laurent !",
-      "relTime": "il y a 3 semaines",
-      "rating": 5,
-      "time": 1793706042000
     },
     {
       "name": "Mathieu Le",
